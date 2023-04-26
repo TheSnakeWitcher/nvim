@@ -1,0 +1,47 @@
+-- local devops = vim.api.nvim_create_augroup("DevOps", { clear = true })
+
+--local Job = require("plenary.job")
+--Job:new({
+--    command = 'git',
+--    args = {"diff","--cached", "--numstat"},
+--    cwd = vim.fn.expand("%:p:h"),
+--    on_exit = function (job)
+--        local result = job:result()
+--        local ok,parsed = pcall(vim.json.decode,table.concat(result,""))
+--        if not ok then
+--            vim.notify "failed to parse github result"
+--            return
+--        end
+--
+--        local items = {}
+--
+--        for _ , item in ipairs(parsed) do
+--            item.body = string.gsub(item.body or "","\r","")
+--
+--            table.insert(items,{
+--                label = string.format("#%s",item.number),
+--                documentation = {
+--                    kind = "markdown",
+--                    value = string.format("# %s\n\n%s",item.title,item.body)
+--                },
+--            })
+--        end
+--    end
+--
+--})
+--:start()
+
+--vim.api.nvim_create_autocmd("BufWritePost", {
+--  desc = "check that commit contains less thant 250 LOC",
+--  group = devops,
+--  pattern = "*",
+--  callback = function()
+--    cmd = "git df --cached --shortstat | awk '{print $4}'"
+--    out = vim.fn.system(cmd)
+--    vim.notify("outout: ",out)
+--    local changes = 300
+--    if changes > 250 then
+--        vim.notify("commit too big, contains more than 250 LOC testfile")
+--    end
+--  end
+--})

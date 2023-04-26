@@ -1,0 +1,49 @@
+--local ok,session = pcall(require,"projections.session")
+--if not ok then
+--    vim.notify "projections session autocmd not loaded"
+--else
+--    vim.api.nvim_create_autocmd('VimLeavePre', {
+--        desc = "Autostore session on VimExit",
+--        callback = function() session.store(vim.loop.cwd()) end,
+--    })
+--end
+--
+--local ok,switcher = pcall(require,"projections.switcher")
+--if not ok then
+--    vim.notify "projections switcher autocmd not loaded"
+--else
+--    vim.api.nvim_create_autocmd("VimEnter", {
+--        desc = "Switch to project if vim was started in a project dir",
+--        callback = function()
+--            if vim.fn.argc() == 0 then switcher.switch(vim.loop.cwd()) end
+--        end,
+--    })
+--end
+
+-- Autostore session on VimExit
+-- local Session = require("projections.session")
+-- vim.api.nvim_create_autocmd({ 'VimLeavePre' }, {
+--     callback = function() Session.store(vim.loop.cwd()) end,
+-- })
+--
+-- -- Switch to project if vim was started in a project dir
+-- local switcher = require("projections.switcher")
+-- vim.api.nvim_create_autocmd({ "VimEnter" }, {
+--     callback = function()
+--         if vim.fn.argc() == 0 then switcher.switch(vim.loop.cwd()) end
+--     end,
+-- })
+
+--local Session = require("projections.session")
+-- vim.api.nvim_create_autocmd({ "VimEnter" }, {
+--     callback = function()
+--         if vim.fn.argc() ~= 0 then return end
+--         local session_info = Session.info(vim.loop.cwd())
+--         if session_info == nil then
+--             Session.restore_latest()
+--         else
+--             Session.restore(vim.loop.cwd())
+--         end
+--     end,
+--     desc = "Restore last session automatically"
+-- })

@@ -1,0 +1,10 @@
+-- vim.api.nvim_create_autocmd("VimEnter",{
+--     desc = "show dashboard when open neovim without args",
+--     callback = function()
+--         -- vim.print("argc: ",vim.fn.argc())
+--         -- vim.print("argv(-1): ",vim.fn.argv(-1))
+--         if vim.fn.argc() == 0 then
+--             vim.cmd("Dashboard")
+--         end
+--     end,
+-- })
