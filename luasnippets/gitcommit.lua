@@ -1,0 +1,111 @@
+--local ls = require "luasnip"
+--local s = ls.snippet
+--local sn = ls.snippet_node
+--local isn = ls.indent_snippet_node
+--local t = ls.text_node
+--local i = ls.insert_node
+--local c = ls.choice_node
+--local f = ls.function_node
+--local d = ls.dynamic_node
+--local r = ls.restore_node
+--local extras = require "luasnip.extras"
+--local fmt = require("luasnip.extras.fmt").fmt
+--local fmt = require("luasnip.extras.fmt").fmta
+--local events = require "luasnip.util.events"
+--local conds = require "luasnip.extras.conditions"
+--local ai = require "luasnip.nodes.absolute_indexer"
+--local rep = extras.rep
+--local p = extras.partial
+--local m = extras.match
+--local l = extras.lambda
+--local dl = extras.dynamic_lambda
+--local n = extras.nonempty
+--local postfix = require("luasnip.extras.postfix").postfix
+--local types = require("luasnip.util.types")
+
+
+--ls.add_snippets("gitcommit", {
+
+--------------------------
+-- codebase structure
+--------------------------
+--s({
+--    name = "base",
+--    trig = "!",
+--    dscr = [[anatomy of a git commit,notes:
+--        feat:     a new feature is introduced with the changes
+--        fix:      a bug fix has occurred
+--        chore:    changes that do not relate to a fix or feature and don't modify src or test files (for example updating dependencies)
+--        refactor: refactored code that neither fixes a bug nor adds a feature
+--        docs:     updates to documentation such as a the README or other markdown files
+--        style:    changes that do not affect the meaning of the code, likely related to code formatting such as white-space, missing semi-colons, and so on.
+--        test:     including new or correcting previous tests
+--        perf:     performance improvements
+--        ci:       continuous integration related
+--        build:    changes that affect the build system or external dependencies
+--        revert:   reverts a previous commit 
+--     ]],
+--}, fmt([[
+--    {} {}: {}
+--    {}
+--    {}
+--]], {
+--    c(1, {
+--        t(""),
+--        t "feat ",
+--        t "fix",
+--        t "chore",
+--        t "refactor",
+--        t "docs",
+--        t "style",
+--        t "test",
+--        t "perf",
+--        t "ci",
+--        t "build",
+--        t "revert",
+--        t "BREAKING CHANGE",
+--    }),
+--    c(2,{
+--        i(1,"scope"),
+--        t(""),
+--    }),
+--    i(3, "description"),
+--    c(4,{
+--        i(1,"body"),
+--        t(" "),
+--    }),
+--    n(4,
+--        c(1,{
+--            i(5,"footer"),
+--            t(""),
+--        }),
+--        t("")
+--    ),
+--})),
+--
+--s({
+--    name = "notes",
+--    trig = "notes",
+--    dscr = [[important details about commits:
+--    ]],
+--}, {
+--t([[
+--    main questions to be answered:
+--    why change ?
+--    what change ?
+--    how change ?
+--    where change ?
+--
+--    tips:
+--    use imperative mode
+--
+--    help questions:
+--    if applied this commit will <commit consecuence>
+--
+--    commit examples
+--    https://github.com/tpope/vim-pathogen/commits/master
+--    https://github.com/torvalds/linux/commits/master
+--    https://github.com/git/git/commits/master
+--]])}),
+
+--})
