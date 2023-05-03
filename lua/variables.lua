@@ -5,9 +5,9 @@
 
 -- notation: vim.[option].VAR_NAME = 'VAR_VALUE'
 --
--- vim.bo  : buffer scoped option 
--- vim.wo  : window scoped option
--- vim.to  : tabpage scoped option
+-- vim.b   : buffer scoped variables 
+-- vim.w   : window scoped variables
+-- vim.t   : tabpage scoped variables
 -- vim.g   : global scoped variables 
 -- vim.v   : predefined vim variables 
 -- vim.env : environment scoped variables(environment variables defined in the editor session)

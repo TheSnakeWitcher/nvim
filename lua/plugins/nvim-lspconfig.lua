@@ -26,7 +26,6 @@ local on_attach = function(client, bufnr)
     --virtualtypes.on_attach
     --virtualtypes.enable()
 
-
     local nmap = function(keys, func, desc)
         if desc then
           desc = 'LSP: ' .. desc
@@ -76,6 +75,13 @@ end
 --------------------------------------------------------------
 -- config servers
 --------------------------------------------------------------
+local status_ok, neodev = pcall(require,"neodev")
+if not status_ok then
+    vim.notify "neodev config not loaded in nvim-lspconfig"
+    return
+end
+neodev.setup()
+
 local ok, cmp_nvim_lsp = pcall(require,"cmp_nvim_lsp")
 if not ok then
     vim.notify("cmp-nvim-lsp not loaded in" .. vim.fn.expand("%"))
@@ -83,7 +89,6 @@ if not ok then
 end
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities = cmp_nvim_lsp.default_capabilities(capabilities)
---capabilities = cmp_nvim_lsp.update_capabilities(capabilities)
 
 local servers = mason_lspconfig.get_installed_servers()
 for _, server in ipairs(servers) do
@@ -103,12 +108,4 @@ for _, server in ipairs(servers) do
         })
     end
 
-
 end
-
---local ok ,rust_tools = pcall(require,"rust-tools")
---if not ok then
---    vim.notify("rust-tools config not loaded")
---end
---rust_tools.setup()
-

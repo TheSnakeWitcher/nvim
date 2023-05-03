@@ -9,6 +9,7 @@ if not ok then
     vim.notify("lspkind config don't loaded")
     return
 end
+
 local ok, luasnip = pcall(require,'luasnip')
 if not ok then
     vim.notify("luasnip not loaded in nvim-cmp config")
@@ -41,12 +42,12 @@ cmp.setup({
             --vim_item.kind = lspkind.presets.default[vim_item.kind]
             vim_item.kind = lspkind.presets.default[vim_item.kind] .. ' [' .. vim_item.kind ..  ']'
             vim_item.menu = ({
-                --nvim_lsp = '[lsp]',
-                --luasnip = '[snip]',
-                --buffer = '[buf]',
-                --path = '[path]',
-                --nvim_lua = '[nvim]',
-                --gh_issues = '[issues]',
+                nvim_lsp = '[lsp]',
+                luasnip = '[snip]',
+                buffer = '[buf]',
+                path = '[path]',
+                nvim_lua = '[nvim]',
+                gh_issues = '[issues]',
             })[entry.source.name]
             return vim_item
         end,
@@ -56,6 +57,7 @@ cmp.setup({
         { name = 'luasnip' },
         { name = 'nvim_lua' }, -- by default active only in lua files
         { name = 'nvim_lsp' },
+        { name = 'git' },
         { name = 'buffer' },
         { name = 'path' , keyworkd_length = 2},
     },
@@ -121,11 +123,11 @@ cmp.setup({
 
 })
 
--- local ok, _ = pcall(require,'plugins.nvim-cmp.cmp-git')
--- if not ok then
---     vim.notify "cmp-git config not loaded"
---     return
--- end
+local ok, _ = pcall(require,'plugins.nvim-cmp.cmp-git')
+if not ok then
+    vim.notify "cmp-git config not loaded"
+    return
+end
 
 -- local ok, _ = pcall(require,'plugins.nvim-cmp.cmp-make')
 -- if not ok then

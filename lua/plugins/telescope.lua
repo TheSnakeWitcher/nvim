@@ -26,9 +26,6 @@ if not ok then vim.notify "telescope notify extension not loaded" end
 local ok , _ = pcall(telescope.load_extension,'projections')
 if not ok then vim.notify "telescope projections extension not loaded" end
 
--- local ok , _ = pcall(telescope.load_extension,'luasnip')
--- if not ok then vim.notify "telescope luasnip extension not loaded" end
-
 local ok , _ = pcall(telescope.load_extension,'make')
 if not ok then vim.notify "telescope make extension not loaded" end
 

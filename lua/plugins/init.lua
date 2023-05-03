@@ -38,10 +38,7 @@ return packer.startup(function(use)
     use "MunifTanjim/nui.nvim"     -- UI component library
     use "ray-x/guihua.lua"         -- GUI library
     -- plugin development setup 
-    use {
-        "folke/neodev.nvim",
-        config = function() load_config("neodev") end,
-    }
+    use "folke/neodev.nvim" -- config = function() load_config("neodev") end,
     -- tools management UI (easily install lsp,dap,linters,etc)
     use {
         "williamboman/mason.nvim",
@@ -67,10 +64,10 @@ return packer.startup(function(use)
     --------------------------------------------------------------
     -- colorschemes
     use "romgrk/doom-one.vim"
-    use { "folke/tokyonight.nvim" , cmd = "colorscheme" }
-    use { "Mofiqul/dracula.nvim" , cmd = "colorscheme" }
-    use { "EdenEast/nightfox.nvim" , cmd = "colorscheme" }
-    use { "nyoom-engineering/oxocarbon.nvim" , cmd = "colorscheme" }
+    use { "folke/tokyonight.nvim" , opt = true }
+    use { "Mofiqul/dracula.nvim" , opt = true }
+    use { "EdenEast/nightfox.nvim" , opt = true }
+    use { "nyoom-engineering/oxocarbon.nvim" , opt = true }
     -- icons
     use {
         "nvim-tree/nvim-web-devicons",
@@ -93,14 +90,12 @@ return packer.startup(function(use)
         config = function() load_config("tabby") end,
     }
     -- startup screen/dashboard
-    -- use {
-    --    "glepnir/dashboard-nvim",
-    --    config = function() load_config("dashboard") end,
-    -- }
-    -- use {
-    --    "startup-nvim/startup.nvim",
-    --    config = function() load_config("startup") end,
-    -- }
+    use {
+       "glepnir/dashboard-nvim",
+       config = function() load_config("dashboard") end,
+       -- "startup-nvim/startup.nvim",
+       -- config = function() load_config("startup") end,
+    }
     -- improve input interfaces (vim.ui.input & vim.ui.select)
     use {
         "stevearc/dressing.nvim",
@@ -301,14 +296,19 @@ return packer.startup(function(use)
         "hrsh7th/nvim-cmp",
         config = function() load_config("nvim-cmp") end,
         requires = {
-            "hrsh7th/cmp-buffer",       -- buffers completion source
-            "hrsh7th/cmp-path",         -- paths completion source
-            "hrsh7th/cmp-cmdline",      -- cmdline completion source
-            "hrsh7th/cmp-nvim-lua",     -- neovim lua api completion source
-            "hrsh7th/cmp-nvim-lsp",     -- lsp completion source
-            "petertriho/cmp-git",       -- git completion source
-            "saadparwaiz1/cmp_luasnip", -- luasnip snippet engine completion source
-            "doxnit/cmp-luasnip-choice" -- luasnip choice node completion source
+            "hrsh7th/cmp-buffer",        -- buffers completion source
+            "hrsh7th/cmp-path",          -- paths completion source
+            "hrsh7th/cmp-cmdline",       -- cmdline completion source
+            "hrsh7th/cmp-nvim-lua",      -- neovim lua api completion source
+            "hrsh7th/cmp-nvim-lsp",      -- lsp completion source
+            "petertriho/cmp-git",        -- git completion source
+            "saadparwaiz1/cmp_luasnip",  -- luasnip snippet engine completion source
+            "doxnit/cmp-luasnip-choice", -- luasnip choice node completion source
+            -- {
+            --   "zbirenbaum/copilot-cmp",
+            --   after = { "copilot.lua" },
+            --   config = function () load_config("copilot_cmp") end,
+            -- }
         }
     }
     -- snippet engine
@@ -408,7 +408,7 @@ return packer.startup(function(use)
         run = 'deno task --quiet build:fast',
         config = function() load_config("peek") end,
     }
-    --  image viewers
+    --  image previewer
     use "edluffy/hologram.nvim"
 
 
@@ -424,10 +424,11 @@ return packer.startup(function(use)
     }
     -- single tabpage interface for easily view diffs
     -- use { 'sindrets/diffview.nvim', requires = 'nvim-lua/plenary.nvim' }
-    -- use "TimUntersberger/neogit"  -- git ui
     -- use "kdheepak/lazygit.nvim"   -- open lazygit from neovim
+    -- use "TimUntersberger/neogit"  -- git ui
     -- github
-    use { -- edit & review github issues
+    use {
+        -- edit & review github issues
         "pwntester/octo.nvim",
         config = function() load_config("octo") end,
     }
@@ -441,7 +442,8 @@ return packer.startup(function(use)
     --    config = function() load_config("nvim-utils") end,
     --}
     ---- pandoc
-    --use { -- latex like editing experience while writing markdown
+    --use {
+    --    -- latex like editing experience while writing markdown
     --    "abeleinin/papyrus",
     --    config = function() load_config("papyrus") end,
     --}
@@ -450,10 +452,10 @@ return packer.startup(function(use)
     --------------------------------------------------------------
     -- AI
     --------------------------------------------------------------
-    --
-    use "github/copilot.vim"
-    --     config = function() load_config("copilot") end,
-    -- }
+     -- use {
+     --     "zbirenbaum/copilot.lua",
+     --     config = function() load_config("copilot") end,
+     -- }
     -- AI code generation plugin(OpenAI,ChatGPT and more)
     -- use { -- configure rust lsp
     --     "dense-analysis/neural",
@@ -633,46 +635,56 @@ return packer.startup(function(use)
     --------------------------------------------------------------
      -- chisel integration(REPL solidity from foundry toolkit)
     use {
-        "TheSnakeWitcher/chisel.nvim",
+        "/home/mr-papi/.config/nvim/lua/plugins/development/chisel.nvim",
         config = function() load_config("chisel") end,
     }
      -- anvil integration(local blockchain from foundry toolkit)
     use {
-        "TheSnakeWitcher/anvil.nvim",
+        "/home/mr-papi/.config/nvim/lua/plugins/development/anvil.nvim",
         config = function() load_config("anvil") end,
     }
-     -- forge integration(test framework from foundry toolkit)
+     -- forge integration(foundry toolkit test framework)
     use {
-        "TheSnakeWitcher/forge.nvim",
+        "/home/mr-papi/.config/nvim/lua/plugins/development/forge.nvim",
         config = function() load_config("forge") end,
     }
-    -- cast integration(blockchain client inspired in rest.nvim)
+    -- cast integration(foundry toolkit blockchain client inspired in rest.nvim)
     -- use {
     --     "TheSnakeWitcher/cast.nvim",
     --     config = function() load_config("cast") end,
     -- }
-    -- foundry integration(test framework from foundry toolkit)
-    --  foundry toolkit for web3 development
+    -- foundry toolkit integration for web3 development
     -- use {
     --      "TheSnakeWitcher/foundry.nvim",
     --      config = function() load_config("foundry") end,
     -- }
-    -- web3 tools
-    -- tool list: https://github.com/ConsenSys/ethereum-developer-tools-list
-    -- crypto address lens: https://marketplace.visualstudio.com/items?itemName=peetzweg.crypto-address-lens
-    -- ramen ui: https://github.com/dyng/eth-ramen
-    -- mythril : https://github.com/dyng/eth-ramen
+    -- integration with common web3 tools for dApp development)
     -- use {
-    --      "TheSnakeWitcher/web3tools.nvim",
-    --      config = function() load_config("web3") end,
+    --      -- tool list: https://github.com/ConsenSys/ethereum-developer-tools-list
+    --      -- mythril : https://github.com/dyng/eth-ramen
+    --      -- crypto address lens: https://marketplace.visualstudio.com/items?itemName=peetzweg.crypto-address-lens
+    --      -- ramen ui: https://github.com/dyng/eth-ramen
+    --      -- crytic-compile: https://github.com/crytic/crytic-compile/#crytic-compile
+    --      -- echidna: https://github.com/crytic/echidna
+    --      -- manticore: https://github.com/trailofbits/manticore/
+    --      "TheSnakeWitcher/web3tools.nvim", 
+    --      config = function() load_config("web3tools") end,
+    -- }
+    -- utilities to aid in dAPP development process using autocmds/cmds/and others
+    -- use {
+    --      -- view what and from where data/methods are being inherited
+    --      -- detect automatically name clashes in inherit herarchy
+    --      -- detect automatically storage and function selector clashes in poxy-like contracts(pattern independent)
+    --      "TheSnakeWitcher/web3utils.nvim", 
+    --      config = function() load_config("web3utils") end,
     -- }
     -- use "TheSnakeWitcher/mksw.nvim"             -- boilerplate/project init/scaffold structure management
     -- use "TheSnakeWitcher/sourcify.nvim"         -- sourcify is a solidity source code and metadata verification tool
+    -- use "TheSnakeWitcher/openzeppelin-wizard"   -- openzeppelin bindings
     -- use "TheSnakeWitcher/doc-patterns.nvim"     -- get patterns in comments
     -- use "TheSnakeWitcher/doc-hooks.nvim"        -- execute actions on patterns
     -- use "TheSnakeWitcher/doc-traductions.nvim"  -- traduce documentation
-    -- use "TheSnakeWitcher/openzeppelin-wizard"   -- openzeppelin bindings
-    -- use "TheSnakeWitcher/chat-ai"               -- openzeppelin bindings
+    -- use "TheSnakeWitcher/AIchat.nvim"           -- allow interaction/chat with AI tools
 
 
     if packer_boostraped then
