@@ -158,11 +158,7 @@ ls.add_snippets("solidity", {
 
             {contract} testContract ;
 
-<<<<<<< HEAD
             function setUp() public {{
-=======
-            function setup() {{
->>>>>>> snippets
                 testContract = new {contract}({}) ;
             }}
 
@@ -196,15 +192,9 @@ ls.add_snippets("solidity", {
 	  using {1} for {2} ;
 	]]  ,
       {
-<<<<<<< HEAD
         i(1, "`{lib}` / `{lib} as {alias}` / `{lib} as {+} global`"),
         c(2, {
             i(1,"type "),
-=======
-        i(1, "lib/lib as alias"),
-        c(2, {
-            i(1,"type"),
->>>>>>> snippets
             sn(1,{
                 i(1,"type"),
                 t(" global"),
@@ -664,15 +654,9 @@ ls.add_snippets("solidity", {
     name = "type",
     trig = "type",
     dscr = [[type declaration statement,note:
-<<<<<<< HEAD
         declare a new type `newtype` that is different
         from `underlying_type` but can be asigned with
         values of same type
-=======
-        declare a new type who that is different
-        from underlying_type but can be asigned
-        with values of same type
->>>>>>> snippets
     ]],
   },fmt([[
     type {} is {} ;
