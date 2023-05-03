@@ -179,7 +179,7 @@ set("n", "<leader>se", "<CMD>Telescope env<CR>" ,{ desc = "[s]earch [e]nvironmen
 set("n", "<leader>ss", "<CMD>Telescope luasnip<CR>" ,{ desc = "[s]earch [s]snippets"}) -- telescope-luasnip
 set("n", "<leader>st", "<CMD>Telescope telescope-tabs list_tabs<CR>" ,{ desc = "[s]earch [t]abs"}) -- telescope-tabs
 set("n", "<leader>m", "<cmd>Telescope make<cr>", { desc = "[m]ake"}) -- telescope-makefile
-set("n", "<leader>T", "<cmd>Telescope toggletasks spawn<cr>", { desc = "[T]ask spawn"}) -- toggletasks
+-- set("n", "<leader>T", "<cmd>Telescope toggletasks spawn<cr>", { desc = "[T]ask"}) -- toggletasks
 
 
 --------------------------------------------------------------
@@ -255,12 +255,6 @@ set("n", "<leader>tv", "<Cmd>ToggleTerm direction=vertical size=50<CR>", { desc 
 
 
 --------------------------------------------------------------
--- trouble
---------------------------------------------------------------
-set("n", "<leader>D", ":TroubleToggle<CR>", { desc = "[D]iagnostic toggle"})
-
-
---------------------------------------------------------------
 -- urlview
 --------------------------------------------------------------
 set("n", "<leader>su", "<Cmd>UrlView buffer<CR>", { desc = "[s]earch [u]rls in buffer" })
@@ -284,9 +278,13 @@ vim.api.nvim_set_keymap("n", "<leader>tmp", ":-tabmove<CR>", { desc = "move curr
 --------------------------------------------------------------
 -- trees/views/explorer
 --------------------------------------------------------------
-set("n", "<leader>e", "<Cmd>NeoTreeFocusToggle<CR>", { desc = "[e]xplorer "})
-set("n", "<leader>E", "<Cmd>Vista nvim_lsp<CR>", { desc = "[E]xplorer summary(vista)"})
-set("n", "<leader>u", "<Cmd>UndotreeToggle<CR>", { desc = "[u]ndo tree toggle"})
+set("n", "<leader>e", "<cmd>NeoTreeFocusToggle<CR>", { desc = "[e]xplorer "})
+set("n", "<leader>E", "<cmd>AerialToggle<CR>", { desc = "[E]xplorer summary/outline(aerial)"})
+set("n", "<leader>u", "<cmd>UndotreeToggle<CR>", { desc = "[u]ndo tree toggle"})
+set("n", "<leader><leader>d", "<cmd>TroubleToggle<CR>", { desc = "[D]iagnostic toggle"}) -- or <leader>[B]ug / <leader>[x]
+set("n", "<leader>D", "<cmd>TroubleToggle<CR>", { desc = "[D]iagnostic toggle"}) -- for nvim-dap
+
+
 
 --------------------------------------------------------------
 -- git signs
@@ -306,3 +304,49 @@ set({"n","v"}, "<leader>!", ":Nredir ", { desc = "[!]execute command and redirec
 --------------------------------------------------------------
 set("n", "<leader>R", "<cmd>ExecuteBuffer<cr>", { desc = "[R]un buffer"})
 set("v", "<leader>R", "<cmd>ExecuteSelection<cr>", { desc = "[R]un selectoin"})
+
+
+--------------------------------------------------------------
+-- zetelkasten
+--------------------------------------------------------------
+set("n","<leader>zn","<cmd>Telekasten new_note<cr>",{desc = "[z]ettelkasten [n]ote"})
+set("n","<leader>zN","<cmd>Telekasten new_templated_note<cr>",{desc = "[z]ettelkasten [N]ote templated"})
+set("n","<leader>zf","<cmd>Telekasten find_notes<cr>",{desc = "[z]ettelkasten [f]ind"})
+set("n","<leader>zg","<cmd>Telekasten search_notes<cr>")
+set("n","<leader>zt","<cmd>Telekasten show_tags<cr>",{desc = "[z]ettelkasten [t]ag"})
+-- set("i","<leader>[[","<esc><cmd>Telekasten insert_link<cr>",{desc = "insert link"})
+-- set("n","<leader>z#","<cmd>Telekasten show_tags<cr>")
+-- set("n","<leader>zb","<cmd>Telekasten show_backlinks<cr>")
+-- set("n","<leader>zF","<cmd>Telekasten find_friends<cr>")
+-- set("n","<leader>zd","<cmd>Telekasten find_daily_notes<cr>")
+-- set("n","<leader>zz","<cmd>Telekasten follow_link<cr>")
+-- set("n","<leader>zT","<cmd>Telekasten goto_today<cr>")
+-- set("n","<leader>zW","<cmd>Telekasten goto_thisweek<cr>")
+-- set("n","<leader>zw","<cmd>Telekasten find_weekly_notes<cr>")
+-- set("n","<leader>zy","<cmd>Telekasten yank_notelink<cr>")
+-- set("n","<leader>zc","<cmd>Telekasten show_calendar<cr>")
+-- set("<leader>zi",":lua require('telekasten').paste_img_and_link()<CR>)
+-- set("n","<leader>zI","<cmd>Telekasten insert_img_link({ i=true })<cr>")
+-- set("n","<leader>zp","<cmd>Telekasten preview_img<cr>")
+-- set("n","<leader>zm","<cmd>Telekasten browse_media<cr>")
+-- set("<leader>zt",":lua require('telekasten').toggle_todo()<CR>)
+ -- vnoremap <leader>zt :lua require('telekasten').toggle_todo({ v = true })<CR>
+-- set("n","<leader>zC",":CalendarT<CR>)
+
+
+--------------------------------------------------------------
+-- overseer
+--------------------------------------------------------------
+set("n","<leader>Tt","<cmd>OverseerToggle<cr>",{desc = "[T]ask [t]oggle"})
+set("n","<leader>Ti","<cmd>OverseerInfo<cr>",{desc = "[T]ask [i]nfo"})
+set("n","<leader>Te","<cmd>OverseerToggle<cr>",{desc = "[T]ask [e]xplorer"})
+set("n","<leader>Tr","<cmd>OverseerRun<cr>",{desc = "[T]ask [r]un"})
+set("n","<leader>TR","<cmd>OverseerRunCmd<cr>",{desc = "[T]ask [R]un"})
+set("n","<leader>Tl","<cmd>OverseerRestartLast<cr>",{desc = "[T]ask [l]ast"})
+
+
+--------------------------------------------------------------
+-- IconPicker
+--------------------------------------------------------------
+set("n","<A-i>","<cmd>IconPickerNormal<cr>",{desc = "[i]con"})
+set("i","<A-i>","<cmd>IconPickerInsert<cr>",{desc = "[i]con"})

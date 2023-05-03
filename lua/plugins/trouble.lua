@@ -1,6 +1,6 @@
-local status_ok, trouble = pcall(require, "trouble")
-if not status_ok then
-	vim.notify("trouble config not loaded")
+local ok, trouble = pcall(require, "trouble")
+if not ok then
+	vim.notify "trouble config not loaded"
 	return
 end
 
@@ -49,4 +49,5 @@ trouble.setup({
 		information = "",
 		other = "﫠",
 	},
+	use_diagnostic_signs = false, -- enabling this will use the signs defined in your lsp client
 })

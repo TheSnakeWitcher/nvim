@@ -6,10 +6,11 @@ end
 
 
 chatgpt.setup({
+    api_key_cmd = "pass apis/chatgpt",
 
     welcome_message = "welcome",
     loading_text = "loading...",
-    question_sign = "", -- you can use emoji if you want e.g. 🙂
+    question_sign = "",
     answer_sign = "ﮧ", -- 🤖
     max_line_length = 120,
     yank_register = "+",

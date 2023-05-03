@@ -27,9 +27,9 @@ end
 cmp.setup({
 
     -- disable completion if the cursor is `Comment` syntax group.
-    --enabled = function()
+    -- enabled = function()
     --    return not cmp.config.context.in_syntax_group('Comment')
-    --end,
+    -- end,
 
     snippet = {
       expand = function(args)
@@ -38,16 +38,17 @@ cmp.setup({
     },
 
     formatting = {
+        -- format = lspkind.cmp_format(),
         format = function(entry, vim_item)
-            --vim_item.kind = lspkind.presets.default[vim_item.kind]
-            vim_item.kind = lspkind.presets.default[vim_item.kind] .. ' [' .. vim_item.kind ..  ']'
+            -- mode = "symbol_text",
+            -- vim_item.kind = lspkind.presets.default[vim_item.kind] .. ' [' .. vim_item.kind ..  ']'
+            vim_item.kind = lspkind.presets.default[vim_item.kind]
             vim_item.menu = ({
                 nvim_lsp = '[lsp]',
                 luasnip = '[snip]',
                 buffer = '[buf]',
                 path = '[path]',
                 nvim_lua = '[nvim]',
-                gh_issues = '[issues]',
             })[entry.source.name]
             return vim_item
         end,
@@ -60,6 +61,16 @@ cmp.setup({
         { name = 'git' },
         { name = 'buffer' },
         { name = 'path' , keyworkd_length = 2},
+        {
+            name = "latex_symbols",
+            option = {        -- 0(mixed) :show command and insert symbol
+                strategy = 0, -- 1(julia) :show and insert symbol
+                              -- 2(latex) :show and insert command
+            },
+        },
+        { name = 'calc' },
+        -- { name = 'emoji' }
+
     },
 
     mapping = {

@@ -67,6 +67,12 @@ local options = {
 
 
     --------------------------------
+    -- highligh
+    --------------------------------
+    sessionoptions = vim.opt.sessionoptions:append("localoptions"), -- recomended by GnikDroy/projections.nvim
+
+
+    --------------------------------
     -- search patterns
     --------------------------------
     ignorecase = true,  -- ignore case in search patterns

@@ -6,31 +6,36 @@ end
 
 dashboard.setup({
 	theme = "hyper",
+    hide = {
+      statusline = false,
+      tabline = false,
+      winbar = false,
+    },
 	config = {
 		week_header = {
 			enable = true,
 		},
 		shortcut = {
-			{ desc = " Update", group = "@property", action = "Lazy update", key = "u" },
+			{ desc = " Update", group = "@property", action = "PackerSync", key = "u" },
+			{
+				desc = " Projects",
+				group = "DiagnosticHint",
+				action = "Telescope projections",
+				key = "p",
+			},
+			{
+				desc = " config",
+				group = "Number",
+				action = ":e" .. vim.fn.stdpath("config"),
+				key = "c",
+			},
 			{
 				icon = " ",
 				icon_hl = "@variable",
-				desc = "Files",
+				desc = "Note",
 				group = "Label",
-				action = "Telescope find_files",
-				key = "f",
-			},
-			{
-				desc = " Apps",
-				group = "DiagnosticHint",
-				action = "Telescope app",
-				key = "a",
-			},
-			{
-				desc = " dotfiles",
-				group = "Number",
-				action = "Telescope dotfiles",
-				key = "d",
+				action = "Telekasten new_note",
+				key = "n",
 			},
 		},
 	},

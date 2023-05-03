@@ -14,6 +14,7 @@ for _, module in ipairs {
     "plugins",
     "autocmds",
     "cmds",
+    "highlight",
 } do
   local ok, _ = pcall(require, module)
   if not ok then

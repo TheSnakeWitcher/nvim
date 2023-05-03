@@ -3,6 +3,8 @@
 -- TODO: hot reload snippets automatically when changed
 -- TODO: check dashboard/startup autocmd to be show when starting
 -- TODO: use in plugins/init.lua util.load_config as load_config
+-- TODO: search where is seted <leader>D definition keymap and remove it
+-- TODO: check nvim-cmp advanced config
 local packer_boostraped = util.ensure_packer()
 local packer = require("packer")
 
@@ -37,8 +39,7 @@ return packer.startup(function(use)
     use "nvim-lua/popup.nvim"      -- popup api implementation of vim for neovim
     use "MunifTanjim/nui.nvim"     -- UI component library
     use "ray-x/guihua.lua"         -- GUI library
-    -- plugin development setup 
-    use "folke/neodev.nvim" -- config = function() load_config("neodev") end,
+    use "folke/neodev.nvim"        -- plugin development setup 
     -- tools management UI (easily install lsp,dap,linters,etc)
     use {
         "williamboman/mason.nvim",
@@ -49,14 +50,13 @@ return packer.startup(function(use)
             "jay-babu/mason-nvim-dap.nvim",      -- bridge mason with nvim-dap
         },
     }
-    -- async linter
-    -- use {
-    --     -- prefer nvim-lint because ale create his own lsp client and is incompatible with vim.diagnostics API
-    --     "mfussenegger/nvim-lint",
-    --     "dense-analysis/ale" 
-    --     config = function() load_config() end,
-    -- }
-    --  use "miversen33/netman.nvim" -- neovim (lua powered) network resource manager 
+    -- network resource manager
+    use "miversen33/netman.nvim" -- framework or provider of an interface for remote resources/
+    -- base improvement plugins
+    use {
+        "echasnovski/mini.nvim",
+        opt = true,
+    }
 
 
     --------------------------------------------------------------
@@ -67,7 +67,6 @@ return packer.startup(function(use)
     use { "folke/tokyonight.nvim" , opt = true }
     use { "Mofiqul/dracula.nvim" , opt = true }
     use { "EdenEast/nightfox.nvim" , opt = true }
-    use { "nyoom-engineering/oxocarbon.nvim" , opt = true }
     -- icons
     use {
         "nvim-tree/nvim-web-devicons",
@@ -93,8 +92,6 @@ return packer.startup(function(use)
     use {
        "glepnir/dashboard-nvim",
        config = function() load_config("dashboard") end,
-       -- "startup-nvim/startup.nvim",
-       -- config = function() load_config("startup") end,
     }
     -- improve input interfaces (vim.ui.input & vim.ui.select)
     use {
@@ -139,6 +136,11 @@ return packer.startup(function(use)
     --     config = function() load_config("significant") end,
     -- }
     -- use "VonHeikemen/fine-cmdline.nvim" -- enhaced cmdline
+    -- colorizer
+    use {
+        "norcalli/nvim-colorizer.lua",
+        config = function() load_config("colorizer") end,
+    }
 
 
     --------------------------------------------------------------
@@ -190,14 +192,17 @@ return packer.startup(function(use)
     -- bridge/hook up non-LSP tools to the LSP UX through lua
     -- use neovim as a language server to inject LSP diagnostics, code actions, and more via Lua. 
     use {
+        -- "mfussenegger/nvim-lint", -- async linter
         "jose-elias-alvarez/null-ls.nvim",
         config = function() load_config("null-ls") end,
     }
-    -- pretty diagnostics
+    -- diagnostics
     use {
+        -- pretty diagnostics
         "folke/trouble.nvim",
         config = function() load_config("trouble") end,
     }
+    use "https://git.sr.ht/~whynothugo/lsp_lines.nvim" -- renders diagnostics using virtual lines on top of the real line of code
     -- lsp navigation
     use {
         "ray-x/navigator.lua",
@@ -212,7 +217,6 @@ return packer.startup(function(use)
     --------------------------------------------------------------
     -- search
     --------------------------------------------------------------
-    use "liuchengxu/vista.vim" -- viewer & finder for lsp symbols & tags
     -- fzf
     use {
         "nvim-telescope/telescope.nvim",
@@ -222,11 +226,14 @@ return packer.startup(function(use)
         end,
         requires = {
             "nvim-telescope/telescope-ui-select.nvim",       -- sets vim.ui.select to telescope
-            "nvim-telescope/telescope-github.nvim",          -- telescope github-cli integration
-	        'LukasPietzschmann/telescope-tabs',              -- search tabs
             "LinArcX/telescope-env.nvim",                    -- search environment variables
+            "nvim-telescope/telescope-file-browser.nvim",    -- search/manipulate filesystem
             "nvim-telescope/telescope-media-files.nvim",     -- search media files
-            -- "nvim-telescope/telescope-file-browser.nvim",    -- search filesystem
+	        'LukasPietzschmann/telescope-tabs',              -- search tabs
+            {   -- create telescope pickers from shell commands
+                "axkirillov/easypick.nvim",
+                config = function() load_config("easypick") end,
+            },
             {   -- use fzf
                 "nvim-telescope/telescope-fzf-native.nvim",
                 run = "make",
@@ -235,14 +242,6 @@ return packer.startup(function(use)
                 "dhruvmanila/telescope-bookmarks.nvim",
                 tag = "*",
                 requires = "kkharji/sqlite.lua",
-            },
-            {   -- create telescope pickers
-                "axkirillov/easypick.nvim",
-                config = function() load_config("easypick") end,
-            },
-            {
-                "sopa0/telescope-makefile",
-                config = function() load_config("telescope-makefile") end,
             },
             -- {
             --     "benfowler/telescope-luasnip.nvim",
@@ -257,8 +256,6 @@ return packer.startup(function(use)
             -- }
             --"nvim-telescope/telescope-cheat.nvim",         -- an attempt to recreate cheat.sh
             -- "sdushantha/fontpreview",                     -- search fonts
-            --"xiyaowong/telescope-emoji.nvim",              -- search emojis
-            -- "nvim-telescope/telescope-node-modules.nvim", -- search node modules
         },
     }
     -- buffer/mark management
@@ -271,6 +268,11 @@ return packer.startup(function(use)
         "GnikDroy/projections.nvim",
         config = function() load_config("projections") end,
     }
+    -- tree view for lsp symbols/tags(code outline )
+    use {
+        "stevearc/aerial.nvim",
+        config = function() load_config("aerial") end,
+    }
     -- search urls in buffer
     use {
         "axieax/urlview.nvim",
@@ -279,11 +281,7 @@ return packer.startup(function(use)
     -- search unicode/emojis characters management
     use {
         "ziontee113/icon-picker.nvim",
-        config = function()
-            require("icon-picker").setup({
-                disable_legacy_commands = true
-            })
-        end,
+        config = function() load_config("icon-picker") end,
     }
     use "lambdalisue/glyph-palette.vim" -- glyphs management
 
@@ -296,14 +294,17 @@ return packer.startup(function(use)
         "hrsh7th/nvim-cmp",
         config = function() load_config("nvim-cmp") end,
         requires = {
-            "hrsh7th/cmp-buffer",        -- buffers completion source
-            "hrsh7th/cmp-path",          -- paths completion source
-            "hrsh7th/cmp-cmdline",       -- cmdline completion source
-            "hrsh7th/cmp-nvim-lua",      -- neovim lua api completion source
-            "hrsh7th/cmp-nvim-lsp",      -- lsp completion source
-            "petertriho/cmp-git",        -- git completion source
-            "saadparwaiz1/cmp_luasnip",  -- luasnip snippet engine completion source
-            "doxnit/cmp-luasnip-choice", -- luasnip choice node completion source
+            "hrsh7th/cmp-buffer",         -- buffers completion source
+            "hrsh7th/cmp-path",           -- paths completion source
+            "hrsh7th/cmp-cmdline",        -- cmdline completion source
+            "hrsh7th/cmp-nvim-lua",       -- neovim lua api completion source
+            "hrsh7th/cmp-nvim-lsp",       -- lsp completion source
+            "saadparwaiz1/cmp_luasnip",   -- luasnip snippet engine completion source
+            "doxnit/cmp-luasnip-choice",  -- luasnip choice node completion source
+            "petertriho/cmp-git",         -- git completion source
+            "kdheepak/cmp-latex-symbols", -- latex completion source
+            "hrsh7th/cmp-calc",           -- math calculation source
+            -- "hrsh7th/cmp-emoji",          -- emoji completion source
             -- {
             --   "zbirenbaum/copilot-cmp",
             --   after = { "copilot.lua" },
@@ -378,7 +379,24 @@ return packer.startup(function(use)
         config = function() load_config("hydra") end,
     }
     -- wiki management
-    use  "vimwiki/vimwiki"
+    use {
+        "renerocksai/telekasten.nvim",
+        config = function() load_config("telekasten") end,
+    }
+    use {
+        "Furkanzmc/zettelkasten.nvim",
+        config = function() require("zettelkasten").setup({
+            notes_path = vim.fn.stdpath("cache") .. "/zettelkasten"
+        }) end,
+    }
+    use "vimwiki/vimwiki"
+
+    use {
+        -- utilities for markdown files navigation
+        'jakewvincent/mkdnflow.nvim',
+        rocks = 'luautf8',
+        config = function() load_config("mkdnflow") end
+    }
     -- use "tools-life/taskwiki" -- task management with vimwiki using taskwarrior
     -- terminal management
     use {
@@ -386,14 +404,15 @@ return packer.startup(function(use)
         tag = '*',
         config = function() load_config("toggleterm") end,
     }
-    -- task management(vscode like task declared using json/yaml files)
-    use {
-        'jedrzejboczar/toggletasks.nvim',
-        config = function() load_config("toggletasks") end,
-    }
+    -- task/jobs management 
     use {
         'stevearc/overseer.nvim',
         config = function() load_config("overseer") end,
+    }
+    use {
+        -- task management(vscode like task declared using json/yaml files)
+        'jedrzejboczar/toggletasks.nvim',
+        config = function() load_config("toggletasks") end,
     }
     -- http client
     use {
@@ -422,6 +441,7 @@ return packer.startup(function(use)
         "lewis6991/gitsigns.nvim",
         config = function() load_config("gitsigns") end,
     }
+    -- use "sindrets/diffview.nvim" -- single tabpage interface for easily cycling through diffs for all modified files for any git rev
     -- single tabpage interface for easily view diffs
     -- use { 'sindrets/diffview.nvim', requires = 'nvim-lua/plenary.nvim' }
     -- use "kdheepak/lazygit.nvim"   -- open lazygit from neovim
@@ -452,28 +472,29 @@ return packer.startup(function(use)
     --------------------------------------------------------------
     -- AI
     --------------------------------------------------------------
-     -- use {
-     --     "zbirenbaum/copilot.lua",
-     --     config = function() load_config("copilot") end,
-     -- }
-    -- AI code generation plugin(OpenAI,ChatGPT and more)
-    -- use { -- configure rust lsp
-    --     "dense-analysis/neural",
-    --     config = function() load_config("neural") end,
-    -- }
+    -- github copilot
+     use {
+         "zbirenbaum/copilot.lua",
+         config = function() load_config("copilot") end,
+     }
     -- ChatGpt prompt
     -- use {
     --     "jackMort/ChatGPT.nvim",
     --     config = function() load_config("ChatGPT") end,
     -- }
-    -- use {
-    --     "madox2/vim-ai",
-    --     config = function() load_config("vim-ai") end,
-    -- }
     -- highlight and explain code readability issues
     -- use {
     --     "james1236/backseat.nvim",
     --     config = function() load_config("backseat") end,
+    -- }
+    -- AI code generation plugin(OpenAI,ChatGPT and more)
+    -- use { -- configure rust lsp
+    --     "dense-analysis/neural",
+    --     config = function() load_config("neural") end,
+    -- }
+    -- use {
+    --     "madox2/vim-ai",
+    --     config = function() load_config("vim-ai") end,
     -- }
     -- use {
     --     "zbirenbaum/codeium.lua",
@@ -491,7 +512,6 @@ return packer.startup(function(use)
     --     "jameshiew/nvim-magic",
     --     config = function() load_config("nvim-magic") end,
     -- }
-
 
 
     --------------------------------------------------------------
@@ -520,45 +540,25 @@ return packer.startup(function(use)
     --------------------------------------------------------------
     -- front end
     --------------------------------------------------------------
-    -- colorizer
-    --use {
-    --    "NvChad/nvim-colorizer.lua",
-    --    config = function() require("colorizer").setup({}) end,
-    --}
     -- use "mhartington/formatter.nvim"  -- emmet integration
     -- use "mattn/emmet-vim"             -- emmet integration
-
 
 
     --------------------------------------------------------------
     -- experimental 
     --------------------------------------------------------------
     --knowledge management(wiki/notes)
-    use {
-        "jakewvincent/mkdnflow.nvim",
-        opt = false,
-    }
-    use {
-        "mickael-menu/zk-nvim",
-        opt = false,
-    }
-    use {
-        "renerocksai/telekasten.nvim",
-        opt = false,
-    }
     use "lukas-reineke/headlines.nvim" -- add horizontal headline to filetypes markdown,orgmode,etc
     -- use "itchyny/calendar.vim"         -- calendar for neovim
     use "jbyuki/instant.nvim"        -- collaborative coding
     -- motions
-    use "ggandor/leap.nvim"                -- motions for every coordinate of the viewport
-    -- cmds
-    use "tpope/vim-dispatch"               -- asynchronous build and test dispatcher 
-    use "protex/better-digraphs.nvim"      -- better digraphs
-    -- tree like view for symbols
     use {
-        "simrat39/symbols-outline.nvim",
-        config = function() load_config("experimental.symbols-outline") end,
+        -- motions for every coordinate of the viewport
+        "ggandor/leap.nvim",
+        opt = true,
     }
+    -- cmds
+    use "protex/better-digraphs.nvim"      -- better digraphs
     -- tool for test interaction
     use {
       "nvim-neotest/neotest",
@@ -618,8 +618,10 @@ return packer.startup(function(use)
     --}
     -- use "SmitheshP/nvim-navbuddy" -- pop up menu to navigate buffer lsp symbols
     -- use "notomo/cmdbuf.nvim"      -- alternative cmdline
-    -- use "kosayoda/nvim-lightbulb" --  VSCode bulb for neovim's built-in LSP. 
+    -- use "kosayoda/nvim-lightbulb" -- VSCode bulb for neovim's built-in LSP. 
+    -- use "smjonas/inc-rename.nvim" -- incremental LSP renaming based on Neovim's command-preview feature.
 
+    -- use "b0o/SchemaStore.nvim"  -- access to schemas from schemastore.org
     -- remote development / collaboration
     -- use "mhinz/neovim-remote"        -- support for --remote and fiends
     -- use "chipsenkbeil/distant.nvim"  -- ALPHA STAGE: remote development from local environment 
@@ -685,6 +687,27 @@ return packer.startup(function(use)
     -- use "TheSnakeWitcher/doc-hooks.nvim"        -- execute actions on patterns
     -- use "TheSnakeWitcher/doc-traductions.nvim"  -- traduce documentation
     -- use "TheSnakeWitcher/AIchat.nvim"           -- allow interaction/chat with AI tools
+    -- use {
+    --      "TheSnakeWitcher/ZkNotes.nvim"          -- definitive zetelkasten
+    --      check = {
+    --          https://github.com/oniony/TMSU
+    --      }
+    --      features = {
+    --          tag pane plugin from obsidian
+    --          citations plugin
+    --          admonition plugin from obsidian
+    --          MOCs(maps of contents)
+    --      }
+    --      configuration = {
+    --          templates(select a template dir as configuration to make new_templated_note)
+    --      }
+    --      inspired = {
+    --          "vimwiki/vimwiki"
+    --          "Furkanzmc/zettelkasten.nvim"
+    --          "marty-oehme/zettelkasten.nvim"
+    --          "jakewvincent/mkdnflow.nvim"
+    --          "renerocksai/telekasten.nvim"
+    --      }    
 
 
     if packer_boostraped then

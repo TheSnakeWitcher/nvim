@@ -4,7 +4,6 @@ if not ok then
     return
 end
 
-
 mkdnflow.setup({
     modules = {
         bib = true,
