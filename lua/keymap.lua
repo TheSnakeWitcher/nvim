@@ -274,6 +274,8 @@ vim.api.nvim_set_keymap("n", "<leader>tp", ":tabp<CR>", { desc = "select previou
 vim.api.nvim_set_keymap("n", "<leader>tmn", ":+tabmove<CR>", { desc = "move current tab to next position",noremap = true })
 vim.api.nvim_set_keymap("n", "<leader>tmp", ":-tabmove<CR>", { desc = "move current tab to previous position" , noremap = true })
 
+set("n", "<leader>tl", "<CMD>Telescope telescope-tabs list_tabs<CR>" ,{ desc = "[s]earch [t]abs"})
+
 
 --------------------------------------------------------------
 -- trees/views/explorer

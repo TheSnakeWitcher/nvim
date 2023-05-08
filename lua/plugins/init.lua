@@ -103,7 +103,6 @@ return packer.startup(function(use)
         "rcarriga/nvim-notify",
         config = function() load_config("nvim-notify") end,
     }
-    --use 'VonHeikemen/fine-cmdline.nvim' -- improve cmdline (floating cmdline)
     -- cursorline (highligh all word in buffer equals to word under cursor)
     use {
         "yamatsum/nvim-cursorline",
@@ -341,13 +340,16 @@ return packer.startup(function(use)
     -- easily comment code(treesiter integration)
     use {
         "numToStr/Comment.nvim",
-        config = function()
-            load_config("Comment")
-        end,
+        config = function() load_config("Comment") end,
     }
     use "sbulav/nredir.nvim"               -- redirect outputs of commands and filters(external commands) to temp sidebuffer
     --use "andymass/vim-matchup"           --  even better % fist_oncoming navigate and highlight matching words 
     --use "Wansmer/treesj"                 -- split/joint text blocks efficiently 
+    -- code screenshots
+    use {
+       "0oAstro/silicon.lua",
+       config = function() load_config("silicon") end ,
+    }
 
 
     --------------------------------------------------------------
@@ -386,7 +388,7 @@ return packer.startup(function(use)
         "anuvyklack/hydra.nvim",
         config = function() load_config("hydra") end,
     }
-    -- wiki management
+    -- knowledgebase/notes management
     use {
         "renerocksai/telekasten.nvim",
         config = function() load_config("telekasten") end,
@@ -525,10 +527,8 @@ return packer.startup(function(use)
     --------------------------------------------------------------
     -- experimental 
     --------------------------------------------------------------
-    --knowledge management(wiki/notes)
-    use "lukas-reineke/headlines.nvim" -- add horizontal headline to filetypes markdown,orgmode,etc
-    -- use "itchyny/calendar.vim"         -- calendar for neovim
-    use "jbyuki/instant.nvim"        -- collaborative coding
+    use "jbyuki/instant.nvim"     -- collaborative coding
+    -- use "itchyny/calendar.vim" -- calendar for neovim
     -- motions
     use {
         -- motions for every coordinate of the viewport
@@ -669,6 +669,15 @@ return packer.startup(function(use)
     -- use "TheSnakeWitcher/doc-hooks.nvim"        -- execute actions on patterns
     -- use "TheSnakeWitcher/doc-traductions.nvim"  -- traduce documentation
     -- use "TheSnakeWitcher/AIchat.nvim"           -- allow interaction/chat with AI tools
+    -- use {
+    --      "TheSnakeWitcher/tab_manager",
+    --      inspired = {
+    --          buffer_manager/harpoon
+    --          buffers per tab like scope
+    --          telescope integration like telescope-tabs
+    --          dbm/tabbot for window manager like experience
+    --      }
+    -- }
     -- use {
     --      "TheSnakeWitcher/zk.nvim"          -- definitive zetelkasten
     --      check = {
