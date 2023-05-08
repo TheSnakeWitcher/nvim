@@ -353,7 +353,7 @@ return packer.startup(function(use)
     --------------------------------------------------------------
     -- test/dap
     --------------------------------------------------------------
-    -- dap integration
+    -- dap(debug adapter protocol) integration
     use {
         "mfussenegger/nvim-dap", -- alternative "puremourning/vimspector",
         config = function() load_config("nvim-dap") end,
@@ -365,12 +365,15 @@ return packer.startup(function(use)
              "rcarriga/cmp-dap",
         },
     }
-    -- test framework
+    -- tests integrations/framework
     use {
       "nvim-neotest/neotest",
-      -- config = function() load_config("experimental.neotest") end,
+      config = function() load_config("neotest") end,
       requires = {
-        "antoinemadec/FixCursorHold.nvim"
+        "antoinemadec/FixCursorHold.nvim",
+        "nvim-neotest/neotest-go",
+        "rouge8/neotest-rust",
+        "nvim-neotest/neotest-plenary",
       },
     }
 
@@ -444,7 +447,6 @@ return packer.startup(function(use)
     }
     -- use "sindrets/diffview.nvim" -- single tabpage interface for easily cycling through diffs for all modified files for any git rev
     -- single tabpage interface for easily view diffs
-    -- use { 'sindrets/diffview.nvim', requires = 'nvim-lua/plenary.nvim' }
     -- use "kdheepak/lazygit.nvim"   -- open lazygit from neovim
     -- use "TimUntersberger/neogit"  -- git ui
     -- github
@@ -540,7 +542,6 @@ return packer.startup(function(use)
     -- use "tpope/vim-dadbod",              -- db interaction
     -- use "tpope/vim-unimpaired",          -- complementary mapping
     -- use "tpope/vim-sleuth"               -- detect tabstop and shiftwidth automatically
-    -- use "Exafunction/codeium.vim"
     -- use "ThePrimeagen/refactoring.nvim"  -- refactoring tool
     -- code runner
     -- use {
