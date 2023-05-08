@@ -5,7 +5,7 @@ if not status_ok then
 end
 
 overseer.setup({
-	strategy = "terminal",     -- Default task strategy
+	strategy = "terminal",     -- Default task strategy,options: toggleterm , terminal
 	templates = { "builtin" }, -- Template modules to load
 	auto_detect_success_color = true, -- When true, tries to detect a green color from your colorscheme to use for success highlight
 	dap = true, -- Patch nvim-dap to support preLaunchTask and postDebugTask

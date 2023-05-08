@@ -22,6 +22,12 @@ if not ok then
 	return
 end
 
+local ok, overseer_consumer = pcall(require, "neotest.consumers.overseer")
+if not ok then
+	vim.notify "overseer consumer not loaded in neotest config"
+	return
+end
+
 neotest.setup({
 	adapters = {
 		neotest_go({
@@ -36,4 +42,12 @@ neotest.setup({
         }),
         neotest_plenary,
 	},
+    consumers = {
+        overseer = overseer_consumer,
+    }
+    -- overseer = {
+    --     enabled = true,
+    --     -- When this is true (the default), it will replace all neotest.run.* commands
+    --     force_default = false,
+    --   },
 })
