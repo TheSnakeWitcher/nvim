@@ -69,6 +69,7 @@ cmp.setup({
             },
         },
         { name = 'calc' },
+        -- { name = "codeium" },
         -- { name = 'emoji' }
 
     },

@@ -109,21 +109,26 @@ return packer.startup(function(use)
         "yamatsum/nvim-cursorline",
         config = function() load_config("nvim-cursorline") end,
     }
-    use "itchyny/vim-highlighturl" -- highlighturl urls in buffer
     -- highlight, list and search notes(todo-comments)
     use {
         "folke/todo-comments.nvim",
         config = function() load_config("todo-comments") end,
     }
-    -- display due dates
-    use {
-        "nfrid/due.nvim",
-        config = function() load_config("due") end,
-    }
     -- easily add highlight to comments with @{highlight}
     use {
         "folke/paint.nvim",
         config = function() load_config("paint") end,
+    }
+    use "itchyny/vim-highlighturl" -- highlighturl urls in buffer
+    -- colorizer
+    use {
+        "norcalli/nvim-colorizer.lua",
+        config = function() load_config("colorizer") end,
+    }
+    -- display due dates
+    use {
+        "nfrid/due.nvim",
+        config = function() load_config("due") end,
     }
     -- fold signs
     use {
@@ -136,11 +141,6 @@ return packer.startup(function(use)
     --     config = function() load_config("significant") end,
     -- }
     -- use "VonHeikemen/fine-cmdline.nvim" -- enhaced cmdline
-    -- colorizer
-    use {
-        "norcalli/nvim-colorizer.lua",
-        config = function() load_config("colorizer") end,
-    }
 
 
     --------------------------------------------------------------
@@ -244,21 +244,17 @@ return packer.startup(function(use)
                 requires = "kkharji/sqlite.lua",
             },
             -- {
-            --     "benfowler/telescope-luasnip.nvim",
-            --     module = "telescope._extensions.luasnip",    -- to lazy-load
-            -- },
-            -- {
 	            --config = function()
 		        --    require'telescope-tabs'.setup{
 			    --        -- Your custom config :^)
 		        --    }
 	            --end
             -- }
-            --"nvim-telescope/telescope-cheat.nvim",         -- an attempt to recreate cheat.sh
+            -- "nvim-telescope/telescope-cheat.nvim",         -- an attempt to recreate cheat.sh
             -- "sdushantha/fontpreview",                     -- search fonts
         },
     }
-    -- buffer/mark management
+    -- buffer and mark management
     use {
         "j-morano/buffer_manager.nvim",
         config = function() load_config("buffer_manager") end,
@@ -273,15 +269,15 @@ return packer.startup(function(use)
         "stevearc/aerial.nvim",
         config = function() load_config("aerial") end,
     }
-    -- search urls in buffer
-    use {
-        "axieax/urlview.nvim",
-        config = function() load_config("urlview") end,
-    }
     -- search unicode/emojis characters management
     use {
         "ziontee113/icon-picker.nvim",
         config = function() load_config("icon-picker") end,
+    }
+    -- search urls in buffer
+    use {
+        "axieax/urlview.nvim",
+        config = function() load_config("urlview") end,
     }
     use "lambdalisue/glyph-palette.vim" -- glyphs management
 
@@ -331,11 +327,12 @@ return packer.startup(function(use)
         "folke/which-key.nvim",
         config = function() load_config("which-key") end,
     }
+    use "tpope/vim-repeat"       -- make repeatable plugins operations
+    -- surround operations on vim textobjects/symbols `"`,`()` ,`[]`,`{}`,`<>`,etc 
+    use "tpope/vim-surround"     -- check: https://github.com/kylechui/nvim-surround
+    use "tpope/vim-speeddating"  -- allow C-a/C-x to increment/decrement dates and times
     use "mbbill/undotree"        -- save tree of undo operations
     use "unblevable/quick-scope" -- highligh unique chars per word in line(to use with `f`,`F`,`t`,`T`)
-    use "tpope/vim-repeat"       -- make repeatable plugins operations
-    use "tpope/vim-surround"     -- surround operations on vim textobjects/symbols `"`,`()` ,`[]`,`{}`,`<>`,etc
-    use "tpope/vim-speeddating"  -- allow C-a/C-x to increment/decrement dates and times
     -- to close automatically `(`,`[`,`"`,`'`
     use {
         "windwp/nvim-autopairs",
@@ -348,15 +345,15 @@ return packer.startup(function(use)
             load_config("Comment")
         end,
     }
-    use "sbulav/nredir.nvim"               -- redirect outputs of filters(external commands) to temp sidebuffer
-    use "JarrodCtaylor/vim-shell-executor" -- execute buffer in shell and view output in split pane
+    use "sbulav/nredir.nvim"               -- redirect outputs of commands and filters(external commands) to temp sidebuffer
     --use "andymass/vim-matchup"           --  even better % fist_oncoming navigate and highlight matching words 
     --use "Wansmer/treesj"                 -- split/joint text blocks efficiently 
 
 
     --------------------------------------------------------------
-    -- dap
+    -- test/dap
     --------------------------------------------------------------
+    -- dap integration
     use {
         "mfussenegger/nvim-dap", -- alternative "puremourning/vimspector",
         config = function() load_config("nvim-dap") end,
@@ -367,6 +364,14 @@ return packer.startup(function(use)
              "nvim-telescope/telescope-dap.nvim",
              "rcarriga/cmp-dap",
         },
+    }
+    -- test framework
+    use {
+      "nvim-neotest/neotest",
+      -- config = function() load_config("experimental.neotest") end,
+      requires = {
+        "antoinemadec/FixCursorHold.nvim"
+      },
     }
 
 
@@ -385,12 +390,8 @@ return packer.startup(function(use)
     }
     use {
         "Furkanzmc/zettelkasten.nvim",
-        config = function() require("zettelkasten").setup({
-            notes_path = vim.fn.stdpath("cache") .. "/zettelkasten"
-        }) end,
+        config = function() load_config("zettelkasten") end,
     }
-    use "vimwiki/vimwiki"
-
     use {
         -- utilities for markdown files navigation
         'jakewvincent/mkdnflow.nvim',
@@ -461,7 +462,7 @@ return packer.startup(function(use)
     --    "willothy/nvim-utils",
     --    config = function() load_config("nvim-utils") end,
     --}
-    ---- pandoc
+    -- pandoc
     --use {
     --    -- latex like editing experience while writing markdown
     --    "abeleinin/papyrus",
@@ -472,45 +473,27 @@ return packer.startup(function(use)
     --------------------------------------------------------------
     -- AI
     --------------------------------------------------------------
+    use "aduros/ai.vim" -- generate and edit text using OpenAI and GPT. 
     -- github copilot
      use {
          "zbirenbaum/copilot.lua",
          config = function() load_config("copilot") end,
      }
-    -- ChatGpt prompt
-    -- use {
-    --     "jackMort/ChatGPT.nvim",
-    --     config = function() load_config("ChatGPT") end,
-    -- }
+    -- chatgpt
+    use {
+        "jackMort/ChatGPT.nvim",
+        cmd = "ChatGpt",
+        config = function() load_config("chatgpt") end,
+    }
+    -- codeium ai toolkit integration
+    use {
+        "jcdickinson/codeium.nvim",
+        config = function() load_config("codeium") end,
+    }
     -- highlight and explain code readability issues
     -- use {
     --     "james1236/backseat.nvim",
     --     config = function() load_config("backseat") end,
-    -- }
-    -- AI code generation plugin(OpenAI,ChatGPT and more)
-    -- use { -- configure rust lsp
-    --     "dense-analysis/neural",
-    --     config = function() load_config("neural") end,
-    -- }
-    -- use {
-    --     "madox2/vim-ai",
-    --     config = function() load_config("vim-ai") end,
-    -- }
-    -- use {
-    --     "zbirenbaum/codeium.lua",
-    --     config = function() load_config("codeium") end,
-    -- }
-    -- use {
-    --     "dpayne/CodeGPT.nvim",
-    --     config = function() load_config("CodeGPT") end,
-    -- }
-    -- use {
-    --     "aduros/ai.vim",
-    --     config = function() load_config("ai") end,
-    -- }
-    -- use {
-    --     "jameshiew/nvim-magic",
-    --     config = function() load_config("nvim-magic") end,
     -- }
 
 
@@ -538,13 +521,6 @@ return packer.startup(function(use)
 
 
     --------------------------------------------------------------
-    -- front end
-    --------------------------------------------------------------
-    -- use "mhartington/formatter.nvim"  -- emmet integration
-    -- use "mattn/emmet-vim"             -- emmet integration
-
-
-    --------------------------------------------------------------
     -- experimental 
     --------------------------------------------------------------
     --knowledge management(wiki/notes)
@@ -559,20 +535,19 @@ return packer.startup(function(use)
     }
     -- cmds
     use "protex/better-digraphs.nvim"      -- better digraphs
+
     -- tool for test interaction
-    use {
-      "nvim-neotest/neotest",
-      -- config = function() load_config("experimental.neotest") end,
-      requires = {
-        "antoinemadec/FixCursorHold.nvim"
-      },
-    }
     -- use "tpope/vim-dadbod",              -- db interaction
     -- use "tpope/vim-unimpaired",          -- complementary mapping
     -- use "tpope/vim-sleuth"               -- detect tabstop and shiftwidth automatically
     -- use "Exafunction/codeium.vim"
     -- use "ThePrimeagen/refactoring.nvim"  -- refactoring tool
-    use "michaelb/sniprun"                  -- code runner
+    -- code runner
+    -- use {
+    --     "michaelb/sniprun",
+    --     config = function() load_config("sniprun") end,
+    --     run = "bash ./install.sh",
+    -- }
     -- cloud
     use { -- jupyter interaction
         'dccsillag/magma-nvim',
@@ -586,6 +561,8 @@ return packer.startup(function(use)
 
     -- git integration
     -- use "akinsho/git-conflict.nvim"      -- tool to git confligts management
+    -- sindrets/diffview.nvim
+    -- junkblocker/patchreview-vim
 
     -- github integration
     -- use "Almo7aya/openingh.nvim"  -- open file or project in github for neovim wirtten in lua
@@ -594,10 +571,6 @@ return packer.startup(function(use)
     --     "tjdevries/sg.nvim",
     --     build = "cargo build --workspace",
     -- }
-
-    -- git integration
-    -- sindrets/diffview.nvim
-    -- junkblocker/patchreview-vim
 
     --  containers integration
     -- use {
@@ -612,14 +585,22 @@ return packer.startup(function(use)
     -- use "ap/vim-buftabline"        -- tabs management
     -- use LintaoAmons/scratch.nvim"  -- open scratch buffers
     -- use chrishrb/gx.nvim"          -- open urls in buffer
+
+    -- ui
     --use {
     --    "folke/noice.nvim",
     --    config = function() load_config("noice") end,
     --}
-    -- use "SmitheshP/nvim-navbuddy" -- pop up menu to navigate buffer lsp symbols
     -- use "notomo/cmdbuf.nvim"      -- alternative cmdline
+    -- use "SmitheshP/nvim-navbuddy" -- pop up menu to navigate buffer lsp symbols
     -- use "kosayoda/nvim-lightbulb" -- VSCode bulb for neovim's built-in LSP. 
     -- use "smjonas/inc-rename.nvim" -- incremental LSP renaming based on Neovim's command-preview feature.
+
+    -- formater
+    -- use "cbochs/grapple.nvim" -- tagging import files and manage their
+
+    -- formater
+    -- use "mhartington/formatter.nvim"  -- emmet integration
 
     -- use "b0o/SchemaStore.nvim"  -- access to schemas from schemastore.org
     -- remote development / collaboration
@@ -688,11 +669,12 @@ return packer.startup(function(use)
     -- use "TheSnakeWitcher/doc-traductions.nvim"  -- traduce documentation
     -- use "TheSnakeWitcher/AIchat.nvim"           -- allow interaction/chat with AI tools
     -- use {
-    --      "TheSnakeWitcher/ZkNotes.nvim"          -- definitive zetelkasten
+    --      "TheSnakeWitcher/zk.nvim"          -- definitive zetelkasten
     --      check = {
     --          https://github.com/oniony/TMSU
     --      }
     --      features = {
+    --          preview like obsidian or vim help files
     --          tag pane plugin from obsidian
     --          citations plugin
     --          admonition plugin from obsidian
@@ -703,10 +685,9 @@ return packer.startup(function(use)
     --      }
     --      inspired = {
     --          "vimwiki/vimwiki"
-    --          "Furkanzmc/zettelkasten.nvim"
-    --          "marty-oehme/zettelkasten.nvim"
-    --          "jakewvincent/mkdnflow.nvim"
     --          "renerocksai/telekasten.nvim"
+    --          "Furkanzmc/zettelkasten.nvim"
+    --          "jakewvincent/mkdnflow.nvim"
     --      }    
 
 
