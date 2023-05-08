@@ -147,6 +147,12 @@ overseer.setup({
 			"on_result_diagnostics",
 			"on_result_diagnostics_quickfix",
 		},
+        default_neotest = {
+          "on_output_summarize",
+          "on_exit_set_status",
+          "on_complete_notify",
+          "on_complete_dispose",
+      }
 	},
 	bundles = {
 		-- When saving a bundle with OverseerSaveBundle or save_task_bundle(), filter the tasks with
