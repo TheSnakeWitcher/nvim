@@ -213,7 +213,7 @@ ls.add_snippets("go", {
           t "",
         }),
         c(2, {
-          t "args",
+          i (1,"args"),
           t "",
         }),
         c(3, {
@@ -274,11 +274,11 @@ ls.add_snippets("go", {
       {
         i(1, "name"),
         c(2, {
-          t "",
           sn(1, {
             t ", ",
             i(1, "args"),
           }),
+          t "",
         }),
         c(3, {
           sn(nil, {
