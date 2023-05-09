@@ -299,6 +299,7 @@ return packer.startup(function(use)
             "petertriho/cmp-git",         -- git completion source
             "kdheepak/cmp-latex-symbols", -- latex completion source
             "hrsh7th/cmp-calc",           -- math calculation source
+            -- "tzachar/cmp-ai",             -- ai completion source
             -- "hrsh7th/cmp-emoji",          -- emoji completion source
             -- {
             --   "zbirenbaum/copilot-cmp",
@@ -360,14 +361,14 @@ return packer.startup(function(use)
         "mfussenegger/nvim-dap", -- alternative "puremourning/vimspector",
         config = function() load_config("nvim-dap") end,
         requires = {
-            "theHamsta/nvim-dap-virtual-text",
              "rcarriga/nvim-dap-ui",
+            "theHamsta/nvim-dap-virtual-text",
              "leoluz/nvim-dap-go",
              "nvim-telescope/telescope-dap.nvim",
              "rcarriga/cmp-dap",
         },
     }
-    -- tests integrations/framework
+    -- tests runner/framework
     use {
       "nvim-neotest/neotest",
       config = function() load_config("neotest") end,
@@ -477,7 +478,7 @@ return packer.startup(function(use)
     --------------------------------------------------------------
     -- AI
     --------------------------------------------------------------
-    use "aduros/ai.vim" -- generate and edit text using OpenAI and GPT. 
+    -- use "aduros/ai.vim" -- generate and edit text using OpenAI and GPT. 
     -- github copilot
      use {
          "zbirenbaum/copilot.lua",
@@ -527,14 +528,18 @@ return packer.startup(function(use)
     --------------------------------------------------------------
     -- experimental 
     --------------------------------------------------------------
-    use "jbyuki/instant.nvim"     -- collaborative coding
+    use "jbyuki/instant.nvim"     -- collaborative coding,check https://github.com/Floobits/floobits-neovim
     -- use "itchyny/calendar.vim" -- calendar for neovim
     -- motions
     use {
         -- motions for every coordinate of the viewport
         "ggandor/leap.nvim",
-        opt = true,
+        config = function() load_config("leap") end,
     }
+
+    -- lsp
+    -- use "smjonas/inc-rename.nvim" -- incremental LSP renaming based on Neovim's command-preview feature.
+
     -- cmds
     use "protex/better-digraphs.nvim"      -- better digraphs
 
@@ -544,14 +549,16 @@ return packer.startup(function(use)
     -- use "tpope/vim-sleuth"               -- detect tabstop and shiftwidth automatically
     -- use "ThePrimeagen/refactoring.nvim"  -- refactoring tool
     -- code runner
-    -- use {
-    --     "michaelb/sniprun",
-    --     config = function() load_config("sniprun") end,
-    --     run = "bash ./install.sh",
-    -- }
+    use {
+        "michaelb/sniprun",
+        opt = true,
+        run = "bash ./install.sh",
+        config = function() load_config("sniprun") end,
+    }
     -- cloud
     use { -- jupyter interaction
         'dccsillag/magma-nvim',
+        opt = true,
         run = ':UpdateRemotePlugins',
         config = function()
             vim.g.magma_automatically_open_output = false
@@ -561,9 +568,10 @@ return packer.startup(function(use)
     -- use "luk400/vim-jukit"         -- REPL interaction
 
     -- git integration
-    -- use "akinsho/git-conflict.nvim"      -- tool to git confligts management
-    -- sindrets/diffview.nvim
-    -- junkblocker/patchreview-vim
+    use {
+        "sindrets/diffview.nvim",
+        config = function() load_config("diffview") end,
+    }
 
     -- github integration
     -- use "Almo7aya/openingh.nvim"  -- open file or project in github for neovim wirtten in lua
@@ -576,7 +584,6 @@ return packer.startup(function(use)
     --  containers integration
     -- use {
     --   'dgrbrady/nvim-docker',
-    --   requires = {'nvim-lua/plenary.nvim', 'MunifTanjim/nui.nvim'},
     --   rocks = '4O4/reactivex' -- ReactiveX Lua implementation
     -- }
     --  use "jamestthompson3/nvim-remote-containers"
@@ -594,13 +601,9 @@ return packer.startup(function(use)
     --}
     -- use "notomo/cmdbuf.nvim"      -- alternative cmdline
     -- use "SmitheshP/nvim-navbuddy" -- pop up menu to navigate buffer lsp symbols
-    -- use "kosayoda/nvim-lightbulb" -- VSCode bulb for neovim's built-in LSP. 
-    -- use "smjonas/inc-rename.nvim" -- incremental LSP renaming based on Neovim's command-preview feature.
 
     -- formater
     -- use "cbochs/grapple.nvim" -- tagging import files and manage their
-
-    -- formater
     -- use "mhartington/formatter.nvim"  -- emmet integration
 
     -- use "b0o/SchemaStore.nvim"  -- access to schemas from schemastore.org

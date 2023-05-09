@@ -4,29 +4,28 @@ if not ok then
 	return
 end
 
+
 local ok, neotest_go = pcall(require, "neotest-go")
 if not ok then
 	vim.notify "neotest-go config not loaded"
-	return
 end
 
 local ok, neotest_rust = pcall(require, "neotest-rust")
 if not ok then
 	vim.notify "neotest-rust config not loaded"
-	return
 end
 
 local ok, neotest_plenary = pcall(require, "neotest-plenary")
 if not ok then
 	vim.notify "neotest-plenary config not loaded"
-	return
 end
+
 
 local ok, overseer_consumer = pcall(require, "neotest.consumers.overseer")
 if not ok then
 	vim.notify "overseer consumer not loaded in neotest config"
-	return
 end
+
 
 neotest.setup({
 	adapters = {

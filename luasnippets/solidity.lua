@@ -135,7 +135,7 @@ ls.add_snippets("solidity", {
             i(3, "/* code */"),
             i(4, "/* code */"),
           })),
-          i(nil, "/* code */"),
+          i(1, "/* code */"),
         }),
       }
     )
@@ -149,7 +149,7 @@ ls.add_snippets("solidity", {
     },
     fmt([[
         // SPDX-License-Identifier: UNLICENSED
-        pragma solidity ^0.8.19;
+        pragma solidity {solc} ;
 
         import "../lib/forge-std/src/Test.sol" ;
         import "./TestUtil.t.sol" ;
@@ -167,6 +167,12 @@ ls.add_snippets("solidity", {
         }}
     ]],
       {
+        solc = f(function()
+            local handle = io.popen("solc --version")
+            local result = handle:read("*a")
+            handle:close()
+            return result:match("%d.%d.%d%d")
+        end,{},{}),
         contract = f(function()
             local filename = vim.fn.expand("%:t")
             local extension = ".t.sol"
@@ -903,7 +909,7 @@ ls.add_snippets("solidity", {
       t "msg.data",
       t "msg.sig",
       t "block.coinbase",
-      t "block.difficulty",
+      t "block.prevrandao",
       t "block.gaslimit",
       t "block.number",
       t "block.timestamp",
@@ -1005,7 +1011,6 @@ ls.add_snippets("solidity", {
       * unchecked perform operations without underflow/overflow verification
       * assembly allow to write assembly code
       * new keyword creates new instance of a contract by deploying contract & initializing its state variables and running its constructor,settign nonce to 1
-      * selfdestruct send all ether in a contract to a specific address
     ]],
   }, {
     c(1, {
@@ -1019,7 +1024,6 @@ ls.add_snippets("solidity", {
       ]],{
         i(1,"contract")
       })),
-      t("selfdestruct(address)"),
       t("super().{1}"),
     }),
   }),
@@ -1105,7 +1109,7 @@ ls.add_snippets("solidity", {
       t("coinbase()"), -- current mining beneficiary
       t("timestamp()"), -- timestamp of current block in seconds since epoch
       t("number()"), -- current block number
-      t("difficulty()"), -- current block difficulty
+      t("prevrandao()"), -- current block difficulty
       t("gaslimit()"), -- current block gas limit
       t("gas()"), -- current block gas still available to execution
       t("address()"), -- current block gas still available to execution

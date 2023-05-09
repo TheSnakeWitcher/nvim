@@ -31,9 +31,10 @@ telekasten.setup({
 	uuid_sep = "-",           -- UUID separator
 
 	-- Flags for creating non-existing notes
-	follow_creates_nonexisting = true, -- create non-existing on follow
-	dailies_create_nonexisting = true, -- create non-existing dailies
+	follow_creates_nonexisting = true,  -- create non-existing on follow
+	dailies_create_nonexisting = true,  -- create non-existing dailies
 	weeklies_create_nonexisting = true, -- create non-existing weeklies
+	rename_update_links = true,         -- if `true` update links after a file has been renamed
 
 	-- Image link style",
 	-- wiki:     ![[image name]]

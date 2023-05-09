@@ -44,6 +44,9 @@ if not ok then vim.notify "telescope tabs extension not loaded" end
 local ok , _ = pcall(telescope.load_extension,'bookmarks')
 if not ok then vim.notify "telescope bookmarks extension not loaded" end
 
+local ok , _ = pcall(telescope.load_extension,'dap')
+if not ok then vim.notify "telescope telescope-dap extension not loaded" end
+
 -- local ok , _ = pcall(telescope.load_extension,'file_browser')
 -- if not ok then vim.notify "telescope file_browser extension not loaded" end
 -- local ok , fb_actions = pcall(telescope.load_extension,'telescope._extensions.file_browser.actions')

@@ -6,15 +6,20 @@ end
 
 dashboard.setup({
 	theme = "hyper",
+    disable_move = true,
+    shortcut_type = 'letter',  -- options: 'letter' or 'number'
     hide = {
       statusline = false,
       tabline = false,
       winbar = false,
     },
 	config = {
-		week_header = {
-			enable = true,
-		},
+        header = util.headers.main_header,
+        -- footer = {},
+        packages = { enable = true }, -- show loaded plugins
+        project = { enable = true, limit = 4 },
+        mru = { limit = 5 },
+        -- action = function() vim.cmd('Telescope projections') end, -- executed when <CR> is pressed dashboard
 		shortcut = {
 			{ desc = " Update", group = "@property", action = "PackerSync", key = "u" },
 			{

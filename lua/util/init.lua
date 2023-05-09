@@ -45,4 +45,6 @@ function util.load_config(module)
     return module_config
 end
 
+util.headers = require("util.headers")
+
 return util

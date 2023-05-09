@@ -69,19 +69,19 @@ ls.add_snippets("rust", {
 
   s(
     {
-      name = "module-import",
+      name = "module",
       trig = "mod",
-      dscr = "import module mod_name",
+      dscr = "import/declare module",
     },
     fmt([[
-	  {1}mod {2}
+        {attribute}
+        {}mod {}
     ]],
       {
         c(1, {
           t "",
           t "pub ",
         }),
-        -- i(2, "name"),
         c(2, {
           sn(nil, {
             i(1, "name"),
@@ -95,7 +95,8 @@ ls.add_snippets("rust", {
             i(1, "name"),
             i(2, "/* code */"),
           })),
-        })
+        }),
+        attribute = m({2},"test", "#[cfg(test)]")
       }
     )
   ),
@@ -160,16 +161,12 @@ ls.add_snippets("rust", {
       dscr = "main function declaration, note: main is entry point for program",
     },
     fmt([[
-      fn main({1}){2}{{
-        {3}
+      fn main(){}{{
+        {}
       }}
     ]],
       {
         c(1, {
-          t "",
-          i(1, "args"),
-        }),
-        c(2, {
           sn(2, {
             t " -> ",
             i(1, "return_type"),
@@ -177,7 +174,7 @@ ls.add_snippets("rust", {
           }),
           t " ",
         }),
-        i(3, "/* code */"),
+        i(2, "/* code */"),
       }
     )
   ),
@@ -321,7 +318,7 @@ ls.add_snippets("rust", {
   s(
     {
       name = "method",
-      trig = "fnm",
+      trig = "fm",
       dscr = "method declaration, note: methdos are asociated with a datastruct & must be inside and impl{",
     },
     fmt([[
@@ -338,6 +335,7 @@ ls.add_snippets("rust", {
         c(3, {
           t "&self",
           t "&mut self",
+          t "self",
         }),
         c(4, {
           sn(1, {
@@ -470,7 +468,7 @@ ls.add_snippets("rust", {
     },
     fmt([[
       #[test]{1}
-      {2}fn {3}_test({4}){5}{{
+      {2}fn {3}({4}){5}{{
         {6}
       }}
     ]],
@@ -754,7 +752,6 @@ ls.add_snippets("rust", {
       }
     )
   ),
-
   s(
     {
       name = "for",
