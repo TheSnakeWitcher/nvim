@@ -1,6 +1,5 @@
 local ok, silicon = pcall(require,"silicon")
 if not ok then
-    vim.notify "silicon cmds not loaded"
     return
 end
 

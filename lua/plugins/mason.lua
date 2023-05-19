@@ -20,20 +20,20 @@ mason.setup({
 
 
 local base_servers = {
-    "lua_ls",   -- lua
+    "lua_ls",        -- lua
+    "bashls",        -- bash
+    "solidity",      -- solidity
     "rust_analyzer", -- rust
     "gopls",         -- go
-    "solidity",      -- solidity
     "julials",       -- julia
-    "bashls",        -- bash
     "sqls",          -- sql
+
+    "texlab",        -- latex
+    "grammarly",     -- markdown
     "jsonls",        -- json
     "taplo",         -- toml
-    "texlab",        -- latex
---    "marksman",      -- markdown
 --    "yamlls",        -- yaml
 --    "lemminx",       -- xml
---    "tsserver",      -- ts
 --    "html",          -- html
 --    "cssls",         -- css
 }

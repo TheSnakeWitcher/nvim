@@ -13,7 +13,7 @@ end
 
 
 require("luasnip.loaders.from_lua").lazy_load({
-    path = vim.fn.stdpath("config") .. "/luasnippets"
+    path = vim.g.snippets_dir
 })
 
 

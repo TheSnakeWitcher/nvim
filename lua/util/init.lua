@@ -1,4 +1,4 @@
-_G.util = {}
+util = {}
 
 function util.ensure_lazy()
     local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
@@ -45,6 +45,8 @@ function util.load_config(module)
     return module_config
 end
 
-util.headers = require("util.headers")
+
+util.ui = require("util.ui")
+
 
 return util

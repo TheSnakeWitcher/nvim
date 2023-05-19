@@ -5,4 +5,6 @@ if not ok then
 end
 
 
-anvil.setup()
+anvil.setup({
+    config_file_name = "data/anvil_conf.json",   -- file where to output anvil config when spawned 
+})

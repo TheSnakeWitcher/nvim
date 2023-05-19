@@ -1,7 +1,6 @@
 -- TODO: check why don't work projections autocmd in autocmds folders
 -- TODO: enable spell in specific filetypes and comments
 -- TODO: hot reload snippets automatically when changed
--- TODO: check dashboard/startup autocmd to be show when starting
 -- TODO: use in plugins/init.lua util.load_config as load_config
 -- TODO: search where is seted <leader>D definition keymap and remove it
 -- TODO: check nvim-cmp advanced config
@@ -16,7 +15,6 @@ function load_config(module)
     end
     return module_config
 end
-
 
 packer.init({
     display = {
@@ -33,6 +31,7 @@ return packer.startup(function(use)
     -- base
     --------------------------------------------------------------
     -- TODO: change packer for folke/lazy.nvim
+    -- TODO: check "romgrk/kui.nvim"
     use "wbthomason/packer.nvim"   -- plugin manager
     use "nvim-lua/plenary.nvim"    -- usefull collection of lua functions for neovim
     use "lewis6991/impatient.nvim" -- improve startup time
@@ -124,11 +123,6 @@ return packer.startup(function(use)
         "norcalli/nvim-colorizer.lua",
         config = function() load_config("colorizer") end,
     }
-    -- display due dates
-    use {
-        "nfrid/due.nvim",
-        config = function() load_config("due") end,
-    }
     -- fold signs
     use {
         "yaocccc/nvim-foldsign",
@@ -147,14 +141,13 @@ return packer.startup(function(use)
     --------------------------------------------------------------
     use {
         "nvim-treesitter/nvim-treesitter",
-        config = function()
-            load_config("nvim-treesitter")
-        end,
+        config = function() load_config("nvim-treesitter") end,
         run = ":TSUpdate",
         requires = {
-            'nvim-treesitter/nvim-treesitter-textobjects',  -- additional text objects via treesitter
+            "nvim-treesitter/nvim-treesitter-textobjects",  -- additional text objects via treesitter
             "nvim-treesitter/playground",
-            'nvim-treesitter/nvim-treesitter-context',      -- show code context
+            "nvim-treesitter/nvim-treesitter-context",      -- show code context
+            -- "ibhagwan/ts-vimdoc.nvim",                   -- treesitter base markdown to vimdoc convertion tool
             --"RRethy/nvim-treesitter-textsubjects",
             --"p00f/nvim-ts-rainbow"                        -- highligh 
             --"windwp/nvim-ts-autotag"                      -- use treesitter to autocose & autorename html tags
@@ -180,6 +173,7 @@ return packer.startup(function(use)
                 "ray-x/lsp_signature.nvim",
                 config = function () load_config("lsp_signature")end,
             },
+            -- "lewis6991/hover.nvim",
         },
         config = function() load_config("nvim-lspconfig") end,
     }
@@ -220,15 +214,13 @@ return packer.startup(function(use)
     use {
         "nvim-telescope/telescope.nvim",
         branch = "0.1.x",
-        config = function()
-            load_config("telescope")
-        end,
+        config = function() load_config("telescope") end,
         requires = {
-            "nvim-telescope/telescope-ui-select.nvim",       -- sets vim.ui.select to telescope
             "LinArcX/telescope-env.nvim",                    -- search environment variables
             "nvim-telescope/telescope-file-browser.nvim",    -- search/manipulate filesystem
             "nvim-telescope/telescope-media-files.nvim",     -- search media files
-	        'LukasPietzschmann/telescope-tabs',              -- search tabs
+	        "LukasPietzschmann/telescope-tabs",              -- search tabs
+            "crispgm/telescope-heading.nvim",                -- search headers
             {   -- create telescope pickers from shell commands
                 "axkirillov/easypick.nvim",
                 config = function() load_config("easypick") end,
@@ -278,7 +270,6 @@ return packer.startup(function(use)
         "axieax/urlview.nvim",
         config = function() load_config("urlview") end,
     }
-    use "lambdalisue/glyph-palette.vim" -- glyphs management
 
 
     --------------------------------------------------------------
@@ -311,7 +302,6 @@ return packer.startup(function(use)
     -- snippet engine
     use {
         "L3MON4D3/LuaSnip",
-        opt = false,
         config = function() load_config("luasnip") end,
     }
     -- improvements icons for completion menu
@@ -351,21 +341,27 @@ return packer.startup(function(use)
        "0oAstro/silicon.lua",
        config = function() load_config("silicon") end ,
     }
+    -- package info
+    -- use {
+    --    "vuki656/package-info.nvim",
+    --    config = function() load_config("package-info") end ,
+    -- }
 
 
     --------------------------------------------------------------
     -- test/dap
     --------------------------------------------------------------
     -- dap(debug adapter protocol) integration
+    -- TODO: check use "kndndrj/nvim-projector" --  project-specific configs for nvim-dap with telescope
     use {
         "mfussenegger/nvim-dap", -- alternative "puremourning/vimspector",
         config = function() load_config("nvim-dap") end,
         requires = {
-             "rcarriga/nvim-dap-ui",
+            "rcarriga/nvim-dap-ui",
             "theHamsta/nvim-dap-virtual-text",
-             "leoluz/nvim-dap-go",
-             "nvim-telescope/telescope-dap.nvim",
-             "rcarriga/cmp-dap",
+            "leoluz/nvim-dap-go",
+            "nvim-telescope/telescope-dap.nvim",
+            "rcarriga/cmp-dap",
         },
     }
     -- tests runner/framework
@@ -384,7 +380,7 @@ return packer.startup(function(use)
     --------------------------------------------------------------
     -- tools
     --------------------------------------------------------------
-    -- custom submode management (create custom submodes and menus)
+    -- custom submodes management (create custom submodes and menus)
     use {
         "anuvyklack/hydra.nvim",
         config = function() load_config("hydra") end,
@@ -404,7 +400,7 @@ return packer.startup(function(use)
         rocks = 'luautf8',
         config = function() load_config("mkdnflow") end
     }
-    -- use "tools-life/taskwiki" -- task management with vimwiki using taskwarrior
+    use "vimwiki/vimwiki"  -- wiki management
     -- terminal management
     use {
         "akinsho/toggleterm.nvim",
@@ -428,14 +424,26 @@ return packer.startup(function(use)
     }
     -- previewiers
     use {
-        -- markdow previewiersn
+        -- markdow previewiers
         'toppair/peek.nvim',
         -- "iamcco/markdown-preview.nvim",
         run = 'deno task --quiet build:fast',
         config = function() load_config("peek") end,
     }
     --  image previewer
-    use "edluffy/hologram.nvim"
+    use {
+        "edluffy/hologram.nvim",
+        config = function() load_config("hologram") end,
+    }
+    -- database interaction management
+    use {
+        "tpope/vim-dadbod",
+        requires = { "kristijanhusak/vim-dadbod-ui" },
+    }
+    -- use {
+    --     -- develop integration with overseer
+    --     "kndndrj/nvim-dbee",
+    -- }
 
 
     --------------------------------------------------------------
@@ -493,6 +501,7 @@ return packer.startup(function(use)
     -- codeium ai toolkit integration
     use {
         "jcdickinson/codeium.nvim",
+        opt = true,
         config = function() load_config("codeium") end,
     }
     -- highlight and explain code readability issues
@@ -508,7 +517,8 @@ return packer.startup(function(use)
     -- lua
     --
     -- rust
-    use { -- configure rust lsp
+    use {
+        -- configure rust lsp
         "simrat39/rust-tools.nvim",
         config = function() load_config("rust-tools") end,
     }
@@ -517,12 +527,10 @@ return packer.startup(function(use)
     --
     -- latex
     use "lervag/vimtex"
-
-
-    --------------------------------------------------------------
-    -- back end
-    --------------------------------------------------------------
-
+    -- use "frabjous/knap"
+    -- conceal
+    -- use "KeitaNakamura/tex-conceal.vim"
+    -- use "Jxstxs/conceal.nvim"
 
 
     --------------------------------------------------------------
@@ -534,17 +542,22 @@ return packer.startup(function(use)
     use {
         -- motions for every coordinate of the viewport
         "ggandor/leap.nvim",
+        opt = true,
         config = function() load_config("leap") end,
     }
 
+    -- use "ai-phind" 
+
     -- lsp
     -- use "smjonas/inc-rename.nvim" -- incremental LSP renaming based on Neovim's command-preview feature.
+
+    -- markdown
+    -- use "SidOfc/mkdx" -- markdown utils
 
     -- cmds
     use "protex/better-digraphs.nvim"      -- better digraphs
 
     -- tool for test interaction
-    -- use "tpope/vim-dadbod",              -- db interaction
     -- use "tpope/vim-unimpaired",          -- complementary mapping
     -- use "tpope/vim-sleuth"               -- detect tabstop and shiftwidth automatically
     -- use "ThePrimeagen/refactoring.nvim"  -- refactoring tool
@@ -565,7 +578,8 @@ return packer.startup(function(use)
             vim.g.magma_image_provider = "ueberzug"
         end,
     }
-    -- use "luk400/vim-jukit"         -- REPL interaction
+    -- use "luk400/vim-jukit"     -- REPL interaction
+    -- use "Jxstxs/conceal.nvim"  -- conceal management
 
     -- git integration
     use {
@@ -635,7 +649,7 @@ return packer.startup(function(use)
         "/home/mr-papi/.config/nvim/lua/plugins/development/forge.nvim",
         config = function() load_config("forge") end,
     }
-    -- cast integration(foundry toolkit blockchain client inspired in rest.nvim)
+    -- cast integration(foundry toolkit blockchain client inspired in rest.nvim and postman)
     -- use {
     --     "TheSnakeWitcher/cast.nvim",
     --     config = function() load_config("cast") end,
@@ -654,9 +668,21 @@ return packer.startup(function(use)
     --      -- crytic-compile: https://github.com/crytic/crytic-compile/#crytic-compile
     --      -- echidna: https://github.com/crytic/echidna
     --      -- manticore: https://github.com/trailofbits/manticore/
+    --      -- brokentoken: https://github.com/zeroknots/brokentoken
     --      "TheSnakeWitcher/web3tools.nvim", 
     --      config = function() load_config("web3tools") end,
     -- }
+    --
+    -- hardhat framework
+    -- use {
+    --      "TheSnakeWitcher/hardhat.nvim",
+    --      config = function() load_config("hardhat") end,
+    -- }
+    --
+    -- completion  
+    -- use "TheSnakeWitcher/cmp-web3-foundry.nvim" -- completion source for foundry
+    -- use "TheSnakeWitcher/cmp-gh-actions"        -- completion source for foundry
+    --
     -- utilities to aid in dAPP development process using autocmds/cmds/and others
     -- use {
     --      -- view what and from where data/methods are being inherited
@@ -681,8 +707,17 @@ return packer.startup(function(use)
     --          dbm/tabbot for window manager like experience
     --      }
     -- }
+    -- knowledgebase management
     -- use {
-    --      "TheSnakeWitcher/zk.nvim"          -- definitive zetelkasten
+    --      "TheSnakeWitcher/knowledgebase.nvim",
+    --      requires = {
+    --          "TheSnakeWitcher/zk.nvim",
+    --          "TheSnakeWitcher/wiki.nvim"
+    --      }
+    -- }
+    -- zetelkasten management
+    -- use {
+    --      "TheSnakeWitcher/zk.nvim",
     --      check = {
     --          https://github.com/oniony/TMSU
     --      }
@@ -697,11 +732,18 @@ return packer.startup(function(use)
     --          templates(select a template dir as configuration to make new_templated_note)
     --      }
     --      inspired = {
-    --          "vimwiki/vimwiki"
     --          "renerocksai/telekasten.nvim"
     --          "Furkanzmc/zettelkasten.nvim"
     --          "jakewvincent/mkdnflow.nvim"
     --      }    
+    --}
+    -- wiki management
+    -- use {
+    --     "TheSnakeWitcher/wiki.nvim"          -- wiki
+    --      inspired = {
+    --          "vimwiki/vimwiki"
+    --      }
+    -- }
 
 
     if packer_boostraped then

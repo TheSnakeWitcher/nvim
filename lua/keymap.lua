@@ -16,6 +16,7 @@
 --     < ESC >    = escape
 --     < CR >     = enter (stands for [C]arrier [R]eturn)
 --     < leader > = user seted leader key
+--     <nop> = do nothing action
 
 local set = vim.keymap.set
 local opts = { noremap = true , silent = true }
@@ -25,7 +26,7 @@ local opts = { noremap = true , silent = true }
 --------------------------------------------------------------
 -- builtins
 --------------------------------------------------------------
-set({ 'n', 'v' }, '<Space>', '<Nop>', { silent = true })
+-- set({ 'n', 'v' }, '<Space>', '<Nop>', { silent = true })
 set("i", "<C-c>", "<Esc>",{ silent = true })
 set("v", "S", ":s/\v/g<LEFT><LEFT>",{desc = "substitute pattern in range globally"})
 
@@ -155,6 +156,7 @@ set("n", "<C-f>", builtin.find_files, {desc = "[s]earch [f]iles" })
 set("n", "<leader>sf", builtin.find_files, {desc = "[s]earch [f]iles" })
 set("n", "<leader>sg", builtin.live_grep, {desc = "[s]earch [g]rep" })
 set("n","<leader>so",builtin.oldfiles,{desc = "[s]earch [o]ldfiles"})
+set("n","<leader>sP","<cmd>Telescope media_files<cr>",{desc = "[s]earch [P]ics"})
 --set("n","<leader>sF",
 --    function () builtin.find_files{ hidden = true, no_ignore = true} end,
 --    telescope_opts
@@ -176,10 +178,10 @@ set("n", "<leader>sn", "<CMD>TodoTelescope<CR>", { desc = "[s]earch [n]otes"}) -
 set("n", "<leader>sN", "<CMD>Telescope notify<CR>", { desc = "[s]earch [N]otifications"}) -- notify
 set("n", "<leader>sp", "<CMD>Telescope projections<CR>" ,{ desc = "[s]earch [p]rojects"}) -- projections
 set("n", "<leader>se", "<CMD>Telescope env<CR>" ,{ desc = "[s]earch [e]nvironment"}) -- telescope-env
-set("n", "<leader>ss", "<CMD>Telescope luasnip<CR>" ,{ desc = "[s]earch [s]snippets"}) -- telescope-luasnip
+set("n", "<leader>ss", "<CMD>LuaSnipEdit<CR>" ,{ desc = "[s]earch [s]snippets"}) -- luasnip
 set("n", "<leader>st", "<CMD>Telescope telescope-tabs list_tabs<CR>" ,{ desc = "[s]earch [t]abs"}) -- telescope-tabs
-set("n", "<leader>m", "<cmd>Telescope make<cr>", { desc = "[m]ake"}) -- telescope-makefile
--- set("n", "<leader>T", "<cmd>Telescope toggletasks spawn<cr>", { desc = "[T]ask"}) -- toggletasks
+set("n", "<leader>sH", "<cmd>Telescope heading<cr>", { desc = "[s]earch [H]eaders"}) -- telescope-heading
+set("n", "<leader>sT", "<cmd>Telescope toggletasks spawn<cr>", { desc = "[s]earch [T]ask"}) -- toggletasks
 
 
 --------------------------------------------------------------
@@ -210,25 +212,18 @@ set('n', '<space>q', vim.diagnostic.setloclist, opts)
 --------------------------------------------------------------
 local ls = require("luasnip")
 
-set({"i","s"},"<C-y>",function()
-    if ls.expand_or_jumpable() then
-        ls.expand_or_jump()
-    end
-end,{desc = "expansion key",silent = true})
-
 set({"i","s"},"<C-s>",function()
     if ls.choice_active() then
         require('luasnip.extras.select_choice')()
     end
 end,{desc = "select choice" , silent = true})
 
-set({"i","s"},"<C-l>",
-    "<cmd>lua require('luasnip.extras.select_choice')()<cr>",
-{desc = "select choice"})
-
 set("n","<leader><leader>s",
     "<cmd>source " .. vim.fn.stdpath("config") .. "/lua/plugins/luasnip.lua<CR>",
 {desc = "hot reload snippets"})
+
+set("n","<leader><leader>S", "<CMD>LuaSnipEdit<CR>", {desc = "open current filetype snippets files" , silent = true})
+
 
 
 --------------------------------------------------------------
@@ -305,7 +300,7 @@ set({"n","v"}, "<leader>!", ":Nredir ", { desc = "[!]execute command and redirec
 -- vim-shell-executor
 --------------------------------------------------------------
 set("n", "<leader>R", "<cmd>ExecuteBuffer<cr>", { desc = "[R]un buffer"})
-set("v", "<leader>R", "<cmd>ExecuteSelection<cr>", { desc = "[R]un selectoin"})
+set("v", "<leader>R", "<cmd>ExecuteSelection<cr>", { desc = "[R]un selection"})
 
 
 --------------------------------------------------------------
@@ -317,6 +312,7 @@ set("n","<leader>zf","<cmd>Telekasten find_notes<cr>",{desc = "[z]ettelkasten [f
 set("n","<leader>zs","<cmd>Telekasten find_notes<cr>",{desc = "[z]ettelkasten [s]earch"})
 set("n","<leader>zg","<cmd>Telekasten search_notes<cr>")
 set("n","<leader>zt","<cmd>Telekasten show_tags<cr>",{desc = "[z]ettelkasten [t]ag"})
+set("n","<leader>zv","<cmd>Telekasten switch_vault<cr>",{desc = "[z]ettelkasten [v]ault"})
 -- set("i","<leader>[[","<esc><cmd>Telekasten insert_link<cr>",{desc = "insert link"})
 -- set("n","<leader>z#","<cmd>Telekasten show_tags<cr>")
 -- set("n","<leader>zb","<cmd>Telekasten show_backlinks<cr>")

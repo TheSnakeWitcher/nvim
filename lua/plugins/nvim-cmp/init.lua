@@ -20,8 +20,16 @@ end
 --------------------------------------------------------------
 -- sources
 --------------------------------------------------------------
--- sources1
+local _ = require('plugins.nvim-cmp.cmp-git')
+-- local ok , cmp_git = pcall(require,'plugins.nvim-cmp.cmp-git')
+-- if not ok then vim.notify("cmp-git config not loaded") end
 -- sources2
+-- local ok, _ = pcall(require,'plugins.nvim-cmp.cmp-git')
+-- if not ok then
+--     vim.notify "cmp-git config not loaded"
+--     return
+-- end
+
 
 
 cmp.setup({
@@ -64,14 +72,11 @@ cmp.setup({
         {
             name = "latex_symbols",
             option = {        -- 0(mixed) :show command and insert symbol
-                strategy = 0, -- 1(julia) :show and insert symbol
+                strategy = 2, -- 1(julia) :show and insert symbol
                               -- 2(latex) :show and insert command
             },
         },
         { name = 'calc' },
-        -- { name = "codeium" },
-        -- { name = 'emoji' }
-
     },
 
     mapping = {
@@ -84,7 +89,8 @@ cmp.setup({
         ['<C-d>'] = cmp.mapping.scroll_docs(4),
         ['<C-u>'] = cmp.mapping.scroll_docs(-4),
         ["<C-n>"] = cmp.mapping(function(fallback) --["<C-n>"] = cmp.mapping.select_next_item(),
-            if luasnip.choice_active() then
+            -- if luasnip.choice_active() then
+            if luasnip.choice_active() and not cmp.visible() then
                 luasnip.change_choice(1)
             elseif cmp.visible() then
                 cmp.select_next_item()
@@ -93,7 +99,8 @@ cmp.setup({
             end
         end,{"i","s"}),
         ["<C-p>"] = cmp.mapping(function(fallback) --["<C-p>"] = cmp.mapping.select_prev_item(),
-            if luasnip.choice_active() then
+            -- if luasnip.choice_active() then
+            if luasnip.choice_active() and not cmp.visible() then
                 luasnip.change_choice(-1)
             elseif cmp.visible() then
                 cmp.select_prev_item()
@@ -109,10 +116,6 @@ cmp.setup({
             else
                 fallback()
             end
-            --elseif luasnip.expandable() then
-            --    luasnip.expand()
-            --elseif luasnip.expand_or_jumpable() then
-            --    luasnip.expand_or_jump()
         end,{"i","s"}),
         ["<S-Tab>"] = cmp.mapping(function(fallback) --["<S-Tab>"] = cmp.mapping(cmp.mapping.select_prev_item(), { "i", "s" }),
             if luasnip.jumpable(-1) then
@@ -122,10 +125,6 @@ cmp.setup({
             else
                 fallback()
             end
-            --if cmp.visible() then
-            --    cmp.select_prev_item()
-            --elseif luasnip.jumpable(-1) then
-            --    luasnip.jump(-1)
         end,{"i","s"}),
     },
 
@@ -135,29 +134,16 @@ cmp.setup({
 
 })
 
-local ok, _ = pcall(require,'plugins.nvim-cmp.cmp-git')
-if not ok then
-    vim.notify "cmp-git config not loaded"
-    return
-end
-
--- local ok, _ = pcall(require,'plugins.nvim-cmp.cmp-make')
--- if not ok then
---     vim.notify "cmp-make config not loaded"
---     return
--- end
-
 cmp.setup.cmdline(':', {
     mapping = cmp.mapping.preset.cmdline(),
     sources = cmp.config.sources({
-      -- { name = 'make' },
       { name = 'path' },
     }, {
       { name = 'cmdline' },
     })
 })
 
--- use buffer source for `/` and `?` (if you enabled `native_menu`, this won't work anymore).
+-- if you enabled `native_menu`, this won't work anymore
 cmp.setup.cmdline({'/', '?' }, {
   mapping = cmp.mapping.preset.cmdline(),
   sources = {

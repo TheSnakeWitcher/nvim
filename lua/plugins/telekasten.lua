@@ -4,20 +4,21 @@ if not ok then
 	return
 end
 
-local knowledgebase_path = vim.env.HOME .. "/Knowledgebase"
-local template_path = vim.env.HOME .. "/Templates/zettelkasten"
-telekasten.setup({
-	home = knowledgebase_path .. "/zettelkasten",   -- path to main notes folder
-	daily = knowledgebase_path .. "/zettelkasten",  -- path to daily notes
-	weekly = knowledgebase_path .. "/zettelkasten", -- path to weekly notes
-	templates = template_path,                      -- path to templates
+local zettelkasten_dir = vim.g.knowledgebase_dir .. "/zettelkasten"
+local template_dir = vim.env.HOME .. "/Templates/zettelkasten"
 
-	template_new_note = template_path .. "/note.md",    -- template for new notes
-	template_new_daily = template_path .. "/daily_note.md",   -- template for new daily notes
-	template_new_weekly = template_path .. "/weekly_note.md",  -- template for new weekly notes
+telekasten.setup({
+	home = zettelkasten_dir,   -- path to main notes folder
+	daily = zettelkasten_dir,  -- path to daily notes
+	weekly = zettelkasten_dir, -- path to weekly notes
+	templates = template_dir,  -- path to templates
+
+	template_new_note = template_dir .. "/note.md",          -- template for new notes
+	template_new_daily = template_dir .. "/daily_note.md",   -- template for new daily notes
+	template_new_weekly = template_dir .. "/weekly_note.md", -- template for new weekly notes
 
 	-- image subdir for pasting or nil if pasted images shouldn't go into a special subdir
-	image_subdir = knowledgebase_path .. "/img",
+	image_subdir = vim.g.knowledgebase_dir .. "/img",
 
 	extension = ".md",  -- File extension for note files
 
@@ -88,9 +89,10 @@ telekasten.setup({
 	},
 
 	vaults = {
-		personal = {
-			-- configuration for personal vault. E.g.:
-			-- home = "/home/user/vaults/personal",
+		wiki = {
+			home =vim.g.knowledgebase_dir .. "/wiki",
+	        templates = template_dir,
+	        template_new_note = template_dir .. "/note.md",
 		},
 	},
 

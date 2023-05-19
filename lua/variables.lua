@@ -17,12 +17,11 @@
 -- user variables
 --------------------------------------------------------------
 vim.g.mapleader = " "
-vim.g.projects_dir = os.getenv("HOME") .. "/SoftwareCode/Projects"
+vim.g.knowledgebase_dir = vim.env.HOME .. "/Knowledgebase"
+vim.g.projects_dir = vim.env.HOME .. "/SoftwareCode/Projects"
+vim.g.work_projects_dir = vim.env.HOME .. "/SoftwareCode/Work"
+vim.g.plugin_dev_dir = vim.fn.stdpath("config") .. "/lua/plugins/development"
 vim.g.snippets_dir = vim.fn.stdpath("config") .. "/luasnippets"
--- vim.g.tasks_dir = vim.fn.stdpath("cache") .. "/toggletasks"
---vim.g.internet = function()
---os.execute("wget google.com --spider")
---end
 
 
 --------------------------------------------------------------
@@ -37,7 +36,7 @@ vim.g.snippets_dir = vim.fn.stdpath("config") .. "/luasnippets"
 --------------------------------------------------------------
 vim.g.vimwiki_list = {
     {
-        path =  vim.fn.stdpath("cache") .. "/vimwiki",
+        path =  vim.g.knowledgebase_dir .. "/wiki",
         syntax = 'markdown',
         ext = '.md'
     },
@@ -46,7 +45,18 @@ vim.g.vimwiki_global_ext = 0
 
 
 --------------------------------------------------------------
+-- vimtex
+--------------------------------------------------------------
+vim.g.vimtex_view_method = 'general'
+vim.g.vimtex_view_general_viewer = 'pdfviewer'
+-- vim.g.vimtex_view_general_options = '--unique file:@pdf\#src:@line@tex'
+vim.g.vimtex_compiler_method = 'latexmk'
+vim.g.vimtex_complete_enabled = true
+vim.g.vimtex_fold_enabled = true
+
+
+--------------------------------------------------------------
 -- notify
 --------------------------------------------------------------
-local ok , _ = pcall(require,"notify")
-if ok then vim.notify = require("notify") end
+local ok , notify = pcall(require,"notify")
+if ok then vim.notify = notify end

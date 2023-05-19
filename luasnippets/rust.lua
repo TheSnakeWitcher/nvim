@@ -14,12 +14,13 @@ local events = require "luasnip.util.events"
 local conds = require "luasnip.extras.conditions"
 local ai = require "luasnip.nodes.absolute_indexer"
 local m = extras.match
+local n = extras.nonempty
 local l = extras.lambda
 local rep = extras.rep
 local postfix = require("luasnip.extras.postfix").postfix
+local types = require("luasnip.util.types")
 
 -- common nodes
-
 ls.add_snippets("rust", {
 
   ------------------------------------------------------
@@ -89,6 +90,7 @@ ls.add_snippets("rust", {
           }),
           sn(nil, fmt([[
             {1} {{
+              use super::* ;
               {2}
             }}
           ]], {
@@ -161,12 +163,31 @@ ls.add_snippets("rust", {
       dscr = "main function declaration, note: main is entry point for program",
     },
     fmt([[
-      fn main(){}{{
         {}
-      }}
+        {}fn main(){}{{
+            {}
+        }}
     ]],
       {
-        c(1, {
+        d(1,function()
+            local bufnr = vim.api.nvim_get_current_buf()
+            local lang , query_name  = "rust" , "used_modules"
+            local query = [[( (use_declaration (scoped_use_list (identifier) @module (#eq? @module "actix_web") ) ) )]]
+            local struct_name_query = [[( (struct_item (type_identifier) @struct_name ) )]]
+            local trait_name_query = [[( (trait_item (type_identifier) @trait_name ) )]]
+
+            local parser = vim.treesitter.get_parser(bufnr ,lang,{})
+            local tree = parser:parse()[1]
+            local tree_root = tree:root()
+            local used_modules = vim.treesitter.query.parse(lang,query)
+
+            for id,node,metadata in used_modules:iter_captures(tree_root,bufnr) do
+                return sn(nil,t("#[actix_web::main]"))
+            end
+            return sn(nil,t(""))
+        end,{},{}),
+        n(1,"async ",""),
+        c(2, {
           sn(2, {
             t " -> ",
             i(1, "return_type"),
@@ -174,7 +195,27 @@ ls.add_snippets("rust", {
           }),
           t " ",
         }),
-        i(2, "/* code */"),
+        d(3,function(args)
+            local insert_code_node = i(1,"/* code */")
+            local attribute_node = sn(nil,
+            fmt([[
+                HttpServer::new(||{{
+                    App::new()
+                    {}
+                }})
+                .bind((SERVER_ADDRESS,SERVER_PORT))
+                .run()
+                .await
+            ]],{insert_code_node}))
+
+            local attribute = args[1][1]
+            vim.print(args)
+            if attribute == "#[actix_web::main]" then
+                return attribute_node
+            else
+                return sn(nil,{insert_code_node})
+            end
+        end,{1},{}),
       }
     )
   ),
@@ -429,7 +470,10 @@ ls.add_snippets("rust", {
     {
       name = "func-extern",
       trig = "fne",
-      dscr = "external function declaration, note: function to use from/be called from another programming languaje",
+      dscr = [[external function declaration, note: function to interoperate with another programming languaje
+            c => c
+            system => java
+      ]],
     },
     fmt([[
       #[no_mangle]
@@ -439,8 +483,8 @@ ls.add_snippets("rust", {
     ]],
       {
         c(1, {
-          t "C",
-          t " ",
+          t "\"C\"",
+          t "\"system\"",
         }),
         i(2, "name"),
         c(3, {
@@ -465,6 +509,7 @@ ls.add_snippets("rust", {
       name = "func-test",
       trig = "fnt",
       dscr = "testing function declaration",
+      snippetType = "autosnippet",
     },
     fmt([[
       #[test]{1}
@@ -1131,7 +1176,33 @@ type {1} = {2} ;
     ]],
       {
         i(1, "name"),
+        -- d(1,function()
+        --     local bufnr = vim.api.nvim_get_current_buf()
+        --     local lang  = "rust"
+        --     local structs_names_query = [[( (struct_item (type_identifier) @struct_name ) )]]
+        --     local trait_names_query = [[( (trait_item (type_identifier) @trait_name ) )]]
+        --
+        --     local parser = vim.treesitter.get_parser(bufnr ,lang,{})
+        --     local tree = parser:parse()[1]
+        --     local tree_root = tree:root()
+        --     local struct_names = vim.treesitter.query.parse(lang,structs_names_query)
+        --
+        --     local structs_ids = {}
+        --     for id,node,metadata in struct_names:iter_captures(tree_root,bufnr) do
+        --         local node_text = vim.treesitter.get_node_text(node,bufnr)
+        --         table.insert(structs_ids,node_text)
+        --     end
+        --     return sn(nil,c(structs_ids))
+        -- end,{},{}),
+
         i(2, "/* function/method set */"),
+        -- posible implementation for when `name` is a trait search his definition and print
+        -- local trait_names = vim.treesitter.query.parse(lang,trait_names_query)
+        -- local traits = {}
+        -- for id,node,metadata in trait_names:iter_captures(tree_root,bufnr) do
+        --     local data = vim.treesitter.get_node_text(node,bufnr)
+        --     table.insert(traits,data)
+        -- end
       }
     )
   ),

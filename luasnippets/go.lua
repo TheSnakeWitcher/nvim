@@ -29,8 +29,8 @@ ls.add_snippets("go", {
   ------------------------------------------------------
   s(
     {
-      name = "kkk2",
-      trig = "kkk2",
+      name = "!",
+      trig = "!",
     },
     fmt([[
 	  package {}
@@ -56,16 +56,9 @@ ls.add_snippets("go", {
     },
     fmt([[
 	  package {}
-
-	  {}
 	]]  ,
       {
         i(1, "name"),
-        c(2, {
-          t "",
-          t "maininit",
-          t "main",
-        }),
       }
     )
   ),

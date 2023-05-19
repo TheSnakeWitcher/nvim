@@ -10,6 +10,7 @@ local d = ls.dynamic_node
 local r = ls.restore_node
 local extras = require "luasnip.extras"
 local fmt = require("luasnip.extras.fmt").fmt
+local fmta = require("luasnip.extras.fmt").fmta
 local events = require "luasnip.util.events"
 local conds = require "luasnip.extras.conditions"
 local ai = require "luasnip.nodes.absolute_indexer"
@@ -26,58 +27,94 @@ ls.add_snippets("tex", {
     ------------------------------------------------------
     s(
         {
-            name = "\\",
-            trig = "\\",
+            name = "base structure",
+            trig = "!",
             dscr = "basic tex estructure",
         },
-        fmt([[
-            \documentclass[{}]{{{}}}
+        fmta([[
+            \documentclass{<>}
 
-            \usepackage{{{}}}
 
-            \title{{{}}}
-            \author{{Mr.PAPI}}
-            \date{{\today}}
+            \usepackage{<>}
 
-            \begin{{document}}
+
+            \title{<>}
+            \author{Alejandro Virelles}
+            \date{\today}
+
+
+            \begin{document}
 
             \maketitle
 
-            {}
+            <>
 
-            \end{{document}}
+            \end{document}
         ]],
             {
+                -- i(1),
+                -- documentclass classess
                 c(1, {
-                    t "titlepage",
-                    t "notitle",
-                    t "oneside",
-                    t "twoside",
-                    t "twcolumn",
-                    t "a4paper",
-                    t "letter",
-                    t "paper",
-                    t "fleqn", -- align math formula to lefth
-                    t "leqno", -- put  numbering of formula on lefth
-                }),
-                c(2, {
                     t "article",
+                    t "IEEEtran",
                     t "letter",
                     t "books",
-                    t "reports",
+                    t "report",
                     t "slides",
                     t "beamer",
-                    t "IEEEtran",
-                    t "",
                 }),
-                c(3, {
+                -- documentclass options
+                -- c(1, {
+                --     t "titlepage",
+                --     t "notitle",
+                --     t "oneside",
+                --     t "twoside",
+                --     t "twcolumn",
+                --     t "a4paper",
+                --     t "letter",
+                --     t "paper",
+                --     t "fleqn", -- align math formula to lefth
+                --     t "leqno", -- put  numbering of formula on lefth
+                -- }),
+                c(2, {
                     t "amsmath",
                     t "color",
                     t "geometry",
                     t "graphicx",
                 }),
-                i(4, "title"),
-                i(5, "code"),
+                i(3, "title"),
+                i(4, "code"),
+            }
+        )
+    ),
+
+    s(
+        {
+            name = "input/include",
+            trig = "in",
+            dscr = [[codebase management,note:
+                input:
+                    can contain another \input
+                    don't insert line breaks
+                    tex extension is optional
+                include:
+                    can't contain another \include but can \input
+                    insert line breaks
+                    tex extension required
+                includeonly:
+                    determines from a subset of \include which will be compiled
+            ]],
+        },
+        fmta([[
+            <>{<>}
+        ]],
+            {
+                c(1, {
+                    t "input",
+                    t "include",
+                    t "includeonly",
+                }),
+                i(2, "file"),
             }
         )
     ),
@@ -94,10 +131,10 @@ ls.add_snippets("tex", {
                     p: speciall page for floats only
             ]],
         },
-        fmt([[
-            \begin{{{}}}{}
-                {}
-            \end{{{}}}
+        fmta([[
+            \begin{<>}<>
+                <>
+            \end{<>}
         ]],
             {
                 c(1, {
@@ -158,9 +195,9 @@ ls.add_snippets("tex", {
             trig = "section",
             dscr = "section declaration",
         },
-        fmt([[
-            \{}{{{}}}
-                {}
+        fmta([[
+            \<>{<>}
+                <>
         ]],
             {
                 c(1, {
@@ -193,8 +230,8 @@ ls.add_snippets("tex", {
             trig = "fmt",
             dscr = "fmt commands",
         },
-        fmt([[
-            \{}{{ {} }}
+        fmta([[
+            \<>{<>}
         ]],
             {
                 c(1, {

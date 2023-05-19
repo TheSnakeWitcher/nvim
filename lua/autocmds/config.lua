@@ -48,3 +48,6 @@ vim.api.nvim_create_autocmd("BufWritePost",{
 --     end
 --   end,
 -- })
+--
+-- vim.cmd("autocmd! BufEnter * if &ft ==# 'fugitive' | wincmd L | endif")
+--

@@ -1,5 +1,5 @@
-local status_ok, cmp_git = pcall(require,"cmp_git")
-if not status_ok then
+local ok, cmp_git = pcall(require,"cmp_git")
+if not ok then
     vim.notify "cmp_git config not loaded"
     return
 end

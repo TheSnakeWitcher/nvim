@@ -7,20 +7,15 @@ end
 dressing.setup({
 
 	input = {
-		-- Set to false to disable the vim.ui.input implementation
-		enabled = true,
+		enabled = true,            -- when false disable vim.ui.input implementation
 
-		-- Default prompt string
-		default_prompt = "Input:",
+		default_prompt = "Input:", -- default prompt string
 
-		-- Can be 'left', 'right', or 'center'
-		prompt_align = "left",
+		prompt_align = "left", -- options: 'left', 'right', or 'center'
 
-		-- When true, <Esc> will close the modal
-		insert_only = true,
+		insert_only = true, -- when true <Esc> will close the modal
 
-		-- When true, input will start in insert mode.
-		start_in_insert = true,
+		start_in_insert = true, -- when true input will start in insert mode.
 
 		-- These are passed to nvim_open_win
 		anchor = "SW",
@@ -72,7 +67,7 @@ dressing.setup({
 		enabled = true,
 
 		-- Priority list of preferred vim.select implementations
-		backend = { "telescope", "fzf_lua", "fzf", "builtin", "nui" },
+		backend = { "telescope", "fzf_lua", "fzf", "builtin" , "nui" },
 
 		-- Trim trailing `:` from prompt
 		trim_prompt = true,

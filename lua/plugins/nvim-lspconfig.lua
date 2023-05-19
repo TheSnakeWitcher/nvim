@@ -1,21 +1,19 @@
-local ok , mason_lspconfig = pcall(require,"mason-lspconfig")
-if not ok then
-    vim.notify("mason-lspconfig config not loaded in nvim-lspconfig")
-    return
-end
-
 local ok , lspconfig = pcall(require,'lspconfig')
 if not ok then
     vim.notify("lspconfig not loaded")
     return
 end
 
+local ok , mason_lspconfig = pcall(require,"mason-lspconfig")
+if not ok then
+    vim.notify("mason-lspconfig config not loaded in nvim-lspconfig")
+    return
+end
+
 
 --------------------------------------------------------------
--- mappings
+-- mappings (see from `lspconfig-setup` the `on_attach` option)
 --------------------------------------------------------------
----Use an on_attach function to only map the following keys
----after the language server attaches to the current buffer
 local on_attach = function(client, bufnr)
 
     --local ok, virtualtypes = pcall(require,"virtualtypes")
@@ -58,10 +56,10 @@ local on_attach = function(client, bufnr)
     nmap('<leader>wl', function()
         print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
     end, '[W]orkspace [L]ist Folders')
-    nmap('<space><space>f', function() vim.lsp.buf.format { async = true } end, '[F]ormat')
+    nmap('<leader><leader>f', function() vim.lsp.buf.format { async = true } end, '[F]ormat')
 
 
-    vim.api.nvim_buf_create_user_command(bufnr, 'Format', function(_)
+    vim.api.nvim_buf_create_user_command(bufnr, 'LspFormat', function(_)
         if vim.lsp.buf.format then
             vim.lsp.buf.format()
         elseif vim.lsp.buf.formatting then
@@ -73,15 +71,31 @@ end
 
 
 --------------------------------------------------------------
--- config servers
+-- neodev to config lua-lsp
 --------------------------------------------------------------
-local status_ok, neodev = pcall(require,"neodev")
-if not status_ok then
-    vim.notify "neodev config not loaded in nvim-lspconfig"
-    return
-end
-neodev.setup()
+-- local ok, neodev = pcall(require,"neodev")
+-- if not ok then
+--     vim.notify "neodev config not loaded in nvim-lspconfig"
+--     return
+-- end
+--
+-- -- see `neodev-configuration`
+-- neodev.setup({
+--     library = {
+--         enabled = true,
+--         runtime = true,
+--         types = true,
+--         plugins = true,
+--     },
+--     setup_jsonls = true,
+--     lspconfig = true,
+--     pathStrict = true,
+-- })
 
+
+--------------------------------------------------------------
+-- completion capabilities for server
+--------------------------------------------------------------
 local ok, cmp_nvim_lsp = pcall(require,"cmp_nvim_lsp")
 if not ok then
     vim.notify("cmp-nvim-lsp not loaded in" .. vim.fn.expand("%"))
@@ -90,6 +104,9 @@ end
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities = cmp_nvim_lsp.default_capabilities(capabilities)
 
+--------------------------------------------------------------
+-- config servers
+--------------------------------------------------------------
 local servers = mason_lspconfig.get_installed_servers()
 for _, server in ipairs(servers) do
 
@@ -98,8 +115,8 @@ for _, server in ipairs(servers) do
         lspconfig[server].setup({
             on_attach = on_attach,
             capabilities = capabilities,
-            settings = server_config.default_config,
-            filetype = server_config.filetypes,
+            settings = server_config.settings,
+            filetypes = server_config.filetypes,
         })
     else
         lspconfig[server].setup({

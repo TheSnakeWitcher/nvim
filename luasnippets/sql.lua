@@ -111,7 +111,7 @@ ls.add_snippets("sql", {
                     i(1,"name"),
                     c(2,{
                         sn(1,fmt([[
-                                (
+                            (
                             {}
                             ) {};
                         ]],{
@@ -128,11 +128,17 @@ ls.add_snippets("sql", {
                         sn(2,fmt([[
                             AS
                             SELECT {} FROM {}
-                            WHERE {} ;
+                            {}
                         ]],{
                             i(1, "*/cols"),
                             i(2, "table"),
-                            i(3, "filter"),
+                            -- i(3, "filter"),
+                            c(3,{
+                                sn(nil,fmt([[WHERE {} ; ]],{
+                                    i(1,"filter")
+                                })),
+                                t(""),
+                            }),
                         })),
                     }),
                 })),
@@ -238,28 +244,22 @@ ls.add_snippets("sql", {
                     i(7, "code")
                 })),
                 sn(nil, fmt([[
-                    TYPE {}
+                    TYPE {} AS {}
                 ]], {
-                    c(1, {
-                        sn(1, fmt([[
-                            {} AS {} ;  
-                        ]], {
-                            i(1, "name"),
-                            i(2, "basetype"),
+                    i(1,"name"),
+                    c(2, {
+                        sn(nil,fmt([[ {} ;]], {
+                            i(1, "basetype"),
                         })),
-                        sn(1, fmt([[
-                            {} AS ENUM({}) ;  
-                        ]], {
-                            i(1, "name"),
-                            i(2, "variants"),
+                        sn(nil, fmt([[ENUM({}) ;]], {
+                            i(1, "variants"),
                         })),
-                        sn(1, fmt([[
-                            {} AS (
+                        sn(nil, fmt([[
+                            (
                                 {}
                             ) ;
                         ]], {
-                            i(1, "name"),
-                            i(2, "name type"),
+                            i(1, "name type"),
                         })),
                     })
                 })),

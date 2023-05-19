@@ -1,6 +1,5 @@
 local status_ok, peek = pcall(require,"peek")
 if not status_ok then
-    vim.notify("peek not loaded in commands")
     return
 end
 

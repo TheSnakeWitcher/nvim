@@ -10,6 +10,7 @@ local d = ls.dynamic_node
 local r = ls.restore_node
 local extras = require "luasnip.extras"
 local fmt = require("luasnip.extras.fmt").fmt
+local fmta = require("luasnip.extras.fmt").fmta
 local events = require "luasnip.util.events"
 local conds = require "luasnip.extras.conditions"
 local ai = require "luasnip.nodes.absolute_indexer"
@@ -28,19 +29,27 @@ ls.add_snippets("solidity", {
   ------------------------------------------------------
   s(
     {
-      name = "pragma",
-      trig = "pragma",
+      name = "structure",
+      trig = "!",
       dscr = "declare solidity and abicoder version to be used",
     },
     fmt([[
       //SPDX-License-Identifier: MIT
-      pragma solidity {1} ;
-      pragma {2} ;
+      pragma solidity ^{} ;
+      pragma {} ;
 
-      {3}
+      {}
     ]],
       {
-        i(1, "version"),
+        d(1,function()
+            local solc_version_cmd_out = vim.fn.system({"solc","--version"})
+            local solc_version = string.match(solc_version_cmd_out,"%d.%d+.%d%d*")
+            if solc_version then
+                return sn(nil,{i(1,solc_version)})
+            else
+                return sn(nil,{i("version")})
+            end
+        end,{},{}),
         c(2, {
           t "abicoder v2",
           t "abicoder v1",
@@ -83,6 +92,23 @@ ls.add_snippets("solidity", {
     )
   ),
 
+  -- comments
+  s(
+    {
+      name = "comment",
+      trig = "/**",
+      dscr = "declare a comment block",
+    },
+    fmt([[
+        /**
+         * {}
+         */
+	]]  ,
+      { i(1,"code") }
+    )
+  ),
+
+
   -- contracts
   s(
     {
@@ -98,25 +124,31 @@ ls.add_snippets("solidity", {
       ]],
     },
     fmt([[
-      contract {1} {{
+      /**
+       * @title {title}
+       */
+      contract {name} {parent}{{
 
-        {2}
+        {}
 
-        // receive() external payable {{}}
-        // fallback() external payable {{}}
       }}
     ]],
       {
-        c(1, {
-          i(1, "name"),
+        title = rep(1),
+        -- name = i(1,"name"),
+        name = d(1,function()
+            local file = vim.fn.expand("%:t:r")
+            return sn(nil,{ i(1,file) })
+        end,{},{}),
+        parent = c(2, {
           sn(nil, fmt([[
-            {} is {}
+            is {} 
           ]], {
-            i(1, "name"),
-            i(2, "basecontract"),
+            i(1, "basecontract"),
           })),
+          t("")
         }),
-        c(2, {
+        c(3, {
           sn(nil, fmt([[
             constructor({1}) {2} {{
               {3}
@@ -168,10 +200,13 @@ ls.add_snippets("solidity", {
     ]],
       {
         solc = f(function()
-            local handle = io.popen("solc --version")
-            local result = handle:read("*a")
-            handle:close()
-            return result:match("%d.%d.%d%d")
+            local solc_version_cmd_out = vim.fn.system({"solc","--version"})
+            local solc_version = string.match(solc_version_cmd_out,"%d.%d+.%d%d*")
+            if solc_version then
+                return solc_version
+            else
+                return "version"
+            end
         end,{},{}),
         contract = f(function()
             local filename = vim.fn.expand("%:t")
@@ -190,8 +225,21 @@ ls.add_snippets("solidity", {
       name = "using",
       trig = "using",
       dscr = [[using library statement,notes:
-        * deployed librarys have public functions
-        * embedded librarys have internal functions
+        Libraries are contracts that are deployed only once at specific
+        address(singlestons with read-only functions) and their code is
+        reused using DELEGATECALL and CALLCODE
+
+        * deployed/linked librarys have public or external functions
+        * embedded librarys have only internal functions and are included in the contract that use it
+        Libraries are a special form of contracts that:
+            * Are singletons
+            * Not allowed any storage or state variables that change
+            * Cannot have fallback functions
+            * Have no event logs
+            * Do not hold Ether
+            * Are stateless
+            * Cannot use destroy
+            * Cannot inherit or be inherited
       ]],
     },
     fmt([[
@@ -241,9 +289,8 @@ ls.add_snippets("solidity", {
       dscr = [[interface declaration,note:
         * all functions declarations must be external and are implicitly virtual
         * all functions declarations cannot have implementations
-        * cannot declare constructor/state variables/modifiers
         * cannot inherith from contract but can from other interfaces
-
+        * cannot declare constructor/state variables/modifiers but can declare types like structs or enums
       ]],
     },
     fmt([[
@@ -284,22 +331,22 @@ ls.add_snippets("solidity", {
       dscr = "function declaration",
     },
     fmt([[
-      function {1}({2}) {4} {3} {{
-        {5}
-      }}
-	]]  ,
+        /**
+         *
+         */
+        function {1}({2}) {4} {3}{{
+            {5}
+        }}
+    ]]  ,
       {
         i(1, "name"),
         c(2, {
-          t "_args",
+          i(1,"_args"),
           t "",
         }),
-        c(3, {
-          sn(1, {
-            t "returns ",
-            i(1, "types"),
-          }),
-          t "",
+        c(3,{
+            fmt("returns ({}) ",{ i(1, "types") }),
+            t "",
         }),
         i(4, "constraint"),
         i(5, "/* code */"),
@@ -314,8 +361,8 @@ ls.add_snippets("solidity", {
       dscr = "function test declaration",
     },
     fmt([[
-      function {1}({2}) public {3} {{
-        {4}
+      function {}({}) public {{
+        {}
       }}
 	]]  ,
       {
@@ -330,17 +377,10 @@ ls.add_snippets("solidity", {
             }),
         }),
         c(2, {
-          t "_args",
+          i(1,"_args"),
           t "",
         }),
-        c(3, {
-          sn(1, {
-            t "returns ",
-            i(1, "types"),
-          }),
-          t "",
-        }),
-        i(4, "/* code */"),
+        i(3, "/* code */"),
       }
     )
   ),
@@ -349,10 +389,10 @@ ls.add_snippets("solidity", {
     {
       name = "function-interface",
       trig = "fni",
-      dscr = "function declaration of an interface",
+      dscr = "function declaration inside an interface",
     },
     fmt([[
-      function {1}({2}) external {3} {{
+      function {1}({2}) external virtual {3}{{
         {4}
       }}
 	]]  ,
@@ -362,7 +402,10 @@ ls.add_snippets("solidity", {
           t "_args",
           t "",
         }),
-        i(3, "constraint"),
+        c(3, {
+          i(1,"constraint"),
+          t "",
+        }),
         i(4, "/* code */"),
       }
     )
@@ -796,6 +839,9 @@ ls.add_snippets("solidity", {
     },
     fmt(
       [[
+        /**
+         *
+         */
 		enum {1} {{
 			{2},
 			{3}
@@ -817,6 +863,9 @@ ls.add_snippets("solidity", {
     },
     fmt(
       [[
+        /**
+         * @member
+         */
 		struct {1} {{
 			{2}
 		}}
@@ -848,18 +897,31 @@ ls.add_snippets("solidity", {
     {
       name = "event-declaration",
       trig = "event",
-      dscr = 'event declaration,note: indexed keyword can be used in events wich adds them to a special data structure known as "topics"(wich have 32 bytes) instead of part of the logs,up to 3 params can be indexed',
+      dscr = [[ event declaration,note: 
+            indexed keyword can be used in events wich adds them to a
+            special data structure known as "topics"(wich have 32 bytes)
+            instead of part of the logs,up to 3 params can be indexed
+            
+            event can be declared like anonimous event(parameters) wich
+            are cheaper to deploy and call but can't be acceses by event
+            name and can only be accesed by their associated contract address
+            and not by name
+      ]],
     },
     fmt(
       [[
-		event {1}({2} {3}) ;
-	]]    ,
+        /**
+         * @notice emitted when {}
+         */
+		 event {}({}) {};
+	]],
       {
+        i(4,"trigger"),
         i(1, "name"),
-        i(2, "fields"),
-        c(3, {
-          t "indexed",
-          t "",
+        i(3, "type indexed fields"),
+        c(2,{
+            t("anonymous "),
+            t(""),
         }),
       }
     )

@@ -5,9 +5,10 @@ if not ok then
 end
 
 local actions = require("telescope.actions")
-local trouble = require("trouble.providers.telescope")
+-- local actions_state = require("telescope.actions.state")
 -- local builtin = require("telescope.builtin")
 -- local previewers = telescope.previewers
+-- local trouble = require("trouble.providers.telescope")
 
 
 --------------------------------------------------------------
@@ -17,9 +18,6 @@ local trouble = require("trouble.providers.telescope")
 
 local ok , _ = pcall(telescope.load_extension,'fzf')
 if not ok then vim.notify "telescope fzf extension not loaded" end
-
-local ok , _ = pcall(telescope.load_extension,'ui-select')
-if not ok then vim.notify("telescope ui-select extension not loaded") end
 
 local ok , _ = pcall(telescope.load_extension,'notify')
 if not ok then vim.notify "telescope notify extension not loaded" end
@@ -47,6 +45,15 @@ if not ok then vim.notify "telescope bookmarks extension not loaded" end
 local ok , _ = pcall(telescope.load_extension,'dap')
 if not ok then vim.notify "telescope telescope-dap extension not loaded" end
 
+local ok , _ = pcall(telescope.load_extension,'media_files')
+if not ok then vim.notify "telescope media_files extension not loaded" end
+
+local ok , _ = pcall(telescope.load_extension,'heading')
+if not ok then vim.notify "telescope heading extension not loaded" end
+
+local ok , _ = pcall(telescope.load_extension,'chisel')
+if not ok then vim.notify "telescope chisel extension not loaded" end
+
 -- local ok , _ = pcall(telescope.load_extension,'file_browser')
 -- if not ok then vim.notify "telescope file_browser extension not loaded" end
 -- local ok , fb_actions = pcall(telescope.load_extension,'telescope._extensions.file_browser.actions')
@@ -62,9 +69,6 @@ if not ok then vim.notify "telescope telescope-dap extension not loaded" end
 --if not ok then vim.notify("telescope gh extension not loaded") end
 
 --local ok , _ = pcall(telescope.load_extension,'cheat')
---if not ok then vim.notify("telescope cheat extension not loaded") end
-
---local ok , _ = pcall(telescope.load_extension,'emoji')
 --if not ok then vim.notify("telescope cheat extension not loaded") end
 
 
@@ -169,14 +173,21 @@ telescope.setup({
 
     },
 
-    -- default configuration for builtin pickers
     pickers = {
-    -- picker_name = {
-    --   picker_config_key = value,
-    --   ...
-    -- }
-    -- Now the picker_config_key will be applied every time you call this
-    -- builtin picker
+        -- now the picker_opts_table will be applied every time you call builtin_picker_name
+        -- builtin_picker_name = { picker_opts_table }
+        -- git_branches = {
+        --     attach_mappings = function(prompt_bufnr, map)
+        --         actions.select_default:replace(function()
+	                -- actions.close(prompt_bufnr)
+	                -- local selection = actions_state.get_selected_entry()
+        --             vim.print(selection.name)
+        --             vim.cmd("Git checkout ".. selection.name)
+        --             -- actions.git_switch_branch(prompt_bufnr)
+        --         end)
+        --         return true
+        --     end
+        -- }
     },
 
     extensions = {
@@ -186,6 +197,7 @@ telescope.setup({
             override_file_sorter = true,     -- override the file sorter
             case_mode = "smart_case",        -- or "ignore_case" or "respect_case"
         },
+
         bookmarks = {
             selected_browser = 'firefox', -- options: 'waterfox','vivaldi','brave','brave_beta','buku','chrome','chrome_beta','edge', 'qutebrowser' , 'safari',
             url_open_command = 'open',    -- Either provide a shell command to open the URL
@@ -194,24 +206,6 @@ telescope.setup({
             profile_name = nil,           -- 'firefox' , waterfox,vivaldi , 'brave' , 'brave_beta' , 'chrome' , 'chrome_beta' , 'edge'
             buku_include_tags = false,    -- Add a column which contains the tags for each bookmark for buku
             debug = false,                -- Provide debug messages
-        },
-        ["ui-select"] = {
-            require("telescope.themes").get_dropdown {
-              -- even more opts
-            }
-            -- pseudo code / specification for writing custom displays, like the one
-            -- for "codeactions"
-            -- specific_opts = {
-            --   [kind] = {
-            --     make_indexed = function(items) -> indexed_items, width,
-            --     make_displayer = function(widths) -> displayer
-            --     make_display = function(displayer) -> function(e)
-            --     make_ordinal = function(e) -> string
-            --   },
-            --   -- for example to disable the custom builtin "codeactions" display
-            --      do the following
-            --   codeactions = false,
-            -- }
         },
 
         media_files = {
@@ -228,18 +222,14 @@ telescope.setup({
               }
         },
 
-        --emoji = {
-        --      action = function(emoji)
-        --        -- argument emoji is a table.
-        --        -- {name="", value="", cagegory="", description=""}
+        heading = {
+            treesitter = true,
+            picker_opts = {
+                layout_config = { width = 0.8 , preview_width = 0.5 },
+                layout_strategy = "horizontal",
 
-        --        vim.fn.setreg("*", emoji.value)
-        --        print([[Press p or "*p to paste this emoji]] .. emoji.value)
-
-        --        -- insert emoji when picked
-        --        -- vim.api.nvim_put({ emoji.value }, 'c', false, true)
-        --      end,
-        --}
+            },
+        },
 
         -- file_browser = {
         --     -- path

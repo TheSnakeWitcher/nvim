@@ -5,31 +5,28 @@ if not status_ok then
 end
 
 
-config.setup {
+config.setup({
 
--- a list of parser names, or "maintained" to install parsers with maintainers
+-- see {nvim-treesitter-quickstart}
 ensure_installed = {
+    "help",
     "lua",
     "rust",
-    "go",
     "solidity",
+    "go",
     "julia",
     "latex",
+    "bibtex",
     "toml",
     "json",
     "yaml",
-    "help",
---  "html"
---  "css"
---  "js"
---  "ts"
---  "ts"
 },
--- auto_install = true,  -- automatically install missing parsers when entering buffer
+auto_install = false ,   -- when true automatically install missing parsers when entering buffer
 sync_install = false,    -- install parsers synchronously (only applied to `ensure_installed`)
-ignore_install = { "" },   -- list of parsers to ignore installing (for "all")
+ignore_install = { "" }, -- list of parsers to ignore installing (for "all")
 
 
+-- see {nvim-treesitter-highlight-mod}
 highlight = {
     enable = true,
     --disable = {}, -- list of languajes that will be disabled
@@ -37,10 +34,24 @@ highlight = {
 },
 
 
+-- see {nvim-treesitter-incremental-selection-mod}
+incremenmal_selection = {
+    enable = true,
+    keymaps = {
+      init_selection = '<c-space>',
+      node_incremental = '<c-space>',
+      scope_incremental = '<c-s>',
+      node_decremental = '<c-backspace>',
+    },
+},
+
+
+-- see {nvim-treesitter-indentation-mod}
 indent = {
     enable = true ,
     -- disable = {} ,
 },
+
 
 --autotag = {
 --    enable = true,
@@ -52,20 +63,10 @@ autopairs = {
     -- disable = {} ,
 },
 
+
 context_commentstring = {
     enable = true ,
     --enable_autocmd = false
-},
-
-
-incremenmal_selection = {
-    enable = true,
-    keymaps = {
-      init_selection = '<c-space>',
-      node_incremental = '<c-space>',
-      scope_incremental = '<c-s>',
-      node_decremental = '<c-backspace>',
-    },
 },
 
 
@@ -174,4 +175,4 @@ playground = {
 },
 
 
-}
+})
