@@ -1,9 +1,10 @@
--- TODO: check why don't work projections autocmd in autocmds folders
--- TODO: enable spell in specific filetypes and comments
--- TODO: hot reload snippets automatically when changed
+-- TODO: move cmds/autocmds to after/lua
 -- TODO: use in plugins/init.lua util.load_config as load_config
+-- TODO: enable spell in specific filetypes and comments
 -- TODO: search where is seted <leader>D definition keymap and remove it
 -- TODO: check nvim-cmp advanced config
+-- TODO: check why don't work projections autocmd in autocmds folders
+-- TODO: hot reload snippets automatically when changed ?
 local packer_boostraped = util.ensure_packer()
 local packer = require("packer")
 
@@ -87,6 +88,8 @@ return packer.startup(function(use)
         "nanozuki/tabby.nvim",
         config = function() load_config("tabby") end,
     }
+    -- sidebar
+    -- use "sidebar-nvim/sidebar.nvim"
     -- startup screen/dashboard
     use {
        "glepnir/dashboard-nvim",
@@ -144,14 +147,14 @@ return packer.startup(function(use)
         config = function() load_config("nvim-treesitter") end,
         run = ":TSUpdate",
         requires = {
-            "nvim-treesitter/nvim-treesitter-textobjects",  -- additional text objects via treesitter
             "nvim-treesitter/playground",
-            "nvim-treesitter/nvim-treesitter-context",      -- show code context
-            -- "ibhagwan/ts-vimdoc.nvim",                   -- treesitter base markdown to vimdoc convertion tool
+            "nvim-treesitter/nvim-treesitter-context",     -- show code context
+            "JoosepAlviste/nvim-ts-context-commentstring", -- to comment jsx/tsx
+            "nvim-treesitter/nvim-treesitter-textobjects", -- additional text objects via treesitter
+            -- "ibhagwan/ts-vimdoc.nvim",                  -- treesitter base markdown to vimdoc convertion tool
             --"RRethy/nvim-treesitter-textsubjects",
-            --"p00f/nvim-ts-rainbow"                        -- highligh 
-            --"windwp/nvim-ts-autotag"                      -- use treesitter to autocose & autorename html tags
-            --"JoosepAlviste/nvim-ts-context-commentstring" -- to comment jsx/tsx
+            --"p00f/nvim-ts-rainbow"                       -- highligh 
+            --"windwp/nvim-ts-autotag"                     -- use treesitter to autocose & autorename html tags
             --"nfrid/treesitter-utils"
         }
     }
@@ -412,6 +415,7 @@ return packer.startup(function(use)
         'stevearc/overseer.nvim',
         config = function() load_config("overseer") end,
     }
+    -- use "GustavoKatel/tasks.nvim"
     use {
         -- task management(vscode like task declared using json/yaml files)
         'jedrzejboczar/toggletasks.nvim',
@@ -649,51 +653,11 @@ return packer.startup(function(use)
         "/home/mr-papi/.config/nvim/lua/plugins/development/forge.nvim",
         config = function() load_config("forge") end,
     }
-    -- cast integration(foundry toolkit blockchain client inspired in rest.nvim and postman)
-    -- use {
-    --     "TheSnakeWitcher/cast.nvim",
-    --     config = function() load_config("cast") end,
-    -- }
-    -- foundry toolkit integration for web3 development
-    -- use {
-    --      "TheSnakeWitcher/foundry.nvim",
-    --      config = function() load_config("foundry") end,
-    -- }
-    -- integration with common web3 tools for dApp development)
-    -- use {
-    --      -- tool list: https://github.com/ConsenSys/ethereum-developer-tools-list
-    --      -- mythril : https://github.com/dyng/eth-ramen
-    --      -- crypto address lens: https://marketplace.visualstudio.com/items?itemName=peetzweg.crypto-address-lens
-    --      -- ramen ui: https://github.com/dyng/eth-ramen
-    --      -- crytic-compile: https://github.com/crytic/crytic-compile/#crytic-compile
-    --      -- echidna: https://github.com/crytic/echidna
-    --      -- manticore: https://github.com/trailofbits/manticore/
-    --      -- brokentoken: https://github.com/zeroknots/brokentoken
-    --      "TheSnakeWitcher/web3tools.nvim", 
-    --      config = function() load_config("web3tools") end,
-    -- }
-    --
-    -- hardhat framework
-    -- use {
-    --      "TheSnakeWitcher/hardhat.nvim",
-    --      config = function() load_config("hardhat") end,
-    -- }
-    --
-    -- completion  
-    -- use "TheSnakeWitcher/cmp-web3-foundry.nvim" -- completion source for foundry
-    -- use "TheSnakeWitcher/cmp-gh-actions"        -- completion source for foundry
-    --
-    -- utilities to aid in dAPP development process using autocmds/cmds/and others
-    -- use {
-    --      -- view what and from where data/methods are being inherited
-    --      -- detect automatically name clashes in inherit herarchy
-    --      -- detect automatically storage and function selector clashes in poxy-like contracts(pattern independent)
-    --      "TheSnakeWitcher/web3utils.nvim", 
-    --      config = function() load_config("web3utils") end,
-    -- }
-    -- use "TheSnakeWitcher/mksw.nvim"             -- boilerplate/project init/scaffold structure management
-    -- use "TheSnakeWitcher/sourcify.nvim"         -- sourcify is a solidity source code and metadata verification tool
-    -- use "TheSnakeWitcher/openzeppelin-wizard"   -- openzeppelin bindings
+
+    -- utilities
+    -- use "TheSnakeWitcher/tee.nvim"              -- analog to `tee` linux command for neovim to manage eficiently multiple input/ouput sources
+    -- use "TheSnakeWitcher/architect.nvim"        -- boilerplate/project init/scaffold structure management
+    -- use "TheSnakeWitcher/persistenfolds.nvim"   -- save folds in session
     -- use "TheSnakeWitcher/doc-patterns.nvim"     -- get patterns in comments
     -- use "TheSnakeWitcher/doc-hooks.nvim"        -- execute actions on patterns
     -- use "TheSnakeWitcher/doc-traductions.nvim"  -- traduce documentation
@@ -707,6 +671,59 @@ return packer.startup(function(use)
     --          dbm/tabbot for window manager like experience
     --      }
     -- }
+    --
+
+    -- cast integration(foundry toolkit blockchain client inspired in rest.nvim and postman)
+    -- use {
+    --     "TheSnakeWitcher/cast.nvim",
+    --     config = function() load_config("cast") end,
+    -- }
+    -- foundry toolkit integration for web3 development
+    -- use {
+    --      "TheSnakeWitcher/foundry.nvim",
+    --      config = function() load_config("foundry") end,
+    -- }
+    -- integration with common web3 tools for dApp development)
+    -- use {
+    --      -- tool list: https://github.com/ConsenSys/ethereum-developer-tools-list
+    --      -- slither
+    --      -- mythril : https://github.com/dyng/eth-ramen
+    --      -- crypto address lens: https://marketplace.visualstudio.com/items?itemName=peetzweg.crypto-address-lens
+    --      -- ramen ui: https://github.com/dyng/eth-ramen
+    --      -- crytic-compile: https://github.com/crytic/crytic-compile/#crytic-compile
+    --      -- echidna: https://github.com/crytic/echidna
+    --      -- manticore: https://github.com/trailofbits/manticore/
+    --      -- brokentoken: https://github.com/zeroknots/brokentoken
+    --      "TheSnakeWitcher/web3tools.nvim", 
+    --      config = function() load_config("web3tools") end,
+    -- }
+
+    -- hardhat framework
+    -- provider hardhat command
+    -- use {
+    --      "TheSnakeWitcher/hardhat.nvim",
+    --      config = function() load_config("hardhat") end,
+    --      requires = {
+    --          "overseer-hardhat"  -- run hardhat task/scripts with overseer
+    --          "neotest-hardhat"   -- integrate hardhat/mocha test with neotest ? check neotest-js
+    --      }
+    -- }
+
+    -- completion  
+    -- use "TheSnakeWitcher/cmp-web3-foundry.nvim" -- completion source for foundry
+    -- use "TheSnakeWitcher/cmp-gh-actions"        -- completion source for github actions
+
+    -- utilities to aid in dAPP development process using autocmds/cmds/and others
+    -- use {
+    --      -- view what and from where data/methods are being inherited
+    --      -- detect automatically name clashes in inherit herarchy
+    --      -- detect automatically storage and function selector clashes in poxy-like contracts(pattern independent)
+    --      "TheSnakeWitcher/web3utils.nvim", 
+    --      config = function() load_config("web3utils") end,
+    -- }
+    -- use "TheSnakeWitcher/sourcify.nvim"         -- sourcify is a solidity source code and metadata verification tool
+    -- use "TheSnakeWitcher/openzeppelin-wizard"   -- openzeppelin bindings
+
     -- knowledgebase management
     -- use {
     --      "TheSnakeWitcher/knowledgebase.nvim",
