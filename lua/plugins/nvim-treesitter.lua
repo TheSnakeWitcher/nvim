@@ -1,5 +1,5 @@
-local status_ok, nvim_treesitter_config = pcall(require,"nvim-treesitter.configs")
-if not status_ok then
+local ok, nvim_treesitter_config = pcall(require,"nvim-treesitter.configs")
+if not ok then
     vim.notify("nvim-treesitter config don't loaded")
     return
 end
@@ -180,7 +180,7 @@ playground = {
 
 --- @doc {nvim-tree-docs-setup}
 tree_docs = {
-    enable = false,
+    enable = true,
     spec_config = {
         jsdoc = {
             slots = {

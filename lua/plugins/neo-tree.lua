@@ -75,12 +75,12 @@ neo_tree.setup({
           icon = {
             folder_closed = "",
             folder_open = "",
-            folder_empty = "ﰊ",
+            folder_empty = "", -- ﰊ
             default = "*",
             highlight = "NeoTreeFileIcon"
           },
           modified = {
-            symbol = "[+]",
+            symbol = "", -- [+]",
             highlight = "NeoTreeModified",
           },
           name = {
@@ -90,20 +90,19 @@ neo_tree.setup({
           },
           git_status = {
             symbols = {
-              added     = "", -- or "✚", but this is redundant info if you use git_status_colors on the name
-              modified  = "", -- or "", but this is redundant info if you use git_status_colors on the name
-              deleted   = "✖",-- this can only be used in the git_status source
-              renamed   = "➜",-- this can only be used in the git_status source
-
+              added     = "", -- or "✚", but this is redundant info if you use git_status_colors on the name
+              modified  = "", -- or "", but this is redundant info if you use git_status_colors on the name
+              deleted   = "", -- or ✖ this can only be used in the git_status source
+              renamed   = "➜", -- this can only be used in the git_status source
               untracked = "",
               ignored   = "◌",
-              unstaged  = "",
-              staged    = "",
+              unstaged  = "✗", -- 
+              staged    = "✓", -- 
               conflict  = "",
             }
           },
         },
-        window = {
+        windo = {
           position = "left",
           width = 40,
           mapping_options = {
@@ -113,7 +112,7 @@ neo_tree.setup({
           mappings = {
             ["<space>"] = {
                 "toggle_node",
-                nowait = false, -- disable `nowait` if you have existing combos starting with this char that you want to use 
+                nowait = false,
             },
             ["<2-LeftMouse>"] = "open",
             ["<cr>"] = "open",
@@ -134,26 +133,18 @@ neo_tree.setup({
             --["Z"] = "expand_all_nodes",
             ["a"] = {
               "add",
-              -- this command supports BASH style brace expansion ("x{a,b,c}" -> xa,xb,xc). see `:h neo-tree-file-actions` for details
-              -- some commands may take optional config options, see `:h neo-tree-mappings` for details
               config = {
-                show_path = "none" -- "none", "relative", "absolute"
+                show_path = "none"
               }
             },
-            ["A"] = "add_directory", -- also accepts the optional config.show_path option like "add". this also supports BASH style brace expansion.
+            ["A"] = "add_directory",
             ["d"] = "delete",
             ["r"] = "rename",
             ["y"] = "copy_to_clipboard",
             ["x"] = "cut_to_clipboard",
             ["p"] = "paste_from_clipboard",
-            ["c"] = "copy", -- takes text input for destination, also accepts the optional config.show_path option like "add":
-            -- ["c"] = {
-            --  "copy",
-            --  config = {
-            --    show_path = "none" -- "none", "relative", "absolute"
-            --  }
-            --}
-            ["m"] = "move", -- takes text input for destination, also accepts the optional config.show_path option like "add".
+            ["c"] = "copy",
+            ["m"] = "move",
             ["q"] = "close_window",
             ["R"] = "refresh",
             ["?"] = "show_help",
@@ -164,38 +155,20 @@ neo_tree.setup({
         nesting_rules = {},
         filesystem = {
           filtered_items = {
-            visible = false, -- when true, they will just be displayed differently than normal items
+            visible = false,
             hide_dotfiles = true,
             hide_gitignored = true,
-            hide_hidden = true, -- only works on Windows for hidden files/directories
-            hide_by_name = {
-              --"node_modules"
-            },
-            hide_by_pattern = { -- uses glob style patterns
-              --"*.meta",
-              --"*/src/*/tsconfig.json",
-            },
-            always_show = { -- remains visible even if other settings would normally hide it
-              --".gitignored",
-            },
-            never_show = { -- remains hidden even if visible is toggled to true, this overrides always_show
-              --".DS_Store",
-              --"thumbs.db"
-            },
-            never_show_by_pattern = { -- uses glob style patterns
-              --".null-ls_*",
-            },
+            hide_hidden = true,
+            hide_by_name = {},
+            hide_by_pattern = {},
+            always_show = {},
+            never_show = {},
+            never_show_by_pattern = {},
           },
-          follow_current_file = true, -- This will find and focus the file in the active buffer every
-                                       -- time the current file is changed while the tree is open.
-          group_empty_dirs = false, -- when true, empty folders will be grouped together
-          hijack_netrw_behavior = "open_default", -- netrw disabled, opening a directory opens neo-tree
-                                                  -- in whatever position is specified in window.position
-                                -- "open_current",  -- netrw disabled, opening a directory opens within the
-                                                  -- window like netrw would, regardless of window.position
-                                -- "disabled",    -- netrw left alone, neo-tree does not handle opening dirs
-          use_libuv_file_watcher = true, -- This will use the OS level file watchers to detect changes
-                                          -- instead of relying on nvim autocmd events.
+          follow_current_file = true,
+          group_empty_dirs = false,
+          hijack_netrw_behavior = "open_default",
+          use_libuv_file_watcher = true,
           window = {
             mappings = {
               ["<bs>"] = "navigate_up",
