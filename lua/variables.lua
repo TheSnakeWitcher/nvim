@@ -1,8 +1,6 @@
 --------------------------------------------------------------
 -- documentation
 --------------------------------------------------------------
-
-
 -- notation: vim.[option].VAR_NAME = 'VAR_VALUE'
 --
 -- vim.b   : buffer scoped variables 
@@ -18,9 +16,11 @@
 --------------------------------------------------------------
 vim.g.mapleader = " "
 vim.g.knowledgebase_dir = vim.env.HOME .. "/Knowledgebase"
-vim.g.projects_dir = vim.env.HOME .. "/SoftwareCode/Projects"
-vim.g.work_projects_dir = vim.env.HOME .. "/SoftwareCode/Work"
-vim.g.plugin_dev_dir = vim.fn.stdpath("config") .. "/lua/plugins/development"
+vim.g.code_dir = vim.env.HOME .. "/Code"
+vim.g.scripts_dir = vim.g.code_dir .. "/scripts"
+vim.g.projects_dir = vim.g.code_dir .. "/projects"
+vim.g.work_projects_dir = vim.g.code_dir .. "/work"
+vim.g.plugin_dev_dir = vim.g.projects_dir .. "/nvim"
 vim.g.snippets_dir = vim.fn.stdpath("config") .. "/luasnippets"
 
 
@@ -53,10 +53,3 @@ vim.g.vimtex_view_general_viewer = 'pdfviewer'
 vim.g.vimtex_compiler_method = 'latexmk'
 vim.g.vimtex_complete_enabled = true
 vim.g.vimtex_fold_enabled = true
-
-
---------------------------------------------------------------
--- notify
---------------------------------------------------------------
-local ok , notify = pcall(require,"notify")
-if ok then vim.notify = notify end

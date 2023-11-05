@@ -22,14 +22,14 @@ local options = {
     showtabline = 2,            -- show tabline always
 
     -- fillchars = [[eob: ,fold: ,foldopen:,foldsep: ,foldclose:]]
-    fillchars = {
-        foldopen = "",
-        foldclose = "",
-        fold = " ",
-        foldsep = " ",
-        diff = "╱",
-        eob = " ",              -- remove `~` from empty lines
-    },
+    -- fillchars = {
+        -- foldopen = "",
+        -- foldclose = "",
+    --     fold = "",
+    --     foldsep = "",
+    --     diff = "╱",
+    --     eob = "",-- remove `~` from empty lines
+    -- },
 
 
     --------------------------------

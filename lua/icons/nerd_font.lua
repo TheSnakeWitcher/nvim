@@ -44,3 +44,4 @@ return {
   Spellcheck = "暈",
   TabClose = "",
 }
+

@@ -39,9 +39,6 @@ if not ok then vim.notify "telescope aerial extension not loaded" end
 local ok , _ = pcall(telescope.load_extension,'telescope-tabs')
 if not ok then vim.notify "telescope tabs extension not loaded" end
 
-local ok , _ = pcall(telescope.load_extension,'bookmarks')
-if not ok then vim.notify "telescope bookmarks extension not loaded" end
-
 local ok , _ = pcall(telescope.load_extension,'dap')
 if not ok then vim.notify "telescope telescope-dap extension not loaded" end
 
@@ -51,22 +48,19 @@ if not ok then vim.notify "telescope media_files extension not loaded" end
 local ok , _ = pcall(telescope.load_extension,'heading')
 if not ok then vim.notify "telescope heading extension not loaded" end
 
-local ok , _ = pcall(telescope.load_extension,'chisel')
-if not ok then vim.notify "telescope chisel extension not loaded" end
+local ok , _ = pcall(telescope.load_extension,'zoxide')
+if not ok then vim.notify("telescope zoxide extension not loaded") end
+
+-- local ok , _ = pcall(telescope.load_extension,'chisel')
+-- if not ok then vim.notify "telescope chisel extension not loaded" end
 
 -- local ok , _ = pcall(telescope.load_extension,'file_browser')
 -- if not ok then vim.notify "telescope file_browser extension not loaded" end
 -- local ok , fb_actions = pcall(telescope.load_extension,'telescope._extensions.file_browser.actions')
 -- if not ok then vim.notify "telescope file_browser actions extension not loaded" end
 
---local ok , _ = pcall(telescope.load_extension,'zoxide')
---if not ok then vim.notify("telescope zoxide extension not loaded") end
-
 --local ok , _ = pcall(telescope.load_extension,'neoclip')
 --if not ok then vim.notify("telescope neoclip extension not loaded") end
-
---local ok , _ = pcall(telescope.load_extension,'gh')
---if not ok then vim.notify("telescope gh extension not loaded") end
 
 --local ok , _ = pcall(telescope.load_extension,'cheat')
 --if not ok then vim.notify("telescope cheat extension not loaded") end

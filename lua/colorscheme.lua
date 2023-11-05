@@ -1,5 +1,6 @@
-local colorscheme = "doom-one"
-vim.cmd ("colorscheme " .. colorscheme )
+-- local colorscheme = "doom-one"
+-- vim.cmd("colorscheme " .. colorscheme)
+-- vim.cmd("colorscheme " .. colorscheme )
 
 -- "tokyonight-moon","tokyonight-storm"
 -- local ok, tokyonight = pcall(require, "tokyonight")
@@ -7,7 +8,7 @@ vim.cmd ("colorscheme " .. colorscheme )
 -- 	vim.notify("tokyonight config not loaded")
 -- 	return
 -- end
---
+
 -- tokyonight.setup({
 -- 	style = "moon",
 -- 	-- transparent = true,

@@ -1,13 +1,12 @@
-
 local status_ok, buffer_manager = pcall(require,"buffer_manager")
 if not status_ok then
     vim.notify("buffer_manager config not loaded")
     return
 end
 
+
 buffer_manager.setup({
-    line_keys = "1234567890",  -- deactivate line keybindings
-    focus_alternate_buffer = false,
+    line_keys = "1234567890",
     select_menu_item_commands = {
         edit = {
             key = "<CR>",
@@ -19,9 +18,14 @@ buffer_manager.setup({
         },
         h = {
             key = "<C-h>",
-                command = "split"
-            }
+            command = "split"
+        }
     },
-    width = 0.8,
-    height = 0.3,
+    focus_alternate_buffer = false,
+    short_file_names = false,
+    short_term_names = false,
+    loop_nav = true,
+    highlight = "",
+    win_extra_options = {},
+    borderchars = { "─", "│", "─", "│", "╭", "╮", "╯", "╰" },
 })

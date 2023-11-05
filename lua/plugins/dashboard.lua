@@ -7,14 +7,14 @@ end
 dashboard.setup({
 	theme = "hyper",
     disable_move = true,
-    shortcut_type = 'letter',  -- options: 'letter' or 'number'
+    shortcut_type = 'letter',
     hide = {
       statusline = false,
       tabline = false,
       winbar = false,
     },
 	config = {
-        header = require("util.headers").main_header or "[header not available]",
+        -- header = require("util.headers").main_header or "[header not available]",
         -- footer = {},
         packages = { enable = true }, -- show loaded plugins
         project = { enable = true, limit = 4 },
@@ -32,6 +32,7 @@ dashboard.setup({
 				desc = "🏡 Config",
 				icon_hl = "@variable",
 				group = "Label",
+				key = "c",
 				-- action = ":e" .. vim.fn.stdpath("config"),
 				action = function()
                     local ok , switcher = pcall(require,"projections.switcher")
@@ -41,35 +42,36 @@ dashboard.setup({
                     end
                     switcher.switch(vim.fn.stdpath("config"))
                 end ,
-				key = "c",
 			},
 			{
-				desc = "📦 Projects",
+				icon = "📦 ",
+				desc = "Projects",
 				group = "DiagnosticHint",
-				action = "Telescope projections",
 				key = "p",
+				action = "Telescope projections",
 			},
 			{
-                desc = "累 Update",
+                icon = "🔼 ",
+                desc = "Update",
                 group = "@property",
-                action = "PackerSync",
-                key = "u"
+                key = "u",
+                action = "Lazy update",
             },
 			{
 				icon = "📝 ",
 				icon_hl = "@variable",
 				desc = "New note",
 				group = "Label",
-				action = "Telekasten new_note",
 				key = "n",
+				action = "Telekasten new_note",
 			},
 			{
 				icon = "🔍 ",
 				icon_hl = "@variable",
 				desc = "Search notes",
 				group = "Number",
-				action = "Telekasten find_notes",
 				key = "N",
+				action = "Telekasten find_notes",
 			},
 		},
 	},

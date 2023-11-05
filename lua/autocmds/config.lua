@@ -1,6 +1,7 @@
 local config = vim.api.nvim_create_augroup("Config",{clear = true})
 
 vim.cmd("autocmd! BufEnter * if &ft ==# 'help' | wincmd L | endif")
+-- vim.cmd("autocmd! BufEnter * if &ft ==# 'markdown' | wincmd L | endif")
 -- vim.api.nvim_create_autocmd("FileType",{
 --    desc = [[
 --         open help in right sidebuffer,equivalent to:
@@ -25,12 +26,12 @@ vim.api.nvim_create_autocmd("BufWritePost",{
     command = "source <afile>",
 })
 
-vim.api.nvim_create_autocmd("BufWritePost",{
-    desc = "hot compile plugins",
-    group = config,
-    pattern = vim.fn.stdpath("config") .. "/lua/plugins/init.lua",
-    command = "source <afile> | PackerCompile",
-})
+-- vim.api.nvim_create_autocmd("BufWritePost",{
+--     desc = "hot compile plugins",
+--     group = config,
+--     pattern = vim.fn.stdpath("config") .. "/lua/plugins/init.lua",
+--     command = "source <afile> | Lazy sync",
+-- })
 
 -- vim.api.nvim_create_autocmd("BufWritePost",{
 --     desc = "hot reload snippets",
@@ -50,4 +51,3 @@ vim.api.nvim_create_autocmd("BufWritePost",{
 -- })
 --
 -- vim.cmd("autocmd! BufEnter * if &ft ==# 'fugitive' | wincmd L | endif")
---

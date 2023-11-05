@@ -11,9 +11,30 @@ if not ok then
 end
 
 
---------------------------------------------------------------
--- mappings (see from `lspconfig-setup` the `on_attach` option)
---------------------------------------------------------------
+------------------------------------------------------------
+-- neodev
+------------------------------------------------------------
+local ok, neodev = pcall(require,"neodev")
+if not ok then
+    vim.notify "neodev config not loaded in nvim-lspconfig"
+    return
+end
+
+--- @doc {neodev-configuration}
+neodev.setup({
+    library = {
+        enabled = true,
+        runtime = true,
+        types = true,
+        plugins = true,
+    },
+    setup_jsonls = true,
+    lspconfig = true,
+    pathStrict = true,
+})
+
+
+--- @doc {lspconfig-setup-on_attach}
 local on_attach = function(client, bufnr)
 
     --local ok, virtualtypes = pcall(require,"virtualtypes")
@@ -71,29 +92,6 @@ end
 
 
 --------------------------------------------------------------
--- neodev to config lua-lsp
---------------------------------------------------------------
--- local ok, neodev = pcall(require,"neodev")
--- if not ok then
---     vim.notify "neodev config not loaded in nvim-lspconfig"
---     return
--- end
---
--- -- see `neodev-configuration`
--- neodev.setup({
---     library = {
---         enabled = true,
---         runtime = true,
---         types = true,
---         plugins = true,
---     },
---     setup_jsonls = true,
---     lspconfig = true,
---     pathStrict = true,
--- })
-
-
---------------------------------------------------------------
 -- completion capabilities for server
 --------------------------------------------------------------
 local ok, cmp_nvim_lsp = pcall(require,"cmp_nvim_lsp")
@@ -101,8 +99,11 @@ if not ok then
     vim.notify("cmp-nvim-lsp not loaded in" .. vim.fn.expand("%"))
     return
 end
-local capabilities = vim.lsp.protocol.make_client_capabilities()
-capabilities = cmp_nvim_lsp.default_capabilities(capabilities)
+-- local capabilities = vim.lsp.protocol.make_client_capabilities()
+-- capabilities = cmp_nvim_lsp.default_capabilities(capabilities)
+local capabilities = cmp_nvim_lsp.default_capabilities()
+capabilities.textDocument.completion.completionItem.snippetSupport = true --- @doc {schemastore-usage}
+
 
 --------------------------------------------------------------
 -- config servers
@@ -116,7 +117,7 @@ for _, server in ipairs(servers) do
             on_attach = on_attach,
             capabilities = capabilities,
             settings = server_config.settings,
-            filetypes = server_config.filetypes,
+            -- filetypes = server_config.filetypes or {},
         })
     else
         lspconfig[server].setup({

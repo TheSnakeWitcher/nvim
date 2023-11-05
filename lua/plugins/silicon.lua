@@ -4,23 +4,24 @@ if not ok then
 	return
 end
 
+--- @doc {silicon.lua-configuration}
 silicon.setup({
 	theme = "auto",
-	output = vim.env.HOME .. "/Pictures/Screnshoots/${year}-${month}-${date}_${time}.png", -- auto generate file name based on time (absolute or relative to cwd)
+	output = vim.env.HOME .. "/Pictures/Screenshots/${year}-${month}-${date}_${time}.png",
 	bgColor = vim.g.terminal_color_5,
-	bgImage = "", -- path to image, must be png
+	bgImage = "",
 	roundCorner = true,
 	windowControls = true,
 	lineNumber = true,
-	font = "monospace",
-	lineOffset = 1, -- from where to start line number
-	linePad = 2, -- padding between lines
-	padHoriz = 80, -- Horizontal padding
-	padVert = 100, -- vertical padding
+	font = "Iosevka Term Nerd Font Mono",
+	lineOffset = 1,
+	linePad = 2,
+	padHoriz = 80,
+	padVert = 100,
 	shadowBlurRadius = 10,
 	shadowColor = "#555555",
-	shadowOffsetX = 8,
-	shadowOffsetY = 8,
-	gobble = false, -- enable lsautogobble like feature
-	debug = false, -- enable debug output
+	shadowOffsetX = 10,
+	shadowOffsetY = 10,
+	gobble = true,
+	debug = true,
 })

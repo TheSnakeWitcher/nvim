@@ -4,14 +4,48 @@ if not ok then
     return
 end
 
+--- @doc {neo-tree-configuration}
 neo_tree.setup({
+    source_selector = {
+        winbar = false,
+        statusline = false,
+        show_scrolled_off_parent_node = false,
+        sources = {
+            {
+                source = "filesystem",
+                display_name = "  Files "
+            },
+            {
+                source = "buffers",
+                display_name = "  Buffers "
+            },
+            {
+                source = "git_status",
+                display_name = "  Git "
+            },
+        },
+        content_layout = "start",
+        tabs_layout = "equal",
+        truncation_character = "…",
+        tabs_min_width = nil,
+        tabs_max_width = nil,
+        padding = 0,
+        separator = { left = "▏", right= "▕" },
+        separator_active = nil,
+        show_separator_on_edge = false,
+        highlight_tab = "NeoTreeTabInactive",
+        highlight_tab_active = "NeoTreeTabActive",
+        highlight_background = "NeoTreeTabInactive",
+        highlight_separator = "NeoTreeTabSeparatorInactive",
+        highlight_separator_active = "NeoTreeTabSeparatorActive",
+    },
 
-        close_if_last_window = false, -- Close Neo-tree if it is the last window left in the tab
+        close_if_last_window = false,
         popup_border_style = "rounded",
         enable_git_status = true,
         enable_diagnostics = true,
-        sort_case_insensitive = false, -- used when sorting files and directories in the tree
-        sort_function = nil , -- use a custom function for sorting files and directories in the tree 
+        sort_case_insensitive = false,
+        sort_function = nil,
         -- sort_function = function (a,b)
         --       if a.type == b.type then
         --           return a.path > b.path
@@ -26,14 +60,14 @@ neo_tree.setup({
           },
           indent = {
             indent_size = 2,
-            padding = 1, -- extra padding on left hand side
-            -- indent guides
+            padding = 1,
+
             with_markers = true,
             indent_marker = "│",
             last_indent_marker = "└",
             highlight = "NeoTreeIndentMarker",
-            -- expander config, needed for nesting files
-            with_expanders = nil, -- if nil and file nesting is enabled, will enable expanders
+
+            with_expanders = nil,
             expander_collapsed = "",
             expander_expanded = "",
             expander_highlight = "NeoTreeExpander",
@@ -42,8 +76,6 @@ neo_tree.setup({
             folder_closed = "",
             folder_open = "",
             folder_empty = "ﰊ",
-            -- The next two settings are only a fallback, if you use nvim-web-devicons and configure default icons there
-            -- then these will never be used.
             default = "*",
             highlight = "NeoTreeFileIcon"
           },
@@ -58,15 +90,14 @@ neo_tree.setup({
           },
           git_status = {
             symbols = {
-              -- Change type
               added     = "", -- or "✚", but this is redundant info if you use git_status_colors on the name
               modified  = "", -- or "", but this is redundant info if you use git_status_colors on the name
               deleted   = "✖",-- this can only be used in the git_status source
-              renamed   = "",-- this can only be used in the git_status source
-              -- Status type
+              renamed   = "➜",-- this can only be used in the git_status source
+
               untracked = "",
-              ignored   = "",
-              unstaged  = "",
+              ignored   = "◌",
+              unstaged  = "",
               staged    = "",
               conflict  = "",
             }
@@ -180,9 +211,8 @@ neo_tree.setup({
           }
         },
         buffers = {
-          follow_current_file = true, -- This will find and focus the file in the active buffer every
-                                       -- time the current file is changed while the tree is open.
-          group_empty_dirs = true, -- when true, empty folders will be grouped together
+          follow_current_file = true,
+          group_empty_dirs = true,
           show_unloaded = true,
           window = {
             mappings = {

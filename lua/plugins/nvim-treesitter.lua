@@ -1,15 +1,14 @@
-local status_ok, config = pcall(require,"nvim-treesitter.configs")
+local status_ok, nvim_treesitter_config = pcall(require,"nvim-treesitter.configs")
 if not status_ok then
     vim.notify("nvim-treesitter config don't loaded")
     return
 end
 
 
-config.setup({
+nvim_treesitter_config.setup({
 
--- see {nvim-treesitter-quickstart}
+--- @doc {nvim-treesitter-quickstart}
 ensure_installed = {
-    "help",
     "lua",
     "rust",
     "solidity",
@@ -17,16 +16,18 @@ ensure_installed = {
     "julia",
     "latex",
     "bibtex",
+    "markdown",
+    "markdown_inline",
     "toml",
     "json",
     "yaml",
 },
-auto_install = false ,   -- when true automatically install missing parsers when entering buffer
-sync_install = false,    -- install parsers synchronously (only applied to `ensure_installed`)
-ignore_install = { "" }, -- list of parsers to ignore installing (for "all")
+auto_install = false ,
+sync_install = false,
+ignore_install = {},
 
 
--- see {nvim-treesitter-highlight-mod}
+--- @doc {nvim-treesitter-highlight-mod}
 highlight = {
     enable = true,
     --disable = {}, -- list of languajes that will be disabled
@@ -34,7 +35,7 @@ highlight = {
 },
 
 
--- see {nvim-treesitter-incremental-selection-mod}
+--- @doc {nvim-treesitter-incremental-selection-mod}
 incremenmal_selection = {
     enable = true,
     keymaps = {
@@ -46,7 +47,7 @@ incremenmal_selection = {
 },
 
 
--- see {nvim-treesitter-indentation-mod}
+--- @doc {nvim-treesitter-indentation-mod}
 indent = {
     enable = true ,
     -- disable = {} ,
@@ -57,6 +58,7 @@ indent = {
 --    enable = true,
 --    filetypes = { "html" , "xml" },
 --},
+
 
 autopairs = {
     enable = true ,
@@ -155,6 +157,7 @@ context_commentstring = {
 --},
 
 
+--- @doc {playground-neovim-treesitter-playground}
 playground = {
     enable = true,
     disable = {},
@@ -172,6 +175,26 @@ playground = {
         goto_node = '<cr>',
         show_help = '?',
     },
+},
+
+
+--- @doc {nvim-tree-docs-setup}
+tree_docs = {
+    enable = false,
+    spec_config = {
+        jsdoc = {
+            slots = {
+                class = { author = true },
+            },
+            processors = {
+                author = function()
+                    return "@author Alejandro Virelles <thesnakewitcher@gmail.com>"
+                end
+            },
+        },
+        soliditydoc = {},
+        rustdoc = {},
+    }
 },
 
 

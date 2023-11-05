@@ -4,8 +4,21 @@ if not status_ok then
     return
 end
 
+--- @doc {notify.setup()}
 notify.setup({
-    background_colour = "Normal",
+    background_colour = "NotifyBackground",
     render = "default",
-    stages = "slide",   -- fade_in_slide_out",
+    stages = "slide",
+    fps = 30,
+    icons = {
+      DEBUG = "",
+      ERROR = "",
+      INFO = "",
+      TRACE = "✎",
+      WARN = ""
+    },
+    level = 2,
+    minimum_width = 50,
+    timeout = 5000,
+    top_down = true
 })

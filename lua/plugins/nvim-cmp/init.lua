@@ -10,6 +10,13 @@ if not ok then
     return
 end
 
+lspkind.init({
+    symbol_map = {
+        Copilot = "",
+    },
+})
+vim.api.nvim_set_hl(0, "CmpItemKindCopilot", {fg ="#6CC644"})
+
 local ok, luasnip = pcall(require,'luasnip')
 if not ok then
     vim.notify("luasnip not loaded in nvim-cmp config")
@@ -17,43 +24,36 @@ if not ok then
 end
 
 
---------------------------------------------------------------
--- sources
---------------------------------------------------------------
-local _ = require('plugins.nvim-cmp.cmp-git')
--- local ok , cmp_git = pcall(require,'plugins.nvim-cmp.cmp-git')
--- if not ok then vim.notify("cmp-git config not loaded") end
--- sources2
--- local ok, _ = pcall(require,'plugins.nvim-cmp.cmp-git')
--- if not ok then
---     vim.notify "cmp-git config not loaded"
---     return
--- end
-
-
-
+--- @doc {cmp-usage}
 cmp.setup({
 
-    -- disable completion if the cursor is `Comment` syntax group.
     -- enabled = function()
-    --    return not cmp.config.context.in_syntax_group('Comment')
+    --     local context = require 'cmp.config.context'  -- disable completion in comments
+    --
+    --     -- keep command mode completion enabled when cursor is in a comment
+    --     if vim.api.nvim_get_mode().mode == 'c' then
+    --         return true
+    --     else
+    --         return not context.in_treesitter_capture("comment")
+    --                and not context.in_syntax_group("Comment")
+    --     end
     -- end,
 
     snippet = {
-      expand = function(args)
-        luasnip.lsp_expand(args.body)
-      end,
+        expand = function(args)
+            luasnip.lsp_expand(args.body)
+        end,
     },
 
     formatting = {
-        -- format = lspkind.cmp_format(),
         format = function(entry, vim_item)
-            -- mode = "symbol_text",
             -- vim_item.kind = lspkind.presets.default[vim_item.kind] .. ' [' .. vim_item.kind ..  ']'
             vim_item.kind = lspkind.presets.default[vim_item.kind]
             vim_item.menu = ({
-                nvim_lsp = '[lsp]',
                 luasnip = '[snip]',
+                -- copilot = '[copilot]',
+                -- cmp_ai = '[ai]',
+                nvim_lsp = '[lsp]',
                 buffer = '[buf]',
                 path = '[path]',
                 nvim_lua = '[nvim]',
@@ -63,70 +63,76 @@ cmp.setup({
     },
 
     sources = {
-        { name = 'luasnip' },
-        { name = 'nvim_lua' }, -- by default active only in lua files
-        { name = 'nvim_lsp' },
-        { name = 'git' },
-        { name = 'buffer' },
-        { name = 'path' , keyworkd_length = 2},
+        { name = 'luasnip' , priority = 1000 },
+        -- { name = 'copilot' , priority = 1000 },
+        -- { name = 'cmp_ai' , priority = 1000 },
+        -- { name = 'codeium' },
+        { name = 'nvim_lsp' , priority = 750 },
+        { name = 'nvim_lua' , priority = 750 }, -- by default active only in lua files
+        { name = 'buffer' , priority = 500 },
+        { name = 'path' , keyworkd_length = 2 , priority = 250 },
+        { name = 'git' , priority = 250 },
         {
             name = "latex_symbols",
-            option = {        -- 0(mixed) :show command and insert symbol
-                strategy = 2, -- 1(julia) :show and insert symbol
-                              -- 2(latex) :show and insert command
-            },
+            option = { strategy = 2 }, --- @doc {cmp-latex-symbols-options}
         },
         { name = 'calc' },
     },
 
     mapping = {
 
-        ["<C-space>"] = cmp.mapping.complete(), --["<C-space>"] = cmp.mapping(cmp.mapping.complete(),{"i","c"}),
+        ["<C-space>"] = cmp.mapping.complete(),
         ["<C-y>"] = cmp.mapping.confirm({
             behabior = cmp.ConfirmBehavior.Replace,
             select = true,
         }),
+
         ['<C-d>'] = cmp.mapping.scroll_docs(4),
         ['<C-u>'] = cmp.mapping.scroll_docs(-4),
-        ["<C-n>"] = cmp.mapping(function(fallback) --["<C-n>"] = cmp.mapping.select_next_item(),
-            -- if luasnip.choice_active() then
+
+        ["<C-n>"] = cmp.mapping(function(fallback)
             if luasnip.choice_active() and not cmp.visible() then
                 luasnip.change_choice(1)
             elseif cmp.visible() then
-                cmp.select_next_item()
+                cmp.select_next_item({ behavior = cmp.SelectBehavior.Insert })
             else
                 fallback()
             end
         end,{"i","s"}),
-        ["<C-p>"] = cmp.mapping(function(fallback) --["<C-p>"] = cmp.mapping.select_prev_item(),
-            -- if luasnip.choice_active() then
+        ["<C-p>"] = cmp.mapping(function(fallback)
             if luasnip.choice_active() and not cmp.visible() then
                 luasnip.change_choice(-1)
             elseif cmp.visible() then
-                cmp.select_prev_item()
+                cmp.select_prev_item({ behavior = cmp.SelectBehavior.Insert })
             else
                 fallback()
             end
         end,{"i","s"}),
-        ["<Tab>"] = cmp.mapping(function(fallback) --["<Tab>"] = cmp.mapping(cmp.mapping.select_next_item(), { "i", "s" }),
+
+        ["<Tab>"] = cmp.mapping(function(fallback)
             if luasnip.jumpable(1) then
                 luasnip.jump(1)
-            elseif cmp.visible() then
-                cmp.select_next_item()
+            -- elseif cmp.visible() then
+            --     cmp.select_next_item()
             else
                 fallback()
             end
         end,{"i","s"}),
-        ["<S-Tab>"] = cmp.mapping(function(fallback) --["<S-Tab>"] = cmp.mapping(cmp.mapping.select_prev_item(), { "i", "s" }),
+        ["<S-Tab>"] = cmp.mapping(function(fallback)
             if luasnip.jumpable(-1) then
                 luasnip.jump(-1)
-            elseif cmp.visible() then
-                cmp.select_prev_item()
+            -- elseif cmp.visible() then
+            --     cmp.select_prev_item()
             else
                 fallback()
             end
         end,{"i","s"}),
     },
+
+    -- window = {
+    --     completion = cmp.config.window.bordered(),
+    --     documentation = cmp.config.window.bordered(),
+    -- },
 
     experimental = {
         ghost_text = true, -- put virtual text of current suggestion in front of cursor
@@ -134,19 +140,11 @@ cmp.setup({
 
 })
 
-cmp.setup.cmdline(':', {
-    mapping = cmp.mapping.preset.cmdline(),
-    sources = cmp.config.sources({
-      { name = 'path' },
-    }, {
-      { name = 'cmdline' },
-    })
-})
 
--- if you enabled `native_menu`, this won't work anymore
-cmp.setup.cmdline({'/', '?' }, {
-  mapping = cmp.mapping.preset.cmdline(),
-  sources = {
-    { name = 'buffer' }
-  }
-})
+--------------------------------------------------------------
+-- sources
+--------------------------------------------------------------
+
+local cmp_dir = "plugins.nvim-cmp."
+require(cmp_dir .. 'cmdline-source')
+require(cmp_dir .. 'cmp-git')

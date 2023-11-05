@@ -19,7 +19,7 @@
 --     <nop> = do nothing action
 
 local set = vim.keymap.set
-local opts = { noremap = true , silent = true }
+local opts = { noremap = true, silent = true }
 -- local term_opts = { silent = true }
 
 
@@ -134,7 +134,6 @@ set({"v","x"}, "<C-k>", ":move '<-2<CR>gv-gv", opts)
 --------------------------------------------------------------
 -- telescope
 --------------------------------------------------------------
-local telescope = require('telescope')
 local builtin = require('telescope.builtin')
 
 -- vim pickers
@@ -152,8 +151,8 @@ set("n" , "<leader>sc" , builtin.commands,{desc = "[s]earch [c]ommands" })
 set("n" , "<leader>sM" , builtin.man_pages,{desc = "[s]earch [M]anual" })
 
 -- file pickers
-set("n", "<C-f>", builtin.find_files, {desc = "[s]earch [f]iles" })
 set("n", "<leader>sf", builtin.find_files, {desc = "[s]earch [f]iles" })
+set("n", "<C-f>", builtin.find_files, {desc = "[s]earch [f]iles" })
 set("n", "<leader>sg", builtin.live_grep, {desc = "[s]earch [g]rep" })
 set("n","<leader>so",builtin.oldfiles,{desc = "[s]earch [o]ldfiles"})
 set("n","<leader>sP","<cmd>Telescope media_files<cr>",{desc = "[s]earch [P]ics"})
@@ -177,21 +176,12 @@ set("n","<leader>sS",builtin.git_status, {desc = "[s]earch [S]tatus"})
 set("n", "<leader>sn", "<CMD>TodoTelescope<CR>", { desc = "[s]earch [n]otes"}) -- todo-comments
 set("n", "<leader>sN", "<CMD>Telescope notify<CR>", { desc = "[s]earch [N]otifications"}) -- notify
 set("n", "<leader>sp", "<CMD>Telescope projections<CR>" ,{ desc = "[s]earch [p]rojects"}) -- projections
+set("n", "<C-p>", "<CMD>Telescope projections<CR>" ,{ desc = "[s]earch [p]rojects"}) -- projections
 set("n", "<leader>se", "<CMD>Telescope env<CR>" ,{ desc = "[s]earch [e]nvironment"}) -- telescope-env
 set("n", "<leader>ss", "<CMD>LuaSnipEdit<CR>" ,{ desc = "[s]earch [s]snippets"}) -- luasnip
 set("n", "<leader>st", "<CMD>Telescope telescope-tabs list_tabs<CR>" ,{ desc = "[s]earch [t]abs"}) -- telescope-tabs
 set("n", "<leader>sH", "<cmd>Telescope heading<cr>", { desc = "[s]earch [H]eaders"}) -- telescope-heading
 set("n", "<leader>sT", "<cmd>Telescope toggletasks spawn<cr>", { desc = "[s]earch [T]ask"}) -- toggletasks
-
-
---------------------------------------------------------------
--- Packer
---------------------------------------------------------------
-set("n","<leader>pc", "<cmd>PackerCompile<cr>",{desc = "[p]acker [c]ompile"})
-set("n","<leader>pi", "<cmd>PackerInstall<cr>",{desc = "[p]acker [i]nstall"})
-set("n","<leader>pu", "<cmd>PackerUpdate<cr>",{desc = "[p]acker [u]pdate"})
-set("n","<leader>ps", "<cmd>PackerSync<cr>",{desc = "[p]acker [s]ync"})
-set("n","<leader>pS", "<cmd>PackerStatus<cr>",{desc = "[p]acker [S]tatus"})
 
 
 --------------------------------------------------------------
@@ -212,17 +202,13 @@ set('n', '<space>q', vim.diagnostic.setloclist, opts)
 --------------------------------------------------------------
 local ls = require("luasnip")
 
+set("n","<leader><leader>S", "<CMD>LuaSnipEdit<CR>", {desc = "open current filetype snippets files" , silent = true})
 set({"i","s"},"<C-s>",function()
     if ls.choice_active() then
         require('luasnip.extras.select_choice')()
     end
 end,{desc = "select choice" , silent = true})
 
-set("n","<leader><leader>s",
-    "<cmd>source " .. vim.fn.stdpath("config") .. "/lua/plugins/luasnip.lua<CR>",
-{desc = "hot reload snippets"})
-
-set("n","<leader><leader>S", "<CMD>LuaSnipEdit<CR>", {desc = "open current filetype snippets files" , silent = true})
 
 
 
@@ -230,7 +216,7 @@ set("n","<leader><leader>S", "<CMD>LuaSnipEdit<CR>", {desc = "open current filet
 -- buffer_manager
 --------------------------------------------------------------
 set("n", "<leader>b","<cmd>lua require('buffer_manager.ui').toggle_quick_menu()<cr>",{})
-local keys = '1234567890'
+local keys = '123456789'
 for i = 1, #keys do
   local key = keys:sub(i,i)
   set(
@@ -253,7 +239,7 @@ set("n", "<leader>tv", "<Cmd>ToggleTerm direction=vertical size=50<CR>", { desc 
 -- urlview
 --------------------------------------------------------------
 set("n", "<leader>su", "<Cmd>UrlView buffer<CR>", { desc = "[s]earch [u]rls in buffer" })
-set("n", "<leader>sU", "<Cmd>UrlView packer<CR>", { desc = "[s]earch [U]rls in packer" })
+set("n", "<leader>sU", "<Cmd>UrlView lazy<CR>", { desc = "[s]earch [U]rls of plugins" })
 
 
 --------------------------------------------------------------
@@ -273,7 +259,7 @@ set("n", "<leader>tl", "<CMD>Telescope telescope-tabs list_tabs<CR>" ,{ desc = "
 
 
 --------------------------------------------------------------
--- trees/views/explorer
+-- trees/views/explorers
 --------------------------------------------------------------
 set("n", "<leader>e", "<cmd>NeoTreeFocusToggle<CR>", { desc = "[e]xplorer "})
 set("n", "<leader>E", "<cmd>AerialToggle<CR>", { desc = "[E]xplorer summary/outline(aerial)"})
@@ -349,3 +335,9 @@ set("n","<leader>Tl","<cmd>OverseerRestartLast<cr>",{desc = "[T]ask [l]ast"})
 --------------------------------------------------------------
 set("n","<A-i>","<cmd>IconPickerNormal<cr>",{desc = "[i]con"})
 set("i","<A-i>","<cmd>IconPickerInsert<cr>",{desc = "[i]con"})
+
+
+--------------------------------------------------------------
+-- Treesj
+--------------------------------------------------------------
+set("n","<leader>j","<cmd>lua require('treesj').toggle()<cr>",{desc = "toggle split/joint of code block"})

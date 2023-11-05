@@ -1,10 +1,12 @@
 for _, module in ipairs {
     "autocmds.admin",
     "autocmds.config",
+    -- "autocmds.nvim-lspconfig",
     "autocmds.highlight",
-    "autocmds.web3",
     "autocmds.projections",
     "autocmds.anvil",
+    "autocmds.overseer",
+    -- "autocmds.package-info",
     "autocmds.experimental",
 } do
     local ok, _ = pcall(require, module)

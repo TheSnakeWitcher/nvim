@@ -3,6 +3,7 @@ if not ok then
     return
 end
 
+--- @doc {silicon.lua-usage}
 vim.api.nvim_create_user_command("Screenshot", function(opts)
     if opts.range ~= 0 then
 	    silicon.visualise_cmdline({})
@@ -14,38 +15,21 @@ end, {
 	range = "%",
 })
 
--- vim.api.nvim_create_user_command(
---      'Screenshot',
---      function({opts})
---          opts.fargs
---          require("silicon").visualise_api()
---      end ,
---      {
---          desc = "Generate image of lines in a visual selection",
---          nargs = 1,
---      }
---  )
+vim.api.nvim_create_user_command("ScreenshotPic", function()
+    local slurp , grim = "slurp" , "grim"
 
--- vim.api.nvim_create_user_command(
---      'Screenshot',
---      function() silicon.visualise_api({}) end ,
---      {desc = "Generate image of lines in a visual selection"}
---  )
---
--- vim.api.nvim_create_user_command(
---      'ScreenshotBuf',
---      silicon.visualise_api({to_clip = false, show_buf = true}),
---      {desc = "Generate image of a whole buffer, with lines in a visual selection highlighted"}
---  )
+    if not vim.fn.executable(slurp) or not vim.fn.executable(grim) then
+        vim.notify("missed " .. slurp .. " or " .. grim )
+        return
+    end
 
--- vim.api.nvim_create_user_command(
---      'ScreenshotBufVisible',
---      require("silicon").visualise_api({to_clip = false, visible = true}),
---      {desc = "Generate visible portion of a buffer"}
---  )
+    local buf , date = vim.fn.expand("%:t:r") , os.date()
+    local path = vim.env.HOME .. "/Pictures/Screenshots"
+    local cmd = string.format("%s | %s %s/%s-%s",slurp,grim,path,buf,date)
+    vim.notify(cmd)
+    vim.fn.system(cmd)
+    -- os.execute(cmd)
 
--- vim.api.nvim_create_user_command(
---      'ScreenshotBuf',
---      require("silicon").visualise_api({to_clip = true}),
---      {desc = "Generate current buffer line in normal mode"}
---  )
+end, {
+	desc = "Select with cursor an screen are to take a screenshot",
+})

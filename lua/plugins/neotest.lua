@@ -4,6 +4,10 @@ if not ok then
 	return
 end
 
+-- local ok, neotest_plenary = pcall(require, "neotest-plenary")
+-- if not ok then
+-- 	vim.notify "neotest-plenary config not loaded"
+-- end
 
 local ok, neotest_go = pcall(require, "neotest-go")
 if not ok then
@@ -15,7 +19,7 @@ if not ok then
 	vim.notify "neotest-rust config not loaded"
 end
 
-local ok, neotest_plenary = pcall(require, "neotest-plenary")
+local ok, neotest_foundry = pcall(require, "neotest-foundry")
 if not ok then
 	vim.notify "neotest-plenary config not loaded"
 end
@@ -39,7 +43,8 @@ neotest.setup({
             args = { "--no-capture"},
             dap_adapter = "lldb",
         }),
-        neotest_plenary,
+        neotest_foundry,
+        -- neotest_plenary,
 	},
     consumers = {
         overseer = overseer_consumer,

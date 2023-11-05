@@ -1,3 +1,9 @@
+local ok, cmp = pcall(require,'cmp')
+if not ok then
+    vim.notify("nvim-cmp config don't loaded")
+    return
+end
+
 local ok, cmp_git = pcall(require,"cmp_git")
 if not ok then
     vim.notify "cmp_git config not loaded"
@@ -7,10 +13,11 @@ end
 local format = require("cmp_git.format")
 local sort = require("cmp_git.sort")
 
+--- @doc {cmp-git-config}
 cmp_git.setup({
     filetypes = { "gitcommit", "octo" },
-    remotes = { "upstream", "origin" }, -- in order of most to least prioritized
-    enableRemoteUrlRewrites = false, -- enable git url rewrites, see https://git-scm.com/docs/git-config#Documentation/git-config.txt-urlltbasegtinsteadOf
+    remotes = { "upstream", "origin" },
+    enableRemoteUrlRewrites = false,
     git = {
         commits = {
             limit = 100,
@@ -19,12 +26,12 @@ cmp_git.setup({
         },
     },
     github = {
-        hosts = {},  -- list of private instances of github
+        hosts = {},
         issues = {
             fields = { "title", "number", "body", "updatedAt", "state" },
-            filter = "all", -- assigned, created, mentioned, subscribed, all, repos
+            filter = "all",
             limit = 100,
-            state = "open", -- open, closed, all
+            state = "open",
             sort_by = sort.github.issues,
             format = format.github.issues,
         },
@@ -36,16 +43,16 @@ cmp_git.setup({
         pull_requests = {
             fields = { "title", "number", "body", "updatedAt", "state" },
             limit = 100,
-            state = "open", -- open, closed, merged, all
+            state = "open",
             sort_by = sort.github.pull_requests,
             format = format.github.pull_requests,
         },
     },
     gitlab = {
-        hosts = {},  -- list of private instances of gitlab
+        hosts = {},
         issues = {
             limit = 100,
-            state = "opened", -- opened, closed, all
+            state = "opened",
             sort_by = sort.gitlab.issues,
             format = format.gitlab.issues,
         },
@@ -56,7 +63,7 @@ cmp_git.setup({
         },
         merge_requests = {
             limit = 100,
-            state = "opened", -- opened, closed, locked, merged
+            state = "opened",
             sort_by = sort.gitlab.merge_requests,
             format = format.gitlab.merge_requests,
         },
@@ -107,3 +114,11 @@ cmp_git.setup({
     },
   }
 )
+
+cmp.setup.filetype({'gitcommit','octo'}, {
+    sources = cmp.config.sources({
+        { name = 'git' }, -- You can specify the `git` source if [you were installed it](https://github.com/petertriho/cmp-git).
+    }, {
+        { name = 'buffer' },
+    })
+})
