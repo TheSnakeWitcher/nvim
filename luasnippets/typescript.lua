@@ -138,8 +138,8 @@ s({
     dscr = "function async declaration"
 },
     fmt([[
-        async function {1}({2}) {{
-            {3}
+        async function {1}({2}) {3}{{
+            {4}
         }}
     ]], {
       c(1,{
@@ -150,7 +150,11 @@ s({
             i(1,"args:type"),
             t(""),
         }),
-        i(3, "/* code */"),
+        c(3, {
+            sn(1,fmt(": {} ",{ i(1,"return") })),
+            t(""),
+        }),
+        i(4, "/* code */"),
     })
 ),
 

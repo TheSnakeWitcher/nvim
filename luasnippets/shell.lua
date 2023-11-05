@@ -75,4 +75,29 @@ ls.add_snippets("sh", {
         i(3,"# code #"),
     })),
 
+
+    s({
+        name = "case",
+        trig = "case",
+        dscr = "case statement",
+    }, fmt([[
+            case {} in
+                {})
+                    {}
+                    ;;
+                {})
+                    {}
+                    ;;
+                *)
+                    # default code #
+                    ;;
+            esac
+    ]], {
+        i(1,"expression"),
+        i(2,"condition1"),
+        i(4,"# code 1 #"),
+        i(3,"condition2"),
+        i(5,"# code 2 #"),
+    })),
+
 })

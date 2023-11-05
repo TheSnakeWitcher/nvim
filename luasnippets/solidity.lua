@@ -54,13 +54,7 @@ ls.add_snippets("solidity", {
           t "abicoder v2",
           t "abicoder v1",
         }),
-        c(3, {
-          t "im",
-          t "contract",
-          t "interface",
-          t "lib",
-          t "",
-        }),
+        i(3,"/* code */"),
       }
     )
   ),
@@ -84,8 +78,8 @@ ls.add_snippets("solidity", {
           sn(nil, fmt([[
             {{ {} }} from "{}" ;
           ]], {
-            i(1, "object"),
-            i(2, "package"),
+            i(2, "object"),
+            i(1, "package"),
           })),
         })
       }
@@ -328,14 +322,23 @@ ls.add_snippets("solidity", {
     {
       name = "function",
       trig = "fn",
-      dscr = "function declaration",
+      dscr = [[function declaration,note
+		functions visibility:
+		    * private: only can be see/used by current contract, private funcitons aren't part of ABI
+		    * public: everybody can see/used function,
+		    * internal: only can be see/used by current contracts and childs, internal functions aren't part of ABI
+		    * external: only can be see/used by EOA(external owned accounts) 
+		functions constraints/state mutability:
+		    * pure: not read/write
+		    * view: rea donly
+		    * payable: can receive ether
+		    * virtual: can be override by childs contracts, not is mutually exclusive with override
+		    * override: override a virtual functions of some parent contract, not is mutually exclusive with virtual
+	]],
     },
     fmt([[
-        /**
-         *
-         */
-        function {1}({2}) {4} {3}{{
-            {5}
+        function {1}({2}) {4} {5}{3}{{
+            {6}
         }}
     ]]  ,
       {
@@ -348,8 +351,21 @@ ls.add_snippets("solidity", {
             fmt("returns ({}) ",{ i(1, "types") }),
             t "",
         }),
-        i(4, "constraint"),
-        i(5, "/* code */"),
+        c(4,{
+            t("private"),
+            t("public"),
+            t("internal"),
+            t("external"),
+        }),
+        c(5,{
+            t(""),
+            sn(1,{ t("view "), i(1) }),
+            sn(1,{ t("pure "), i(1) }),
+            sn(1,{ t("virtual "), i(1) }),
+            sn(1,{ t("override "), i(1) }),
+            sn(1,{ t("payable "), i(1) }),
+        }),
+        i(6,"/* code */"),
       }
     )
   ),
@@ -411,34 +427,10 @@ ls.add_snippets("solidity", {
     )
   ),
 
-  s({
-    name = "function-constraint",
-    trig = "fnc",
-    dscr = [[
-		* pure: not read/write
-		* view: rea donly
-		* private: only current contract can see/use the function, private funcitons are not part of ABI
-		* internal: internal functions are not part of ABI
-		* public: everybody can see/use function,
-	]]  ,
-  }, {
-    c(1, {
-      t "private",
-      t "internal",
-      t "public",
-      t "external",
-      t "pure",
-      t "view",
-      t "payable",
-      t "virtual",
-      t "override",
-    }),
-  }),
-
   s(
     {
-      name = "function-modifier",
-      trig = "fnm",
+      name = "modifier",
+      trig = "modifier",
       dscr = [[create a modifier, note:
         * modifier are used to validate that condition are meet in functions
         * _ is only used in modifiers & mean "execute rest of the code"
@@ -469,7 +461,7 @@ ls.add_snippets("solidity", {
 
   s(
     {
-      name = "function-modifier-call",
+      name = "require",
       trig = "require",
       dscr = [[
         require: validate that condition is meet,otherwise return msg/error,note: modifier cannot have same name as a function
@@ -483,18 +475,16 @@ ls.add_snippets("solidity", {
       {
         c(1, {
           sn(nil, fmt([[
-            require({1},{2}) ;
+            if ( {} ) revert {} ;
           ]], {
-            i(1, "cond"),
-            i(2, "msg/error"),
+            i(1,"condition"),
+            i(2,"ErrorName"),
           })),
           sn(nil, fmt([[
-            {}
+            require({1},"{2}") ;
           ]], {
-            c(1, {
-              t "revert ErrorName({field: value}) ;",
-              t "revert(msg) ;",
-            }),
+            i(1, "condition"),
+            i(2, "msg/error"),
           })),
           sn(nil, fmt([[
 		    assert({1}) ;
@@ -558,7 +548,7 @@ ls.add_snippets("solidity", {
       dscr = "if ternary declaration",
     },
     fmt([[
-      {1} ? ${2} : {3}
+      {1} ? {2} : {3}
     ]],
       {
         i(1, "cond"),
@@ -726,7 +716,11 @@ ls.add_snippets("solidity", {
 	]]    ,
       {
         i(1, "type"),
-        i(2, "constraint"),
+        c(2,{
+            t("private"),
+            t("public"),
+            t("internal"),
+        }),
         c(3, {
           t "constant",
           t "inmutable",
@@ -755,7 +749,7 @@ ls.add_snippets("solidity", {
     fmt(
       [[
 		{1} {2} {3} = {4} ;
-	]]    ,
+	]],
       {
         i(1, "type"),
         i(2, "varc"),
@@ -768,9 +762,8 @@ ls.add_snippets("solidity", {
           t "calldata",
           t "payable",
         }),
-        i(4, "value"),
-      }
-    )
+        i(4,"value"),
+      })
   ),
 
   s({
@@ -908,21 +901,17 @@ ls.add_snippets("solidity", {
             and not by name
       ]],
     },
-    fmt(
-      [[
-        /**
-         * @notice emitted when {}
-         */
-		 event {}({}) {};
+    fmt([[
+	    event {}({}) {} ; /// @notice emitted when {}
 	]],
       {
-        i(4,"trigger"),
         i(1, "name"),
-        i(3, "type indexed fields"),
+        i(3, "type [indexed] fields"),
         c(2,{
             t("anonymous "),
             t(""),
         }),
+        i(4,"trigger"),
       }
     )
   ),
