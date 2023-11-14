@@ -37,18 +37,8 @@ neodev.setup({
 --- @doc {lspconfig-setup-on_attach}
 local on_attach = function(client, bufnr)
 
-    --local ok, virtualtypes = pcall(require,"virtualtypes")
-    --if not ok then
-    --    vim.notify("virtualtypes config not loaded in nvim-lspconfig")
-    --    return
-    --end
-    --virtualtypes.on_attach
-    --virtualtypes.enable()
-
     local nmap = function(keys, func, desc)
-        if desc then
-          desc = 'LSP: ' .. desc
-        end
+        if desc then desc = 'LSP: ' .. desc end
         vim.keymap.set('n', keys, func, { buffer = bufnr, desc = desc })
     end
 
@@ -99,9 +89,10 @@ if not ok then
     vim.notify("cmp-nvim-lsp not loaded in" .. vim.fn.expand("%"))
     return
 end
--- local capabilities = vim.lsp.protocol.make_client_capabilities()
--- capabilities = cmp_nvim_lsp.default_capabilities(capabilities)
-local capabilities = cmp_nvim_lsp.default_capabilities()
+
+local capabilities = vim.lsp.protocol.make_client_capabilities()
+capabilities = cmp_nvim_lsp.default_capabilities(capabilities)
+-- local capabilities = cmp_nvim_lsp.default_capabilities()
 capabilities.textDocument.completion.completionItem.snippetSupport = true --- @doc {schemastore-usage}
 
 

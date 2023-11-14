@@ -5,6 +5,7 @@ if not status_ok then
 end
 
 
+---@doc {lualine-Default-configuration}
 lualine.setup({
     options = {
         icons_enabled = true,
@@ -12,6 +13,38 @@ lualine.setup({
         component_separators = " ",
         section_separators = " ",
     },
+    sections = {
+        lualine_a = {'mode'},
+        lualine_b = {
+            'branch',
+            {
+                'diff', ---@doc {lualine-diff-component-options}
+                 symbols = {
+                    added = ' ',
+                    modified = ' ',
+                    removed = ' ',
+                 },
+            },
+            'diagnostics'
+        },
+        lualine_c = {
+            'filename', ---@doc {lualine-filename-component-options}
+             symbols = {
+                modified = '[+]',
+                readonly = '[-]',
+                unnamed = '[no name]',
+                newfile = '[new]',
+             },
+        },
+        lualine_x = {'fileformat', 'filetype'},
+        lualine_y = {'progress'},
+        lualine_z = {'location'}
+    },
+    extensions = {
+        -- "neo-tree",
+        -- "overseer",
+        -- "lazy",
+    }
 })
 
 

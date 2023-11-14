@@ -15,65 +15,38 @@ local actions = require("telescope.actions")
 -- extensions
 --------------------------------------------------------------
 
+for _, module in ipairs {
+    "notify",
+    "fzf",
+    "projections",
+    "toggletasks", -- NOTE: overseer will deprecate toggletask
+    "env",
+    "aerial",
+    "telescope-tabs", -- NOTE: posible tab_manager and improve of buffer_manager with deprecate this
+    "dap",
+    "media_files",
+    "heading",
+    "zoxide",
 
-local ok , _ = pcall(telescope.load_extension,'fzf')
-if not ok then vim.notify "telescope fzf extension not loaded" end
-
-local ok , _ = pcall(telescope.load_extension,'notify')
-if not ok then vim.notify "telescope notify extension not loaded" end
-
-local ok , _ = pcall(telescope.load_extension,'projections')
-if not ok then vim.notify "telescope projections extension not loaded" end
-
--- NOTE: overseer will deprecate toggletask
-local ok , _ = pcall(telescope.load_extension,'toggletasks')
-if not ok then vim.notify "telescope toggletasks extension not loaded" end
-
-local ok , _ = pcall(telescope.load_extension,'env')
-if not ok then vim.notify "telescope env extension not loaded" end
-
-local ok , _ = pcall(telescope.load_extension,'aerial')
-if not ok then vim.notify "telescope aerial extension not loaded" end
-
--- NOTE: posible tab_manager and improve of buffer_manager with deprecate this
-local ok , _ = pcall(telescope.load_extension,'telescope-tabs')
-if not ok then vim.notify "telescope tabs extension not loaded" end
-
-local ok , _ = pcall(telescope.load_extension,'dap')
-if not ok then vim.notify "telescope telescope-dap extension not loaded" end
-
-local ok , _ = pcall(telescope.load_extension,'media_files')
-if not ok then vim.notify "telescope media_files extension not loaded" end
-
-local ok , _ = pcall(telescope.load_extension,'heading')
-if not ok then vim.notify "telescope heading extension not loaded" end
-
-local ok , _ = pcall(telescope.load_extension,'zoxide')
-if not ok then vim.notify("telescope zoxide extension not loaded") end
-
--- local ok , _ = pcall(telescope.load_extension,'chisel')
--- if not ok then vim.notify "telescope chisel extension not loaded" end
-
--- local ok , _ = pcall(telescope.load_extension,'file_browser')
--- if not ok then vim.notify "telescope file_browser extension not loaded" end
--- local ok , fb_actions = pcall(telescope.load_extension,'telescope._extensions.file_browser.actions')
--- if not ok then vim.notify "telescope file_browser actions extension not loaded" end
-
---local ok , _ = pcall(telescope.load_extension,'neoclip')
---if not ok then vim.notify("telescope neoclip extension not loaded") end
-
---local ok , _ = pcall(telescope.load_extension,'cheat')
---if not ok then vim.notify("telescope cheat extension not loaded") end
+    -- "chisel",
+    -- "file_browser",
+    -- "neoclip",
+    -- "cheat",
+    -- "telescope._extensions.file_browser.actions"
+} do
+    local ok, _ = pcall(telescope.load_extension, module)
+    if not ok then
+        vim.notify(string.format("%s telescope extension not loaded",module))
+    end
+end
 
 
---------------------------------------------------------------
--- setup
---------------------------------------------------------------
+---@doc {telescope.setup()}
 telescope.setup({
 
     defaults = {
 
-        prompt_prefix = " ",
+        prompt_prefix = "  ",
         selection_caret = " ",
         path_display = { "smart" },
 
@@ -185,11 +158,13 @@ telescope.setup({
     },
 
     extensions = {
+
+        ---@doc {telescope-nvim-fzf-native.nvim-telescope-setup-and-configuration:}
         fzf = {
-            fuzzy = true,                    -- false will only do exact matching
-            override_generic_sorter = true,  -- override the generic sorter
-            override_file_sorter = true,     -- override the file sorter
-            case_mode = "smart_case",        -- or "ignore_case" or "respect_case"
+            fuzzy = true,
+            override_generic_sorter = true,
+            override_file_sorter = true,
+            case_mode = "smart_case",
         },
 
         bookmarks = {
@@ -202,20 +177,21 @@ telescope.setup({
             debug = false,                -- Provide debug messages
         },
 
+        ---@doc {telescope-media-files.nvim-configuration}
         media_files = {
            filetypes = {"png", "jpg", "jpeg", "mp4", "webm", "webp",},
            -- find_cmd = "rg" -- defaults to `fd`
         },
 
         aerial = {
-              -- Display symbols as <root>.<parent>.<symbol>
               show_nesting = {
-                ['_'] = false, -- This key will be the default
-                json = true,   -- You can set the option for specific filetypes
+                ['_'] = false,
+                json = true,
                 yaml = true,
               }
         },
 
+        ---@doc {telescope-heading.nvim-setup}
         heading = {
             treesitter = true,
             picker_opts = {

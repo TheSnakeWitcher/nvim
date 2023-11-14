@@ -182,7 +182,7 @@ require("lazy").setup({
                 tag = "legacy",
                 config = function() load_config("fidget") end,
             },
-            --  lsp signature hint as typing 
+             -- lsp signature hint as typing 
             {
                 "ray-x/lsp_signature.nvim",
                 config = function () load_config("lsp_signature")end,
@@ -230,11 +230,13 @@ require("lazy").setup({
             "LukasPietzschmann/telescope-tabs",              -- search tabs
             "crispgm/telescope-heading.nvim",                -- search headers
             "jvgrootveld/telescope-zoxide",
-            {   -- create telescope pickers from shell commands
+            {
+                -- create telescope pickers from shell commands
                 "axkirillov/easypick.nvim",
                 config = function() load_config("easypick") end,
             },
-            {   -- use fzf
+            {
+                -- use fzf
                 "nvim-telescope/telescope-fzf-native.nvim",
                 build = "make",
             },
@@ -302,11 +304,11 @@ require("lazy").setup({
             "kdheepak/cmp-latex-symbols",            -- latex completion source
             "hrsh7th/cmp-calc",                      -- math calculation source
             -- github copilot source
-            {
-                "zbirenbaum/copilot-cmp",
-                dependencies = "zbirenbaum/copilot.lua",
-                config = function () require("copilot_cmp").setup() end
-            }
+            -- {
+            --     "zbirenbaum/copilot-cmp",
+            --     dependencies = "zbirenbaum/copilot.lua",
+            --     config = function () require("copilot_cmp").setup() end
+            -- }
             -- "tzachar/cmp-ai",                        -- ai completion source
             -- "hrsh7th/cmp-emoji",                  -- emoji completion source
         }
@@ -362,7 +364,6 @@ require("lazy").setup({
         dependencies = { 'nvim-treesitter/nvim-treesitter' },
         config = function() load_config('treesj') end,
     },
-
     --use "andymass/vim-matchup"           --  even better % fist_oncoming navigate and highlight matching words 
     -- code screenshots
     {
@@ -372,7 +373,7 @@ require("lazy").setup({
 
 
     --------------------------------------------------------------
-    -- test/dap
+    -- dap/test
     --------------------------------------------------------------
     -- dap(debug adapter protocol) integration
     -- TODO: check use "kndndrj/nvim-projector" --  project-specific configs for nvim-dap with telescope
@@ -490,7 +491,7 @@ require("lazy").setup({
     -- git
     { "tpope/vim-fugitive" }, -- git integration for cmdline
     {
-        -- git integration for buffers
+        -- git integration for buffers 
         "lewis6991/gitsigns.nvim",
         config = function() load_config("gitsigns") end,
     },
@@ -498,6 +499,7 @@ require("lazy").setup({
     -- single tabpage interface for easily view diffs
     -- use "kdheepak/lazygit.nvim"   -- open lazygit from neovim
     -- use "TimUntersberger/neogit"  -- git ui
+    -- { "rhysd/git-messenger.vim" }
     -- github
     {
         -- edit & review github issues
@@ -726,8 +728,10 @@ require("lazy").setup({
     ----      "TheSnakeWitcher/hardhat.nvim",
     ----      config = function() load_config("hardhat") end,
     ----      requires = {
-    ----          "overseer-hardhat"  -- run hardhat task/scripts with overseer
-    ----          "neotest-hardhat"   -- integrate hardhat/mocha test with neotest ? check neotest-js
+    ----          "overseer-hardhat",    -- run hardhat task/scripts with overseer
+    ----          "neotest-hardhat",     -- integrate hardhat/mocha test with neotest ? check neotest-js
+    ----          "hardhat-verify.nvim", 
+    ----          "hardhat-deploy.nvim", 
     ----      }
     ---- }
 

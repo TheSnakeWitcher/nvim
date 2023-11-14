@@ -3,33 +3,31 @@ local options = {
     --------------------------------
     -- buffer
     --------------------------------
-    termguicolors = true,       -- enable ui colors
+    termguicolors = true,
     title = true,
-    ruler = false,              -- show line and column number of cursor position separated by a `,`
-    number = true,              -- activate line numbers
-    relativenumber = true,      -- make line numbers relative
-    numberwidth = 2,            -- width of line number column
-    cmdheight = 1,              -- heigth of cmdline
-    -- pumheight = 20,             -- maximum number of items to show in popup menu
+    ruler = false,
+    number = true,
+    relativenumber = true,
+    numberwidth = 2,
+    cmdheight = 1,
+    -- pumheight = 20,
     clipboard = "unnamedplus",
-    signcolumn = "yes",         -- opt: yes,no,auto
-    lazyredraw = true,          -- don't redraw buffer when executing macros
-    showmode = false,           -- when on show current mode
-    cursorline = true,          -- enable highlight line of cursor
-    cursorlineopt = "number",   -- visual element to highlight
-    timeout = true,             -- activate timeout
-    timeoutlen = 500,           -- time in ms to wait for a mapped sequence to complete.
-    showtabline = 2,            -- show tabline always
-
-    -- fillchars = [[eob: ,fold: ,foldopen:,foldsep: ,foldclose:]]
-    -- fillchars = {
-        -- foldopen = "",
-        -- foldclose = "",
+    signcolumn = "yes",
+    lazyredraw = true,
+    showmode = false,
+    cursorline = true,
+    cursorlineopt =  "both",
+    timeout = true,
+    timeoutlen = 500,
+    showtabline = 2,
+    -- fillchars = vim.opt.fillchars:append({
+    --     foldopen = "",
+    --     foldclose = "",
     --     fold = "",
     --     foldsep = "",
     --     diff = "╱",
     --     eob = "",-- remove `~` from empty lines
-    -- },
+    -- }),
 
 
     --------------------------------
@@ -42,11 +40,11 @@ local options = {
     --------------------------------
     -- indent,scroll and wrap
     --------------------------------
-    smartindent = true,    -- make indenting smarter again
+    smartindent = true,
     smarttab = true,
-    expandtab = true,      -- convert tabs to spaces
-    preserveindent = true, -- preserve indent structure as much as posible
-    copyindent = true,     -- copy previus indentation on autoindenting
+    expandtab = true,
+    preserveindent = true,
+    copyindent = true,
     shiftwidth = 4,
     tabstop = 4,
     softtabstop = 4,
@@ -60,8 +58,8 @@ local options = {
     --------------------------------
     splitbelow = true,
     splitright = true,
-    foldenable= false,     -- when true folds enable by default when open files
-    foldmethod= "manual",  -- :help fold-methods , options: expr
+    foldenable= false,
+    foldmethod= "manual",
     -- foldexpr = "nvim_treesitter#foldexpr()",
     --formatexpr = "nvim_treesitter#foldexpr()",
 
@@ -69,20 +67,20 @@ local options = {
     --------------------------------
     -- highligh
     --------------------------------
-    sessionoptions = vim.opt.sessionoptions:append("localoptions"), -- recomended by GnikDroy/projections.nvim
+    sessionoptions = vim.opt.sessionoptions:append("localoptions"),
 
 
     --------------------------------
     -- search patterns
     --------------------------------
-    ignorecase = true,  -- ignore case in search patterns
+    ignorecase = true,
     smartcase = true,
 
 
     --------------------------------
     -- gui
     --------------------------------
-    guifont = "Iosevka Nerd Font Mono:h10",
+    guifont = "Hack:h10",
 
 
     --------------------------------
@@ -96,8 +94,8 @@ local options = {
     --------------------------------
     -- mouse
     --------------------------------
-    mouse = "a",       -- activate mouse for all modes
-    mousefocus = true, -- window pointed by mouse is automatically activated
+    mouse = "a",
+    mousefocus = true,
 
 }
 

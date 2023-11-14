@@ -27,6 +27,11 @@ nvim_web_devicons.setup({
             icon = "󰥯",
             color = "#ffff00",
             name = "Hardhat"
+        },
+        ["hardhat.config.js"] = {
+            icon = "󰥯",
+            color = "#ffff00",
+            name = "Hardhat"
         }
     };
     override_by_extension = {

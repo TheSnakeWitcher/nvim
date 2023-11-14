@@ -4,14 +4,20 @@ if not ok then
     return
 end
 
+local patterns = {
+    git = ".git",
+    svn = ".svn",
+    hg = ".hg",
+    readme = "README.md"
+}
 
 local function get_workspaces()
     local workspaces = {
-        { vim.g.projects_dir , { ".git" } },
-        { vim.g.projects_dir .. "/nvim" , { ".git" } },
-        { vim.g.projects_dir .. "/hardhat" , { ".git" } },
-        { vim.g.plugin_dev_dir , { ".git" } },
-        { "~/.config/", {"README.md"} },
+        { vim.g.projects_dir , { patterns.git } },
+        { vim.g.projects_dir .. "/nvim" , { patterns.git } },
+        { vim.g.projects_dir .. "/hardhat" , { patterns.git } },
+        { vim.g.plugin_dev_dir , { patterns.git} },
+        { "~/.config/", { patterns.readme } },
     }
 
     local path = vim.g.work_projects_dir
@@ -25,7 +31,7 @@ end
 --- @doc {projections-installation}
 projections.setup({
     workspaces = get_workspaces(),
-    patterns = { ".git", ".svn", ".hg" },
+    patterns = { patterns.git , patterns.svn, patterns.hg },
     store_hooks = {
         pre = function()
             if pcall(require, "neo-tree") then

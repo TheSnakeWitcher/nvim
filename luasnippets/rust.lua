@@ -209,7 +209,6 @@ ls.add_snippets("rust", {
             ]],{insert_code_node}))
 
             local attribute = args[1][1]
-            vim.print(args)
             if attribute == "#[actix_web::main]" then
                 return attribute_node
             else
@@ -319,7 +318,7 @@ ls.add_snippets("rust", {
   s(
     {
       name = "func-parametric-trait",
-      trig = "fnpt",
+      trig = "fngt",
       dscr = "parametrict function declaration",
     },
     fmt([[
@@ -360,7 +359,7 @@ ls.add_snippets("rust", {
     {
       name = "method",
       trig = "fm",
-      dscr = "method declaration, note: methdos are asociated with a datastruct & must be inside and impl{",
+      dscr = "method declaration, note: methdos are asociated with a datastruct & must be inside and impl",
     },
     fmt([[
       {1}fn {2}({3}{4}){5}{{
@@ -394,6 +393,40 @@ ls.add_snippets("rust", {
           t " ",
         }),
         i(6, "/* code */"),
+      }
+    )
+  ),
+
+  s(
+    {
+      name = "wasm function",
+      trig = "fnw",
+      dscr = "wasm function declaration",
+    },
+    fmt([[
+      #[wasm_bindgen]
+      pub fn {1}({2}){3}{{
+        {4}
+      }}
+    ]],
+      {
+        i(1, "name"),
+        c(2, {
+          sn(1, {
+            t ",",
+            i(1, "args"),
+          }),
+          t "",
+        }),
+        c(3, {
+          sn(nil, {
+            t " -> ",
+            i(1, "return_type"),
+            t " ",
+          }),
+          t " ",
+        }),
+        i(4, "/* code */"),
       }
     )
   ),
@@ -1175,7 +1208,6 @@ type {1} = {2} ;
       }}
     ]],
       {
-        i(1, "name"),
         -- d(1,function()
         --     local bufnr = vim.api.nvim_get_current_buf()
         --     local lang  = "rust"
@@ -1194,7 +1226,7 @@ type {1} = {2} ;
         --     end
         --     return sn(nil,c(structs_ids))
         -- end,{},{}),
-
+        i(1, "name"),
         i(2, "/* function/method set */"),
         -- posible implementation for when `name` is a trait search his definition and print
         -- local trait_names = vim.treesitter.query.parse(lang,trait_names_query)
@@ -1209,9 +1241,9 @@ type {1} = {2} ;
 
   s(
     {
-      name = "impl-parametric",
-      trig = "implp",
-      dscr = "implementation of struct/enum name for parametric type ptype",
+      name = "impl-generic",
+      trig = "implg",
+      dscr = "implementation of struct/enum name for generic type ptype",
     },
     fmt([[
       impl{2} {1}{3} {{

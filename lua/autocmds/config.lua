@@ -1,16 +1,6 @@
 local config = vim.api.nvim_create_augroup("Config",{clear = true})
 
-vim.cmd("autocmd! BufEnter * if &ft ==# 'help' | wincmd L | endif")
--- vim.cmd("autocmd! BufEnter * if &ft ==# 'markdown' | wincmd L | endif")
--- vim.api.nvim_create_autocmd("FileType",{
---    desc = [[
---         open help in right sidebuffer,equivalent to:
---         vim.cmd("autocmd! BufEnter * if &ft ==# 'help' | wincmd L | endif")
---     ]],
---    group = config,
---    pattern = "help",
---    command = "wincmd L",
--- })
+-- vim.keymap.set('n', 'q', '<CMD>q<CR>', { buffer = 0 })
 
 vim.api.nvim_create_autocmd("BufWritePost",{
     desc = "hot reload options",
@@ -49,5 +39,5 @@ vim.api.nvim_create_autocmd("BufWritePost",{
 --     end
 --   end,
 -- })
---
+
 -- vim.cmd("autocmd! BufEnter * if &ft ==# 'fugitive' | wincmd L | endif")

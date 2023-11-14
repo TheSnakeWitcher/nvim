@@ -28,7 +28,7 @@ local opts = { noremap = true, silent = true }
 --------------------------------------------------------------
 -- set({ 'n', 'v' }, '<Space>', '<Nop>', { silent = true })
 set("i", "<C-c>", "<Esc>",{ silent = true })
-set("v", "S", ":s/\v/g<LEFT><LEFT>",{desc = "substitute pattern in range globally"})
+-- set("v", "S", ":s/\v/g<LEFT><LEFT>",{desc = "substitute pattern in range globally"})
 
 -- folds
 -- set("c", "C-h","<cmd>history<cr>",{desc = "command history"})
@@ -200,9 +200,7 @@ set('n', '<space>q', vim.diagnostic.setloclist, opts)
 --------------------------------------------------------------
 -- luasnip
 --------------------------------------------------------------
-local ls = require("luasnip")
-
-set("n","<leader><leader>S", "<CMD>LuaSnipEdit<CR>", {desc = "open current filetype snippets files" , silent = true})
+set("n","<leader><leader>s", "<CMD>LuaSnipEdit<CR>", {desc = "open current filetype snippets files" , silent = true})
 set({"i","s"},"<C-s>",function()
     if ls.choice_active() then
         require('luasnip.extras.select_choice')()
