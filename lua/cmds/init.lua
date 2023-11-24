@@ -1,12 +1,12 @@
 for _, module in ipairs({
-	"cmds.web3",
+	"cmds.admin",
 	"cmds.projections",
-	"cmds.nvim-dap-ui",
 	"cmds.luasnip",
 	"cmds.overseer",
-	"cmds.chisel",
-	"cmds.anvil",
+	"cmds.nvim-dap-ui",
 	"cmds.silicon",
+	"cmds.foundry",
+	"cmds.web3",
 }) do
 	local ok, _ = pcall(require, module)
 	if not ok then
