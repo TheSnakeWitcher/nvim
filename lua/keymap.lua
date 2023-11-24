@@ -77,8 +77,10 @@ set("n", "N", "Nzz")
 --------------------------------------------------------------
 -- buffer navigations
 --------------------------------------------------------------
-set("n", "<S-l>", ":bnext<CR>", opts)
-set("n", "<S-h>", ":bprevious<CR>", opts)
+set("n", "<S-l>", ":tabnext<CR>", opts)
+set("n", "<S-h>", ":tabprev<CR>", opts)
+-- set("n", "<S-l>", ":bnext<CR>", opts)
+-- set("n", "<S-h>", ":bprevious<CR>", opts)
 
 
 --------------------------------------------------------------
@@ -149,6 +151,7 @@ set("n" , "<leader>sr" , builtin.registers,{desc = "[s]earch [r]registers" })
 set("n" , "<leader>sk" , builtin.keymaps,{desc = "[s]earch [k]eymaps" })
 set("n" , "<leader>sc" , builtin.commands,{desc = "[s]earch [c]ommands" })
 set("n" , "<leader>sM" , builtin.man_pages,{desc = "[s]earch [M]anual" })
+set("n", "<leader>sd", "<CMD>Telescope diagnostics<CR>", { desc = "[s]earch [d]iagnostics"})
 
 -- file pickers
 set("n", "<leader>sf", builtin.find_files, {desc = "[s]earch [f]iles" })
@@ -268,10 +271,13 @@ set("n", "<leader>D", "<cmd>TroubleToggle<CR>", { desc = "[D]iagnostic toggle"})
 
 
 --------------------------------------------------------------
--- git signs
+-- git
 ------------------------------------------------------------
+-- gitsigns
 set("n", "[c", "<cmd>Gitsign prev_hunk<cr>", { desc = "prev chunk/change/hunk"})
 set("n", "]c", "<cmd>Gitsign next_hunk<cr>", { desc = "next chunk/change/hunk"})
+-- diffview
+set("n", "<leader>G", "<cmd>DiffviewOpen<cr>", { desc = "open diffview"})
 
 
 --------------------------------------------------------------
