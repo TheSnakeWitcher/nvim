@@ -9,7 +9,7 @@ paint.setup({
 	highlights = {
 		{
 			filter = { filetype = "lua" },
-			pattern = "%s*%-%-%s*(@%w+)", --defualt: pattern = "%s*%-%-%-%s*(@%w+)",
+			pattern = "%s*%-%-%s*(@%w+)",
 			hl = "Constant",
 		},
 		{

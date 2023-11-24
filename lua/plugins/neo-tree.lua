@@ -75,7 +75,7 @@ neo_tree.setup({
           icon = {
             folder_closed = "",
             folder_open = "",
-            folder_empty = "", -- ﰊ
+            folder_empty = "",
             default = "*",
             highlight = "NeoTreeFileIcon"
           },
@@ -90,14 +90,14 @@ neo_tree.setup({
           },
           git_status = {
             symbols = {
-              added     = "", -- or "✚", but this is redundant info if you use git_status_colors on the name
-              modified  = "", -- or "", but this is redundant info if you use git_status_colors on the name
-              deleted   = "", -- or ✖ this can only be used in the git_status source
-              renamed   = "➜", -- this can only be used in the git_status source
+              added     = "",
+              modified  = "",
+              deleted   = "",
+              renamed   = "➜",
               untracked = "",
               ignored   = "◌",
-              unstaged  = "✗", -- 
-              staged    = "✓", -- 
+              unstaged  = "✗",
+              staged    = "✓",
               conflict  = "",
             }
           },

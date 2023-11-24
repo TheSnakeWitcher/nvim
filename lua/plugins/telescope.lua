@@ -8,7 +8,9 @@ local actions = require("telescope.actions")
 -- local actions_state = require("telescope.actions.state")
 -- local builtin = require("telescope.builtin")
 -- local previewers = telescope.previewers
--- local trouble = require("trouble.providers.telescope")
+
+-- local ok, trouble = pcall(require,"trouble.providers.telescope")
+-- if not ok then vim.notify("trouble not loaded in telescope config") end
 
 
 --------------------------------------------------------------
@@ -53,22 +55,11 @@ telescope.setup({
         layout_config = {
             horizontal = {
                 prompt_position = "top",
-                preview_width = 0.55,
-                results_width = 0.8,
             },
             vertical = {
                 mirror = false,
             },
-            width = 0.87,
-            height = 0.80,
-            preview_cutoff = 120,
         },
-
-        -- previewer = true,
-        -- file_previewer = previewers.vim_buffer_cat.new,
-        -- grep_previewer = require'telescope.previewers'.vim_buffer_vimgrep.new,
-        -- qflist_previewer = require'telescope.previewers'.vim_buffer_qflist.new,
-        -- layout_strategy = "flex"
 
         mappings = {
             i = {
@@ -134,7 +125,8 @@ telescope.setup({
                 ["<PageDown>"] = actions.results_scrolling_down,
 
                 ["?"] = actions.which_key,
-                -- ["<c-D>"] = trouble.open_with_trouble ,
+
+                -- ["<c-D>"] = trouble.open_with_trouble,
             },
         },
 
@@ -179,8 +171,7 @@ telescope.setup({
 
         ---@doc {telescope-media-files.nvim-configuration}
         media_files = {
-           filetypes = {"png", "jpg", "jpeg", "mp4", "webm", "webp",},
-           -- find_cmd = "rg" -- defaults to `fd`
+           filetypes = {"png", "jpg", "jpeg", "mp4", "webm", "webp"},
         },
 
         aerial = {

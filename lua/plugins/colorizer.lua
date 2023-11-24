@@ -4,4 +4,5 @@ if not ok then
     return
 end
 
+--- @doc {colorizer.setup}
 colorizer.setup()

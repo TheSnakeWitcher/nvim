@@ -6,9 +6,9 @@ end
 
 ---@doc {trouble.nvim-trouble-configuration}
 trouble.setup({
-	position = "bottom",
+	position = "right",
 	height = 10,
-	width = 50,
+	width = 60,
 	icons = true,
 	mode = "workspace_diagnostics",
 	fold_open = "",
@@ -26,8 +26,8 @@ trouble.setup({
 		jump_close = { "o" },
 		toggle_mode = "m",
 		toggle_preview = "P",
-		hover = "K",
 		preview = "p",
+		hover = "K",
 		close_folds = { "zM", "zm" },
 		open_folds = { "zR", "zr" },
 		toggle_fold = { "zA", "za" },
@@ -40,12 +40,5 @@ trouble.setup({
 	auto_preview = true,
 	auto_fold = false,
 	auto_jump = { "lsp_definitions" },
-	signs = {
-		error = "",
-		warning = "",
-		hint = "󰌵",
-		information = "󰋼",
-		other = "﫠",
-	},
-	use_diagnostic_signs = false,
+	use_diagnostic_signs = true,
 })

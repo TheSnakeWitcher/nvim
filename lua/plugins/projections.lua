@@ -13,11 +13,12 @@ local patterns = {
 
 local function get_workspaces()
     local workspaces = {
+        { vim.g.code_dir , { patterns.readme } },
         { vim.g.projects_dir , { patterns.git } },
         { vim.g.projects_dir .. "/nvim" , { patterns.git } },
         { vim.g.projects_dir .. "/hardhat" , { patterns.git } },
         { vim.g.plugin_dev_dir , { patterns.git} },
-        { "~/.config/", { patterns.readme } },
+        { "~/.config/" , { patterns.readme } },
     }
 
     local path = vim.g.work_projects_dir

@@ -45,11 +45,11 @@ end
 --})
 
 
-local ok, _ = pcall(require,"plugins.hydra.git")
-if not ok then
-    vim.notify("git hydra not loaded")
-    return
-end
+-- local ok, _ = pcall(require,"plugins.hydra.git")
+-- if not ok then
+--     vim.notify("git hydra not loaded")
+--     return
+-- end
 
 --local ok, _ = pcall(require,"plugins.hydra.packer")
 --if not ok then

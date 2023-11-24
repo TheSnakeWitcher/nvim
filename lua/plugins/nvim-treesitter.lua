@@ -5,6 +5,13 @@ if not ok then
 end
 
 
+local ok ,ts_context_commentstring = pcall(require,'ts_context_commentstring')
+if ok then
+    vim.g.skip_ts_context_commentstring_module = true
+    ts_context_commentstring.setup()
+end
+
+
 nvim_treesitter_config.setup({
 
 --- @doc {nvim-treesitter-quickstart}
@@ -54,10 +61,13 @@ indent = {
 },
 
 
---autotag = {
---    enable = true,
---    filetypes = { "html" , "xml" },
---},
+--- @doc {nvim-ts-autotag-setup}
+autotag = {
+    enable = true,
+    enable_rename = true,
+    enable_close = true,
+    enable_close_on_slash = true,
+},
 
 
 autopairs = {
@@ -66,10 +76,11 @@ autopairs = {
 },
 
 
-context_commentstring = {
-    enable = true ,
-    --enable_autocmd = false
-},
+--- @doc {}
+-- context_commentstring = {
+--     enable = true ,
+--     enable_autocmd = false
+-- },
 
 
 --textobjects = {
@@ -160,9 +171,8 @@ context_commentstring = {
 --- @doc {playground-neovim-treesitter-playground}
 playground = {
     enable = true,
-    disable = {},
-    updatetime = 25,         -- Debounced time for highlighting nodes in the playground from source code
-    persist_queries = false, -- Whether the query persists across vim sessions
+    updatetime = 25,
+    persist_queries = false,
     keybindings = {
         toggle_query_editor = 'o',
         toggle_hl_groups = 'i',
