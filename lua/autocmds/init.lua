@@ -4,8 +4,8 @@ for _, module in ipairs {
     -- "autocmds.nvim-lspconfig",
     "autocmds.highlight",
     "autocmds.projections",
-    "autocmds.anvil",
     "autocmds.overseer",
+    "autocmds.foundry",
     -- "autocmds.package-info",
     "autocmds.experimental",
 } do
