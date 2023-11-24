@@ -1,6 +1,3 @@
--- TODO: move cmds/autocmds to after/
--- TODO: enable spell in specific filetypes and comments
--- TODO: search where is seted <leader>D definition keymap and remove it
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then
     vim.fn.system({
@@ -29,7 +26,7 @@ end
 --- @PluginList https://github.com/rockerBOO/awesome-neovim.git
 require("lazy").setup({
     ----------------------------------------------------------------
-    ---- base
+    -- base
     ----------------------------------------------------------------
     { "nvim-lua/plenary.nvim" },    -- usefull collection of lua functions for neovim
     { "nvim-lua/popup.nvim" },      -- popup api implementation of vim for neovim
@@ -42,9 +39,9 @@ require("lazy").setup({
         priority = 100,
         config = function() load_config("mason") end,
         dependencies = {
-            "williamboman/mason-lspconfig.nvim", -- bridge mason with lspconfig
-            "jayp0521/mason-null-ls.nvim",       -- bridge mason with null-ls
-            "jay-babu/mason-nvim-dap.nvim",      -- bridge mason with nvim-dap
+            "williamboman/mason-lspconfig.nvim",
+            "jayp0521/mason-null-ls.nvim",
+            "jay-babu/mason-nvim-dap.nvim",
         },
     },
     -- network resource manager
@@ -53,18 +50,17 @@ require("lazy").setup({
         opts = { sources = { "filesystem", "netman.ui.neo-tree" } }
         -- config = function() load_config("netman") end,
     },
-    -- base improvement plugins
-    --use {
-    --    "echasnovski/mini.nvim",
-    --    opt = true,
-    --}
 
 
     --------------------------------------------------------------
     -- ui
     --------------------------------------------------------------
     -- colorschemes
-    { "romgrk/doom-one.vim" , priority = 1000 , init = function() vim.cmd("colorscheme doom-one") end },
+    {
+        "romgrk/doom-one.vim" ,
+        priority = 1000 ,
+        init = function() vim.cmd("colorscheme doom-one") end,
+    },
     { "folke/tokyonight.nvim" , lazy = true },
     { "Mofiqul/dracula.nvim" , lazy = true },
     -- icons
@@ -74,7 +70,6 @@ require("lazy").setup({
     },
     -- file explorer
     {
-        -- check https://github.com/elihunter173/dirbuf.nvim
         "nvim-neo-tree/neo-tree.nvim",
         branch = "v2.x",
         config = function() load_config("neo-tree") end,
@@ -89,7 +84,7 @@ require("lazy").setup({
         "nanozuki/tabby.nvim",
         config = function() load_config("tabby") end,
     },
-    -- lsp symbols top bar
+    -- lsp symbols (just below top bar)
     {
        "glepnir/lspsaga.nvim",
        config = function() load_config("lspsaga") end,
@@ -116,7 +111,7 @@ require("lazy").setup({
         "yamatsum/nvim-cursorline",
         config = function() load_config("nvim-cursorline") end,
     },
-    -- highlight, list and search notes(todo-comments)
+    -- highlight, list and search notes (todo-comments)
     {
         "folke/todo-comments.nvim",
         config = function() load_config("todo-comments") end,
@@ -140,7 +135,7 @@ require("lazy").setup({
     -- vscode like icons for completion menu
     { "onsails/lspkind.nvim" },
     -- animated signs
-    -- use {
+    -- {
     --     "ElPiloto/significant.nvim",
     --     config = function() load_config("significant") end,
     -- }
@@ -155,16 +150,14 @@ require("lazy").setup({
         config = function() load_config("nvim-treesitter") end,
         build = ":TSUpdate",
         dependencies = {
-            "nvim-treesitter/playground",
+            "nvim-treesitter/playground",                  -- treesitter interactivity
             "nvim-treesitter/nvim-treesitter-context",     -- show code context
             "JoosepAlviste/nvim-ts-context-commentstring", -- to embeded languaje trees jsx/tsx
-            "nvim-treesitter/nvim-treesitter-textobjects", -- additional text objects via treesitter
             "nvim-treesitter/nvim-tree-docs",              -- documentation
-            -- "ibhagwan/ts-vimdoc.nvim",                  -- treesitter base markdown to vimdoc convertion tool
+            "nvim-treesitter/nvim-treesitter-textobjects", -- additional text objects via treesitter
+            "windwp/nvim-ts-autotag"                       -- use treesitter to autocose & autorename html tags
             --"RRethy/nvim-treesitter-textsubjects",
-            --"p00f/nvim-ts-rainbow"                       -- highligh 
-            --"windwp/nvim-ts-autotag"                     -- use treesitter to autocose & autorename html tags
-            --"nfrid/treesitter-utils"
+            -- "ibhagwan/ts-vimdoc.nvim",                  -- treesitter base markdown to vimdoc convertion tool
         }
     },
 
@@ -176,16 +169,16 @@ require("lazy").setup({
         "neovim/nvim-lspconfig",
         dependencies = {
             "b0o/schemastore.nvim",
+             -- lsp signature hint as typing 
+            {
+                "ray-x/lsp_signature.nvim",
+                config = function () load_config("lsp_signature")end,
+            },
             -- view status updates/progress for LSP(view ops progress)
             {
                 "j-hui/fidget.nvim",
                 tag = "legacy",
                 config = function() load_config("fidget") end,
-            },
-             -- lsp signature hint as typing 
-            {
-                "ray-x/lsp_signature.nvim",
-                config = function () load_config("lsp_signature")end,
             },
         },
         config = function() load_config("nvim-lspconfig") end,
@@ -203,12 +196,15 @@ require("lazy").setup({
         "folke/trouble.nvim",
         config = function() load_config("trouble") end,
     },
-    -- use "https://git.sr.ht/~whynothugo/lsp_lines.nvim" -- renders diagnostics using virtual lines on top of the real line of code
-    -- lsp navigation
+    -- formatter
     {
-        "ray-x/navigator.lua",
-        config = function() load_config("navigator") end,
+        "stevearc/conform.nvim", opts = {}
     },
+    -- lsp navigation
+    -- {
+    --     "ray-x/navigator.lua",
+    --     config = function() load_config("navigator") end,
+    -- },
     --use {
     --    "RishabhRD/nvim-lsputils",
     --    requires = "RishabhRD/popfix",
@@ -294,10 +290,10 @@ require("lazy").setup({
             "hrsh7th/cmp-nvim-lsp",                  -- lsp completion source
             "saadparwaiz1/cmp_luasnip",              -- luasnip snippet engine completion source
             -- luasnip choice node completion source
-            {
-                "doxnit/cmp-luasnip-choice",
-                -- opts = { auto_open = true },
-            },
+            -- {
+            --     "doxnit/cmp-luasnip-choice",
+            --     -- opts = { auto_open = true },
+            -- },
             "uga-rosa/cmp-dynamic",                  -- dynamic generation candidates sources
             "petertriho/cmp-git",                    -- git completion source
             "davidsierradz/cmp-conventionalcommits", -- conventional commtis
@@ -376,7 +372,6 @@ require("lazy").setup({
     -- dap/test
     --------------------------------------------------------------
     -- dap(debug adapter protocol) integration
-    -- TODO: check use "kndndrj/nvim-projector" --  project-specific configs for nvim-dap with telescope
     {
         "mfussenegger/nvim-dap", -- alternative "puremourning/vimspector",
         config = function() load_config("nvim-dap") end,
@@ -388,7 +383,7 @@ require("lazy").setup({
             "rcarriga/cmp-dap",
         },
     },
-    -- tests runner/framework
+    -- tests framework/runner
     {
       "nvim-neotest/neotest",
       config = function() load_config("neotest") end,
@@ -396,7 +391,6 @@ require("lazy").setup({
         "antoinemadec/FixCursorHold.nvim",
         "nvim-neotest/neotest-go",
         "rouge8/neotest-rust",
-        "neotest-foundry",
         "llllvvuu/neotest-foundry",
       },
     },
@@ -412,19 +406,16 @@ require("lazy").setup({
     },
     -- knowledgebase/notes management
     {
+        -- "Furkanzmc/zettelkasten.nvim",
         "renerocksai/telekasten.nvim",
         config = function() load_config("telekasten") end,
     },
-    {
-        "Furkanzmc/zettelkasten.nvim",
-        config = function() load_config("zettelkasten") end,
-    },
+    { "vimwiki/vimwiki" },  -- wiki management
     -- {
     --     -- utilities for markdown files navigation
     --     'jakewvincent/mkdnflow.nvim',
     --     config = function() load_config("mkdnflow") end
     -- },
-    { "vimwiki/vimwiki" },  -- wiki management
     -- terminal management
     {
         "akinsho/toggleterm.nvim",
@@ -436,30 +427,23 @@ require("lazy").setup({
         'stevearc/overseer.nvim',
         config = function() load_config("overseer") end,
     },
-    -- use "GustavoKatel/tasks.nvim"
     {
         -- task management(vscode like task declared using json/yaml files)
         'jedrzejboczar/toggletasks.nvim',
         config = function() load_config("toggletasks") end,
+    },
+    -- previewiers
+    {
+        -- 'toppair/peek.nvim',
+        "ellisonleao/glow.nvim",
+        config = true,
+        cmd = "Glow"
     },
     -- http client
     {
         'rest-nvim/rest.nvim',
         config = function() load_config("rest") end,
     },
-    -- previewiers
-    {
-        "ellisonleao/glow.nvim",
-        config = true,
-        cmd = "Glow"
-    },
-    -- {
-    --     -- markdow previewiers
-    --     'toppair/peek.nvim',
-    --     -- "iamcco/markdown-preview.nvim",
-    --     cmd = 'deno task --quiet build:fast',
-    --     config = function() load_config("peek") end,
-    -- },
     --  image previewer
     -- {
     --     "edluffy/hologram.nvim",
@@ -472,34 +456,34 @@ require("lazy").setup({
         -- "tpope/vim-dadbod-completion",
         dependencies = { "kristijanhusak/vim-dadbod-ui" },
     },
-    -- use {
+    -- {
     --     -- develop integration with overseer
     --     "kndndrj/nvim-dbee",
     -- }
-    -- check
-    -- https://github.com/stevearc/conform.nvim
-    -- remote exploration
-    {
-        "sourcegraph/sg.nvim",
-        dependencies = { "nvim-lua/plenary.nvim", "nvim-telescope/telescope.nvim" },
-        build = "nvim -l build/init.lua", -- If you have a recent version of lazy.nvim, you don't need to add this!
-    },
+    -- "kndndrj/nvim-projector" --  project-specific configs for nvim-dap with telescope
+    -- "milanglacier/yarepl.nvim" --
+
 
     --------------------------------------------------------------
     -- integrations
     --------------------------------------------------------------
     -- git
-    { "tpope/vim-fugitive" }, -- git integration for cmdline
+    ---- use "Almo7aya/openingh.nvim"  -- open file or project in github for neovim wirtten in lua
+    {
+        -- git integration for cmdline
+        "tpope/vim-fugitive"
+    },
     {
         -- git integration for buffers 
         "lewis6991/gitsigns.nvim",
         config = function() load_config("gitsigns") end,
     },
-    { "sindrets/diffview.nvim" }, -- single tabpage interface for easily cycling through diffs for all modified files for any git rev
-    -- single tabpage interface for easily view diffs
+    {
+        -- single tabpage interface for easily view diffs
+        "sindrets/diffview.nvim",
+        config = function() load_config("diffview") end,
+    },
     -- use "kdheepak/lazygit.nvim"   -- open lazygit from neovim
-    -- use "TimUntersberger/neogit"  -- git ui
-    -- { "rhysd/git-messenger.vim" }
     -- github
     {
         -- edit & review github issues
@@ -511,22 +495,27 @@ require("lazy").setup({
     --    "noib3/nvim-oxi",
     --    config = function() load_config("nvim-oxi") end,
     --}
-    --use {
-    --    "willothy/nvim-utils",
-    --    config = function() load_config("nvim-utils") end,
-    --}
     -- pandoc
-    --use {
+    -- {
     --    -- latex like editing experience while writing markdown
     --    "abeleinin/papyrus",
     --    config = function() load_config("papyrus") end,
-    --}
+    -- },
+    -- sourcegraph integration to explore remote files
+    {
+        "sourcegraph/sg.nvim",
+        dependencies = { "nvim-lua/plenary.nvim", "nvim-telescope/telescope.nvim" },
+    },
 
 
     ----------------------------------------------------------------
     ---- AI
     ----------------------------------------------------------------
-    ---- use "aduros/ai.vim" -- generate and edit text using OpenAI and GPT. 
+    -- generate and edit text using OpenAI and GPT. 
+    {
+        "aduros/ai.vim",
+        config = function() load_config("ai") end,
+    },
     ---- github copilot
     -- use {
     --     "zbirenbaum/copilot.lua",
@@ -541,10 +530,7 @@ require("lazy").setup({
     ---- codeium ai toolkit integration
     -- {
     --     "Exafunction/codeium.nvim",
-    --     dependencies = {
-    --         "nvim-lua/plenary.nvim",
-    --         "hrsh7th/nvim-cmp",
-    --     },
+    --     dependencies = { "nvim-lua/plenary.nvim", "hrsh7th/nvim-cmp" },
     --     config = function() load_config("codeium") end,
     -- },
     ---- highlight and explain code readability issues
@@ -577,14 +563,16 @@ require("lazy").setup({
     ---- go
     ----
     ---- latex
-    -- "lervag/vimtex"
-    ---- use "frabjous/knap"
+    -- "lervag/vimtex",
+    -- "frabjous/knap",
+    --
     ---- conceal
-    ---- use "KeitaNakamura/tex-conceal.vim"
-    ---- use "Jxstxs/conceal.nvim"
+    ---- use "KeitaNakamura/tex-conceal.vim",
+    ---- use "Jxstxs/conceal.nvim",
+    --
     -- javascrtp/typescript
-    -- package info
     -- {
+    --    -- package info
     --    "vuki656/package-info.nvim",
     --    dependencies = "MunifTanjim/nui.nvim",
     --    config = function() load_config("package-info") end ,
@@ -595,38 +583,39 @@ require("lazy").setup({
     ---- experimental 
     ----------------------------------------------------------------
     { "jbyuki/instant.nvim" },    -- collaborative coding,check https://github.com/Floobits/floobits-neovim
+
     ---- motions
-    --use {
+    --{
     --    -- motions for every coordinate of the viewport
     --    "ggandor/leap.nvim",
     --    opt = true,
     --    config = function() load_config("leap") end,
     --}
 
-    ---- use "ai-phind" 
+    ---- "ai-phind" 
 
     ---- lsp
-    ---- use "smjonas/inc-rename.nvim" -- incremental LSP renaming based on Neovim's command-preview feature.
+    -- "smjonas/inc-rename.nvim" -- incremental LSP renaming based on Neovim's command-preview feature.
 
     ---- markdown
-    ---- use "SidOfc/mkdx" -- markdown utils
+    -- "SidOfc/mkdx" -- markdown utils
 
     ---- cmds
-    --use "protex/better-digraphs.nvim"      -- better digraphs
+    -- "protex/better-digraphs.nvim"      -- better digraphs
 
     ---- tool for test interaction
     ---- use "tpope/vim-unimpaired",          -- complementary mapping
     ---- use "tpope/vim-sleuth"               -- detect tabstop and shiftwidth automatically
     ---- use "ThePrimeagen/refactoring.nvim"  -- refactoring tool
     ---- code runner
-    --use {
+    --{
     --    "michaelb/sniprun",
     --    opt = true,
     --    run = "bash ./install.sh",
     --    config = function() load_config("sniprun") end,
     --}
     ---- cloud
-    --use { -- jupyter interaction
+    --{ -- jupyter interaction
     --    'dccsillag/magma-nvim',
     --    opt = true,
     --    run = ':UpdateRemotePlugins',
@@ -635,52 +624,51 @@ require("lazy").setup({
     --        vim.g.magma_image_provider = "ueberzug"
     --    end,
     --}
-    ---- use "luk400/vim-jukit"     -- REPL interaction
-    ---- use "Jxstxs/conceal.nvim"  -- conceal management
+    ---- "luk400/vim-jukit"     -- REPL interaction
+    ---- "Jxstxs/conceal.nvim"  -- conceal management
 
     ---- git integration
-    --use {
+    --{
     --    "sindrets/diffview.nvim",
     --    config = function() load_config("diffview") end,
     --}
 
     ---- github integration
-    ---- use "Almo7aya/openingh.nvim"  -- open file or project in github for neovim wirtten in lua
-    ---- use {
+    ---- {
     --        -- open file or project in github for neovim wirtten in lua
     ----     "tjdevries/sg.nvim",
     ----     build = "cargo build --workspace",
     ---- }
 
     ----  containers integration
-    ---- use {
+    ---- {
     ----   'dgrbrady/nvim-docker',
     ----   rocks = '4O4/reactivex' -- ReactiveX Lua implementation
     ---- }
-    ----  use "jamestthompson3/nvim-remote-containers"
+    ---- "jamestthompson3/nvim-remote-containers"
 
     ---- completely replaces UI for messages, cmdline and the popupmenu
-    ---- use "nvim-pack/nvim-spectre"   -- substitute content in various files
-    ---- use "ap/vim-buftabline"        -- tabs management
-    ---- use LintaoAmons/scratch.nvim"  -- open scratch buffers
-    ---- use chrishrb/gx.nvim"          -- open urls in buffer
+    ---- "nvim-pack/nvim-spectre"   -- substitute content in various files
+    ---- "ap/vim-buftabline"        -- tabs management
+    ---- LintaoAmons/scratch.nvim"  -- open scratch buffers
+    ---- chrishrb/gx.nvim"          -- open urls in buffer
 
     ---- ui
-    ----use {
+    ----{
     ----    "folke/noice.nvim",
     ----    config = function() load_config("noice") end,
     ----}
-    ---- use "notomo/cmdbuf.nvim"      -- alternative cmdline
-    ---- use "SmitheshP/nvim-navbuddy" -- pop up menu to navigate buffer lsp symbols
+    ---- "notomo/cmdbuf.nvim"      -- alternative cmdline
+    ---- "SmitheshP/nvim-navbuddy" -- pop up menu to navigate buffer lsp symbols
 
     ---- formater
-    ---- use "cbochs/grapple.nvim" -- tagging import files and manage their
-    ---- use "mhartington/formatter.nvim"  -- emmet integration
+    ---- "cbochs/grapple.nvim" -- tagging import files and manage their
+    ---- "mhartington/formatter.nvim"  -- emmet integration
 
-    ---- use "b0o/SchemaStore.nvim"  -- access to schemas from schemastore.org
     ---- remote development / collaboration
-    ---- use "mhinz/neovim-remote"        -- support for --remote and fiends
-    ---- use "chipsenkbeil/distant.nvim"  -- ALPHA STAGE: remote development from local environment 
+    ---- "mhinz/neovim-remote"        -- support for --remote and fiends
+    ---- "chipsenkbeil/distant.nvim"  -- ALPHA STAGE: remote development from local environment 
+
     ---- NOTE: buffers per tabs
     ---- stackoverflow.com/questions/7595642/buffers-per-tab-in-vim
     ---- redis.com/r/neovim/comments/101f4w0/how_can_i_get_all_buffers_of_current_tab
@@ -693,28 +681,26 @@ require("lazy").setup({
     ----------------------------------------------------------------
 
     ---- foundry toolkit integration for web3 development
-    ---- {
-    ----      "TheSnakeWitcher/foundry.nvim",
-    ----      config = function() load_config("foundry") end,
-    ----      dependencies = { 
-    --              "TheSnakeWitcher/cmp-web3-foundry.nvim",  -- completion source for foundry
-    --        } 
-    ---- },
+    {
+         -- dir = "TheSnakeWitcher/foundry.nvim",
+         dir = vim.g.plugin_dev_dir .. "/foundry.nvim",
+         config = function() require("foundry").setup() end,
+    },
     -- forge integration(foundry toolkit test framework)
-    {
-       dir = vim.g.plugin_dev_dir .. "/forge.nvim",
-       config = function() load_config("forge") end,
-    },
+    -- {
+    --    dir = vim.g.plugin_dev_dir .. "/forge.nvim",
+    --    config = function() load_config("forge") end,
+    -- },
     -- chisel integration(REPL solidity from foundry toolkit)
-    {
-       dir = vim.g.plugin_dev_dir .. "/chisel.nvim",
-       config = function() load_config("chisel") end,
-    },
-    -- anvil integration(local blockchain from foundry toolkit)
-    {
-       dir = vim.g.plugin_dev_dir .. "/anvil.nvim",
-       config = function() load_config("anvil") end,
-    },
+    -- {
+    --    dir = vim.g.plugin_dev_dir .. "/chisel.nvim",
+    --    config = function() load_config("chisel") end,
+    -- },
+    -- -- anvil integration(local blockchain from foundry toolkit)
+    -- {
+    --    dir = vim.g.plugin_dev_dir .. "/anvil.nvim",
+    --    config = function() load_config("anvil") end,
+    -- },
     -- cast integration(foundry toolkit blockchain client inspired in rest.nvim and postman)
     -- {
     --     "TheSnakeWitcher/cast.nvim",
@@ -724,7 +710,7 @@ require("lazy").setup({
 
     ---- hardhat framework
     ---- provider hardhat command
-    ---- use {
+    ---- {
     ----      "TheSnakeWitcher/hardhat.nvim",
     ----      config = function() load_config("hardhat") end,
     ----      requires = {
@@ -737,7 +723,7 @@ require("lazy").setup({
 
 
     ---- integration with common web3 tools for dApp development
-    ---- use {
+    ---- {
     ----      "TheSnakeWitcher/web3tools.nvim", 
     ----      config = function() load_config("web3tools") end,
     ----      dependencies  = {
@@ -745,7 +731,6 @@ require("lazy").setup({
     ----            -- inline bookmarks by diligence
     ----            -- slither
     ----            -- mythril : https://github.com/dyng/eth-ramen
-    ----            -- crypto address lens: https://marketplace.visualstudio.com/items?itemName=peetzweg.crypto-address-lens
     ----            -- ramen ui: https://github.com/dyng/eth-ramen
     ----            -- crytic-compile: https://github.com/crytic/crytic-compile/#crytic-compile
     ----            -- echidna: https://github.com/crytic/echidna
@@ -754,17 +739,28 @@ require("lazy").setup({
     ----      }
     ---- }
 
+    ---- AI integration
+    ---- use {
+    ----     "TheSnakeWitcher/phind.nvim",
+    ----     config = function() load_config("phind") end,
+    ---- }
+
 
     ---- utilities to aid in dAPP development process using autocmds/cmds/and others
     ---- use {
-    ----      -- view what and from where data/methods are being inherited
-    ----      -- detect automatically name clashes in inherit herarchy
-    ----      -- detect automatically storage and function selector clashes in poxy-like contracts(pattern independent)
     ----      "TheSnakeWitcher/web3utils.nvim", 
     ----      config = function() load_config("web3utils") end,
+    ----      dependencies  = {
+    ----            "TheSnakeWitcher/gasmeter.nvim"            -- contract gas estimates of storage and operations
+    ----            "TheSnakeWitcher/selectorclash.nvim"       -- detect automatically storage and function selector clashes in poxy-like contracts(pattern independent)
+    ----            "TheSnakeWitcher/inheritviz.nvim"          -- view what and from where data/methods are being inherited
+    ----            "TheSnakeWitcher/opcodes.nvim"             -- opcode price
+    ----            "TheSnakeWitcher/ethersmode.nvim"          -- https://marketplace.visualstudio.com/items?itemName=acuarica.ethers-mode
+    ----            "TheSnakeWitcher/crypto-address-lens.nvim" -- https://marketplace.visualstudio.com/items?itemName=peetzweg.crypto-address-lens
+    ----            "TheSnakeWitcher/sourcify.nvim"            -- sourcify is a solidity source code and metadata verification tool
+    ----            "TheSnakeWitcher/openzeppelin-wizard"      -- openzeppelin bindings
+    ----      }
     ---- }
-    ---- use "TheSnakeWitcher/sourcify.nvim"         -- sourcify is a solidity source code and metadata verification tool
-    ---- use "TheSnakeWitcher/openzeppelin-wizard"   -- openzeppelin bindings
 
 
     ---- utilities
@@ -821,7 +817,7 @@ require("lazy").setup({
     ----}
     ---- wiki management
     ---- use {
-    ----     "TheSnakeWitcher/wiki.nvim"          -- wiki
+    ----     "TheSnakeWitcher/wiki.nvim"
     ----      inspired = {
     ----          "vimwiki/vimwiki"
     ----      }
