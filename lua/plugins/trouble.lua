@@ -4,7 +4,7 @@ if not ok then
 	return
 end
 
----@doc {trouble.nvim-trouble-configuration}
+---@help {trouble.nvim-trouble-configuration}
 trouble.setup({
 	position = "right",
 	height = 10,

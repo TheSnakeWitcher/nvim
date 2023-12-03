@@ -4,7 +4,7 @@ if not ok then
     return
 end
 
---- @doc {neo-tree-configuration}
+--- @help {neo-tree-configuration}
 neo_tree.setup({
     source_selector = {
         winbar = false,

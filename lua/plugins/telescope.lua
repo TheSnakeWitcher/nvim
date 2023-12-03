@@ -30,7 +30,7 @@ for _, module in ipairs {
     "heading",
     "zoxide",
 
-    -- "chisel",
+    "chisel",
     -- "file_browser",
     -- "neoclip",
     -- "cheat",
@@ -43,7 +43,7 @@ for _, module in ipairs {
 end
 
 
----@doc {telescope.setup()}
+---@help {telescope.setup()}
 telescope.setup({
 
     defaults = {

@@ -5,6 +5,7 @@ if not status_ok then
 end
 
 
+--- @help {buffer_manager.nvim-configuration}
 buffer_manager.setup({
     line_keys = "1234567890",
     select_menu_item_commands = {

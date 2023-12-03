@@ -9,8 +9,6 @@ nvim_foldsign.setup({
     foldsigns = {
         open = "",
         close = "",
-        -- open = '+',          -- mark the beginning of a fold
-        -- close = '-',         -- show a closed fold
-        seps = { '│', '┃' }, -- open fold middle marker
+        seps = { '│', '┃' },
     }
 })

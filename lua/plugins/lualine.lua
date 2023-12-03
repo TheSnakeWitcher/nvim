@@ -19,7 +19,7 @@ local project = function ()
     return vim.fs.basename(vim.loop.cwd())
 end
 
----@doc {lualine-Default-configuration}
+---@help {lualine-Default-configuration}
 lualine.setup({
     options = {
         icons_enabled = true,
@@ -49,7 +49,7 @@ lualine.setup({
                  symbols = {
                     modified = ' ',
                     readonly = ' ',
-                    unnamed = '[unnamed] ', -- 󰗹
+                    unnamed = '', -- 󰗹
                     newfile = '[new]', -- 󰎔 , 
                  },
             },
@@ -66,7 +66,7 @@ lualine.setup({
         -- "lazy",
         -- "neo-tree",
         -- "man",
-        -- "mason",
+        -- "mason",obtain 
         -- "neo-tree",
         -- "nvim-dap-ui",
         -- "quickfix",

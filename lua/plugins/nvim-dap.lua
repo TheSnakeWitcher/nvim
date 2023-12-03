@@ -11,11 +11,11 @@ if not ok then
 end
 
 
---- @doc {dapui.setup()}
+--- @help {dapui.setup()}
 dapui.setup()
 
 
---- @doc {nvim-dap-virtual-text}
+--- @help {nvim-dap-virtual-text}
 nvim_dap_virtual_text.setup({
 	enabled = true,
 	enabled_commands = true,

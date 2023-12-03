@@ -11,7 +11,7 @@ if not ok then
 end
 
 
---- @doc {comment.config}
+--- @help {comment.config}
 comment.setup({
     padding = true,
     sticky = true,

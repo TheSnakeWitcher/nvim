@@ -4,7 +4,7 @@ if not ok then
     return
 end
 
---- @doc {nvim-cursorline-usage}
+--- @help {nvim-cursorline-usage}
 cursorline.setup({
     cursorline = {
         enable = false,

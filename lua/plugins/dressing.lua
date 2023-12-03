@@ -4,7 +4,7 @@ if not status_ok then
 	return
 end
 
---- @doc {dressing-configuration}
+--- @help {dressing-configuration}
 dressing.setup({
 
 	input = {

@@ -20,7 +20,7 @@ if not ok then
     return
 end
 
---- @doc {neodev-configuration}
+--- @help {neodev-configuration}
 neodev.setup({
     library = {
         enabled = true,
@@ -34,7 +34,7 @@ neodev.setup({
 })
 
 
---- @doc {lspconfig-setup-on_attach}
+--- @help {lspconfig-setup-on_attach}
 local on_attach = function(client, bufnr)
 
     local nmap = function(keys, func, desc)
@@ -93,7 +93,12 @@ end
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities = cmp_nvim_lsp.default_capabilities(capabilities)
 -- local capabilities = cmp_nvim_lsp.default_capabilities()
-capabilities.textDocument.completion.completionItem.snippetSupport = true --- @doc {schemastore-usage}
+capabilities.textDocument.completion.completionItem.snippetSupport = true --- @help {schemastore-usage}
+--- @help {nvim-ufo}
+capabilities.textDocument.foldingRange = {
+    dynamicRegistration = false,
+    lineFoldingOnly = true
+}
 
 
 --------------------------------------------------------------

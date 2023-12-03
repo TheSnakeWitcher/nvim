@@ -4,6 +4,7 @@ if not ok then
 	return
 end
 
+--- @help dashboard.txt
 dashboard.setup({
 	theme = "hyper",
     disable_move = true,

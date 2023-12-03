@@ -13,7 +13,7 @@ local theme = {
 	tail = "TabLine",
 }
 
----@doc {tabby-setup-setup-tabby.nvim}
+---@help {tabby-setup-setup-tabby.nvim}
 tabline.set(function(line) return {
 		{
 			{ "  ", hl = theme.head },

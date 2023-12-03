@@ -4,5 +4,5 @@ if not ok then
     return
 end
 
---- @doc {aerial-options}
+--- @help {aerial-options}
 aerial.setup()

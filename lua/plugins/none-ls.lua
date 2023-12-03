@@ -4,6 +4,7 @@ if not ok then
     return
 end
 
+--- @help {none-ls}
 null_ls.setup({
     sources = {
         null_ls.builtins.completion.luasnip,

@@ -12,9 +12,9 @@ if ok then
 end
 
 
+--- @help {nvim-treesitter-quickstart}
 nvim_treesitter_config.setup({
 
---- @doc {nvim-treesitter-quickstart}
 ensure_installed = {
     "lua",
     "rust",
@@ -23,6 +23,7 @@ ensure_installed = {
     "julia",
     "latex",
     "bibtex",
+    "query", -- for treesitter queries
     "markdown",
     "markdown_inline",
     "toml",
@@ -34,7 +35,7 @@ sync_install = false,
 ignore_install = {},
 
 
---- @doc {nvim-treesitter-highlight-mod}
+--- @help {nvim-treesitter-highlight-mod}
 highlight = {
     enable = true,
     --disable = {}, -- list of languajes that will be disabled
@@ -42,7 +43,7 @@ highlight = {
 },
 
 
---- @doc {nvim-treesitter-incremental-selection-mod}
+--- @help {nvim-treesitter-incremental-selection-mod}
 incremenmal_selection = {
     enable = true,
     keymaps = {
@@ -54,14 +55,14 @@ incremenmal_selection = {
 },
 
 
---- @doc {nvim-treesitter-indentation-mod}
+--- @help {nvim-treesitter-indentation-mod}
 indent = {
     enable = true ,
     -- disable = {} ,
 },
 
 
---- @doc {nvim-ts-autotag-setup}
+--- @help {nvim-ts-autotag-setup}
 autotag = {
     enable = true,
     enable_rename = true,
@@ -76,7 +77,7 @@ autopairs = {
 },
 
 
---- @doc {}
+--- @help {}
 -- context_commentstring = {
 --     enable = true ,
 --     enable_autocmd = false
@@ -161,15 +162,9 @@ autopairs = {
 --},
 
 
---query_linter = {
---    enable = true,
---    use_virtual_text = true,
---    lint_events = {"BufWrite","CursorHold"},
---},
-
-
---- @doc {playground-neovim-treesitter-playground}
+--- @help {playground-neovim-treesitter-playground}
 playground = {
+    disable = {},
     enable = true,
     updatetime = 25,
     persist_queries = false,
@@ -187,8 +182,15 @@ playground = {
     },
 },
 
+--- @help {playground-query-linter}
+query_linter = {
+   enable = true,
+   use_virtual_text = true,
+   lint_events = {"BufWrite","CursorHold"},
+},
 
---- @doc {nvim-tree-docs-setup}
+
+--- @help {nvim-tree-docs-setup}
 tree_docs = {
     enable = true,
     spec_config = {

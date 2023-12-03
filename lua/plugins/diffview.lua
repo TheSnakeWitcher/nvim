@@ -5,7 +5,7 @@ if not ok then
 end
 local actions = require("diffview.config").actions
 
---- @doc {diffview.defaults}
+--- @help {diffview.defaults}
 diffview.setup({
 	diff_binaries = false,
 	enhanced_diff_hl = false,

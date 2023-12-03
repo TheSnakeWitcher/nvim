@@ -5,7 +5,7 @@ if not status_ok then
 end
 
 
---- @doc {lsp_signature-full_configuration_(with_default_values)}
+--- @help {lsp_signature-full_configuration_(with_default_values)}
 lsp_signature.setup({
     debug = false,
     log_path = vim.fn.stdpath("cache") .. "/lsp_signature.log",

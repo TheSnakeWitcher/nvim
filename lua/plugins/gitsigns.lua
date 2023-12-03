@@ -4,6 +4,7 @@ if not status_ok then
     return
 end
 
+--- @help {gitsigns.setup()}
 gitsigns.setup({
 
     signs = {

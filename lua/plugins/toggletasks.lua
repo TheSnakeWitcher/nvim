@@ -5,56 +5,45 @@ if not status_ok then
 end
 
 
+--- @help {toggletasks}
 toggletasks.setup({
     debug = false,
-    silent = false,  -- don't show "info" messages
-    short_paths = true,  -- display relative paths when possible
-    -- Paths (without extension) to task configuration files (relative to scanned directory)
-    -- All supported extensions will be tested, e.g. '.toggletasks.json', '.toggletasks.yaml'
+    silent = false,
+    short_paths = true,
     search_paths = {
         'tasks', '.tasks',
         'toggletasks', '.toggletasks',
     },
-    -- Directories to consider when searching for available tasks for current window
     scan = {
-        global_cwd = true,    -- vim.fn.getcwd(-1, -1)
-        tab_cwd = true,       -- vim.fn.getcwd(-1, tab)
-        win_cwd = true,       -- vim.fn.getcwd(win)
-        lsp_root = true,      -- root_dir for first LSP available for the buffer
-        -- explicit list of directories to search or function(win): dirs
+        global_cwd = true,
+        tab_cwd = true,
+        win_cwd = true,
+        lsp_root = true,
         dirs = {
             vim.fn.stdpath("cache") .. "/toggletasks",
         },
-        rtp = false,          -- scan directories in &runtimepath
-        rtp_ftplugin = false, -- scan in &rtp by filetype, e.g. ftplugin/c/toggletasks.json
+        rtp = false,
+        rtp_ftplugin = false,
     },
-    tasks = {}, -- list of global tasks or function(win): tasks
-                -- this is basically the "Config format" defined using Lua tables
-    -- Language server priorities when selecting lsp_root (default is 0)
+    tasks = {},
     lsp_priorities = {
         ['null-ls'] = -10,
     },
-    -- Defaults used when opening task's terminal (see Terminal:new() in toggleterm/terminal.lua)
     toggleterm = {
         close_on_exit = false,
         hidden = true,
     },
-    -- Configuration of telescope pickers
     telescope = {
         spawn = {
-            open_single = true,  -- auto-open terminal window when spawning a single task
-            show_running = false, -- include already running tasks in picker candidates
-            -- Replaces default select_* actions to spawn task (and change toggleterm
-            -- direction for select horiz/vert/tab)
+            open_single = true,
+            show_running = false,
             mappings = {
                 select_float = '<C-f>',
-                spawn_smart = '<C-a>',  -- all if no entries selected, else use multi-select
-                spawn_all = '<M-a>',    -- all visible entries
-                spawn_selected = nil,   -- entries selected via multi-select (default <tab>)
+                spawn_smart = '<C-a>',
+                spawn_all = '<M-a>',
+                spawn_selected = nil,
             },
         },
-        -- Replaces default select_* actions to open task terminal (and change toggleterm
-        -- direction for select horiz/vert/tab)
         select = {
             mappings = {
                 select_float = '<C-f>',

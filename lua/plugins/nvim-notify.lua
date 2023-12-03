@@ -4,7 +4,7 @@ if not status_ok then
     return
 end
 
---- @doc {notify.setup()}
+--- @help {notify.setup()}
 notify.setup({
     background_colour = "NotifyBackground",
     render = "default",

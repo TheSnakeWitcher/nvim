@@ -21,6 +21,7 @@ local function get_workspaces()
         { "~/.config/" , { patterns.readme } },
     }
 
+    -- local path = vim.g.path.work_projects
     local path = vim.g.work_projects_dir
     for inner_path in vim.fs.dir(path) do
         table.insert(workspaces,{ path .. "/" .. inner_path , {} })
@@ -29,7 +30,7 @@ local function get_workspaces()
     return workspaces
 end
 
---- @doc {projections-installation}
+--- @help {projections-installation}
 projections.setup({
     workspaces = get_workspaces(),
     patterns = { patterns.git , patterns.svn, patterns.hg },

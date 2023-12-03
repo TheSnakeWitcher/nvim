@@ -5,11 +5,12 @@ if not ok then
 end
 
 
-local zettelkasten_dir = vim.g.knowledgebase_dir .. "/zettelkasten"
+local knowledgebase_dir = vim.g.knowledgebase_dir
+local zettelkasten_dir = knowledgebase_dir .. "/zettelkasten"
 local template_dir = vim.env.HOME .. "/Templates/zettelkasten"
 
 
---- @doc {telekasten.setup()}
+--- @help {telekasten.setup()}
 telekasten.setup({
     home = zettelkasten_dir,
     daily = zettelkasten_dir,
@@ -19,7 +20,7 @@ telekasten.setup({
 	template_new_note = template_dir .. "/note.md",
 	template_new_daily = template_dir .. "/daily_note.md",
 	template_new_weekly = template_dir .. "/weekly_note.md",
-	image_subdir = vim.g.knowledgebase_dir .. "/img",
+	image_subdir = knowledgebase_dir .. "/img",
 
 	extension = ".md",
 	new_note_filename = "title",
@@ -50,7 +51,7 @@ telekasten.setup({
 
 	vaults = {
 		wiki = {
-			home =vim.g.knowledgebase_dir .. "/wiki",
+			home = knowledgebase_dir .. "/wiki",
 	        templates = template_dir,
 	        template_new_note = template_dir .. "/note.md",
 		},

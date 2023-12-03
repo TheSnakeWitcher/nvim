@@ -4,7 +4,7 @@ if not status_ok then
 	return
 end
 
---- @doc {paint.nvim-paint-installation}
+--- @help {paint.nvim-paint-installation}
 paint.setup({
 	highlights = {
 		{

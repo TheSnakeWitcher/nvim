@@ -5,4 +5,5 @@ if not ok then
 end
 
 
+--- @help {fidget.txt}
 fidget.setup()

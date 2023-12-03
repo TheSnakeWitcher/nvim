@@ -4,7 +4,7 @@ if not status_ok then
     return
 end
 
---- @doc {nvim-web-devicons-setup}
+--- @help {nvim-web-devicons-setup}
 nvim_web_devicons.setup({
     override = {
         zsh = {

@@ -14,16 +14,18 @@ end
 
 require("luasnip.loaders.from_lua").lazy_load({
     path = vim.g.snippets_dir
+    -- path = vim.g.path.snippets
 })
 
 
 ls.filetype_extend("typescriptreact", { "typescript" })
 
 
+--- @help {luasnip-config-options}
 ls.config.set_config({
     history = true,
     enable_autosnippets = true ,
-    updateevents = "TextChanged,TextChangedI",
+    update_events = "TextChanged,TextChangedI",
     --delete_check_events = 'InsertLeave',
     --ft_func = require('luasnip.extras.filetype_functions').from_cursor,
     ext_opts = {

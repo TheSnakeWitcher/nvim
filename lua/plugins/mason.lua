@@ -4,6 +4,7 @@ if not ok then
     return
 end
 
+--- @help {mason.setup()}
 mason.setup({
     ui = {
         log_level = vim.log.levels.INFO,
