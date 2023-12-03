@@ -10,7 +10,6 @@ local options = {
     relativenumber = true,
     numberwidth = 2,
     cmdheight = 1,
-    -- pumheight = 20,
     clipboard = "unnamedplus",
     signcolumn = "yes",
     lazyredraw = true,
@@ -20,14 +19,7 @@ local options = {
     timeout = true,
     timeoutlen = 500,
     showtabline = 2,
-    -- fillchars = vim.opt.fillchars:append({
-    --     foldopen = "",
-    --     foldclose = "",
-    --     fold = "",
-    --     foldsep = "",
-    --     diff = "╱",
-    --     eob = "",-- remove `~` from empty lines
-    -- }),
+    laststatus = 3,
 
 
     --------------------------------
@@ -60,8 +52,17 @@ local options = {
     splitright = true,
     foldenable= false,
     foldmethod= "manual",
+    foldlevel = 99,
     -- foldexpr = "nvim_treesitter#foldexpr()",
     --formatexpr = "nvim_treesitter#foldexpr()",
+    -- fillchars = vim.opt.fillchars:append({
+    --     foldopen = "",
+    --     foldclose = "",
+    --     fold = "",
+    --     foldsep = "",
+    --     diff = "╱",
+    --     eob = "",-- remove `~` from empty lines
+    -- }),
 
 
     --------------------------------
