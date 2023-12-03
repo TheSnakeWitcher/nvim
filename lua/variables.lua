@@ -1,15 +1,4 @@
---------------------------------------------------------------
--- documentation
---------------------------------------------------------------
--- notation: vim.[option].VAR_NAME = 'VAR_VALUE'
---
--- vim.b   : buffer scoped variables 
--- vim.w   : window scoped variables
--- vim.t   : tabpage scoped variables
--- vim.g   : global scoped variables 
--- vim.v   : predefined vim variables 
--- vim.env : environment scoped variables(environment variables defined in the editor session)
-
+--- @help {lua-vim-variables}
 
 --------------------------------------------------------------
 -- user variables
@@ -22,6 +11,18 @@ vim.g.projects_dir = vim.g.code_dir .. "/projects"
 vim.g.work_projects_dir = vim.g.code_dir .. "/work"
 vim.g.plugin_dev_dir = vim.g.projects_dir .. "/nvim"
 vim.g.snippets_dir = vim.fn.stdpath("config") .. "/luasnippets"
+
+-- local code_dir = vim.env.HOME .. "/Code"
+-- local projects_dir = code_dir .. "/projects"
+-- vim.g.path = {
+--     knowledgebase = vim.env.HOME .. "/Knowledgebase",
+--     code = code_dir,
+--     scripts = code_dir .. "/scripts",
+--     work_projects = code_dir .. "/work",
+--     projects = projects_dir,
+--     plugin_dev = projects_dir .. "/nvim",
+--     snippets = vim.fn.stdpath("config") .. "/luasnippets",
+-- }
 
 
 --------------------------------------------------------------
@@ -42,6 +43,11 @@ vim.g.vimwiki_list = {
     },
 }
 vim.g.vimwiki_global_ext = 0
+vim.g.vimwiki_ext2syntax = {
+    [".md"] = "markdown",
+    [".markdown"] = "markdown",
+    ["mdown"] = "markdown",
+}
 
 
 --------------------------------------------------------------
