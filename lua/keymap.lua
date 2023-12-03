@@ -22,6 +22,13 @@ local set = vim.keymap.set
 local opts = { noremap = true, silent = true }
 -- local term_opts = { silent = true }
 
+--------------------------------------------------------------
+-- help
+--------------------------------------------------------------
+require("yop").op_map({"n", "v"}, "<leader>h", function(lines, info)
+    vim.cmd(string.format("help %s",lines[1]))
+end)
+
 
 --------------------------------------------------------------
 -- builtins
@@ -345,3 +352,12 @@ set("i","<A-i>","<cmd>IconPickerInsert<cr>",{desc = "[i]con"})
 -- Treesj
 --------------------------------------------------------------
 set("n","<leader>j","<cmd>lua require('treesj').toggle()<cr>",{desc = "toggle split/joint of code block"})
+
+
+--------------------------------------------------------------
+-- nvim-ufo
+--------------------------------------------------------------
+set("n","zR",require("ufo").openAllFolds, {desc = "open all fodls"})
+set("n","zM",require("ufo").closeAllFolds, {desc = "close all fodls"})
+-- set('n', 'zr', require('ufo').openFoldsExceptKinds)
+-- set('n', 'zm', require('ufo').closeFoldsWith)
