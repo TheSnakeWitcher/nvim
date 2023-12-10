@@ -61,8 +61,8 @@ require("lazy").setup({
         priority = 1000,
         init = function() vim.cmd("colorscheme doom-one") end,
     },
-    { "folke/tokyonight.nvim",  lazy = true },
-    { "Mofiqul/dracula.nvim",   lazy = true },
+    { "folke/tokyonight.nvim", lazy = true },
+    { "Mofiqul/dracula.nvim",  lazy = true },
     -- icons
     {
         "nvim-tree/nvim-web-devicons",
@@ -86,6 +86,7 @@ require("lazy").setup({
     },
     -- lsp symbols (just below top bar)
     {
+        -- alternatives: https://github.com/SmiteshP/nvim-navic
         "glepnir/lspsaga.nvim",
         config = function() load_config("lspsaga") end,
     },
@@ -108,6 +109,7 @@ require("lazy").setup({
     },
     -- cursorline (highligh all word in buffer equals to word under cursor)
     {
+        -- alternatives: https://github.com/tzachar/local-highlight
         "yamatsum/nvim-cursorline",
         config = function() load_config("nvim-cursorline") end,
     },
@@ -121,7 +123,7 @@ require("lazy").setup({
         "folke/paint.nvim",
         config = function() load_config("paint") end,
     },
-    "itchyny/vim-highlighturl",            -- highlighturl urls in buffer
+    "itchyny/vim-highlighturl", -- highlighturl urls in buffer
     -- highlighturl indent
     {
         "lukas-reineke/indent-blankline.nvim",
@@ -136,7 +138,7 @@ require("lazy").setup({
     -- folds
     {
         "kevinhwang91/nvim-ufo",
-        dependencies = "kevinhwang91/promise-async" ,
+        dependencies = "kevinhwang91/promise-async",
         config = function() load_config("nvim-ufo") end,
     },
     {
@@ -149,6 +151,10 @@ require("lazy").setup({
     -- {
     --     "ElPiloto/significant.nvim",
     --     config = function() load_config("significant") end,
+    -- }
+    -- wildmenu
+    -- {
+    --     "gelguy/wilder.nvim",
     -- }
     -- use "VonHeikemen/fine-cmdline.nvim" -- enhaced cmdline
 
@@ -166,9 +172,7 @@ require("lazy").setup({
             "JoosepAlviste/nvim-ts-context-commentstring", -- to embeded languaje trees jsx/tsx
             "nvim-treesitter/nvim-tree-docs",              -- documentation
             "nvim-treesitter/nvim-treesitter-textobjects", -- additional text objects via treesitter
-            "windwp/nvim-ts-autotag"                       -- use treesitter to autocose & autorename html tags
-            --"RRethy/nvim-treesitter-textsubjects",
-            -- "ibhagwan/ts-vimdoc.nvim",                  -- treesitter base markdown to vimdoc convertion tool
+            "windwp/nvim-ts-autotag",                      -- use treesitter to autocose & autorename html tags
         }
     },
 
@@ -194,16 +198,14 @@ require("lazy").setup({
         },
         config = function() load_config("nvim-lspconfig") end,
     },
-    -- bridge/hook up non-LSP tools to the LSP UX through lua
-    -- use neovim as a language server to inject LSP diagnostics, code actions, and more via Lua.
+    -- bridge/hook up non-LSP tools to the LSP UX to inject LSP diagnostics, code actions via lua
     {
-        -- "mfussenegger/nvim-lint", -- async linter
         "nvimtools/none-ls.nvim",
         config = function() load_config("none-ls") end,
     },
     -- diagnostics
     {
-        -- pretty diagnostics
+        -- quickfix alternative: https://github.com/kevinhwang91/nvim-bqf
         "folke/trouble.nvim",
         config = function() load_config("trouble") end,
     },
@@ -216,7 +218,7 @@ require("lazy").setup({
     --     "ray-x/navigator.lua",
     --     config = function() load_config("navigator") end,
     -- },
-    --use {
+    --{
     --    "RishabhRD/nvim-lsputils",
     --    requires = "RishabhRD/popfix",
     --}
@@ -271,6 +273,7 @@ require("lazy").setup({
     },
     -- tree view for lsp symbols/tags(code outline )
     {
+        -- old alternatives: https://github.com/preservim/tagbar
         "stevearc/aerial.nvim",
         config = function() load_config("aerial") end,
     },
@@ -377,6 +380,7 @@ require("lazy").setup({
         "0oAstro/silicon.lua",
         config = function() load_config("silicon") end,
     },
+    -- https://github.com/mg979/vim-visual-multi
 
 
     --------------------------------------------------------------
@@ -438,11 +442,6 @@ require("lazy").setup({
         'stevearc/overseer.nvim',
         config = function() load_config("overseer") end,
     },
-    {
-        -- task management(vscode like task declared using json/yaml files)
-        'jedrzejboczar/toggletasks.nvim',
-        config = function() load_config("toggletasks") end,
-    },
     -- previewiers
     {
         -- 'toppair/peek.nvim',
@@ -467,10 +466,8 @@ require("lazy").setup({
         -- "tpope/vim-dadbod-completion",
         dependencies = { "kristijanhusak/vim-dadbod-ui" },
     },
-    -- {
-    --     -- develop integration with overseer
-    --     "kndndrj/nvim-dbee",
-    -- }
+    -- doc generation
+    "ibhagwan/ts-vimdoc.nvim", -- treesitter base markdown to vimdoc convertion tool
     -- "kndndrj/nvim-projector" --  project-specific configs for nvim-dap with telescope
     -- "milanglacier/yarepl.nvim" --
 
@@ -480,13 +477,15 @@ require("lazy").setup({
     --------------------------------------------------------------
     -- git
     ---- use "Almo7aya/openingh.nvim"  -- open file or project in github for neovim wirtten in lua
-    { "tpope/vim-fugitive" }, -- git integration for cmdline
+    "tpope/vim-fugitive", -- git integration for cmdline
+    "junegunn/gv.vim", -- git commit browser
     {
         -- git integration for buffers
         "lewis6991/gitsigns.nvim",
         config = function() load_config("gitsigns") end,
     },
     {
+        -- similar: https://github.com/akinsho/git-conflict.nvim
         -- single tabpage interface for easily view diffs
         "sindrets/diffview.nvim",
         config = function() load_config("diffview") end,
@@ -592,8 +591,6 @@ require("lazy").setup({
     --    config = function() load_config("leap") end,
     --}
 
-    ---- "ai-phind"
-
     ---- lsp
     -- "smjonas/inc-rename.nvim" -- incremental LSP renaming based on Neovim's command-preview feature.
 
@@ -625,15 +622,14 @@ require("lazy").setup({
     --        vim.g.magma_image_provider = "ueberzug"
     --    end,
     --}
-    ---- "luk400/vim-jukit"     -- REPL interaction
-    ---- "Jxstxs/conceal.nvim"  -- conceal management
 
-    ---- github integration
-    ---- {
-    --        -- open file or project in github for neovim wirtten in lua
-    ----     "tjdevries/sg.nvim",
-    ----     build = "cargo build --workspace",
-    ---- }
+    -- REPLS
+    -- {
+    --     -- develop integration with overseer
+    --     "kndndrj/nvim-dbee",
+    -- }
+    ---- "luk400/vim-jukit",
+    ---- "Jxstxs/conceal.nvim"  -- conceal management
 
     ----  containers integration
     ---- {
@@ -642,17 +638,11 @@ require("lazy").setup({
     ---- }
     ---- "jamestthompson3/nvim-remote-containers"
 
-    ---- completely replaces UI for messages, cmdline and the popupmenu
     ---- "nvim-pack/nvim-spectre"   -- substitute content in various files
     ---- "ap/vim-buftabline"        -- tabs management
-    ---- LintaoAmons/scratch.nvim"  -- open scratch buffers
-    ---- "chrishrb/gx.nvim"          -- open urls in buffer
+    ---- "LintaoAmons/scratch.nvim"  -- open scratch buffers
 
     ---- ui
-    ----{
-    ----    "folke/noice.nvim",
-    ----    config = function() load_config("noice") end,
-    ----}
     ---- "notomo/cmdbuf.nvim"      -- alternative cmdline
     ---- "SmitheshP/nvim-navbuddy" -- pop up menu to navigate buffer lsp symbols
 
@@ -683,9 +673,9 @@ require("lazy").setup({
     },
     -- hardhat framework
     {
-         dir = vim.g.plugin_dev_dir .. "/hardhat.nvim",
-         -- dir = vim.g.path.plugin_dev .. "/hardhat.nvim",
-         -- config = function() load_config("hardhat") end,
+        dir = vim.g.plugin_dev_dir .. "/hardhat.nvim",
+        -- dir = vim.g.path.plugin_dev .. "/hardhat.nvim",
+        -- config = function() load_config("hardhat") end,
     }
 
     ---- integration with common web3 tools for dApp development

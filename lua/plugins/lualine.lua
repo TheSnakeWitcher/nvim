@@ -29,37 +29,36 @@ lualine.setup({
     },
     sections = {
         lualine_a = {"mode"},
-        lualine_b = {
-            "progress","location",
+        lualine_b = { "progress","location" },
+        lualine_c = {
+            project,
             'branch',
             {
-                'diff', ---@doc {lualine-diff-component-options}
-                 symbols = {
+                'diff', ---@help {lualine-diff-component-options}
+                symbols = {
                     added = ' ',
                     modified = ' ',
                     removed = ' ',
-                 },
+                },
             },
             'diagnostics',
-        },
-        lualine_c = {
-            project,
             {
-                'filename', ---@doc {lualine-filename-component-options}
-                 symbols = {
+                'filename', ---@help {lualine-filename-component-options}
+                symbols = {
                     modified = ' ',
                     readonly = ' ',
                     unnamed = '', -- 󰗹
                     newfile = '[new]', -- 󰎔 , 
-                 },
+                },
             },
             "filetype",
+            "filesize",
         },
         lualine_x = { "overseer" },
         lualine_y = {},
         lualine_z = {}
     },
-    ---@doc {lualine-Available-extensions}
+    ---@help {lualine-Available-extensions}
     extensions = {
         "overseer",
         -- "trouble",

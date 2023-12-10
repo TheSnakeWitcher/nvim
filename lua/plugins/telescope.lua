@@ -21,7 +21,6 @@ for _, module in ipairs {
     "notify",
     "fzf",
     "projections",
-    "toggletasks", -- NOTE: overseer will deprecate toggletask
     "env",
     "aerial",
     "telescope-tabs", -- NOTE: posible tab_manager and improve of buffer_manager with deprecate this

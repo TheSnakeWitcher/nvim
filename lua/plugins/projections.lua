@@ -21,7 +21,6 @@ local function get_workspaces()
         { "~/.config/" , { patterns.readme } },
     }
 
-    -- local path = vim.g.path.work_projects
     local path = vim.g.work_projects_dir
     for inner_path in vim.fs.dir(path) do
         table.insert(workspaces,{ path .. "/" .. inner_path , {} })

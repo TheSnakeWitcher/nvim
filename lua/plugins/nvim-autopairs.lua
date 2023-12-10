@@ -23,7 +23,6 @@ autopairs.setup({
     },
 })
 
--- cmp integration
 local cmp_autopairs = require("nvim-autopairs.completion.cmp")
 local ok, cmp = pcall(require, "cmp")
 if not ok then
