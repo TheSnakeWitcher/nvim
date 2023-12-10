@@ -22,6 +22,7 @@ local set = vim.keymap.set
 local opts = { noremap = true, silent = true }
 -- local term_opts = { silent = true }
 
+
 --------------------------------------------------------------
 -- help
 --------------------------------------------------------------
@@ -43,10 +44,10 @@ set("i", "<C-c>", "<Esc>",{ silent = true })
 -- cmdline
 -- set("n", "zft","za",{desc = "[z]creen [f]old [t]oggle"})
 --
---set("n", "s", "<Nop>",{desc = "substitute pattern globally"})
---set("n", "S", ":%s/\v/g<LEFT><LEFT>",{desc = "substitute pattern globally"})
+-- set("n", "s", "<Nop>",{desc = "substitute pattern globally"})
+-- set("n", "S", ":%s/\v/g<LEFT><LEFT>",{desc = "substitute pattern globally"})
 -- set("v", "s", ":s/\v/<LEFT><LEFT>",{desc = "substitute pattern in range"})
---set("n", "M", ":%s/'.@/.'//g<LEFT><LEFT>",{desc = "substitue global"})
+-- set("n", "M", ":%s/'.@/.'//g<LEFT><LEFT>",{desc = "substitue global"})
 
 
 --------------------------------------------------------------
@@ -183,15 +184,15 @@ set("n", "<leader>sC", builtin.git_commits, {desc = "[s]earch [C]ommits"})
 set("n","<leader>sS",builtin.git_status, {desc = "[s]earch [S]tatus"})
 
 -- extensions pickers
-set("n", "<leader>sn", "<CMD>TodoTelescope<CR>", { desc = "[s]earch [n]otes"}) -- todo-comments
-set("n", "<leader>sN", "<CMD>Telescope notify<CR>", { desc = "[s]earch [N]otifications"}) -- notify
-set("n", "<leader>sp", "<CMD>Telescope projections<CR>" ,{ desc = "[s]earch [p]rojects"}) -- projections
-set("n", "<C-p>", "<CMD>Telescope projections<CR>" ,{ desc = "[s]earch [p]rojects"}) -- projections
-set("n", "<leader>se", "<CMD>Telescope env<CR>" ,{ desc = "[s]earch [e]nvironment"}) -- telescope-env
-set("n", "<leader>ss", "<CMD>LuaSnipEdit<CR>" ,{ desc = "[s]earch [s]snippets"}) -- luasnip
+set("n", "<leader>sn", "<CMD>TodoTelescope<CR>", { desc = "[s]earch [n]otes"})                     -- todo-comments
+set("n", "<leader>sN", "<CMD>Telescope notify<CR>", { desc = "[s]earch [N]otifications"})          -- notify
+set("n", "<leader>sp", "<CMD>Telescope projections<CR>" ,{ desc = "[s]earch [p]rojects"})          -- projections
+set("n", "<C-p>", "<CMD>Telescope projections<CR>" ,{ desc = "[s]earch [p]rojects"})               -- projections
+set("n", "<leader>se", "<CMD>Telescope env<CR>" ,{ desc = "[s]earch [e]nvironment"})               -- telescope-env
+set("n", "<leader>ss", "<CMD>LuaSnipEdit<CR>" ,{ desc = "[s]earch [s]snippets"})                   -- luasnip
 set("n", "<leader>st", "<CMD>Telescope telescope-tabs list_tabs<CR>" ,{ desc = "[s]earch [t]abs"}) -- telescope-tabs
-set("n", "<leader>sH", "<cmd>Telescope heading<cr>", { desc = "[s]earch [H]eaders"}) -- telescope-heading
-set("n", "<leader>sT", "<cmd>Telescope toggletasks spawn<cr>", { desc = "[s]earch [T]ask"}) -- toggletasks
+set("n", "<leader>sH", "<cmd>Telescope heading<cr>", { desc = "[s]earch [H]eaders"})               -- telescope-heading
+-- set("n", "<leader>sT", "<cmd>Telescope toggletasks spawn<cr>", { desc = "[s]earch [T]ask"}) -- toggletasks
 
 
 --------------------------------------------------------------
@@ -240,7 +241,7 @@ end
 -- toggleterm
 --------------------------------------------------------------
 set("n", "<leader>tf", "<Cmd>ToggleTerm direction=float<CR>", { desc = "[t]erminal [f]loat" })
-set("n", "<leader>tv", "<Cmd>ToggleTerm direction=vertical size=50<CR>", { desc = "[t]erminal [v]ertical" })
+set("n", "<leader>tv", "<Cmd>ToggleTerm direction=vertical size=100<CR>", { desc = "[t]erminal [v]ertical" })
 
 
 --------------------------------------------------------------
@@ -272,8 +273,8 @@ set("n", "<leader>tl", "<CMD>Telescope telescope-tabs list_tabs<CR>" ,{ desc = "
 set("n", "<leader>e", "<cmd>NeoTreeFocusToggle<CR>", { desc = "[e]xplorer "})
 set("n", "<leader>E", "<cmd>AerialToggle<CR>", { desc = "[E]xplorer summary/outline(aerial)"})
 set("n", "<leader>u", "<cmd>UndotreeToggle<CR>", { desc = "[u]ndo tree toggle"})
-set("n", "<leader><leader>d", "<cmd>TroubleToggle<CR>", { desc = "[D]iagnostic toggle"}) -- or <leader>[B]ug / <leader>[x]
-set("n", "<leader>D", "<cmd>TroubleToggle<CR>", { desc = "[D]iagnostic toggle"}) -- for nvim-dap
+set("n", "<leader>D", "<cmd>TroubleToggle workspace_diagnostics<CR>", { desc = "[D]iagnostic toggle"}) -- for nvim-dap
+set("n", "<leader>N", "<cmd>TroubleToggle todo<CR>", { desc = "[D]iagnostic toggle"}) -- or <leader>[B]ug / <leader>[x]
 
 
 
