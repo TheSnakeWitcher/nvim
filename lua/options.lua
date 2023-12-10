@@ -27,6 +27,7 @@ local options = {
     --------------------------------
     hlsearch = false,
     incsearch = true,
+    sessionoptions = vim.opt.sessionoptions:append("localoptions"),
 
 
     --------------------------------
@@ -55,6 +56,7 @@ local options = {
     foldlevel = 99,
     -- foldexpr = "nvim_treesitter#foldexpr()",
     --formatexpr = "nvim_treesitter#foldexpr()",
+    -- fillchars = vim.opt.fillchars{
     -- fillchars = vim.opt.fillchars:append({
     --     foldopen = "",
     --     foldclose = "",
@@ -63,13 +65,6 @@ local options = {
     --     diff = "╱",
     --     eob = "",-- remove `~` from empty lines
     -- }),
-
-
-    --------------------------------
-    -- highligh
-    --------------------------------
-    sessionoptions = vim.opt.sessionoptions:append("localoptions"),
-
 
     --------------------------------
     -- search patterns
