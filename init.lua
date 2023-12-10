@@ -1,14 +1,15 @@
-for _, module in ipairs {
+for _, module in ipairs({
     "util",
-    "options",
-    "variables",
-    "diagnostic",
+    "variables",   --- @help {lua-vim-variables}
+    "options",     --- @help {options}
     "plugins",
-    "keymap",
-    "autocmds",
-    "cmds",
+    "keymap",      --- @help {lua-keymap}
+    "autocmds",    --- @help {lua-guide-autocommands}
+    "cmds",        --- @help {lua-guide-commands}
+    "diagnostics", --- @help {diagnostic.txt}
+    "signs",       --- @help {sign.txt}
     "highlight",
-} do
+}) do
   local ok, _ = pcall(require, module)
   if not ok then
         vim.notify("failed to load module " .. module)
