@@ -1,8 +1,12 @@
 return {
+    vim = "",
+    nvim = "",
+
     ActiveLSP = "",
     ActiveTS = "",
     ArrowLeft = "",
     ArrowRight = "",
+
     Bookmarks = "",
     BufferClose = "󰅖",
     DapBreakpoint = "",
@@ -12,13 +16,15 @@ return {
     DapStopped = "󰁕",
     Debugger = "",
     DefaultFile = "󰈙",
+
     Diagnostic = "󰒡",
     DiagnosticError = "",
     DiagnosticErrorAlt = "",
-    DiagnosticHint = "󰌵",
-    DiagnosticInfo = "󰋼",
+    DiagnosticHint = "󰌵", --  ⚑
+    DiagnosticInfo = "󰋼", --  ℹ 󰙎 
     DiagnosticInfoAlt = "",
     DiagnosticWarn = "",
+
     Ellipsis = "…",
     FileNew = "",
     FileModified = "",
@@ -26,21 +32,24 @@ return {
     FoldOpened = "",
     FoldClosed = "",
     FoldSeparator = " ",
-    FolderOpen = "",
-    FolderClosed = "",
+    FolderOpen = "", -- 
+    FolderClosed = "", -- 
     FolderEmpty = "",
+
     Git = "󰊢",
+    GitRepo = "",
     GitBranch = "",
     GitConflict = "",
-    GitAdd = "",
-    GitChange = "",
-    GitDelete = "",
-    GitIgnored = "◌",
-    GitRenamed = "➜",
-    GitStaged = "✓",
-    GitUnstaged = "✗",
-    GitUntracked = "★",
+    GitAdd = "", --  
+    GitChange = "", -- 
+    GitDelete = "", -- 
+    GitIgnored = "◌", -- 
+    GitRenamed = "➜", -- 
+    GitStaged = "✓", -- 
+    GitUnstaged = "✗", -- 󰄱
+    GitUntracked = "", -- ★
     GitSign = "▎",
+
     LSPLoaded = "",
     LSPLoading1 = "",
     LSPLoading2 = "󰀚",
@@ -59,4 +68,34 @@ return {
     Terminal = "",
     Window = "",
     WordFile = "󰈭",
+
+    question = '',
+    clock = '',
+    shaded_lock = '',
+    circle = '',
+    project = '',
+    dashboard = '',
+    history = '󰄉',
+    comment = '󰅺',
+    robot = '󰚩',
+    lightbulb = '󰌵',
+    search = '󰍉',
+    code = '',
+    telescope = '',
+    gear = '',
+    package = '',
+    list = '',
+    sign_in = '',
+    check = '󰄬',
+    fire = '',
+    note = '󰎞',
+    bookmark = '',
+    pencil = '', -- '󰏫',
+    tools = '',
+    arrow_right = '',
+    caret_right = '',
+    chevron_right = '',
+    double_chevron_right = '»',
+    table = '',
+    calendar = '',
 }
