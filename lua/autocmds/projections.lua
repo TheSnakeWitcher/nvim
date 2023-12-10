@@ -1,4 +1,3 @@
--- NOTE: projections trows error due to place autocmds here, place it in projections config file solve it
 local ok,_ = require("projections")
 if not ok then return end
 
@@ -9,13 +8,6 @@ local Workspace = require("projections.workspace")
 vim.api.nvim_create_autocmd({ 'VimLeavePre' }, {
     desc =  "Autostore session on VimExit",
     callback = function() Session.store(vim.loop.cwd()) end,
-})
-
-vim.api.nvim_create_autocmd({ "VimEnter" }, {
-    desc = "Switch to project if vim was started in a project dir",
-    callback = function()
-        if vim.fn.argc() == 0 then Switcher.switch(vim.loop.cwd()) end
-    end,
 })
 
 vim.api.nvim_create_autocmd({ "VimEnter" }, {
