@@ -22,6 +22,14 @@ local set = vim.keymap.set
 local opts = { noremap = true, silent = true }
 -- local term_opts = { silent = true }
 
+-- TODO:
+-- ]] [[ references management
+-- ]h [h hunk management
+-- ][ e for errors
+-- ][ w for warnings
+-- ][ d for diagnostics
+-- ][ n for diagnostics
+-- ][ t for test
 
 --------------------------------------------------------------
 -- help
@@ -87,8 +95,8 @@ set("n", "N", "Nzz")
 --------------------------------------------------------------
 set("n", "<S-l>", ":tabnext<CR>", opts)
 set("n", "<S-h>", ":tabprev<CR>", opts)
--- set("n", "<S-l>", ":bnext<CR>", opts)
--- set("n", "<S-h>", ":bprevious<CR>", opts)
+set("n", "]b", ":bnext<CR>", opts)
+set("n", "[b", ":bprevious<CR>", opts)
 
 
 --------------------------------------------------------------
@@ -160,6 +168,7 @@ set("n" , "<leader>sk" , builtin.keymaps,{desc = "[s]earch [k]eymaps" })
 set("n" , "<leader>sc" , builtin.commands,{desc = "[s]earch [c]ommands" })
 set("n" , "<leader>sM" , builtin.man_pages,{desc = "[s]earch [M]anual" })
 set("n", "<leader>sd", "<CMD>Telescope diagnostics<CR>", { desc = "[s]earch [d]iagnostics"})
+set("n", "<leader>sq", "<cmd>Telescope quickfix<cr>", { desc = "[s]earch [q]uickfix"})
 
 -- file pickers
 set("n", "<leader>sf", builtin.find_files, {desc = "[s]earch [f]iles" })
@@ -171,9 +180,6 @@ set("n","<leader>sP","<cmd>Telescope media_files<cr>",{desc = "[s]earch [P]ics"}
 --    function () builtin.find_files{ hidden = true, no_ignore = true} end,
 --    telescope_opts
 --} -- search all files
-
--- ts pickers
-set('n', '<leader>st', builtin.treesitter, {desc = "[s]earch [t]reesitter"})
 
 -- lsp pickers
 set('n', '<leader>st', builtin.lsp_definitions, {desc = "[s]earch [t]reesitter"})
@@ -205,7 +211,16 @@ set('n', '<space>q', vim.diagnostic.setloclist, opts)
 --set('n', '[d', vim.diagnostic.goto_prev)
 --set('n', ']d', vim.diagnostic.goto_next)
 --set('n', '<leader>e', vim.diagnostic.open_float)
+
+
+--------------------------------------------------------------
+-- quickfix list
+--------------------------------------------------------------
 --set('n', '<leader>q', vim.diagnostic.setloclist)
+set('n', ']q', "<cmd>cnext<cr>",{ desc = "go to next item in quickfix"})
+set('n', '[q', "<cmd>cprevious<cr>",{ desc = "go to previous item in quickfix"})
+set('n', ']Q', "<cmd>clast<cr>", { desc = "go to last item in quickfix"})
+set('n', '[Q', "<cmd>cfirst<cr>", { desc = "go to first item in quickfix"})
 
 
 --------------------------------------------------------------
@@ -217,8 +232,6 @@ set({"i","s"},"<C-s>",function()
         require('luasnip.extras.select_choice')()
     end
 end,{desc = "select choice" , silent = true})
-
-
 
 
 --------------------------------------------------------------
@@ -274,8 +287,7 @@ set("n", "<leader>e", "<cmd>NeoTreeFocusToggle<CR>", { desc = "[e]xplorer "})
 set("n", "<leader>E", "<cmd>AerialToggle<CR>", { desc = "[E]xplorer summary/outline(aerial)"})
 set("n", "<leader>u", "<cmd>UndotreeToggle<CR>", { desc = "[u]ndo tree toggle"})
 set("n", "<leader>D", "<cmd>TroubleToggle workspace_diagnostics<CR>", { desc = "[D]iagnostic toggle"}) -- for nvim-dap
-set("n", "<leader>N", "<cmd>TroubleToggle todo<CR>", { desc = "[D]iagnostic toggle"}) -- or <leader>[B]ug / <leader>[x]
-
+set("n", "<leader>N", "<cmd>TroubleToggle todo<CR>", { desc = "[N]otes toggle"}) -- for notes/todo
 
 
 --------------------------------------------------------------
@@ -358,7 +370,7 @@ set("n","<leader>j","<cmd>lua require('treesj').toggle()<cr>",{desc = "toggle sp
 --------------------------------------------------------------
 -- nvim-ufo
 --------------------------------------------------------------
-set("n","zR",require("ufo").openAllFolds, {desc = "open all fodls"})
-set("n","zM",require("ufo").closeAllFolds, {desc = "close all fodls"})
+-- set("n","zR",require("ufo").openAllFolds, {desc = "open all fodls"})
+-- set("n","zM",require("ufo").closeAllFolds, {desc = "close all fodls"})
 -- set('n', 'zr', require('ufo').openFoldsExceptKinds)
 -- set('n', 'zm', require('ufo').closeFoldsWith)
