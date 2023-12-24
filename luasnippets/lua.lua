@@ -25,6 +25,20 @@ ls.add_snippets("lua", {
     -- codebase structure
     --------------------------
     s({
+        name = "base lua module",
+        trig = "!",
+        dscr = "create a standard lua module structure",
+    }, fmt([[
+        local M = {{}}
+
+        {}
+
+        return M
+    ]], {
+        i(1, "module")
+    })),
+
+    s({
         name = "require",
         trig = "require",
         dscr = "function declaration",

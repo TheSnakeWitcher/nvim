@@ -237,8 +237,8 @@ ls.add_snippets("solidity", {
       ]],
     },
     fmt([[
-	  using {1} for {2} ;
-	]]  ,
+        using {1} for {2} ;
+    ]]  ,
       {
         i(1, "`{lib}` / `{lib} as {alias}` / `{lib} as {+} global`"),
         c(2, {
@@ -288,10 +288,10 @@ ls.add_snippets("solidity", {
       ]],
     },
     fmt([[
-	  interface {1} {{
-		{2}	
-	  }}
-	]]  ,
+        interface {1} {{
+            {2}	
+        }}
+    ]]  ,
       {
         i(1, "name"),
         i(2, "/* function signature set, events*/"),
@@ -860,7 +860,7 @@ ls.add_snippets("solidity", {
          * @member
          */
 		struct {1} {{
-			{2}
+			{2} ;
 		}}
 	]]    ,
       {
