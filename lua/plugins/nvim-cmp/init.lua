@@ -64,9 +64,9 @@ cmp.setup({
 
     sources = {
         { name = 'luasnip' , priority = 1000 },
+        -- { name = 'codeium' , priority = 1000 },
         -- { name = 'copilot' , priority = 1000 },
         -- { name = 'cmp_ai' , priority = 1000 },
-        -- { name = 'codeium' },
         { name = 'nvim_lsp' , priority = 750 },
         { name = 'nvim_lua' , priority = 750 }, -- by default active only in lua files
         { name = 'buffer' , priority = 500 },

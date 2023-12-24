@@ -5,6 +5,7 @@ if not ok then
 end
 
 
+--- @help {ts-context-commentstring-commentstring-configuration}
 local ok ,ts_context_commentstring = pcall(require,'ts_context_commentstring')
 if ok then
     vim.g.skip_ts_context_commentstring_module = true
@@ -77,61 +78,55 @@ autopairs = {
 },
 
 
---- @help {}
--- context_commentstring = {
---     enable = true ,
---     enable_autocmd = false
--- },
+--- @help {nvim-treesitter-text-objects-select-submod}
+textobjects = {
 
+   select = {
+       enable = true,
+       lookahead = true,
+       keymaps = {
+           -- You can use the capture groups defined in textobjects.scm
+           ['af'] = '@function.outer',
+           ['if'] = '@function.inner',
+           ['ac'] = '@class.outer',
+           ['ic'] = '@class.inner',
+           ['aa'] = '@parameter.outer',
+           ['ia'] = '@parameter.inner',
+       },
+   },
 
---textobjects = {
---
---    select = {
---        enable = true,
---        lookahead = true, -- Automatically jump forward to textobj, similar to targets.vim
---        keymaps = {
---            -- You can use the capture groups defined in textobjects.scm
---            ['aa'] = '@parameter.outer',
---            ['ia'] = '@parameter.inner',
---            ['af'] = '@function.outer',
---            ['if'] = '@function.inner',
---            ['ac'] = '@class.outer',
---            ['ic'] = '@class.inner',
---        },
---    },
---
---    move = {
---        enable = true,
---        set_jumps = true, -- whether to set jumps in the jumplist
---        goto_next_start = {
---            [']m'] = '@function.outer',
---            [']]'] = '@class.outer',
---        },
---        goto_next_end = {
---            [']M'] = '@function.outer',
---            [']['] = '@class.outer',
---        },
---        goto_previous_start = {
---            ['[m'] = '@function.outer',
---            ['[['] = '@class.outer',
---        },
---        goto_previous_end = {
---            ['[M'] = '@function.outer',
---            ['[]'] = '@class.outer',
---        },
---    },
---
---    swap = {
---        enable = true,
---        swap_next = {
---            ['<leader>a'] = '@parameter.inner',
---        },
---        swap_previous = {
---            ['<leader>A'] = '@parameter.inner',
---        },
---    },
---
---},
+   move = {
+       enable = true,
+       set_jumps = true, -- whether to set jumps in the jumplist
+       goto_next_start = {
+           [']f'] = '@function.outer',
+           -- [']]'] = '@class.outer',
+       },
+       goto_next_end = {
+           [']F'] = '@function.outer',
+           -- [']['] = '@class.outer',
+       },
+       goto_previous_start = {
+           ['[f'] = '@function.outer',
+           -- ['[['] = '@class.outer',
+       },
+       goto_previous_end = {
+           ['[F'] = '@function.outer',
+           -- ['[]'] = '@class.outer',
+       },
+   },
+
+   -- swap = {
+   --     enable = true,
+   --     swap_next = {
+   --         ['<leader>a'] = '@parameter.inner',
+   --     },
+   --     swap_previous = {
+   --         ['<leader>A'] = '@parameter.inner',
+   --     },
+   -- },
+
+},
 
 
 --textsubjects = {
@@ -144,11 +139,11 @@ autopairs = {
 --    },
 --},
 
---rainbow = {
---    enable = false,
---    extended_mode = true, -- Highlight also non-parentheses delimiters, boolean or table: lang -> boolean
---    max_file_lines = 2000 -- Do not enable for files with more than specified lines
---},
+-- rainbow = {
+--    enable = true,
+--    extended_mode = true,
+--    max_file_lines = 2000
+-- },
 
 
 --refactor = {
@@ -208,6 +203,12 @@ tree_docs = {
         rustdoc = {},
     }
 },
+
+
+--- @help {nvim-treesitter-quick-start}
+endwise = {
+    enable = true
+}
 
 
 })

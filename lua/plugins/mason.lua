@@ -20,24 +20,24 @@ mason.setup({
 })
 
 
--- local base_servers = {
-    -- "lua_ls",                      -- lua
-    -- "bashls",                      -- bash
-    -- "solidity_ls_nomicfoundation", -- solidity
-    -- "rust_analyzer",               -- rust
-    -- "gopls",                       -- go
-    -- "julials",                     -- julia
-    -- "tsserver",                    -- js/ts
-    -- "sqls",                        -- sql
-    -- "texlab",                      -- latex
-    -- "grammarly",                   -- markdown
-    -- "jsonls",                      -- json
-    -- "taplo",                       -- toml
-    -- "yamlls",                      -- yaml
-    -- "lemminx",                     -- xml
-    -- "html",                        -- html
-    --    "cssls",                 -- css
--- }
+local base_servers = {
+    "lua_ls",                      -- lua
+    "bashls",                      -- bash
+    "solidity_ls_nomicfoundation", -- solidity
+    "rust_analyzer",               -- rust
+    "gopls",                       -- go
+    "julials",                     -- julia
+    "tsserver",                    -- js/ts
+    "sqls",                        -- sql
+    "texlab",                      -- latex
+    "grammarly",                   -- markdown
+    "jsonls",                      -- json
+    "taplo",                       -- toml
+    "yamlls",                      -- yaml
+    "lemminx",                     -- xml
+    "html",                        -- html
+    "cssls",                       -- css
+}
 
 local ok , mason_lspconfig = pcall(require,"mason-lspconfig")
 if not ok then

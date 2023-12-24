@@ -4,7 +4,7 @@ if not ok then
     return
 end
 
-codeium.setup({})
+codeium.setup()
     -- config_path = "" ,
     -- bin_path =  "" , -- the path to the directory where the Codeium server will be downloaded to.
     -- api = "", -- information about the API server to use:

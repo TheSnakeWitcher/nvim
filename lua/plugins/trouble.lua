@@ -11,8 +11,8 @@ trouble.setup({
 	width = 60,
 	icons = true,
 	mode = "workspace_diagnostics",
-	fold_open = "",
-	fold_closed = "",
+	fold_open = util.icons.FoldOpened,
+	fold_closed =util.icons.FoldClosed,
 	group = true,
 	padding = true,
 	action_keys = {

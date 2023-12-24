@@ -45,17 +45,18 @@ local on_attach = function(client, bufnr)
     -- Enable completion triggered by <c-x><c-o>
     -- vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
 
-    nmap('<leader>r', vim.lsp.buf.rename, '[R]e[n]ame')
-    nmap('<leader>ca', vim.lsp.buf.code_action, '[C]ode [A]ction')
+    nmap('<leader>lr', vim.lsp.buf.rename, '[L]sp [r]ename')
+    nmap('<leader>la', vim.lsp.buf.code_action, '[L]sp [A]ction (code actions)')
 
     nmap('gD', vim.lsp.buf.declaration, '[G]oto [D]eclaration')
     nmap('gd', vim.lsp.buf.definition, '[G]oto [D]efinition')
 
     nmap('gR', require('telescope.builtin').lsp_references, '[G]oto [R]eferences')
     nmap('gr', vim.lsp.buf.references, '[G]oto [R]eferences')
+    -- nmap(']]', vim.lsp.buf.references, '[G]oto [R]eferences')
     nmap('gI', vim.lsp.buf.implementation, '[G]oto [I]mplementation')
-    nmap('<leader>ls', require('telescope.builtin').lsp_document_symbols, '[L]ist [S]ymbols')
-    nmap('<leader>ws', require('telescope.builtin').lsp_dynamic_workspace_symbols, '[W]orkspace [S]ymbols')
+    nmap('<leader>ls', require('telescope.builtin').lsp_document_symbols, '[L]sp [s]ymbols')
+    nmap('<leader>lS', require('telescope.builtin').lsp_dynamic_workspace_symbols, '[L]sp [S]ymbols (workspace)')
 
     -- See `:help K` for why this keymap
     nmap('K', vim.lsp.buf.hover, 'Hover Documentation')
@@ -67,7 +68,7 @@ local on_attach = function(client, bufnr)
     nmap('<leader>wl', function()
         print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
     end, '[W]orkspace [L]ist Folders')
-    nmap('<leader><leader>f', function() vim.lsp.buf.format { async = true } end, '[F]ormat')
+    nmap('<leader>f', function() vim.lsp.buf.format { async = true } end, '[F]ormat')
 
 
     vim.api.nvim_buf_create_user_command(bufnr, 'LspFormat', function(_)
@@ -95,10 +96,10 @@ capabilities = cmp_nvim_lsp.default_capabilities(capabilities)
 -- local capabilities = cmp_nvim_lsp.default_capabilities()
 capabilities.textDocument.completion.completionItem.snippetSupport = true --- @help {schemastore-usage}
 --- @help {nvim-ufo}
-capabilities.textDocument.foldingRange = {
-    dynamicRegistration = false,
-    lineFoldingOnly = true
-}
+-- capabilities.textDocument.foldingRange = {
+--     dynamicRegistration = false,
+--     lineFoldingOnly = true
+-- }
 
 
 --------------------------------------------------------------

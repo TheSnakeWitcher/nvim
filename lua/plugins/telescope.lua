@@ -30,6 +30,7 @@ for _, module in ipairs {
     "zoxide",
 
     "chisel",
+    "hardhat",
     -- "file_browser",
     -- "neoclip",
     -- "cheat",

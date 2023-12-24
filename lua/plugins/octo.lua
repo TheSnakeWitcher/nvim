@@ -6,7 +6,7 @@ end
 
 --- @help {octo-config}
 octo.setup({
-    default_remote = { "upstream", "origin" },
+    default_remote = { "origin", "upstream" },
     ssh_aliases = {},
     reaction_viewer_hint_icon = "",
     user_icon = " ",

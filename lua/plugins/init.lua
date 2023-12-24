@@ -11,14 +11,7 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
-local function load_config(module)
-    local ok, module_config = pcall(require, "plugins." .. module)
-    if not ok then
-        vim.notify(module .. " config not loaded")
-        return {}
-    end
-    return module_config
-end
+local load_config = util.load_config
 
 
 --- @PluginList https://dotfyle.com/
@@ -63,6 +56,7 @@ require("lazy").setup({
     },
     { "folke/tokyonight.nvim", lazy = true },
     { "Mofiqul/dracula.nvim",  lazy = true },
+    { "catppuccin/nvim", name = "catppuccin", lazy = true },
     -- icons
     {
         "nvim-tree/nvim-web-devicons",
@@ -79,6 +73,10 @@ require("lazy").setup({
         "nvim-lualine/lualine.nvim",
         config = function() load_config("lualine") end,
     },
+    -- floating statusline
+    -- {
+    --     "b0o/incline.nvim",
+    -- }
     -- tabline (top bar)
     {
         "nanozuki/tabby.nvim",
@@ -128,7 +126,7 @@ require("lazy").setup({
     {
         "lukas-reineke/indent-blankline.nvim",
         main = "ibl",
-        opts = {}
+        opts = {},
     },
     -- colorizer
     {
@@ -137,14 +135,14 @@ require("lazy").setup({
     },
     -- folds
     {
-        "kevinhwang91/nvim-ufo",
-        dependencies = "kevinhwang91/promise-async",
-        config = function() load_config("nvim-ufo") end,
-    },
-    {
         "yaocccc/nvim-foldsign",
         config = function() load_config("nvim-foldsign") end,
     },
+    -- {
+    --     "kevinhwang91/nvim-ufo",
+    --     dependencies = "kevinhwang91/promise-async",
+    --     config = function() load_config("nvim-ufo") end,
+    -- },
     -- vscode like icons for completion menu
     { "onsails/lspkind.nvim" },
     -- animated signs
@@ -157,6 +155,14 @@ require("lazy").setup({
     --     "gelguy/wilder.nvim",
     -- }
     -- use "VonHeikemen/fine-cmdline.nvim" -- enhaced cmdline
+    -- highligh headers and codeblocks
+    {
+        "lukas-reineke/headlines.nvim",
+        opts = {},
+    },
+    "Eandrju/cellular-automaton.nvim",
+
+
 
 
     ----------------------------------------------------------------
@@ -173,6 +179,7 @@ require("lazy").setup({
             "nvim-treesitter/nvim-tree-docs",              -- documentation
             "nvim-treesitter/nvim-treesitter-textobjects", -- additional text objects via treesitter
             "windwp/nvim-ts-autotag",                      -- use treesitter to autocose & autorename html tags
+            "RRethy/nvim-treesitter-endwise",              -- add `end` to non-brackets base languajes
         }
     },
 
@@ -222,6 +229,12 @@ require("lazy").setup({
     --    "RishabhRD/nvim-lsputils",
     --    requires = "RishabhRD/popfix",
     --}
+    -- lsp for code embeded in other documents 
+    {
+        "jmbuhr/otter.nvim",
+        opts = {},
+    },
+
 
 
     --------------------------------------------------------------
@@ -258,6 +271,11 @@ require("lazy").setup({
             -- }
             -- "nvim-telescope/telescope-cheat.nvim",  -- an attempt to recreate cheat.sh
             -- "sdushantha/fontpreview",               -- search fonts
+            
+
+            { "FabianWirth/search.nvim" },             -- tabs for telescope
+
+
         },
     },
     -- buffer and mark management
@@ -284,6 +302,7 @@ require("lazy").setup({
     },
     -- search urls in buffer
     {
+        -- "chrishrb/gx.nvim"
         "axieax/urlview.nvim",
         config = function() load_config("urlview") end,
     },
@@ -319,8 +338,10 @@ require("lazy").setup({
             --     dependencies = "zbirenbaum/copilot.lua",
             --     config = function () require("copilot_cmp").setup() end
             -- }
-            -- "tzachar/cmp-ai",                        -- ai completion source
-            -- "hrsh7th/cmp-emoji",                  -- emoji completion source
+            -- "tzachar/cmp-ai",                -- ai completion source
+            -- "hrsh7th/cmp-emoji",             -- emoji completion source
+            -- "nat-418/cmp-color-names.nvim"   -- color sources
+            -- "jc-doyle/cmp-pandoc-references" -- pandoc/markdown/bibliography completion sources
         }
     },
     -- snippet engine
@@ -350,12 +371,12 @@ require("lazy").setup({
         "folke/which-key.nvim",
         config = function() load_config("which-key") end,
     },
-    { "tpope/vim-repeat" },       -- make repeatable plugins operations
-    -- surround operations on vim textobjects/symbols `"`,`()` ,`[]`,`{}`,`<>`,etc
-    { "tpope/vim-surround" },     -- check: https://github.com/kylechui/nvim-surround
-    { "tpope/vim-speeddating" },  -- allow C-a/C-x to increment/decrement dates and times
-    { "mbbill/undotree" },        -- save tree of undo operations
-    { "unblevable/quick-scope" }, -- highligh unique chars per word in line(to use with `f`,`F`,`t`,`T`)
+    "mateuszwieloch/automkdir.nvim", -- automatically creates non-existent parent directories when writing a file
+    "tpope/vim-repeat",              -- make repeatable plugins operations
+    "tpope/vim-surround",            -- -- surround operations on vim textobjects/symbols `"`,`()` ,`[]`,`{}`,`<>`,etc , check: https://github.com/kylechui/nvim-surround
+    "tpope/vim-speeddating",         -- allow C-a/C-x to increment/decrement dates and times
+    "mbbill/undotree",               -- save tree of undo operations
+    "unblevable/quick-scope",        -- highligh unique chars per word in line(to use with `f`,`F`,`t`,`T`)
     -- to close automatically `(`,`[`,`"`,`'`
     {
         "windwp/nvim-autopairs",
@@ -380,8 +401,8 @@ require("lazy").setup({
         "0oAstro/silicon.lua",
         config = function() load_config("silicon") end,
     },
-    -- https://github.com/mg979/vim-visual-multi
 
+    -- https://github.com/mg979/vim-visual-multi
 
     --------------------------------------------------------------
     -- dap/test
@@ -455,6 +476,9 @@ require("lazy").setup({
         config = function() load_config("rest") end,
     },
     --  image previewer
+    --  {
+    --      "3rd/image.nvim",
+    --  }
     -- {
     --     "edluffy/hologram.nvim",
     --     config = function() load_config("hologram") end,
@@ -470,6 +494,9 @@ require("lazy").setup({
     "ibhagwan/ts-vimdoc.nvim", -- treesitter base markdown to vimdoc convertion tool
     -- "kndndrj/nvim-projector" --  project-specific configs for nvim-dap with telescope
     -- "milanglacier/yarepl.nvim" --
+    -- conceal
+    ---- use "KeitaNakamura/tex-conceal.vim",
+    ---- use "Jxstxs/conceal.nvim",
 
 
     --------------------------------------------------------------
@@ -478,7 +505,7 @@ require("lazy").setup({
     -- git
     ---- use "Almo7aya/openingh.nvim"  -- open file or project in github for neovim wirtten in lua
     "tpope/vim-fugitive", -- git integration for cmdline
-    "junegunn/gv.vim", -- git commit browser
+    "junegunn/gv.vim",    -- git commit browser
     {
         -- git integration for buffers
         "lewis6991/gitsigns.nvim",
@@ -492,6 +519,9 @@ require("lazy").setup({
     },
     -- use "kdheepak/lazygit.nvim"   -- open lazygit from neovim
     -- github
+    -- {
+    --      "dlvhdr/gh-dash.git",
+    -- }
     {
         -- edit & review github issues
         "pwntester/octo.nvim",
@@ -507,44 +537,49 @@ require("lazy").setup({
     {
         "sourcegraph/sg.nvim",
         dependencies = { "nvim-lua/plenary.nvim", "nvim-telescope/telescope.nvim" },
+        config = function() load_config("sg") end,
     },
-
     -- AI
-    -- generate and edit text using OpenAI and GPT.
     -- {
+    --     -- generate and edit text using OpenAI and GPT.
     --     "aduros/ai.vim",
     --     config = function() load_config("ai") end,
     -- },
-    ---- github copilot
-    -- use {
-    --     "zbirenbaum/copilot.lua",
-    --     config = function() load_config("copilot") end,
-    -- }
-    ---- chatgpt
-    --use {
-    --    "jackMort/ChatGPT.nvim",
-    --    cmd = "ChatGpt",
-    --    config = function() load_config("chatgpt") end,
-    --}
-    ---- codeium ai toolkit integration
     -- {
+    --      -- ollama
+    --      "David-Kunz/gen.nvim"
+    --      https://github.com/jmorganca/ollama
+    --      https://github.com/ziontee113/ollama.nvim
+    --      https://github.com/jpmcb/nvim-llama
+    -- },
+    {
+       -- chatgpt
+       "jackMort/ChatGPT.nvim",
+       -- cmd = "ChatGpt",
+       -- config = function() load_config("chatgpt") end,
+    },
+    -- {
+    --      "gsuuon/model.nvim",
+    -- }
+    -- {
+    --     -- codeium ai toolkit integration
     --     "Exafunction/codeium.nvim",
     --     dependencies = { "nvim-lua/plenary.nvim", "hrsh7th/nvim-cmp" },
     --     config = function() load_config("codeium") end,
     -- },
-    ---- highlight and explain code readability issues
-    ---- use {
-    ----     "james1236/backseat.nvim",
-    ----     config = function() load_config("backseat") end,
-    ---- }
+    -- {
+    --      -- github copilot
+    --     "zbirenbaum/copilot.lua",
+    --     config = function() load_config("copilot") end,
+    -- }
 
 
     ----------------------------------------------------------------
-    ---- languaje specific
+    ---- languaje
     ----------------------------------------------------------------
-    ---- lua
-    ----
-    ---- rust
+    -- lua
+    --
+    -- rust
     -- {
     --     -- TODO: replace with mrcjkb/rustaceanvim
     --     "simrat39/rust-tools.nvim",
@@ -559,15 +594,12 @@ require("lazy").setup({
     --         require('crates').setup()
     --     end,
     -- }
-    ---- go
+    -- go
     ----
-    ---- latex
+    -- latex
     -- "lervag/vimtex",
     -- "frabjous/knap",
     --
-    ---- conceal
-    ---- use "KeitaNakamura/tex-conceal.vim",
-    ---- use "Jxstxs/conceal.nvim",
     --
     -- javascrtp/typescript
     -- {
@@ -581,6 +613,16 @@ require("lazy").setup({
     ----------------------------------------------------------------
     ---- experimental
     ----------------------------------------------------------------
+    ---- ui
+    --{
+    --    -- tree
+    --    "ldelossa/litee.nvim",
+    --}
+    --{
+    --    -- lsp in statusline
+    --    "nvim-lua/lsp-status.nvim",
+    --}
+
     { "jbyuki/instant.nvim" }, -- collaborative coding,check https://github.com/Floobits/floobits-neovim
 
     ---- motions
@@ -604,6 +646,7 @@ require("lazy").setup({
     ---- use "tpope/vim-unimpaired",          -- complementary mapping
     ---- use "tpope/vim-sleuth"               -- detect tabstop and shiftwidth automatically
     ---- use "ThePrimeagen/refactoring.nvim"  -- refactoring tool
+
     ---- code runner
     --{
     --    "michaelb/sniprun",
@@ -612,8 +655,12 @@ require("lazy").setup({
     --    config = function() load_config("sniprun") end,
     --}
 
-    ---- cloud
-    --{ -- jupyter interaction
+    -- REPLS
+    --{
+    --    'benlubas/molten-nvim ',
+    --}
+    --{
+    --    -- jupyter interaction
     --    'dccsillag/magma-nvim',
     --    opt = true,
     --    run = ':UpdateRemotePlugins',
@@ -622,13 +669,12 @@ require("lazy").setup({
     --        vim.g.magma_image_provider = "ueberzug"
     --    end,
     --}
-
-    -- REPLS
     -- {
     --     -- develop integration with overseer
     --     "kndndrj/nvim-dbee",
     -- }
     ---- "luk400/vim-jukit",
+    ---- "GCBallesteros/jupytext.nvim",
     ---- "Jxstxs/conceal.nvim"  -- conceal management
 
     ----  containers integration
@@ -704,7 +750,7 @@ require("lazy").setup({
     ----      config = function() load_config("web3utils") end,
     ----      dependencies  = {
     ----            "TheSnakeWitcher/selectorclash.nvim"       -- detect automatically storage and function selector clashes in poxy-like contracts(pattern independent)
-    ----            "TheSnakeWitcher/opcodes.nvim"             -- opcode price
+    ----            "TheSnakeWitcher/opcodes.nvim"             -- opcode used and his price
     ----            "TheSnakeWitcher/gasmeter.nvim"            -- contract gas estimates of storage and operations
     ----            "TheSnakeWitcher/ethersmode.nvim"          -- https://marketplace.visualstudio.com/items?itemName=acuarica.ethers-mode
     ----            "TheSnakeWitcher/crypto-address-lens.nvim" -- https://marketplace.visualstudio.com/items?itemName=peetzweg.crypto-address-lens
@@ -779,5 +825,4 @@ require("lazy").setup({
     ----          "vimwiki/vimwiki"
     ----      }
     ---- }
-
 })

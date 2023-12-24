@@ -29,4 +29,6 @@ buffer_manager.setup({
     highlight = "",
     win_extra_options = {},
     borderchars = { "─", "│", "─", "│", "╭", "╮", "╯", "╰" },
+    width = 100,
+    height = 20,
 })
