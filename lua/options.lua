@@ -28,6 +28,7 @@ local options = {
     hlsearch = false,
     incsearch = true,
     sessionoptions = vim.opt.sessionoptions:append("localoptions"),
+    conceallevel = 2,
 
 
     --------------------------------
