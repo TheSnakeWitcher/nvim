@@ -13,7 +13,8 @@ end
 local format = require("cmp_git.format")
 local sort = require("cmp_git.sort")
 
---- @doc {cmp-git-config}
+
+--- @help {cmp-git-config}
 cmp_git.setup({
     filetypes = { "gitcommit", "octo" },
     remotes = { "upstream", "origin" },
@@ -117,7 +118,7 @@ cmp_git.setup({
 
 cmp.setup.filetype({'gitcommit','octo'}, {
     sources = cmp.config.sources({
-        { name = 'git' }, -- You can specify the `git` source if [you were installed it](https://github.com/petertriho/cmp-git).
+        { name = 'git' },
     }, {
         { name = 'buffer' },
     })

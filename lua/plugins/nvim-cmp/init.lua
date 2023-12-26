@@ -24,7 +24,7 @@ if not ok then
 end
 
 
---- @doc {cmp-usage}
+--- @help {cmp-config}
 cmp.setup({
 
     -- enabled = function()
@@ -62,7 +62,7 @@ cmp.setup({
         end,
     },
 
-    sources = {
+    sources = cmp.config.sources({
         { name = 'luasnip' , priority = 1000 },
         -- { name = 'codeium' , priority = 1000 },
         -- { name = 'copilot' , priority = 1000 },
@@ -77,7 +77,7 @@ cmp.setup({
             option = { strategy = 2 }, --- @doc {cmp-latex-symbols-options}
         },
         { name = 'calc' },
-    },
+    }),
 
     mapping = {
 
