@@ -377,7 +377,5 @@ set("n","<leader>j","<cmd>lua require('treesj').toggle()<cr>",{desc = "toggle sp
 --------------------------------------------------------------
 -- nvim-ufo
 --------------------------------------------------------------
--- set("n","zR",require("ufo").openAllFolds, {desc = "open all fodls"})
--- set("n","zM",require("ufo").closeAllFolds, {desc = "close all fodls"})
--- set('n', 'zr', require('ufo').openFoldsExceptKinds)
--- set('n', 'zm', require('ufo').closeFoldsWith)
+set("n","zR",require("ufo").openAllFolds, {desc = "open all folds"})
+set("n","zM",require("ufo").closeAllFolds, {desc = "close all folds"})
