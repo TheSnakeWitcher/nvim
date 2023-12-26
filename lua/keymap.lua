@@ -195,7 +195,6 @@ set("n", "<leader>sN", "<CMD>Telescope notify<CR>", { desc = "[s]earch [N]otific
 set("n", "<leader>sp", "<CMD>Telescope projections<CR>" ,{ desc = "[s]earch [p]rojects"})          -- projections
 set("n", "<C-p>", "<CMD>Telescope projections<CR>" ,{ desc = "[s]earch [p]rojects"})               -- projections
 set("n", "<leader>se", "<CMD>Telescope env<CR>" ,{ desc = "[s]earch [e]nvironment"})               -- telescope-env
-set("n", "<leader>ss", "<CMD>LuaSnipEdit<CR>" ,{ desc = "[s]earch [s]snippets"})                   -- luasnip
 set("n", "<leader>st", "<CMD>Telescope telescope-tabs list_tabs<CR>" ,{ desc = "[s]earch [t]abs"}) -- telescope-tabs
 set("n", "<leader>sH", "<cmd>Telescope heading<cr>", { desc = "[s]earch [H]eaders"})               -- telescope-heading
 -- set("n", "<leader>sT", "<cmd>Telescope toggletasks spawn<cr>", { desc = "[s]earch [T]ask"}) -- toggletasks
@@ -226,9 +225,9 @@ set('n', '[Q', "<cmd>cfirst<cr>", { desc = "go to first item in quickfix"})
 --------------------------------------------------------------
 -- luasnip
 --------------------------------------------------------------
-set("n","<leader><leader>s", "<CMD>LuaSnipEdit<CR>", {desc = "open current filetype snippets files" , silent = true})
+set("n", "<leader>ss", "<CMD>LuaSnipEdit<CR>" ,{ desc = "[s]earch [s]snippets", silent = true })
 set({"i","s"},"<C-s>",function()
-    if ls.choice_active() then
+    if require('luasnip').choice_active() then
         require('luasnip.extras.select_choice')()
     end
 end,{desc = "select choice" , silent = true})
@@ -352,6 +351,14 @@ set("n","<leader>Te","<cmd>OverseerToggle<cr>",{desc = "[T]ask [e]xplorer"})
 set("n","<leader>Tr","<cmd>OverseerRun<cr>",{desc = "[T]ask [r]un"})
 set("n","<leader>TR","<cmd>OverseerRunCmd<cr>",{desc = "[T]ask [R]un"})
 set("n","<leader>Tl","<cmd>OverseerRestartLast<cr>",{desc = "[T]ask [l]ast"})
+
+
+--------------------------------------------------------------
+-- neotest
+--------------------------------------------------------------
+set("n","<leader>tR",'<cmd>lua require("neotest").run.run({ suite= true})<cr>',{desc = "[t]est [R]un all/suite"})
+set("n","<leader>tr","<cmd>Neotest run<cr>",{desc = "[t]est [r]un"})
+set("n","<leader>ts","<cmd>Neotest summary<cr>",{desc = "[t]est [r]un"})
 
 
 --------------------------------------------------------------
