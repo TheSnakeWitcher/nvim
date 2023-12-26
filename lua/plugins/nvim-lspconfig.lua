@@ -42,8 +42,7 @@ local on_attach = function(client, bufnr)
         vim.keymap.set('n', keys, func, { buffer = bufnr, desc = desc })
     end
 
-    -- Enable completion triggered by <c-x><c-o>
-    -- vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
+    -- vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc') -- Enable completion triggered by <c-x><c-o>
 
     nmap('<leader>lr', vim.lsp.buf.rename, '[L]sp [r]ename')
     nmap('<leader>la', vim.lsp.buf.code_action, '[L]sp [A]ction (code actions)')
@@ -91,15 +90,16 @@ if not ok then
     return
 end
 
+-- local capabilities = cmp_nvim_lsp.default_capabilities()
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities = cmp_nvim_lsp.default_capabilities(capabilities)
--- local capabilities = cmp_nvim_lsp.default_capabilities()
-capabilities.textDocument.completion.completionItem.snippetSupport = true --- @help {schemastore-usage}
+
 --- @help {nvim-ufo}
--- capabilities.textDocument.foldingRange = {
---     dynamicRegistration = false,
---     lineFoldingOnly = true
--- }
+capabilities.textDocument.foldingRange = {
+    dynamicRegistration = false,
+    lineFoldingOnly = true
+}
+capabilities.textDocument.completion.completionItem.snippetSupport = true --- @help {schemastore-usage}
 
 
 --------------------------------------------------------------
