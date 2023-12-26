@@ -4,11 +4,13 @@ if not status_ok then
     return
 end
 
+
+--- @help https://github.com/yaocccc/nvim-foldsign
 nvim_foldsign.setup({
     offset = -2,
     foldsigns = {
         open = "",
         close = "",
-        seps = { '│', '┃' },
+        seps = { '', '' },
     }
 })
