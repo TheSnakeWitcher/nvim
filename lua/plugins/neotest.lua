@@ -186,4 +186,8 @@ neotest.setup({
         },
         open = "botright vsplit | vertical resize 50"
     },
+    watch = {
+        enabled = true,
+        symbol_queries = {}
+    },
 })
