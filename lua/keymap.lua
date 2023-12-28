@@ -151,29 +151,22 @@ set({"v","x"}, "<C-k>", ":move '<-2<CR>gv-gv", opts)
 --------------------------------------------------------------
 -- telescope
 --------------------------------------------------------------
-local builtin = require('telescope.builtin')
-
 -- vim pickers
-set('n', '<leader>/', function()
-  builtin.current_buffer_fuzzy_find(require('telescope.themes').get_dropdown {
-    winblend = 10,
-    previewer = false,
-  })
-end, { desc = '[/] Fuzzily search in current buffer]' })
+set('n', '<leader>/', "<cmd>Telescope current_buffer_fuzzy_find<cr>", { desc = '[/] Fuzzily search in current buffer]' })
 set("n" , "<leader>sh" , "<cmd>Telescope help_tags<cr>", {desc = "[s]earch [h]elp" })
 set("n" , "<leader>sm" , "<cmd>Telescope marks<cr>", {desc = "[s]earch [m]arks" })
 set("n" , "<leader>sr" , "<cmd>Telescope registers<cr>",{desc = "[s]earch [r]registers" })
 set("n" , "<leader>sk" , "<cmd>Telescope keymaps<cr>",{desc = "[s]earch [k]eymaps" })
 set("n" , "<leader>sc" , "<cmd>Telescope command_history<cr>",{desc = "[s]earch [c]ommand history" })
-set("n" , "<leader>sM" , "<cmd>Telescope man_pages<cr>",{desc = "[s]earch [M]anual" })
+
 set("n", "<leader>sd", "<cmd>Telescope diagnostics<cr>", { desc = "[s]earch [d]iagnostics"})
 set("n", "<leader>sq", "<cmd>Telescope quickfix<cr>", { desc = "[s]earch [q]uickfix"})
 
 -- file pickers
-set("n", "<C-f>", builtin.git_files, {desc = "[s]earch [g]itfiles(tracked by git according to .gitignore)" })
-set("n", "<leader>sf", builtin.find_files, {desc = "[s]earch [f]iles" })
-set("n", "<leader>sg", builtin.live_grep, {desc = "[s]earch [g]rep" })
-set("n","<leader>so",builtin.oldfiles,{desc = "[s]earch [o]ldfiles"})
+set("n", "<C-f>", "<cmd> Telescope git_files<cr>", {desc = "[s]earch [g]itfiles(tracked by git according to .gitignore)" })
+set("n", "<leader>sf", "<cmd>Telescope find_files<cr>", {desc = "[s]earch [f]iles" })
+set("n", "<leader>sg", "<cmd>Telescope live_grep<cr>", {desc = "[s]earch [g]rep" })
+set("n","<leader>so", "<cmd>Telescope oldfiles<cr>",{desc = "[s]earch [o]ldfiles"})
 set("n","<leader>sP","<cmd>Telescope media_files<cr>",{desc = "[s]earch [P]ics"})
 --set("n","<leader>sF",
 --    function () builtin.find_files{ hidden = true, no_ignore = true} end,
@@ -181,20 +174,21 @@ set("n","<leader>sP","<cmd>Telescope media_files<cr>",{desc = "[s]earch [P]ics"}
 --} -- search all files
 
 -- lsp pickers
-set('n', '<leader>st', builtin.lsp_definitions, {desc = "[s]earch [t]reesitter"})
+-- set('n', '<leader>s', builtin.lsp_definitions, {desc = "[s]earch [t]reesitter"})
 
 -- git pickers
-set("n", "<leader>sB", builtin.git_branches, {desc = "[s]earch [B]ranches"})
-set("n", "<leader>sC", builtin.git_commits, {desc = "[s]earch [C]ommits"})
-set("n","<leader>sS",builtin.git_status, {desc = "[s]earch [S]tatus"})
+set("n","<C-s>","<cmd>Telescope git_status<cr>", {desc = "[s]earch [S]tatus"})
+set("n","<leader>sS","<cmd>Telescope git_status<cr>", {desc = "[s]earch [S]tatus"})
+set("n", "<leader>sB", "<cmd>Telescope git_branches<cr>", {desc = "[s]earch [B]ranches"})
+set("n", "<leader>sC", "<cmd>Telescope git_commits<cr>", {desc = "[s]earch [C]ommits"})
 
 -- extensions pickers
-set("n", "<leader>sn", "<CMD>TodoTelescope<CR>", { desc = "[s]earch [n]otes"})                     -- todo-comments
-set("n", "<leader>sN", "<CMD>Telescope notify<CR>", { desc = "[s]earch [N]otifications"})          -- notify
-set("n", "<leader>sp", "<CMD>Telescope projections<CR>" ,{ desc = "[s]earch [p]rojects"})          -- projections
-set("n", "<C-p>", "<CMD>Telescope projections<CR>" ,{ desc = "[s]earch [p]rojects"})               -- projections
-set("n", "<leader>se", "<CMD>Telescope env<CR>" ,{ desc = "[s]earch [e]nvironment"})               -- telescope-env
-set("n", "<leader>st", "<CMD>Telescope telescope-tabs list_tabs<CR>" ,{ desc = "[s]earch [t]abs"}) -- telescope-tabs
+set("n", "<leader>sn", "<cmd>TodoTelescope<CR>", { desc = "[s]earch [n]otes"})                     -- todo-comments
+set("n", "<leader>sN", "<cmd>Telescope notify<CR>", { desc = "[s]earch [N]otifications"})          -- notify
+set("n", "<leader>sp", "<cmd>Telescope projections<CR>" ,{ desc = "[s]earch [p]rojects"})          -- projections
+set("n", "<C-p>", "<cmd>Telescope projections<CR>" ,{ desc = "[s]earch [p]rojects"})               -- projections
+set("n", "<leader>se", "<cmd>Telescope env<CR>" ,{ desc = "[s]earch [e]nvironment"})               -- telescope-env
+set("n", "<leader>st", "<cmd>Telescope telescope-tabs list_tabs<CR>" ,{ desc = "[s]earch [t]abs"}) -- telescope-tabs
 set("n", "<leader>sH", "<cmd>Telescope heading<cr>", { desc = "[s]earch [H]eaders"})               -- telescope-heading
 -- set("n", "<leader>sT", "<cmd>Telescope toggletasks spawn<cr>", { desc = "[s]earch [T]ask"}) -- toggletasks
 
