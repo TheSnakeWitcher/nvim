@@ -42,20 +42,18 @@ local on_attach = function(client, bufnr)
         vim.keymap.set('n', keys, func, { buffer = bufnr, desc = desc })
     end
 
-    -- vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc') -- Enable completion triggered by <c-x><c-o>
-
     nmap('<leader>lr', vim.lsp.buf.rename, '[L]sp [r]ename')
     nmap('<leader>la', vim.lsp.buf.code_action, '[L]sp [A]ction (code actions)')
 
     nmap('gD', vim.lsp.buf.declaration, '[G]oto [D]eclaration')
     nmap('gd', vim.lsp.buf.definition, '[G]oto [D]efinition')
 
-    nmap('gr', require('telescope.builtin').lsp_references, '[G]oto [R]eferences')
+    nmap('gr', "Telescope lsp_references", '[G]oto [R]eferences')
     nmap('gR', vim.lsp.buf.references, '[G]oto [R]eferences')
     -- nmap(']]', vim.lsp.buf.references, '[G]oto [R]eferences')
     nmap('gI', vim.lsp.buf.implementation, '[G]oto [I]mplementation')
-    nmap('<leader>ls', require('telescope.builtin').lsp_document_symbols, '[L]sp [s]ymbols')
-    nmap('<leader>lS', require('telescope.builtin').lsp_dynamic_workspace_symbols, '[L]sp [S]ymbols (workspace)')
+    nmap('<leader>ls', "Telescope lsp_document_symbols", '[L]sp [s]ymbols')
+    nmap('<leader>lS', "Telescope lsp_dynamic_workspace_symbols", '[L]sp [S]ymbols (workspace)')
 
     -- See `:help K` for why this keymap
     nmap('K', vim.lsp.buf.hover, 'Hover Documentation')
