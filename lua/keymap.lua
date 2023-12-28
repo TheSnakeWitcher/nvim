@@ -190,7 +190,6 @@ set("n", "<C-p>", "<cmd>Telescope projections<CR>" ,{ desc = "[s]earch [p]roject
 set("n", "<leader>se", "<cmd>Telescope env<CR>" ,{ desc = "[s]earch [e]nvironment"})               -- telescope-env
 set("n", "<leader>st", "<cmd>Telescope telescope-tabs list_tabs<CR>" ,{ desc = "[s]earch [t]abs"}) -- telescope-tabs
 set("n", "<leader>sH", "<cmd>Telescope heading<cr>", { desc = "[s]earch [H]eaders"})               -- telescope-heading
--- set("n", "<leader>sT", "<cmd>Telescope toggletasks spawn<cr>", { desc = "[s]earch [T]ask"}) -- toggletasks
 
 
 --------------------------------------------------------------
