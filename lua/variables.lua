@@ -12,17 +12,17 @@ vim.g.work_projects_dir = vim.g.code_dir .. "/work"
 vim.g.plugin_dev_dir = vim.g.projects_dir .. "/nvim"
 vim.g.snippets_dir = vim.fn.stdpath("config") .. "/luasnippets"
 
--- local code_dir = vim.env.HOME .. "/Code"
--- local projects_dir = code_dir .. "/projects"
--- vim.g.path = {
---     knowledgebase = vim.env.HOME .. "/Knowledgebase",
---     code = code_dir,
---     scripts = code_dir .. "/scripts",
---     work_projects = code_dir .. "/work",
---     projects = projects_dir,
---     plugin_dev = projects_dir .. "/nvim",
---     snippets = vim.fn.stdpath("config") .. "/luasnippets",
--- }
+local code_dir = vim.env.HOME .. "/Code"
+local projects_dir = code_dir .. "/projects"
+vim.g.path = {
+    knowledgebase = vim.env.HOME .. "/Knowledgebase",
+    code = code_dir,
+    scripts = code_dir .. "/scripts",
+    work_projects = code_dir .. "/work",
+    projects = projects_dir,
+    plugin_dev = projects_dir .. "/nvim",
+    snippets = vim.fn.stdpath("config") .. "/luasnippets",
+}
 
 
 --------------------------------------------------------------
