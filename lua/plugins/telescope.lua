@@ -133,25 +133,21 @@ telescope.setup({
     },
 
     pickers = {
-        -- now the picker_opts_table will be applied every time you call builtin_picker_name
-        -- builtin_picker_name = { picker_opts_table }
-        -- git_branches = {
-        --     attach_mappings = function(prompt_bufnr, map)
-        --         actions.select_default:replace(function()
-	                -- actions.close(prompt_bufnr)
-	                -- local selection = actions_state.get_selected_entry()
-        --             vim.print(selection.name)
-        --             vim.cmd("Git checkout ".. selection.name)
-        --             -- actions.git_switch_branch(prompt_bufnr)
-        --         end)
-        --         return true
-        --     end
-        -- }
+        lsp_references = {
+            theme = "cursor",
+            show_line = false,
+            layout_config = { height = 0.5, width = 0.8 },
+        },
+        lsp_definitions = {
+            theme = "cursor",
+            show_line = false,
+            layout_config = { height = 0.5, width = 0.8 },
+        },
     },
 
     extensions = {
 
-        ---@doc {telescope-nvim-fzf-native.nvim-telescope-setup-and-configuration:}
+        --- @help {telescope-nvim-fzf-native.nvim-telescope-setup-and-configuration:}
         fzf = {
             fuzzy = true,
             override_generic_sorter = true,
@@ -169,7 +165,7 @@ telescope.setup({
             debug = false,                -- Provide debug messages
         },
 
-        ---@doc {telescope-media-files.nvim-configuration}
+        --- @help {telescope-media-files.nvim-configuration}
         media_files = {
            filetypes = {"png", "jpg", "jpeg", "mp4", "webm", "webp"},
         },
@@ -182,7 +178,7 @@ telescope.setup({
               }
         },
 
-        ---@doc {telescope-heading.nvim-setup}
+        --- @help {telescope-heading.nvim-setup}
         heading = {
             treesitter = true,
             picker_opts = {
