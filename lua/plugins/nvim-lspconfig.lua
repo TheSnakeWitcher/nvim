@@ -20,7 +20,7 @@ if not ok then
     return
 end
 
---- @help {neodev-configuration}
+--- @help {neodev.nvim-neodev.nvim-configuration}
 neodev.setup({
     library = {
         enabled = true,
