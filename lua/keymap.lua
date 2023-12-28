@@ -24,7 +24,6 @@ local opts = { noremap = true, silent = true }
 
 -- TODO:
 -- ]] [[ references management
--- ]h [h hunk management
 -- ][ e for errors
 -- ][ w for warnings
 -- ][ d for diagnostics
@@ -165,7 +164,7 @@ set("n" , "<leader>sh" , builtin.help_tags, {desc = "[s]earch [h]elp" })
 set("n" , "<leader>sm" , builtin.marks, {desc = "[s]earch [m]arks" })
 set("n" , "<leader>sr" , builtin.registers,{desc = "[s]earch [r]registers" })
 set("n" , "<leader>sk" , builtin.keymaps,{desc = "[s]earch [k]eymaps" })
-set("n" , "<leader>sc" , builtin.commands,{desc = "[s]earch [c]ommands" })
+set("n" , "<leader>sc" , builtin.command_history,{desc = "[s]earch [c]ommand history" })
 set("n" , "<leader>sM" , builtin.man_pages,{desc = "[s]earch [M]anual" })
 set("n", "<leader>sd", "<CMD>Telescope diagnostics<CR>", { desc = "[s]earch [d]iagnostics"})
 set("n", "<leader>sq", "<cmd>Telescope quickfix<cr>", { desc = "[s]earch [q]uickfix"})
@@ -377,5 +376,5 @@ set("n","<leader>j","<cmd>lua require('treesj').toggle()<cr>",{desc = "toggle sp
 --------------------------------------------------------------
 -- nvim-ufo
 --------------------------------------------------------------
-set("n","zR",require("ufo").openAllFolds, {desc = "open all folds"})
-set("n","zM",require("ufo").closeAllFolds, {desc = "close all folds"})
+set("n","zR", require("ufo").openAllFolds, {desc = "open all folds"})
+set("n","zM", require("ufo").closeAllFolds, {desc = "close all folds"})
