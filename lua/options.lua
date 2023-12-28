@@ -52,20 +52,20 @@ local options = {
     --------------------------------
     splitbelow = true,
     splitright = true,
-    foldenable= false,
-    foldmethod= "manual",
     foldlevel = 99,
+    foldlevelstart = 99,
+    foldenable = true,
     -- foldexpr = "nvim_treesitter#foldexpr()",
     --formatexpr = "nvim_treesitter#foldexpr()",
-    -- fillchars = vim.opt.fillchars{
-    -- fillchars = vim.opt.fillchars:append({
+    -- fillchars = {
     --     foldopen = "",
     --     foldclose = "",
     --     fold = "",
     --     foldsep = "",
     --     diff = "╱",
-    --     eob = "",-- remove `~` from empty lines
-    -- }),
+    --     eob = "",
+    -- },
+
 
     --------------------------------
     -- search patterns
