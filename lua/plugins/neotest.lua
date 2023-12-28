@@ -4,10 +4,11 @@ if not ok then
     return
 end
 
--- local ok, neotest_plenary = pcall(require, "neotest-plenary")
--- if not ok then
--- 	vim.notify "neotest-plenary config not loaded"
--- end
+
+local ok, neotest_plenary = pcall(require, "neotest-plenary")
+if not ok then
+	vim.notify "neotest-plenary config not loaded"
+end
 
 local ok, neotest_go = pcall(require, "neotest-go")
 if not ok then
@@ -24,21 +25,23 @@ if not ok then
     vim.notify "neotest-plenary config not loaded"
 end
 
-
-local ok, overseer_consumer = pcall(require, "neotest.consumers.overseer")
-if not ok then
-    vim.notify "overseer consumer not loaded in neotest config"
-end
-
 local ok, neotest_hardhat = pcall(require, "neotest-hardhat")
 if not ok then
     vim.notify "neotest-hardhat config not loaded"
 end
 
 
+local ok, overseer_consumer = pcall(require, "neotest.consumers.overseer")
+if not ok then
+    vim.notify "overseer consumer not loaded in neotest config"
+end
+
+
 --- @help {neotest.setup()}
 neotest.setup({
     adapters = {
+
+        neotest_plenary, --- @help {neotest-plenary-neotest-plenary}
 
         --- @help {neotest-go-installation}
         neotest_go({
@@ -59,8 +62,7 @@ neotest.setup({
             filterDir = function(name) return name == "test" end,
         }),
 
-        neotest_hardhat  --- @help {neotest-hardhat-setup}
-        -- neotest_plenary,
+        neotest_hardhat, --- @help {neotest-hardhat-setup}
 
     },
     consumers = {
