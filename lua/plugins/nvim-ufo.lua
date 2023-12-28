@@ -7,6 +7,17 @@ end
 --- @help {nvim-ufo.txt}
 ufo.setup({
 
+    provider_selector = function(bufnr, filetype, buftype)
+
+        local disabled_filetypes = { "dashboard", "neo-tree" }
+        if vim.tbl_contains(disabled_filetypes, filetype) then
+            return ""
+        else
+            return { 'treesitter', 'indent' }
+        end
+
+    end,
+
     fold_virt_text_handler = function(virtText, lnum, endLnum, width, truncate)
 
         local newVirtText = {}
