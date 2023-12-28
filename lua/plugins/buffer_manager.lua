@@ -7,7 +7,6 @@ end
 
 --- @help {buffer_manager.nvim-configuration}
 buffer_manager.setup({
-    line_keys = "1234567890",
     select_menu_item_commands = {
         edit = {
             key = "<CR>",
@@ -22,13 +21,6 @@ buffer_manager.setup({
             command = "split"
         }
     },
-    focus_alternate_buffer = false,
-    short_file_names = false,
-    short_term_names = false,
-    loop_nav = true,
-    highlight = "",
-    win_extra_options = {},
-    borderchars = { "─", "│", "─", "│", "╭", "╮", "╯", "╰" },
     width = 100,
     height = 20,
 })
