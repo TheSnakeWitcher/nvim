@@ -4,4 +4,6 @@ if not ok then
     return
 end
 
-lspsaga.setup({})
+--- @help https://nvimdev.github.io/lspsaga/
+--- @help {lspsaga.nvim.txt}
+lspsaga.setup()
