@@ -4,11 +4,13 @@ if not ok then
     return
 end
 
+
 local ok, lspkind = pcall(require,'lspkind')
 if not ok then
     vim.notify("lspkind config don't loaded")
     return
 end
+
 
 local ok, luasnip = pcall(require,'luasnip')
 if not ok then
@@ -64,7 +66,6 @@ cmp.setup({
         { name = 'nvim_lua' , priority = 750 }, -- by default active only in lua files
         { name = 'buffer' , priority = 500 },
         { name = 'path' , keyworkd_length = 2 , priority = 250 },
-        { name = 'git' , priority = 250 },
         { name = 'calc' },
     }),
 
@@ -101,8 +102,6 @@ cmp.setup({
         ["<Tab>"] = cmp.mapping(function(fallback)
             if luasnip.jumpable(1) then
                 luasnip.jump(1)
-            -- elseif cmp.visible() then
-            --     cmp.select_next_item()
             else
                 fallback()
             end
@@ -110,8 +109,6 @@ cmp.setup({
         ["<S-Tab>"] = cmp.mapping(function(fallback)
             if luasnip.jumpable(-1) then
                 luasnip.jump(-1)
-            -- elseif cmp.visible() then
-            --     cmp.select_prev_item()
             else
                 fallback()
             end
