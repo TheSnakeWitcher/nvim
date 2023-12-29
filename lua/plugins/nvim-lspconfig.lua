@@ -56,8 +56,8 @@ local on_attach = function(client, bufnr)
     nmap('<leader>lS', "Telescope lsp_dynamic_workspace_symbols", '[L]sp [S]ymbols (workspace)')
 
     -- See `:help K` for why this keymap
-    nmap('K', vim.lsp.buf.hover, 'Hover Documentation')
-    nmap('<C-k>', vim.lsp.buf.signature_help, 'Signature Documentation')
+    nmap('<leader>?', vim.lsp.buf.hover, 'Hover Documentation')
+    -- nmap('<leader>?', vim.lsp.buf.signature_help, 'Signature Documentation')
     nmap('<leader>lf', function() vim.lsp.buf.format { async = true } end, '[L]sp [f]ormat')
 
     -- workspace

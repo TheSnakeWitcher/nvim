@@ -94,6 +94,13 @@ local options = {
     mouse = "a",
     mousefocus = true,
 
+
+    --------------------------------
+    -- spell
+    --------------------------------
+    -- spell = true,
+    -- spelllang = en_us,
+
 }
 
 for key,value in pairs(options) do

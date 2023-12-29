@@ -22,12 +22,13 @@ require("lazy").setup({
     ----------------------------------------------------------------
     -- base
     ----------------------------------------------------------------
-    { "nvim-lua/plenary.nvim" }, -- usefull collection of lua functions for neovim
-    { "nvim-lua/popup.nvim" },   -- popup api implementation of vim for neovim
-    { "ray-x/guihua.lua" },      -- GUI library
-    { "MunifTanjim/nui.nvim" },  -- UI component library
-    { "folke/neodev.nvim" },     -- plugin development setup, alternative https://github.com/danymat/neogen
-    { "zdcthomas/yop.nvim" },    -- easier custom operator management
+    { "nvim-lua/plenary.nvim" },   -- usefull collection of lua functions for neovim
+    { "nvim-lua/popup.nvim" },     -- popup api implementation of vim for neovim
+    { "ray-x/guihua.lua" },        -- GUI library
+    { "MunifTanjim/nui.nvim" },    -- UI component library
+    { "folke/neodev.nvim" },       -- plugin development setup, alternative https://github.com/danymat/neogen
+    { "zdcthomas/yop.nvim" },      -- easier custom operator management
+--  { "carbon-steel/detour.nvim" } -- ui library to create popups 
     -- tools management UI to easily install lsp,dap,linters,formatters,etc
     {
         "williamboman/mason.nvim",
@@ -50,50 +51,15 @@ require("lazy").setup({
     -- ui
     --------------------------------------------------------------
     -- colorschemes
-    -- {
-    --     "doom-neovim/doom-nvim",
-    --     'NTBBloodbath/doom-one.nvim',
-        -- config = function()
-		    -- vim.g.doom_one_enable_treesitter = true       -- Enable TS support
-		    -- vim.g.doom_one_terminal_colors = false         -- Set :terminal colors
-		    -- vim.g.doom_one_italic_comments = true        -- Enable italic comments
-		    -- vim.g.doom_one_cursor_coloring = false        -- Add color to cursor
-      --       vim.g.doom_one_diagnostics_text_color = false -- Color whole diagnostic text or only underline
-		    -- vim.g.doom_one_transparent_background = false -- Enable transparent background
-						--
-      --       -- Pumblend transparency
-		    -- vim.g.doom_one_pumblend_enable = false
-		    -- vim.g.doom_one_pumblend_transparency = 20
-						--
-      --       -- Plugins integration
-		    -- vim.g.doom_one_plugin_telescope = false
-		    -- vim.g.doom_one_plugin_dashboard = true
-		    -- vim.g.doom_one_plugin_indent_blankline = true
-		    -- vim.g.doom_one_plugin_neorg = true
-		    -- vim.g.doom_one_plugin_barbar = false
-		    -- vim.g.doom_one_plugin_neogit = true
-		    -- vim.g.doom_one_plugin_nvim_tree = true
-		    -- vim.g.doom_one_plugin_startify = true
-		    -- vim.g.doom_one_plugin_whichkey = true
-		    -- vim.g.doom_one_plugin_vim_illuminate = true
-		    -- vim.g.doom_one_plugin_lspsaga = false
-	    -- end,
-        -- lazy = true,
-        -- priority = 1000,
-	    -- init = function() vim.cmd("colorscheme doom-one") end,
-    -- },
     {
         "romgrk/doom-one.vim",
-        lazy = true,
         priority = 1000,
         init = function() vim.cmd("colorscheme doom-one") end,
     },
     {
         "folke/tokyonight.nvim",
         lazy = true,
-        -- priority = 1000,
-        -- init = function() vim.cmd("colorscheme tokyonight-storm") end,
-        -- opts = { 
+        -- opts = {
         --     on_highlights = function(hl, c)
         --         hl.CursorLineNr = { fg = c.orange, bold = true }
         --         -- hl.LineNr = { fg = c.orange, bold = true }
@@ -108,11 +74,14 @@ require("lazy").setup({
         --         hl.TelescopePreviewTitle = { bg = c.bg_dark, fg = c.bg_dark }
         --         hl.TelescopeResultsTitle = { bg = c.bg_dark, fg = c.bg_dark }
         --     end,
-        -- }
+        -- },
     },
     { "Mofiqul/dracula.nvim",  lazy = true },
-    { "catppuccin/nvim", name = "catppuccin", lazy = true },
-    { "marko-cerovac/material.nvim" , lazy = true },
+    -- { "NTBBloodbath/doom-one.nvim", lazy = true },
+    -- { "doom-neovim/doom-nvim", lazy = true },
+    -- { "scottmckendry/cyberdream.nvim", lazy = true, },
+    -- { "catppuccin/nvim", name = "catppuccin", lazy = true },
+    -- { "marko-cerovac/material.nvim" , lazy = true },
     -- icons
     {
         "nvim-tree/nvim-web-devicons",
@@ -134,15 +103,23 @@ require("lazy").setup({
         -- }
     },
     -- tabline (top bar)
+    {
+        "willothy/nvim-cokeline",
+        config = function() load_config("nvim-cokeline") end,
+    },
     -- {
     --     "nanozuki/tabby.nvim",
     --     config = function() load_config("tabby") end,
     -- },
     -- lsp symbols in winbar(just below tabline)
-    {
-        "glepnir/lspsaga.nvim",
-        config = function() load_config("lspsaga") end,
-    },
+    -- {
+    --     "Bekaboo/dropbar.nvim",
+    --     -- config = function() load_config("dropbar") end,
+    -- },
+    -- {
+    --     "glepnir/lspsaga.nvim",
+    --     config = function() load_config("lspsaga") end,
+    -- },
     -- startup screen/dashboard
     {
         "glepnir/dashboard-nvim",
@@ -179,6 +156,8 @@ require("lazy").setup({
     "itchyny/vim-highlighturl", -- highlighturl urls in buffer
     -- highlighturl indent
     {
+        -- "utilyre/sentiment.nvim" -- highlighturl parents `(` , `[` or `{` TODO: teset this
+        -- check: https://github.com/echasnovski/mini.indentscope
         "lukas-reineke/indent-blankline.nvim",
         main = "ibl",
         opts = {},
@@ -189,6 +168,7 @@ require("lazy").setup({
         config = function() load_config("colorizer") end,
     },
     -- folds
+    -- { "luukvbaal/statuscol.nvim" }, TODO: check
     {
         "yaocccc/nvim-foldsign",
         config = function() load_config("nvim-foldsign") end,
@@ -227,6 +207,14 @@ require("lazy").setup({
     -- "xiyaowong/transparent.nvim",   -- transparent ui
     -- "anuvyklack/fold-preview.nvim", -- fold preview
     -- { "AckslD/messages.nvim", opts = {} }, -- buf for better messages management
+    -- edgy
+    -- generic sidebar
+    -- { "sidebar-nvim/sidebar.nvim" },
+    -- command preview
+    -- { smjonas/live-command.nvim },  TODO: check these
+    -- help in anchorable/resizable floating window
+    -- { "Tyler-Barham/floating-help.nvim" },
+
 
 
     ----------------------------------------------------------------
@@ -247,7 +235,6 @@ require("lazy").setup({
         }
     },
     -- "CKolkey/ts-node-action", -- run arbitrary actions in treesitter nodes
-
 
 
     ----------------------------------------------------------------
@@ -272,6 +259,7 @@ require("lazy").setup({
         config = function() load_config("nvim-lspconfig") end,
     },
     -- bridge/hook up non-LSP tools to the LSP UX to inject LSP diagnostics, code actions via lua
+    -- { "dgagn/diagflow.nvim" },  -- message of focused diagnostics  in top-rigth corner
     {
         "nvimtools/none-ls.nvim",
         config = function() load_config("none-ls") end,
@@ -344,6 +332,7 @@ require("lazy").setup({
     },
     -- buffer and mark management
     {
+        -- tab scoped buffers "tiagovla/scope.nvim" ,  "backdround/tabscope.nvim"
         "j-morano/buffer_manager.nvim",
         config = function() load_config("buffer_manager") end,
     },
@@ -461,6 +450,20 @@ require("lazy").setup({
         "numToStr/Comment.nvim",
         config = function() load_config("Comment") end,
     },
+    -- macro management TODO: test this
+    -- {
+    --     "ecthelionvi/NeoComposer.nvim",
+    --
+    -- },
+    -- temp buffer or scrach buffer management TODO: test this
+    -- {
+    --      "mong8se/actually.nvim",
+    -- },
+    -- ask for correct file to open when multiple files share the same prefix
+    -- {
+    --      "m-demare/attempt.nvim",
+    --
+    -- },
     { "sbulav/nredir.nvim" }, -- redirect outputs of commands and filters(external commands) to temp sidebuffer
     -- split/joint text blocks efficiently
     {
@@ -470,6 +473,10 @@ require("lazy").setup({
         dependencies = { 'nvim-treesitter/nvim-treesitter' },
         config = function() load_config('treesj') end,
     },
+    -- move line/blocks
+    -- { 
+    --     "willothy/moveline.nvim",
+    -- }
     --use "andymass/vim-matchup"           --  even better % fist_oncoming navigate and highlight matching words
     -- code screenshots
     {
@@ -619,9 +626,8 @@ require("lazy").setup({
     },
     -- use "kdheepak/lazygit.nvim"   -- open lazygit from neovim
     -- github
-    -- {
-    --      "dlvhdr/gh-dash.git",
-    -- }
+    -- "dlvhdr/gh-dash.git",
+    -- "rawnly/gist.nvim", -- gist management
     {
         -- edit & review github issues
         "pwntester/octo.nvim",
@@ -702,6 +708,10 @@ require("lazy").setup({
     --
     --
     -- javascrtp/typescript
+    -- {
+    --      -- manage pnpm workspace with telescope
+    --      "lukahartwig/pnpm.nvim",
+    -- },
     -- {
     --    -- package info
     --    "vuki656/package-info.nvim",
