@@ -10,13 +10,6 @@ if not ok then
     return
 end
 
-lspkind.init({
-    symbol_map = {
-        Copilot = "",
-    },
-})
-vim.api.nvim_set_hl(0, "CmpItemKindCopilot", {fg ="#6CC644"})
-
 local ok, luasnip = pcall(require,'luasnip')
 if not ok then
     vim.notify("luasnip not loaded in nvim-cmp config")
@@ -72,10 +65,6 @@ cmp.setup({
         { name = 'buffer' , priority = 500 },
         { name = 'path' , keyworkd_length = 2 , priority = 250 },
         { name = 'git' , priority = 250 },
-        {
-            name = "latex_symbols",
-            option = { strategy = 2 }, --- @doc {cmp-latex-symbols-options}
-        },
         { name = 'calc' },
     }),
 
@@ -148,3 +137,4 @@ cmp.setup({
 local cmp_dir = "plugins.nvim-cmp."
 require(cmp_dir .. 'cmdline-source')
 require(cmp_dir .. 'cmp-git')
+require(cmp_dir .. 'cmp-latex')
