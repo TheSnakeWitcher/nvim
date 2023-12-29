@@ -33,9 +33,14 @@ local opts = { noremap = true, silent = true }
 --------------------------------------------------------------
 -- help
 --------------------------------------------------------------
-require("yop").op_map({"n", "v"}, "<leader>h", function(lines, info)
-    vim.cmd(string.format("help %s",lines[1]))
-end)
+local ok , yop = pcall(require,"yop")
+if not ok then
+    vim.noitfy("yop not loaded in keymaps")
+else
+    yop.op_map({"n", "v"}, "<leader>h", function(lines, info)
+        vim.cmd(string.format("help %s",lines[1]))
+    end)
+end
 
 
 --------------------------------------------------------------
@@ -157,7 +162,7 @@ set("n" , "<leader>sh" , "<cmd>Telescope help_tags<cr>", { desc = "[s]earch [h]e
 set("n" , "<leader>sm" , "<cmd>Telescope marks<cr>", { desc = "[s]earch [m]arks" })
 set("n" , "<leader>sr" , "<cmd>Telescope registers<cr>", { desc = "[s]earch [r]registers" })
 set("n" , "<leader>sk" , "<cmd>Telescope keymaps<cr>", { desc = "[s]earch [k]eymaps" })
-set("n" , "<leader>sc" , "<cmd>Telescope command_history<cr>", { desc = "[s]earch [c]ommand history" })
+set("n" , "<leader>sC" , "<cmd>Telescope command_history<cr>", { desc = "[s]earch [c]ommand history" })
 
 set("n", "<leader>sd", "<cmd>Telescope diagnostics<cr>", { desc = "[s]earch [d]iagnostics" })
 set("n", "<leader>sq", "<cmd>Telescope quickfix<cr>", { desc = "[s]earch [q]uickfix" })
@@ -178,9 +183,9 @@ set("n", "<leader>sP", "<cmd>Telescope media_files<cr>", { desc = "[s]earch [P]i
 
 -- git pickers
 set("n", "<C-s>", "<cmd>Telescope git_status<cr>", { desc = "[s]earch [S]tatus" })
-set("n","<leader>sS","<cmd>Telescope git_status<cr>", { desc = "[s]earch [S]tatus" })
-set("n", "<leader>sB", "<cmd>Telescope git_branches<cr>", { desc = "[s]earch [B]ranches" })
-set("n", "<leader>sC", "<cmd>Telescope git_commits<cr>", { desc = "[s]earch [C]ommits" })
+set("n","<leader>ss","<cmd>Telescope git_status<cr>", { desc = "[s]earch [S]tatus" })
+set("n", "<leader>sb", "<cmd>Telescope git_branches<cr>", { desc = "[s]earch [B]ranches" })
+set("n", "<leader>sc", "<cmd>Telescope git_commits<cr>", { desc = "[s]earch [C]ommits" })
 
 -- extensions pickers
 set("n", "<leader>sn", "<cmd>TodoTelescope<CR>", { desc = "[s]earch [n]otes" })                     -- todo-comments
@@ -217,7 +222,7 @@ set('n', '[Q', "<cmd>cfirst<cr>", { desc = "go to first item in quickfix" })
 --------------------------------------------------------------
 -- luasnip
 --------------------------------------------------------------
-set("n", "<leader>ss", "<CMD>LuaSnipEdit<CR>" , { desc = "[s]earch [s]snippets", silent = true })
+set("n", "<leader>sS", "<CMD>LuaSnipEdit<CR>" , { desc = "[s]earch [s]snippets", silent = true })
 set({"i","s"},"<C-s>",function()
     if require('luasnip').choice_active() then
         require('luasnip.extras.select_choice')()
