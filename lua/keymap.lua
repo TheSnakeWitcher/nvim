@@ -42,7 +42,7 @@ end)
 -- builtins
 --------------------------------------------------------------
 -- set({ 'n', 'v' }, '<Space>', '<Nop>', { silent = true })
-set("i", "<C-c>", "<Esc>",{ silent = true })
+set("i", "<C-c>", "<Esc>", { silent = true })
 -- set("v", "S", ":s/\v/g<LEFT><LEFT>",{desc = "substitute pattern in range globally"})
 
 -- folds
@@ -76,10 +76,10 @@ set("i", "<C-c>", "<Esc>",{ silent = true })
 --------------------------------------------------------------
 -- paste(yank) & delete
 --------------------------------------------------------------
-set({"v","x"}, "<leader>p", "\"_dP",{desc = "delete without copy selected content and paste"})
-set({"n","v"}, "<leader>d", "\"_d",{desc = "delete to hold register"})
-set({"n","v"}, "<leader>y", "\"+y",{desc = "copy to system clipboard"})
-set("n", "<leader>Y", "\"+Y",{desc = "copy to system clipboard entire line"})
+set({"v","x"}, "<leader>p", "\"_dP", { desc = "delete without copy selected content and paste"})
+set({"n","v"}, "<leader>d", "\"_d", { desc = "delete to hold register"})
+set({"n","v"}, "<leader>y", "\"+y", { desc = "copy to system clipboard"})
+set("n", "<leader>Y", "\"+Y", { desc = "copy to system clipboard entire line"})
 
 
 --------------------------------------------------------------
@@ -153,21 +153,21 @@ set({"v","x"}, "<C-k>", ":move '<-2<CR>gv-gv", opts)
 --------------------------------------------------------------
 -- vim pickers
 set('n', '<leader>/', "<cmd>Telescope current_buffer_fuzzy_find<cr>", { desc = '[/] Fuzzily search in current buffer]' })
-set("n" , "<leader>sh" , "<cmd>Telescope help_tags<cr>", {desc = "[s]earch [h]elp" })
-set("n" , "<leader>sm" , "<cmd>Telescope marks<cr>", {desc = "[s]earch [m]arks" })
-set("n" , "<leader>sr" , "<cmd>Telescope registers<cr>",{desc = "[s]earch [r]registers" })
-set("n" , "<leader>sk" , "<cmd>Telescope keymaps<cr>",{desc = "[s]earch [k]eymaps" })
-set("n" , "<leader>sc" , "<cmd>Telescope command_history<cr>",{desc = "[s]earch [c]ommand history" })
+set("n" , "<leader>sh" , "<cmd>Telescope help_tags<cr>", { desc = "[s]earch [h]elp" })
+set("n" , "<leader>sm" , "<cmd>Telescope marks<cr>", { desc = "[s]earch [m]arks" })
+set("n" , "<leader>sr" , "<cmd>Telescope registers<cr>", { desc = "[s]earch [r]registers" })
+set("n" , "<leader>sk" , "<cmd>Telescope keymaps<cr>", { desc = "[s]earch [k]eymaps" })
+set("n" , "<leader>sc" , "<cmd>Telescope command_history<cr>", { desc = "[s]earch [c]ommand history" })
 
-set("n", "<leader>sd", "<cmd>Telescope diagnostics<cr>", { desc = "[s]earch [d]iagnostics"})
-set("n", "<leader>sq", "<cmd>Telescope quickfix<cr>", { desc = "[s]earch [q]uickfix"})
+set("n", "<leader>sd", "<cmd>Telescope diagnostics<cr>", { desc = "[s]earch [d]iagnostics" })
+set("n", "<leader>sq", "<cmd>Telescope quickfix<cr>", { desc = "[s]earch [q]uickfix" })
 
 -- file pickers
-set("n", "<C-f>", "<cmd> Telescope git_files<cr>", {desc = "[s]earch [g]itfiles(tracked by git according to .gitignore)" })
-set("n", "<leader>sf", "<cmd>Telescope find_files<cr>", {desc = "[s]earch [f]iles" })
-set("n", "<leader>sg", "<cmd>Telescope live_grep<cr>", {desc = "[s]earch [g]rep" })
-set("n","<leader>so", "<cmd>Telescope oldfiles<cr>",{desc = "[s]earch [o]ldfiles"})
-set("n","<leader>sP","<cmd>Telescope media_files<cr>",{desc = "[s]earch [P]ics"})
+set("n", "<C-f>", "<cmd> Telescope git_files<cr>", { desc = "[s]earch [g]itfiles(tracked by git according to .gitignore)" })
+set("n", "<leader>sf", "<cmd>Telescope find_files<cr>", { desc = "[s]earch [f]iles" })
+set("n", "<leader>sg", "<cmd>Telescope live_grep<cr>", { desc = "[s]earch [g]rep"  })
+set("n", "<leader>so", "<cmd>Telescope oldfiles<cr>",{ desc = "[s]earch [o]ldfiles" })
+set("n", "<leader>sP", "<cmd>Telescope media_files<cr>", { desc = "[s]earch [P]ics" })
 --set("n","<leader>sF",
 --    function () builtin.find_files{ hidden = true, no_ignore = true} end,
 --    telescope_opts
@@ -177,19 +177,19 @@ set("n","<leader>sP","<cmd>Telescope media_files<cr>",{desc = "[s]earch [P]ics"}
 -- set('n', '<leader>s', builtin.lsp_definitions, {desc = "[s]earch [t]reesitter"})
 
 -- git pickers
-set("n","<C-s>","<cmd>Telescope git_status<cr>", {desc = "[s]earch [S]tatus"})
-set("n","<leader>sS","<cmd>Telescope git_status<cr>", {desc = "[s]earch [S]tatus"})
-set("n", "<leader>sB", "<cmd>Telescope git_branches<cr>", {desc = "[s]earch [B]ranches"})
-set("n", "<leader>sC", "<cmd>Telescope git_commits<cr>", {desc = "[s]earch [C]ommits"})
+set("n", "<C-s>", "<cmd>Telescope git_status<cr>", { desc = "[s]earch [S]tatus" })
+set("n","<leader>sS","<cmd>Telescope git_status<cr>", { desc = "[s]earch [S]tatus" })
+set("n", "<leader>sB", "<cmd>Telescope git_branches<cr>", { desc = "[s]earch [B]ranches" })
+set("n", "<leader>sC", "<cmd>Telescope git_commits<cr>", { desc = "[s]earch [C]ommits" })
 
 -- extensions pickers
-set("n", "<leader>sn", "<cmd>TodoTelescope<CR>", { desc = "[s]earch [n]otes"})                     -- todo-comments
-set("n", "<leader>sN", "<cmd>Telescope notify<CR>", { desc = "[s]earch [N]otifications"})          -- notify
-set("n", "<leader>sp", "<cmd>Telescope projections<CR>" ,{ desc = "[s]earch [p]rojects"})          -- projections
-set("n", "<C-p>", "<cmd>Telescope projections<CR>" ,{ desc = "[s]earch [p]rojects"})               -- projections
-set("n", "<leader>se", "<cmd>Telescope env<CR>" ,{ desc = "[s]earch [e]nvironment"})               -- telescope-env
-set("n", "<leader>st", "<cmd>Telescope telescope-tabs list_tabs<CR>" ,{ desc = "[s]earch [t]abs"}) -- telescope-tabs
-set("n", "<leader>sH", "<cmd>Telescope heading<cr>", { desc = "[s]earch [H]eaders"})               -- telescope-heading
+set("n", "<leader>sn", "<cmd>TodoTelescope<CR>", { desc = "[s]earch [n]otes" })                     -- todo-comments
+set("n", "<leader>sN", "<cmd>Telescope notify<CR>", { desc = "[s]earch [N]otifications" })          -- notify
+set("n", "<leader>sp", "<cmd>Telescope projections<CR>", { desc = "[s]earch [p]rojects" })          -- projections
+set("n", "<C-p>", "<cmd>Telescope projections<CR>", { desc = "[s]earch [p]rojects" })               -- projections
+set("n", "<leader>se", "<cmd>Telescope env<CR>", { desc = "[s]earch [e]nvironment" })               -- telescope-env
+set("n", "<leader>st", "<cmd>Telescope telescope-tabs list_tabs<CR>", { desc = "[s]earch [t]abs" }) -- telescope-tabs
+set("n", "<leader>sH", "<cmd>Telescope heading<cr>", { desc = "[s]earch [H]eaders" })               -- telescope-heading
 
 
 --------------------------------------------------------------
@@ -208,16 +208,16 @@ set('n', '<space>q', vim.diagnostic.setloclist, opts)
 -- quickfix list
 --------------------------------------------------------------
 --set('n', '<leader>q', vim.diagnostic.setloclist)
-set('n', ']q', "<cmd>cnext<cr>",{ desc = "go to next item in quickfix"})
-set('n', '[q', "<cmd>cprevious<cr>",{ desc = "go to previous item in quickfix"})
-set('n', ']Q', "<cmd>clast<cr>", { desc = "go to last item in quickfix"})
-set('n', '[Q', "<cmd>cfirst<cr>", { desc = "go to first item in quickfix"})
+set('n', ']q', "<cmd>cnext<cr>", { desc = "go to next item in quickfix" })
+set('n', '[q', "<cmd>cprevious<cr>", { desc = "go to previous item in quickfix" })
+set('n', ']Q', "<cmd>clast<cr>", { desc = "go to last item in quickfix" })
+set('n', '[Q', "<cmd>cfirst<cr>", { desc = "go to first item in quickfix" })
 
 
 --------------------------------------------------------------
 -- luasnip
 --------------------------------------------------------------
-set("n", "<leader>ss", "<CMD>LuaSnipEdit<CR>" ,{ desc = "[s]earch [s]snippets", silent = true })
+set("n", "<leader>ss", "<CMD>LuaSnipEdit<CR>" , { desc = "[s]earch [s]snippets", silent = true })
 set({"i","s"},"<C-s>",function()
     if require('luasnip').choice_active() then
         require('luasnip.extras.select_choice')()
@@ -228,7 +228,7 @@ end,{desc = "select choice" , silent = true})
 --------------------------------------------------------------
 -- buffer_manager
 --------------------------------------------------------------
-set("n", "<leader>b","<cmd>lua require('buffer_manager.ui').toggle_quick_menu()<cr>",{})
+set("n", "<leader>b", "<cmd>lua require('buffer_manager.ui').toggle_quick_menu()<cr>", {} )
 local keys = '123456789'
 for i = 1, #keys do
   local key = keys:sub(i,i)
@@ -268,52 +268,52 @@ vim.api.nvim_set_keymap("n", "<leader>tp", ":tabp<CR>", { desc = "select previou
 vim.api.nvim_set_keymap("n", "<leader>tmn", ":+tabmove<CR>", { desc = "move current tab to next position",noremap = true })
 vim.api.nvim_set_keymap("n", "<leader>tmp", ":-tabmove<CR>", { desc = "move current tab to previous position" , noremap = true })
 
-set("n", "<leader>tl", "<CMD>Telescope telescope-tabs list_tabs<CR>" ,{ desc = "[s]earch [t]abs"})
+set("n", "<leader>tl", "<CMD>Telescope telescope-tabs list_tabs<CR>", { desc = "[s]earch [t]abs" })
 
 
 --------------------------------------------------------------
 -- trees/views/explorers
 --------------------------------------------------------------
-set("n", "<leader>e", "<cmd>NeoTreeFocusToggle<CR>", { desc = "[e]xplorer "})
-set("n", "<leader>E", "<cmd>AerialToggle<CR>", { desc = "[E]xplorer summary/outline(aerial)"})
-set("n", "<leader>u", "<cmd>UndotreeToggle<CR>", { desc = "[u]ndo tree toggle"})
-set("n", "<leader>D", "<cmd>TroubleToggle workspace_diagnostics<CR>", { desc = "[D]iagnostic toggle"}) -- for nvim-dap
-set("n", "<leader>N", "<cmd>TroubleToggle todo<CR>", { desc = "[N]otes toggle"}) -- for notes/todo
+set("n", "<leader>e", "<cmd>NeoTreeFocusToggle<CR>", { desc = "[e]xplorer" })
+set("n", "<leader>E", "<cmd>AerialToggle<CR>", { desc = "[E]xplorer summary/outline(aerial)" })
+set("n", "<leader>u", "<cmd>UndotreeToggle<CR>", { desc = "[u]ndo tree toggle" })
+set("n", "<leader>D", "<cmd>TroubleToggle workspace_diagnostics<CR>", { desc = "[D]iagnostic toggle" }) -- for nvim-dap
+set("n", "<leader>N", "<cmd>TroubleToggle todo<CR>", { desc = "[N]otes toggle" }) -- for notes/todo
 
 
 --------------------------------------------------------------
 -- git
 ------------------------------------------------------------
 -- gitsigns
-set("n", "[c", "<cmd>Gitsign prev_hunk<cr>", { desc = "prev chunk/change/hunk"})
-set("n", "]c", "<cmd>Gitsign next_hunk<cr>", { desc = "next chunk/change/hunk"})
+set("n", "[c", "<cmd>Gitsign prev_hunk<cr>", { desc = "prev chunk/change/hunk" })
+set("n", "]c", "<cmd>Gitsign next_hunk<cr>", { desc = "next chunk/change/hunk" })
 -- diffview
-set("n", "<leader>G", "<cmd>DiffviewOpen<cr>", { desc = "open diffview"})
+set("n", "<leader>G", "<cmd>DiffviewOpen<cr>", { desc = "open diffview" })
 
 
 --------------------------------------------------------------
 -- nredir
 --------------------------------------------------------------
-set({"n","v"}, "<leader>!", ":Nredir ", { desc = "[!]execute command and redirect output to sidebuffer"})
+set({"n","v"}, "<leader>!", ":Nredir ", { desc = "[!]execute command and redirect output to sidebuffer" })
 
 
 --------------------------------------------------------------
 -- vim-shell-executor
 --------------------------------------------------------------
-set("n", "<leader>R", "<cmd>ExecuteBuffer<cr>", { desc = "[R]un buffer"})
-set("v", "<leader>R", "<cmd>ExecuteSelection<cr>", { desc = "[R]un selection"})
+set("n", "<leader>R", "<cmd>ExecuteBuffer<cr>", { desc = "[R]un buffer" })
+set("v", "<leader>R", "<cmd>ExecuteSelection<cr>", { desc = "[R]un selection" })
 
 
 --------------------------------------------------------------
 -- zetelkasten
 --------------------------------------------------------------
-set("n","<leader>zn","<cmd>Telekasten new_note<cr>",{desc = "[z]ettelkasten [n]ote"})
-set("n","<leader>zN","<cmd>Telekasten new_templated_note<cr>",{desc = "[z]ettelkasten [N]ote templated"})
-set("n","<leader>zf","<cmd>Telekasten find_notes<cr>",{desc = "[z]ettelkasten [f]ind"})
-set("n","<leader>zs","<cmd>Telekasten find_notes<cr>",{desc = "[z]ettelkasten [s]earch"})
-set("n","<leader>zg","<cmd>Telekasten search_notes<cr>")
-set("n","<leader>zt","<cmd>Telekasten show_tags<cr>",{desc = "[z]ettelkasten [t]ag"})
-set("n","<leader>zv","<cmd>Telekasten switch_vault<cr>",{desc = "[z]ettelkasten [v]ault"})
+set("n", "<leader>zn", "<cmd>Telekasten new_note<cr>", { desc = "[z]ettelkasten [n]ote" })
+set("n", "<leader>zN", "<cmd>Telekasten new_templated_note<cr>", { desc = "[z]ettelkasten [N]ote templated" })
+set("n", "<leader>zf", "<cmd>Telekasten find_notes<cr>", { desc = "[z]ettelkasten [f]ind" })
+set("n", "<leader>zs", "<cmd>Telekasten find_notes<cr>", { desc = "[z]ettelkasten [s]earch" })
+set("n", "<leader>zg", "<cmd>Telekasten search_notes<cr>")
+set("n", "<leader>zt", "<cmd>Telekasten show_tags<cr>", { desc = "[z]ettelkasten [t]ag" })
+set("n", "<leader>zv", "<cmd>Telekasten switch_vault<cr>", { desc = "[z]ettelkasten [v]ault" })
 -- set("i","<leader>[[","<esc><cmd>Telekasten insert_link<cr>",{desc = "insert link"})
 -- set("n","<leader>z#","<cmd>Telekasten show_tags<cr>")
 -- set("n","<leader>zb","<cmd>Telekasten show_backlinks<cr>")
@@ -337,37 +337,37 @@ set("n","<leader>zv","<cmd>Telekasten switch_vault<cr>",{desc = "[z]ettelkasten 
 --------------------------------------------------------------
 -- overseer
 --------------------------------------------------------------
-set("n","<leader>Tt","<cmd>OverseerToggle<cr>",{desc = "[T]ask [t]oggle"})
-set("n","<leader>Ti","<cmd>OverseerInfo<cr>",{desc = "[T]ask [i]nfo"})
-set("n","<leader>Te","<cmd>OverseerToggle<cr>",{desc = "[T]ask [e]xplorer"})
-set("n","<leader>Tr","<cmd>OverseerRun<cr>",{desc = "[T]ask [r]un"})
-set("n","<leader>TR","<cmd>OverseerRunCmd<cr>",{desc = "[T]ask [R]un"})
-set("n","<leader>Tl","<cmd>OverseerRestartLast<cr>",{desc = "[T]ask [l]ast"})
+set("n", "<leader>Tt", "<cmd>OverseerToggle<cr>", { desc = "[T]ask [t]oggle" })
+set("n", "<leader>Ti", "<cmd>OverseerInfo<cr>", { desc = "[T]ask [i]nfo" })
+set("n", "<leader>Te", "<cmd>OverseerToggle<cr>", { desc = "[T]ask [e]xplorer" })
+set("n", "<leader>Tr", "<cmd>OverseerRun<cr>", { desc = "[T]ask [r]un" })
+set("n", "<leader>TR", "<cmd>OverseerRunCmd<cr>", { desc = "[T]ask [R]un" })
+set("n", "<leader>Tl", "<cmd>OverseerRestartLast<cr>", { desc = "[T]ask [l]ast" })
 
 
 --------------------------------------------------------------
 -- neotest
 --------------------------------------------------------------
-set("n","<leader>tR",'<cmd>lua require("neotest").run.run({ suite= true})<cr>',{desc = "[t]est [R]un all/suite"})
-set("n","<leader>tr","<cmd>Neotest run<cr>",{desc = "[t]est [r]un"})
-set("n","<leader>ts","<cmd>Neotest summary<cr>",{desc = "[t]est [r]un"})
+set("n", "<leader>tR", '<cmd>lua require("neotest").run.run({ suite= true})<cr>', { desc = "[t]est [R]un all/suite" })
+set("n", "<leader>tr", "<cmd>Neotest run<cr>", { desc = "[t]est [r]un" })
+set("n", "<leader>ts", "<cmd>Neotest summary<cr>", { desc = "[t]est [r]un" })
 
 
 --------------------------------------------------------------
 -- IconPicker
 --------------------------------------------------------------
-set("n","<A-i>","<cmd>IconPickerNormal<cr>",{desc = "[i]con"})
-set("i","<A-i>","<cmd>IconPickerInsert<cr>",{desc = "[i]con"})
+set("n", "<A-i>", "<cmd>IconPickerNormal<cr>", { desc = "[i]con" })
+set("i", "<A-i>", "<cmd>IconPickerInsert<cr>", { desc = "[i]con" })
 
 
 --------------------------------------------------------------
 -- Treesj
 --------------------------------------------------------------
-set("n","<leader>j","<cmd>lua require('treesj').toggle()<cr>",{desc = "toggle split/joint of code block"})
+set("n", "<leader>j", "<cmd>lua require('treesj').toggle()<cr>", { desc = "toggle split/joint of code block"})
 
 
 --------------------------------------------------------------
 -- nvim-ufo
 --------------------------------------------------------------
-set("n","zR", require("ufo").openAllFolds, {desc = "open all folds"})
-set("n","zM", require("ufo").closeAllFolds, {desc = "close all folds"})
+set("n", "zR", require("ufo").openAllFolds, { desc = "open all folds" })
+set("n", "zM", require("ufo").closeAllFolds, { desc = "close all folds" })
