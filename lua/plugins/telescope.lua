@@ -31,6 +31,7 @@ for _, module in ipairs {
 
     "chisel",
     "hardhat",
+    -- "software-licenses",
     -- "file_browser",
     -- "neoclip",
     -- "cheat",
