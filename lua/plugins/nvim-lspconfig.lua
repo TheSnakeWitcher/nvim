@@ -88,9 +88,11 @@ if not ok then
     return
 end
 
--- local capabilities = cmp_nvim_lsp.default_capabilities()
-local capabilities = vim.lsp.protocol.make_client_capabilities()
-capabilities = cmp_nvim_lsp.default_capabilities(capabilities)
+local capabilities = vim.tbl_deep_extend(
+    "force",
+    vim.lsp.protocol.make_client_capabilities(),
+    cmp_nvim_lsp.default_capabilities()
+)
 
 --- @help {nvim-ufo}
 capabilities.textDocument.foldingRange = {
