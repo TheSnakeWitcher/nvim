@@ -4,7 +4,8 @@ if not ok then
     return
 end
 
-cmp.setup.filetype('latex', {
+
+cmp.setup.filetype('plaintex', {
     sources = cmp.config.sources({
         {
             name = "latex_symbols",
