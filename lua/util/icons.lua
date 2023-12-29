@@ -18,12 +18,14 @@ return {
     DefaultFile = "󰈙",
 
     Diagnostic = "󰒡",
+    DiagnosticWarn = "",
     DiagnosticError = "",
     DiagnosticErrorAlt = "",
+    DiagnosticErrorAlt2 = "󰅚",
     DiagnosticHint = "󰌵", --  ⚑
+    DiagnosticHintAlt = "",
     DiagnosticInfo = "󰋼", --  ℹ 󰙎 
     DiagnosticInfoAlt = "",
-    DiagnosticWarn = "",
 
     Ellipsis = "…",
     FileNew = "",
