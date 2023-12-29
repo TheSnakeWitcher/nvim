@@ -471,6 +471,12 @@ require("lazy").setup({
     {
         "0oAstro/silicon.lua",
         config = function() load_config("silicon") end,
+        cmd = "Screenshot",
+    },
+    {
+        -- refactoring tool
+        "ThePrimeagen/refactoring.nvim",
+        cmd = "Refactor",
     },
     -- {
     --     "cuducos/yaml.nvim",
@@ -480,7 +486,6 @@ require("lazy").setup({
     --         "nvim-telescope/telescope.nvim",
     --     },
     -- },
-    -- "ThePrimeagen/refactoring.nvim"  -- refactoring tool
     -- "mg979/vim-visual-multi",
 
 
@@ -550,7 +555,7 @@ require("lazy").setup({
         -- 'toppair/peek.nvim',
         "ellisonleao/glow.nvim",
         config = true,
-        cmd = "Glow"
+        cmd = "Glow",
     },
     -- http client
     {
@@ -586,12 +591,17 @@ require("lazy").setup({
     -- git
     ---- use "Almo7aya/openingh.nvim"  -- open file or project in github for neovim wirtten in lua
     "tpope/vim-fugitive", -- git integration for cmdline
-    "junegunn/gv.vim",    -- git commit browser
+    {
+        -- git commit browser
+        "junegunn/gv.vim",
+        cmd = "GV",
+    },
     {
         -- generate sharable file permalinks (with line ranges) for git host websites
         "linrongbin16/gitlinker.nvim",
         config = function() load_config("gitlinker") end,
-    }, 
+        cmd = "GL",
+    },
     {
         -- git integration for buffers
         "lewis6991/gitsigns.nvim",
