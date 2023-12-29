@@ -11,9 +11,10 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
+
 local load_config = util.load_config
 
-
+--- @PluginList https://neovimcraft.com/
 --- @PluginList https://dotfyle.com/
 --- @PluginList https://github.com/yutkat/my-neovim-pluginlist
 --- @PluginList https://github.com/rockerBOO/awesome-neovim.git
@@ -25,7 +26,7 @@ require("lazy").setup({
     { "nvim-lua/popup.nvim" },   -- popup api implementation of vim for neovim
     { "ray-x/guihua.lua" },      -- GUI library
     { "MunifTanjim/nui.nvim" },  -- UI component library
-    { "folke/neodev.nvim" },     -- plugin development setup
+    { "folke/neodev.nvim" },     -- plugin development setup, alternative https://github.com/danymat/neogen
     { "zdcthomas/yop.nvim" },    -- easier custom operator management
     -- tools management UI to easily install lsp,dap,linters,formatters,etc
     {
@@ -49,14 +50,69 @@ require("lazy").setup({
     -- ui
     --------------------------------------------------------------
     -- colorschemes
+    -- {
+    --     "doom-neovim/doom-nvim",
+    --     'NTBBloodbath/doom-one.nvim',
+        -- config = function()
+		    -- vim.g.doom_one_enable_treesitter = true       -- Enable TS support
+		    -- vim.g.doom_one_terminal_colors = false         -- Set :terminal colors
+		    -- vim.g.doom_one_italic_comments = true        -- Enable italic comments
+		    -- vim.g.doom_one_cursor_coloring = false        -- Add color to cursor
+      --       vim.g.doom_one_diagnostics_text_color = false -- Color whole diagnostic text or only underline
+		    -- vim.g.doom_one_transparent_background = false -- Enable transparent background
+						--
+      --       -- Pumblend transparency
+		    -- vim.g.doom_one_pumblend_enable = false
+		    -- vim.g.doom_one_pumblend_transparency = 20
+						--
+      --       -- Plugins integration
+		    -- vim.g.doom_one_plugin_telescope = false
+		    -- vim.g.doom_one_plugin_dashboard = true
+		    -- vim.g.doom_one_plugin_indent_blankline = true
+		    -- vim.g.doom_one_plugin_neorg = true
+		    -- vim.g.doom_one_plugin_barbar = false
+		    -- vim.g.doom_one_plugin_neogit = true
+		    -- vim.g.doom_one_plugin_nvim_tree = true
+		    -- vim.g.doom_one_plugin_startify = true
+		    -- vim.g.doom_one_plugin_whichkey = true
+		    -- vim.g.doom_one_plugin_vim_illuminate = true
+		    -- vim.g.doom_one_plugin_lspsaga = false
+	    -- end,
+        -- lazy = true,
+        -- priority = 1000,
+	    -- init = function() vim.cmd("colorscheme doom-one") end,
+    -- },
     {
         "romgrk/doom-one.vim",
+        lazy = true,
         priority = 1000,
         init = function() vim.cmd("colorscheme doom-one") end,
     },
-    { "folke/tokyonight.nvim", lazy = true },
+    {
+        "folke/tokyonight.nvim",
+        lazy = true,
+        -- priority = 1000,
+        -- init = function() vim.cmd("colorscheme tokyonight-storm") end,
+        -- opts = { 
+        --     on_highlights = function(hl, c)
+        --         hl.CursorLineNr = { fg = c.orange, bold = true }
+        --         -- hl.LineNr = { fg = c.orange, bold = true }
+        --         hl.LineNrAbove = { fg = c.fg_gutter }
+        --         hl.LineNrBelow = { fg = c.fg_gutter }
+        --         local prompt = "#2d3149"
+        --         hl.TelescopeNormal = { bg = c.bg_dark, fg = c.fg_dark }
+        --         hl.TelescopeBorder = { bg = c.bg_dark, fg = c.bg_dark }
+        --         hl.TelescopePromptNormal = { bg = prompt }
+        --         hl.TelescopePromptBorder = { bg = prompt, fg = prompt }
+        --         hl.TelescopePromptTitle = { bg = c.fg_gutter, fg = c.orange }
+        --         hl.TelescopePreviewTitle = { bg = c.bg_dark, fg = c.bg_dark }
+        --         hl.TelescopeResultsTitle = { bg = c.bg_dark, fg = c.bg_dark }
+        --     end,
+        -- }
+    },
     { "Mofiqul/dracula.nvim",  lazy = true },
     { "catppuccin/nvim", name = "catppuccin", lazy = true },
+    { "marko-cerovac/material.nvim" , lazy = true },
     -- icons
     {
         "nvim-tree/nvim-web-devicons",
@@ -70,21 +126,20 @@ require("lazy").setup({
     },
     -- statusline (bottom bar)
     {
+         -- watch "tjdevries/express_line.nvim",
         "nvim-lualine/lualine.nvim",
         config = function() load_config("lualine") end,
+        -- dependencies = {
+        --     "arkav/lualine-lsp-progress",
+        -- }
     },
-    -- floating statusline
-    -- {
-    --     "b0o/incline.nvim",
-    -- }
     -- tabline (top bar)
+    -- {
+    --     "nanozuki/tabby.nvim",
+    --     config = function() load_config("tabby") end,
+    -- },
+    -- lsp symbols in winbar(just below tabline)
     {
-        "nanozuki/tabby.nvim",
-        config = function() load_config("tabby") end,
-    },
-    -- lsp symbols (just below top bar)
-    {
-        -- alternatives: https://github.com/SmiteshP/nvim-navic
         "glepnir/lspsaga.nvim",
         config = function() load_config("lspsaga") end,
     },
@@ -138,10 +193,14 @@ require("lazy").setup({
         "yaocccc/nvim-foldsign",
         config = function() load_config("nvim-foldsign") end,
     },
+    {
+        "kevinhwang91/nvim-ufo",
+        dependencies = "kevinhwang91/promise-async",
+        config = function() load_config("nvim-ufo") end,
+    },
+    -- windows
     -- {
-    --     "kevinhwang91/nvim-ufo",
-    --     dependencies = "kevinhwang91/promise-async",
-    --     config = function() load_config("nvim-ufo") end,
+    --     "sindrets/winshift.nvim", -- rearrange window easily
     -- },
     -- vscode like icons for completion menu
     { "onsails/lspkind.nvim" },
@@ -160,9 +219,10 @@ require("lazy").setup({
         "lukas-reineke/headlines.nvim",
         opts = {},
     },
-    "Eandrju/cellular-automaton.nvim",
-
-
+    "Eandrju/cellular-automaton.nvim", -- funny animation in ui
+    -- "xiyaowong/transparent.nvim",   -- transparent ui
+    -- "anuvyklack/fold-preview.nvim", -- fold preview
+    -- { "AckslD/messages.nvim", opts = {} }, -- buf for better messages management
 
 
     ----------------------------------------------------------------
@@ -182,6 +242,8 @@ require("lazy").setup({
             "RRethy/nvim-treesitter-endwise",              -- add `end` to non-brackets base languajes
         }
     },
+    -- "CKolkey/ts-node-action", -- run arbitrary actions in treesitter nodes
+
 
 
     ----------------------------------------------------------------
@@ -271,11 +333,9 @@ require("lazy").setup({
             -- }
             -- "nvim-telescope/telescope-cheat.nvim",  -- an attempt to recreate cheat.sh
             -- "sdushantha/fontpreview",               -- search fonts
-            
-
             { "FabianWirth/search.nvim" },             -- tabs for telescope
-
-
+            -- "chip/telescope-software-licenses.nvim", -- search licenses
+            -- "piersolenski/telescope-import.nvim"     -- seach imports statements
         },
     },
     -- buffer and mark management
@@ -306,6 +366,15 @@ require("lazy").setup({
         "axieax/urlview.nvim",
         config = function() load_config("urlview") end,
     },
+    -- search nerd fonts glyphs
+    {
+        '2kabhishek/nerdy.nvim',
+        dependencies = {
+            'stevearc/dressing.nvim',
+            'nvim-telescope/telescope.nvim',
+        },
+        cmd = 'Nerdy',
+    },
 
 
     --------------------------------------------------------------
@@ -316,12 +385,12 @@ require("lazy").setup({
         "hrsh7th/nvim-cmp",
         config = function() load_config("nvim-cmp") end,
         dependencies = {
-            "hrsh7th/cmp-buffer",       -- buffers completion source
-            "hrsh7th/cmp-path",         -- paths completion source
-            "hrsh7th/cmp-cmdline",      -- cmdline completion source
-            "hrsh7th/cmp-nvim-lua",     -- neovim lua api completion source
-            "hrsh7th/cmp-nvim-lsp",     -- lsp completion source
-            "saadparwaiz1/cmp_luasnip", -- luasnip snippet engine completion source
+            "hrsh7th/cmp-buffer",        -- buffers completion source
+            "hrsh7th/cmp-path",          -- paths completion source
+            "hrsh7th/cmp-cmdline",       -- cmdline completion source
+            "hrsh7th/cmp-nvim-lua",      -- neovim lua api completion source
+            "hrsh7th/cmp-nvim-lsp",      -- lsp completion source
+            "saadparwaiz1/cmp_luasnip",  -- luasnip snippet engine completion source
             -- luasnip choice node completion source
             -- {
             --     "doxnit/cmp-luasnip-choice",
@@ -332,6 +401,7 @@ require("lazy").setup({
             "davidsierradz/cmp-conventionalcommits", -- conventional commtis
             "kdheepak/cmp-latex-symbols",            -- latex completion source
             "hrsh7th/cmp-calc",                      -- math calculation source
+            "chrisgrieser/cmp-nerdfont",             -- nerd font source
             -- github copilot source
             -- {
             --     "zbirenbaum/copilot-cmp",
@@ -371,11 +441,11 @@ require("lazy").setup({
         "folke/which-key.nvim",
         config = function() load_config("which-key") end,
     },
-    "mateuszwieloch/automkdir.nvim", -- automatically creates non-existent parent directories when writing a file
     "tpope/vim-repeat",              -- make repeatable plugins operations
     "tpope/vim-surround",            -- -- surround operations on vim textobjects/symbols `"`,`()` ,`[]`,`{}`,`<>`,etc , check: https://github.com/kylechui/nvim-surround
     "tpope/vim-speeddating",         -- allow C-a/C-x to increment/decrement dates and times
     "mbbill/undotree",               -- save tree of undo operations
+    -- "simnalamburt/vim-mundo",        -- undotree visualizer
     "unblevable/quick-scope",        -- highligh unique chars per word in line(to use with `f`,`F`,`t`,`T`)
     -- to close automatically `(`,`[`,`"`,`'`
     {
@@ -390,6 +460,7 @@ require("lazy").setup({
     { "sbulav/nredir.nvim" }, -- redirect outputs of commands and filters(external commands) to temp sidebuffer
     -- split/joint text blocks efficiently
     {
+        -- https://github.com/echasnovski/mini.nvim/blob/main/readmes/mini-splitjoin.md
         'Wansmer/treesj',
         keys = { '<leader>j' },
         dependencies = { 'nvim-treesitter/nvim-treesitter' },
@@ -401,8 +472,17 @@ require("lazy").setup({
         "0oAstro/silicon.lua",
         config = function() load_config("silicon") end,
     },
+    -- {
+    --     "cuducos/yaml.nvim",
+    --     ft = { "yaml" },
+    --     dependencies = {
+    --         "nvim-treesitter/nvim-treesitter",
+    --         "nvim-telescope/telescope.nvim",
+    --     },
+    -- },
+    -- "ThePrimeagen/refactoring.nvim"  -- refactoring tool
+    -- "mg979/vim-visual-multi",
 
-    -- https://github.com/mg979/vim-visual-multi
 
     --------------------------------------------------------------
     -- dap/test
@@ -428,6 +508,7 @@ require("lazy").setup({
             "nvim-neotest/neotest-go",
             "rouge8/neotest-rust",
             "llllvvuu/neotest-foundry",
+            "nvim-neotest/neotest-plenary",
         },
     },
 
@@ -460,6 +541,7 @@ require("lazy").setup({
     },
     -- task/jobs management
     {
+        -- alternative: https://github.com/arjunmahishi/flow.nvim
         'stevearc/overseer.nvim',
         config = function() load_config("overseer") end,
     },
@@ -492,7 +574,6 @@ require("lazy").setup({
     },
     -- doc generation
     "ibhagwan/ts-vimdoc.nvim", -- treesitter base markdown to vimdoc convertion tool
-    -- "kndndrj/nvim-projector" --  project-specific configs for nvim-dap with telescope
     -- "milanglacier/yarepl.nvim" --
     -- conceal
     ---- use "KeitaNakamura/tex-conceal.vim",
@@ -506,6 +587,11 @@ require("lazy").setup({
     ---- use "Almo7aya/openingh.nvim"  -- open file or project in github for neovim wirtten in lua
     "tpope/vim-fugitive", -- git integration for cmdline
     "junegunn/gv.vim",    -- git commit browser
+    {
+        -- generate sharable file permalinks (with line ranges) for git host websites
+        "linrongbin16/gitlinker.nvim",
+        config = function() load_config("gitlinker") end,
+    }, 
     {
         -- git integration for buffers
         "lewis6991/gitsigns.nvim",
@@ -613,11 +699,8 @@ require("lazy").setup({
     ----------------------------------------------------------------
     ---- experimental
     ----------------------------------------------------------------
-    ---- ui
-    --{
-    --    -- tree
-    --    "ldelossa/litee.nvim",
-    --}
+    -- ui
+    --  "ldelossa/litee.nvim", -- ui widgets library
     --{
     --    -- lsp in statusline
     --    "nvim-lua/lsp-status.nvim",
@@ -642,10 +725,9 @@ require("lazy").setup({
     ---- cmds
     -- "protex/better-digraphs.nvim"      -- better digraphs
 
-    ---- tool for test interaction
-    ---- use "tpope/vim-unimpaired",          -- complementary mapping
-    ---- use "tpope/vim-sleuth"               -- detect tabstop and shiftwidth automatically
-    ---- use "ThePrimeagen/refactoring.nvim"  -- refactoring tool
+    ---- test interaction
+    ---- "tpope/vim-unimpaired",          -- complementary mapping
+    ---- "tpope/vim-sleuth"               -- detect tabstop and shiftwidth automatically
 
     ---- code runner
     --{
@@ -658,7 +740,7 @@ require("lazy").setup({
     -- REPLS
     --{
     --    'benlubas/molten-nvim ',
-    --}
+    --},
     --{
     --    -- jupyter interaction
     --    'dccsillag/magma-nvim',
@@ -668,11 +750,11 @@ require("lazy").setup({
     --        vim.g.magma_automatically_open_output = false
     --        vim.g.magma_image_provider = "ueberzug"
     --    end,
-    --}
+    --},
     -- {
     --     -- develop integration with overseer
     --     "kndndrj/nvim-dbee",
-    -- }
+    -- },
     ---- "luk400/vim-jukit",
     ---- "GCBallesteros/jupytext.nvim",
     ---- "Jxstxs/conceal.nvim"  -- conceal management
@@ -705,6 +787,8 @@ require("lazy").setup({
     ---- redis.com/r/neovim/comments/101f4w0/how_can_i_get_all_buffers_of_current_tab
     ---- vim.fn.tabpagebuflist()
     ---- scope.nvim / tabby.nvim
+
+    -- https://github.com/someone-stole-my-name/yaml-companion.nvim
 
 
     ----------------------------------------------------------------
