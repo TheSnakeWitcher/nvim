@@ -219,7 +219,11 @@ require("lazy").setup({
         "lukas-reineke/headlines.nvim",
         opts = {},
     },
-    "Eandrju/cellular-automaton.nvim", -- funny animation in ui
+    {
+        -- funny animation in ui
+        "Eandrju/cellular-automaton.nvim",
+        cmd = "CellularAutomaton",
+    },
     -- "xiyaowong/transparent.nvim",   -- transparent ui
     -- "anuvyklack/fold-preview.nvim", -- fold preview
     -- { "AckslD/messages.nvim", opts = {} }, -- buf for better messages management
