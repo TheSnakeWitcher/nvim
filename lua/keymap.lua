@@ -172,7 +172,7 @@ set("n", "<C-f>", "<cmd> Telescope git_files<cr>", { desc = "[s]earch [g]itfiles
 set("n", "<leader>sf", "<cmd>Telescope find_files<cr>", { desc = "[s]earch [f]iles" })
 set("n", "<leader>sg", "<cmd>Telescope live_grep<cr>", { desc = "[s]earch [g]rep"  })
 set("n", "<leader>so", "<cmd>Telescope oldfiles<cr>",{ desc = "[s]earch [o]ldfiles" })
-set("n", "<leader>sP", "<cmd>Telescope media_files<cr>", { desc = "[s]earch [P]ics" })
+set("n", "<leader>sP", "<cmd>Telescope lazy<cr>", { desc = "[s]earch [P]ics" })
 --set("n","<leader>sF",
 --    function () builtin.find_files{ hidden = true, no_ignore = true} end,
 --    telescope_opts
