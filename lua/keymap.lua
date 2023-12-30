@@ -233,17 +233,18 @@ end,{desc = "select choice" , silent = true})
 --------------------------------------------------------------
 -- buffer_manager
 --------------------------------------------------------------
-set("n", "<leader>b", "<cmd>lua require('buffer_manager.ui').toggle_quick_menu()<cr>", {} )
-local keys = '123456789'
-for i = 1, #keys do
-  local key = keys:sub(i,i)
-  set(
-    'n',
-    string.format('<A>%s', key),
-    function () require("buffer_manager.ui").nav_file(i) end,
-    {}
-  )
+local ok, _ = pcall(require,'buffer_manager')
+if not ok then
+    vim.notify("buffer_manager keymaps not defined")
+else
+    set("n", "<leader>b", "<cmd>lua require('buffer_manager.ui').toggle_quick_menu()<cr>", {} )
+    local keys = '123456789'
+    for i = 1, #keys do
+        local key = keys:sub(i,i)
+        set( 'n', string.format('<A>%s', key), function() require("buffer_manager.ui").nav_file(i) end, {})
+    end
 end
+
 
 
 --------------------------------------------------------------
@@ -257,7 +258,6 @@ set("n", "<leader>tv", "<Cmd>ToggleTerm direction=vertical size=100<CR>", { desc
 -- urlview
 --------------------------------------------------------------
 set("n", "<leader>su", "<Cmd>UrlView buffer<CR>", { desc = "[s]earch [u]rls in buffer" })
-set("n", "<leader>sU", "<Cmd>UrlView lazy<CR>", { desc = "[s]earch [U]rls of plugins" })
 
 
 --------------------------------------------------------------
