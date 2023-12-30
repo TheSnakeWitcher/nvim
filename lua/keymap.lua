@@ -374,5 +374,10 @@ set("n", "<leader>j", "<cmd>lua require('treesj').toggle()<cr>", { desc = "toggl
 --------------------------------------------------------------
 -- nvim-ufo
 --------------------------------------------------------------
-set("n", "zR", require("ufo").openAllFolds, { desc = "open all folds" })
-set("n", "zM", require("ufo").closeAllFolds, { desc = "close all folds" })
+local ok , ufo = pcall(require,"ufo")
+if not ok then
+    vim.notify("ufo keymaps not created")
+else
+    set("n", "zR", ufo.openAllFolds, { desc = "open all folds" })
+    set("n", "zM", ufo.closeAllFolds, { desc = "close all folds" })
+end
