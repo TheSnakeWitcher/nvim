@@ -103,10 +103,10 @@ require("lazy").setup({
         -- }
     },
     -- tabline (top bar)
-    {
-        "willothy/nvim-cokeline",
-        config = function() load_config("nvim-cokeline") end,
-    },
+    -- {
+    --     "willothy/nvim-cokeline",
+    --     config = function() load_config("nvim-cokeline") end,
+    -- },
     -- {
     --     "nanozuki/tabby.nvim",
     --     config = function() load_config("tabby") end,
@@ -154,10 +154,10 @@ require("lazy").setup({
         config = function() load_config("paint") end,
     },
     "itchyny/vim-highlighturl", -- highlighturl urls in buffer
+    -- "utilyre/sentiment.nvim" -- highlighturl parents `(` , `[` or `{`
     -- highlighturl indent
     {
-        -- "utilyre/sentiment.nvim" -- highlighturl parents `(` , `[` or `{` TODO: teset this
-        -- check: https://github.com/echasnovski/mini.indentscope
+        -- alternative https://github.com/echasnovski/mini.indentscope
         "lukas-reineke/indent-blankline.nvim",
         main = "ibl",
         opts = {},
@@ -168,7 +168,6 @@ require("lazy").setup({
         config = function() load_config("colorizer") end,
     },
     -- folds
-    -- { "luukvbaal/statuscol.nvim" }, TODO: check
     {
         "yaocccc/nvim-foldsign",
         config = function() load_config("nvim-foldsign") end,
@@ -178,6 +177,11 @@ require("lazy").setup({
         dependencies = "kevinhwang91/promise-async",
         config = function() load_config("nvim-ufo") end,
     },
+    -- signcol config
+    -- {
+    --     "luukvbaal/statuscol.nvim",
+    --     config = function() require("statuscol").setup() end,
+    -- },
     -- windows
     -- {
     --     "sindrets/winshift.nvim", -- rearrange window easily
@@ -190,10 +194,8 @@ require("lazy").setup({
     --     config = function() load_config("significant") end,
     -- }
     -- wildmenu
-    -- {
-    --     "gelguy/wilder.nvim",
-    -- }
-    -- use "VonHeikemen/fine-cmdline.nvim" -- enhaced cmdline
+    -- "gelguy/wilder.nvim",
+    -- "VonHeikemen/fine-cmdline.nvim" -- enhaced cmdline
     -- highligh headers and codeblocks
     {
         "lukas-reineke/headlines.nvim",
@@ -211,9 +213,14 @@ require("lazy").setup({
     -- generic sidebar
     -- { "sidebar-nvim/sidebar.nvim" },
     -- command preview
-    -- { smjonas/live-command.nvim },  TODO: check these
+    {
+        "smjonas/live-command.nvim",
+        config = function() load_config("live-command") end,
+        cmd = "Norm",
+    },
     -- help in anchorable/resizable floating window
     -- { "Tyler-Barham/floating-help.nvim" },
+    -- { "dgagn/diagflow.nvim" },  -- message of focused diagnostics in top-rigth corner
 
 
 
@@ -259,7 +266,6 @@ require("lazy").setup({
         config = function() load_config("nvim-lspconfig") end,
     },
     -- bridge/hook up non-LSP tools to the LSP UX to inject LSP diagnostics, code actions via lua
-    -- { "dgagn/diagflow.nvim" },  -- message of focused diagnostics  in top-rigth corner
     {
         "nvimtools/none-ls.nvim",
         config = function() load_config("none-ls") end,
@@ -292,7 +298,7 @@ require("lazy").setup({
 
 
     --------------------------------------------------------------
-    -- search
+    -- navigation
     --------------------------------------------------------------
     -- fzf
     {
@@ -368,6 +374,7 @@ require("lazy").setup({
         },
         cmd = 'Nerdy',
     },
+    -- "s1n7ax/nvim-window-picker", -- select between open windows
 
 
     --------------------------------------------------------------
@@ -450,28 +457,22 @@ require("lazy").setup({
         "numToStr/Comment.nvim",
         config = function() load_config("Comment") end,
     },
-    -- macro management TODO: test this
+    -- macro management
     -- {
+    --     -- must clean default @recording message 
     --     "ecthelionvi/NeoComposer.nvim",
-    --
+    --     dependencies = { "kkharji/sqlite.lua" },
     -- },
-    -- temp buffer or scrach buffer management TODO: test this
-    -- {
-    --      "mong8se/actually.nvim",
-    -- },
-    -- ask for correct file to open when multiple files share the same prefix
-    -- {
-    --      "m-demare/attempt.nvim",
-    --
-    -- },
-    { "sbulav/nredir.nvim" }, -- redirect outputs of commands and filters(external commands) to temp sidebuffer
+    "mong8se/actually.nvim", -- ask for correct file to open when autocompletion doesn't work because multiple files share the same prefix
+    "sbulav/nredir.nvim",    -- redirect outputs of commands and filters(external commands) to temp sidebuffer
+    -- { "m-demare/attempt.nvim" }, temp buffer or scrach buffer management
     -- split/joint text blocks efficiently
     {
         -- https://github.com/echasnovski/mini.nvim/blob/main/readmes/mini-splitjoin.md
         'Wansmer/treesj',
-        keys = { '<leader>j' },
         dependencies = { 'nvim-treesitter/nvim-treesitter' },
         config = function() load_config('treesj') end,
+        keys = { '<leader>j' },
     },
     -- move line/blocks
     -- { 
@@ -484,11 +485,11 @@ require("lazy").setup({
         config = function() load_config("silicon") end,
         cmd = "Screenshot",
     },
-    {
-        -- refactoring tool
-        "ThePrimeagen/refactoring.nvim",
-        cmd = "Refactor",
-    },
+    -- {
+    --     -- refactoring tool
+    --     "ThePrimeagen/refactoring.nvim",
+    --     cmd = "Refactor",
+    -- },
     -- {
     --     "cuducos/yaml.nvim",
     --     ft = { "yaml" },
@@ -521,10 +522,10 @@ require("lazy").setup({
         config = function() load_config("neotest") end,
         dependencies = {
             "antoinemadec/FixCursorHold.nvim",
+            "nvim-neotest/neotest-plenary",
             "nvim-neotest/neotest-go",
             "rouge8/neotest-rust",
             "llllvvuu/neotest-foundry",
-            "nvim-neotest/neotest-plenary",
         },
     },
 
