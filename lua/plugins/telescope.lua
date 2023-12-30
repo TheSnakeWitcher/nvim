@@ -24,14 +24,17 @@ for _, module in ipairs {
     "projections",
     "dap",
     "env",
-    "aerial",
-    "media_files",
     "heading",
+    "aerial",
     "zoxide",
+    "lazy",
 
     "chisel",
     "hardhat",
+    -- "dap",
+    -- "color_names",
     -- "telescope-tabs",
+    -- "media_files",
     -- "macros",
     -- "software-licenses",
     -- "neoclip",
@@ -209,6 +212,14 @@ telescope.setup({
 
             },
         },
+
+        --- @help {telescope-lazy.nvim-configuratio}
+        lazy = {
+            mappings = {
+                open_in_browser = "<cr>",
+                change_cwd_to_plugin = "<leader>",
+            },
+        }
 
     },
 
