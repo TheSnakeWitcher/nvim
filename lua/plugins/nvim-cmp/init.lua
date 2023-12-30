@@ -22,18 +22,6 @@ end
 --- @help {cmp-config}
 cmp.setup({
 
-    -- enabled = function()
-    --     local context = require 'cmp.config.context'  -- disable completion in comments
-    --
-    --     -- keep command mode completion enabled when cursor is in a comment
-    --     if vim.api.nvim_get_mode().mode == 'c' then
-    --         return true
-    --     else
-    --         return not context.in_treesitter_capture("comment")
-    --                and not context.in_syntax_group("Comment")
-    --     end
-    -- end,
-
     snippet = {
         expand = function(args)
             luasnip.lsp_expand(args.body)
@@ -132,6 +120,7 @@ cmp.setup({
 --------------------------------------------------------------
 
 local cmp_dir = "plugins.nvim-cmp."
-require(cmp_dir .. 'cmdline-source')
+require(cmp_dir .. 'cmp-cmdline')
 require(cmp_dir .. 'cmp-git')
 require(cmp_dir .. 'cmp-latex')
+-- require(cmp_dir .. 'cmp-otter')
