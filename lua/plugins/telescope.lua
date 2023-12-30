@@ -4,8 +4,9 @@ if not ok then
     return
 end
 
+
 local actions = require("telescope.actions")
--- local actions_state = require("telescope.actions.state")
+local action_state = require "telescope.actions.state"
 -- local builtin = require("telescope.builtin")
 -- local previewers = telescope.previewers
 
@@ -18,24 +19,23 @@ local actions = require("telescope.actions")
 --------------------------------------------------------------
 
 for _, module in ipairs {
-    "notify",
     "fzf",
+    "notify",
     "projections",
+    "dap",
     "env",
     "aerial",
-    "telescope-tabs", -- NOTE: posible tab_manager and improve of buffer_manager with deprecate this
-    "dap",
     "media_files",
     "heading",
     "zoxide",
 
     "chisel",
     "hardhat",
+    -- "telescope-tabs",
+    -- "macros",
     -- "software-licenses",
-    -- "file_browser",
     -- "neoclip",
     -- "cheat",
-    -- "telescope._extensions.file_browser.actions"
 } do
     local ok, _ = pcall(telescope.load_extension, module)
     if not ok then
@@ -62,6 +62,7 @@ telescope.setup({
             },
         },
 
+        --- @help {telescope.mappings}
         mappings = {
             i = {
                 ["<C-n>"] = actions.cycle_history_next,
@@ -86,8 +87,13 @@ telescope.setup({
                 ["<PageUp>"] = actions.results_scrolling_up,
                 ["<PageDown>"] = actions.results_scrolling_down,
 
-                ["<Tab>"] = actions.toggle_selection + actions.move_selection_worse,
-                ["<S-Tab>"] = actions.toggle_selection + actions.move_selection_better,
+                ["<Tab>"] = actions.toggle_selection + actions.move_selection_better,
+                ["<S-Tab>"] = actions.toggle_selection + actions.move_selection_worse,
+                -- ["<leader>"] = actions.toggle_selection + actions.move_selection_better,
+                -- ["<C-leader>"] = actions.toggle_selection + actions.move_selection_worse,
+                ["<space>"] = actions.toggle_selection + actions.move_selection_better,
+                ["<S-space>"] = actions.toggle_selection + actions.move_selection_worse,
+
                 ["<C-q>"] = actions.send_to_qflist + actions.open_qflist,
                 ["<M-q>"] = actions.send_selected_to_qflist + actions.open_qflist,
                 ["<C-l>"] = actions.complete_tag,
@@ -103,8 +109,13 @@ telescope.setup({
                 ["<C-v>"] = actions.select_vertical,
                 ["<C-t>"] = actions.select_tab,
 
-                ["<Tab>"] = actions.toggle_selection + actions.move_selection_worse,
-                ["<S-Tab>"] = actions.toggle_selection + actions.move_selection_better,
+                ["<Tab>"] = actions.toggle_selection + actions.move_selection_better,
+                ["<S-Tab>"] = actions.toggle_selection + actions.move_selection_worse,
+                -- ["<leader>"] = actions.toggle_selection + actions.move_selection_better,
+                -- ["<C-leader>"] = actions.toggle_selection + actions.move_selection_worse,
+                ["<space>"] = actions.toggle_selection + actions.move_selection_better,
+                ["<S-space>"] = actions.toggle_selection + actions.move_selection_worse,
+
                 ["<C-q>"] = actions.send_to_qflist + actions.open_qflist,
                 ["<M-q>"] = actions.send_selected_to_qflist + actions.open_qflist,
 
@@ -143,6 +154,16 @@ telescope.setup({
             theme = "cursor",
             show_line = false,
             layout_config = { height = 0.5, width = 0.8 },
+        },
+        git_status = {
+            mappings = {
+                i = {
+                    ["<leader>"] = { "<cmd>G ci<cr>", type = "command" },
+                },
+                n = {
+                    ["<leader>"] = { "<cmd>G ci<cr>", type = "command" },
+                }
+            },
         },
     },
 
@@ -189,65 +210,6 @@ telescope.setup({
             },
         },
 
-        -- file_browser = {
-        --     -- path
-        --     -- cwd
-        --     cwd_to_path = false,
-        --     grouped = false,
-        --     files = true,
-        --     add_dirs = true,
-        --     depth = 1,
-        --     auto_depth = false,
-        --     select_buffer = false,
-        --     hidden = false,
-        --     -- respect_gitignore
-        --     -- browse_files
-        --     -- browse_folders
-        --     hide_parent_dir = false,
-        --     collapse_dirs = false,
-        --     prompt_path = false,
-        --     quiet = false,
-        --     dir_icon = "",
-        --     dir_icon_hl = "Default",
-        --     display_stat = { date = true, size = true, mode = true },
-        --     hijack_netrw = false,
-        --     use_fd = true,
-        --     git_status = true,
-        --     mappings = {
-        --         ["i"] = {
-        --             ["<A-c>"] = fb_actions.create,
-        --             ["<S-CR>"] = fb_actions.create_from_prompt,
-        --             ["<A-r>"] = fb_actions.rename,
-        --             ["<A-m>"] = fb_actions.move,
-        --             ["<A-y>"] = fb_actions.copy,
-        --             ["<A-d>"] = fb_actions.remove,
-        --             ["<C-o>"] = fb_actions.open,
-        --             ["<C-g>"] = fb_actions.goto_parent_dir,
-        --             ["<C-e>"] = fb_actions.goto_home_dir,
-        --             ["<C-w>"] = fb_actions.goto_cwd,
-        --             ["<C-t>"] = fb_actions.change_cwd,
-        --             ["<C-f>"] = fb_actions.toggle_browser,
-        --             ["<C-h>"] = fb_actions.toggle_hidden,
-        --             ["<C-s>"] = fb_actions.toggle_all,
-        --             ["<bs>"] = fb_actions.backspace,
-        --         },
-        --         ["n"] = {
-        --             ["c"] = fb_actions.create,
-        --             ["r"] = fb_actions.rename,
-        --             ["m"] = fb_actions.move,
-        --             ["y"] = fb_actions.copy,
-        --             ["d"] = fb_actions.remove,
-        --             ["o"] = fb_actions.open,
-        --             ["g"] = fb_actions.goto_parent_dir,
-        --             ["e"] = fb_actions.goto_home_dir,
-        --             ["w"] = fb_actions.goto_cwd,
-        --             ["t"] = fb_actions.change_cwd,
-        --             ["f"] = fb_actions.toggle_browser,
-        --             ["h"] = fb_actions.toggle_hidden,
-        --             ["s"] = fb_actions.toggle_all,
-        --         },
-        --         },
-        --     },
     },
 
 })
