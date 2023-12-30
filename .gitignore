@@ -1,7 +1,1 @@
-# directories
-lua/plugins/development/
-plugin/
-
-# files
-
-# regex
+./lazy-lock.json
