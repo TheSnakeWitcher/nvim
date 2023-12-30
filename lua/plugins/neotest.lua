@@ -152,8 +152,8 @@ neotest.setup({
     },
     status = {
         enabled = true,
-        signs = true,
-        virtual_text = false,
+        signs = false,
+        virtual_text = true,
     },
     strategies = {
         integrated = {
