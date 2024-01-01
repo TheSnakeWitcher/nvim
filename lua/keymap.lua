@@ -159,6 +159,7 @@ set({"v","x"}, "<C-k>", ":move '<-2<CR>gv-gv", opts)
 -- vim pickers
 set('n', '<leader>/', "<cmd>Telescope current_buffer_fuzzy_find<cr>", { desc = '[/] Fuzzily search in current buffer]' })
 set("n" , "<leader>sh" , "<cmd>Telescope help_tags<cr>", { desc = "[s]earch [h]elp" })
+set("n" , "<leader>sM" , "<cmd>Telescope man_pages<cr>", { desc = "[s]earch [M]an pages" })
 set("n" , "<leader>sm" , "<cmd>Telescope marks<cr>", { desc = "[s]earch [m]arks" })
 set("n" , "<leader>sr" , "<cmd>Telescope registers<cr>", { desc = "[s]earch [r]registers" })
 set("n" , "<leader>sk" , "<cmd>Telescope keymaps<cr>", { desc = "[s]earch [k]eymaps" })
