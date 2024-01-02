@@ -158,44 +158,44 @@ set({"v","x"}, "<C-k>", ":move '<-2<CR>gv-gv", opts)
 --------------------------------------------------------------
 -- vim pickers
 set('n', '<leader>/', "<cmd>Telescope current_buffer_fuzzy_find<cr>", { desc = '[/] Fuzzily search in current buffer]' })
-set("n" , "<leader>sh" , "<cmd>Telescope help_tags<cr>", { desc = "[s]earch [h]elp" })
-set("n" , "<leader>sM" , "<cmd>Telescope man_pages<cr>", { desc = "[s]earch [M]an pages" })
-set("n" , "<leader>sm" , "<cmd>Telescope marks<cr>", { desc = "[s]earch [m]arks" })
-set("n" , "<leader>sr" , "<cmd>Telescope registers<cr>", { desc = "[s]earch [r]registers" })
-set("n" , "<leader>sk" , "<cmd>Telescope keymaps<cr>", { desc = "[s]earch [k]eymaps" })
-set("n" , "<leader>sC" , "<cmd>Telescope command_history<cr>", { desc = "[s]earch [c]ommand history" })
+set("n" , "<leader>fh" , "<cmd>Telescope help_tags<cr>", { desc = "[f]ind [h]elp" })
+set("n" , "<leader>fM" , "<cmd>Telescope man_pages<cr>", { desc = "[f]ind [M]an pages" })
+set("n" , "<leader>fm" , "<cmd>Telescope marks<cr>", { desc = "[f]ind [m]arks" })
+set("n" , "<leader>fr" , "<cmd>Telescope registers<cr>", { desc = "[f]ind [r]registers" })
+set("n" , "<leader>fk" , "<cmd>Telescope keymaps<cr>", { desc = "[f]ind [k]eymaps" })
+set("n" , "<leader>fC" , "<cmd>Telescope command_history<cr>", { desc = "[f]ind [c]ommand history" })
 
-set("n", "<leader>sd", "<cmd>Telescope diagnostics<cr>", { desc = "[s]earch [d]iagnostics" })
-set("n", "<leader>sq", "<cmd>Telescope quickfix<cr>", { desc = "[s]earch [q]uickfix" })
+set("n", "<leader>fd", "<cmd>Telescope diagnostics<cr>", { desc = "[f]ind [d]iagnostics" })
+set("n", "<leader>fq", "<cmd>Telescope quickfix<cr>", { desc = "[f]ind [q]uickfix" })
 
 -- file pickers
-set("n", "<C-f>", "<cmd> Telescope git_files<cr>", { desc = "[s]earch [g]itfiles(tracked by git according to .gitignore)" })
-set("n", "<leader>sf", "<cmd>Telescope find_files<cr>", { desc = "[s]earch [f]iles" })
-set("n", "<leader>sg", "<cmd>Telescope live_grep<cr>", { desc = "[s]earch [g]rep"  })
-set("n", "<leader>so", "<cmd>Telescope oldfiles<cr>",{ desc = "[s]earch [o]ldfiles" })
-set("n", "<leader>sP", "<cmd>Telescope lazy<cr>", { desc = "[s]earch [P]ics" })
---set("n","<leader>sF",
+set("n", "<C-f>", "<cmd> Telescope git_files<cr>", { desc = "[f]ind [g]itfiles(tracked by git according to .gitignore)" })
+set("n", "<leader>ff", "<cmd>Telescope find_files<cr>", { desc = "[f]ind [f]iles" })
+set("n", "<leader>fg", "<cmd>Telescope live_grep<cr>", { desc = "[f]ind [g]rep"  })
+set("n", "<leader>fo", "<cmd>Telescope oldfiles<cr>",{ desc = "[f]ind [o]ldfiles" })
+set("n", "<leader>fP", "<cmd>Telescope lazy<cr>", { desc = "[f]ind [P]ics" })
+--set("n","<leader>fF",
 --    function () builtin.find_files{ hidden = true, no_ignore = true} end,
 --    telescope_opts
 --} -- search all files
 
 -- lsp pickers
--- set('n', '<leader>s', builtin.lsp_definitions, {desc = "[s]earch [t]reesitter"})
+-- set('n', '<leader>f', builtin.lsp_definitions, {desc = "[f]ind [t]reesitter"})
 
 -- git pickers
-set("n", "<C-s>", "<cmd>Telescope git_status<cr>", { desc = "[s]earch [S]tatus" })
-set("n","<leader>ss","<cmd>Telescope git_status<cr>", { desc = "[s]earch [S]tatus" })
-set("n", "<leader>sb", "<cmd>Telescope git_branches<cr>", { desc = "[s]earch [B]ranches" })
-set("n", "<leader>sc", "<cmd>Telescope git_commits<cr>", { desc = "[s]earch [C]ommits" })
+set("n", "<C-s>", "<cmd>Telescope git_status<cr>", { desc = "[f]ind [S]tatus" })
+set("n","<leader>fs","<cmd>Telescope git_status<cr>", { desc = "[f]ind [S]tatus" })
+set("n", "<leader>fb", "<cmd>Telescope git_branches<cr>", { desc = "[f]ind [B]ranches" })
+set("n", "<leader>fc", "<cmd>Telescope git_commits<cr>", { desc = "[f]ind [C]ommits" })
 
 -- extensions pickers
-set("n", "<leader>sn", "<cmd>TodoTelescope<CR>", { desc = "[s]earch [n]otes" })                     -- todo-comments
-set("n", "<leader>sN", "<cmd>Telescope notify<CR>", { desc = "[s]earch [N]otifications" })          -- notify
-set("n", "<leader>sp", "<cmd>Telescope projections<CR>", { desc = "[s]earch [p]rojects" })          -- projections
-set("n", "<C-p>", "<cmd>Telescope projections<CR>", { desc = "[s]earch [p]rojects" })               -- projections
-set("n", "<leader>se", "<cmd>Telescope env<CR>", { desc = "[s]earch [e]nvironment" })               -- telescope-env
-set("n", "<leader>st", "<cmd>Telescope telescope-tabs list_tabs<CR>", { desc = "[s]earch [t]abs" }) -- telescope-tabs
-set("n", "<leader>sH", "<cmd>Telescope heading<cr>", { desc = "[s]earch [H]eaders" })               -- telescope-heading
+set("n", "<leader>fn", "<cmd>TodoTelescope<CR>", { desc = "[f]ind [n]otes" })                     -- todo-comments
+set("n", "<leader>fN", "<cmd>Telescope notify<CR>", { desc = "[f]ind [N]otifications" })          -- notify
+set("n", "<leader>fp", "<cmd>Telescope projections<CR>", { desc = "[f]ind [p]rojects" })          -- projections
+set("n", "<C-p>", "<cmd>Telescope projections<CR>", { desc = "[f]ind [p]rojects" })               -- projections
+set("n", "<leader>fe", "<cmd>Telescope env<CR>", { desc = "[f]ind [e]nvironment" })               -- telescope-env
+set("n", "<leader>ft", "<cmd>Telescope telescope-tabs list_tabs<CR>", { desc = "[f]ind [t]abs" }) -- telescope-tabs
+set("n", "<leader>fH", "<cmd>Telescope heading<cr>", { desc = "[f]ind [H]eaders" })               -- telescope-heading
 
 
 --------------------------------------------------------------
@@ -223,7 +223,7 @@ set('n', '[Q', "<cmd>cfirst<cr>", { desc = "go to first item in quickfix" })
 --------------------------------------------------------------
 -- luasnip
 --------------------------------------------------------------
-set("n", "<leader>sS", "<CMD>LuaSnipEdit<CR>" , { desc = "[s]earch [s]snippets", silent = true })
+set("n", "<leader>fS", "<CMD>LuaSnipEdit<CR>" , { desc = "[f]ind [s]snippets", silent = true })
 set({"i","s"},"<C-s>",function()
     if require('luasnip').choice_active() then
         require('luasnip.extras.select_choice')()
@@ -258,7 +258,7 @@ set("n", "<leader>tv", "<Cmd>ToggleTerm direction=vertical size=100<CR>", { desc
 --------------------------------------------------------------
 -- urlview
 --------------------------------------------------------------
-set("n", "<leader>su", "<Cmd>UrlView buffer<CR>", { desc = "[s]earch [u]rls in buffer" })
+set("n", "<leader>fu", "<Cmd>UrlView buffer<CR>", { desc = "[f]ind [u]rls in buffer" })
 
 
 --------------------------------------------------------------
@@ -274,7 +274,7 @@ vim.api.nvim_set_keymap("n", "<leader>tp", ":tabp<CR>", { desc = "select previou
 vim.api.nvim_set_keymap("n", "<leader>tmn", ":+tabmove<CR>", { desc = "move current tab to next position",noremap = true })
 vim.api.nvim_set_keymap("n", "<leader>tmp", ":-tabmove<CR>", { desc = "move current tab to previous position" , noremap = true })
 
-set("n", "<leader>tl", "<CMD>Telescope telescope-tabs list_tabs<CR>", { desc = "[s]earch [t]abs" })
+set("n", "<leader>tl", "<CMD>Telescope telescope-tabs list_tabs<CR>", { desc = "[f]ind [t]abs" })
 
 
 --------------------------------------------------------------
