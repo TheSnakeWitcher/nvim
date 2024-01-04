@@ -22,9 +22,6 @@ local set = vim.keymap.set
 local opts = { noremap = true, silent = true }
 -- local term_opts = { silent = true }
 
--- TODO:
--- ]] [[ references management
--- ][ t for test
 
 --------------------------------------------------------------
 -- help
