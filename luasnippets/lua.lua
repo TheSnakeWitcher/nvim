@@ -27,7 +27,7 @@ ls.add_snippets("lua", {
     s({
         name = "base lua module",
         trig = "!",
-        dscr = "create a standard lua module structure",
+        desc = "create a standard lua module structure",
     }, fmt([[
         local M = {{}}
 
@@ -41,7 +41,7 @@ ls.add_snippets("lua", {
     s({
         name = "require",
         trig = "require",
-        dscr = "function declaration",
+        desc = "module requirement",
     }, fmt([[
         {}{} = require("{}")
     ]], {
@@ -62,7 +62,7 @@ ls.add_snippets("lua", {
     s({
         name = "return",
         trig = "return",
-        dscr = "return statement",
+        desc = "return statement",
     }, fmt([[
         return {}
     ]], {
@@ -72,7 +72,7 @@ ls.add_snippets("lua", {
     s({
         name = "function",
         trig = "fn",
-        dscr = "function declaration",
+        desc = "function declaration",
     }, fmt([[
         {}function {}({})
             {}
@@ -99,7 +99,7 @@ ls.add_snippets("lua", {
     s({
         name = "if",
         trig = "if",
-        dscr = "if statement declaration",
+        desc = "if statement declaration",
     },fmt([[
         if ({}) then
             {}
@@ -112,7 +112,7 @@ ls.add_snippets("lua", {
     s({
         name = "if",
         trig = "ife",
-        dscr = "if/else statement declaration",
+        desc = "if/else statement declaration",
     },fmt([[
         if ({}) then
             {}
@@ -128,7 +128,7 @@ ls.add_snippets("lua", {
     s({
         name = "for",
         trig = "forr",
-        dscr = "for statement declaration",
+        desc = "for statement declaration",
     },fmt([[
         for {} = {} , {}{} do
             {}
@@ -150,7 +150,7 @@ ls.add_snippets("lua", {
     s({
         name = "while",
         trig = "while",
-        dscr = "execute code while condition is true",
+        desc = "execute code while condition is true",
     },fmt([[
         while {} do
             {}
@@ -163,7 +163,7 @@ ls.add_snippets("lua", {
     s({
         name = "repeat until",
         trig = "repeat",
-        dscr = "repeat code until condition became true",
+        desc = "repeat code until condition became true",
     }, fmt([[
         repeat
             {}
@@ -179,14 +179,14 @@ ls.add_snippets("lua", {
     s({
         name = "types",
         trig = "types",
-        dscr = "types",
+        desc = "types",
     },fmt([[
         {}
     ]], {
         c(1, {
             t("string"),
             t("number"),
-            t("bool"),
+            t("boolean"),
             t("nil"),
         }),
     })),
@@ -194,7 +194,7 @@ ls.add_snippets("lua", {
     s({
         name = "local",
         trig = "local",
-        dscr = "variable declaration statement declaration",
+        desc = "variable declaration statement declaration",
     }, fmt([[
         local {} = {}
     ]], {
@@ -208,13 +208,13 @@ ls.add_snippets("lua", {
     s({
         name = "snippet",
         trig = "snippet",
-        dscr = "luasnip snippet declaration",
+        desc = "luasnip snippet declaration",
     }, fmt([[
       s(
         {{
             name = "{}",
             trig = "{}",
-            dscr = "{}",
+            desc = "{}",
         }},
         fmt([[
             {}
@@ -225,7 +225,7 @@ ls.add_snippets("lua", {
     ]], {
         i(1, "name"),
         i(2, "trig"),
-        i(3, "dscr"),
+        i(3, "desc"),
         i(4, "code"),
         i(5, "nodes"),
     })),

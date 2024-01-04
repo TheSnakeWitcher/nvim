@@ -38,6 +38,7 @@ ls.add_snippets("solidity", {
       pragma solidity ^{} ;
       pragma {} ;
 
+
       {}
     ]],
       {
@@ -591,7 +592,7 @@ ls.add_snippets("solidity", {
     },
     fmt(
       [[
-		for(uint i={1} ; i < {2} ; ++i ) {{,
+		for(uint i = {1} ; i < {2} ; ++i ) {{
 			{3}
 		}}
 	]]    ,
