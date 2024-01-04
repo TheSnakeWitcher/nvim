@@ -92,10 +92,6 @@ telescope.setup({
 
                 ["<Tab>"] = actions.toggle_selection + actions.move_selection_better,
                 ["<S-Tab>"] = actions.toggle_selection + actions.move_selection_worse,
-                -- ["<leader>"] = actions.toggle_selection + actions.move_selection_better,
-                -- ["<C-leader>"] = actions.toggle_selection + actions.move_selection_worse,
-                ["<space>"] = actions.toggle_selection + actions.move_selection_better,
-                ["<S-space>"] = actions.toggle_selection + actions.move_selection_worse,
 
                 ["<C-q>"] = actions.send_to_qflist + actions.open_qflist,
                 ["<M-q>"] = actions.send_selected_to_qflist + actions.open_qflist,
@@ -114,10 +110,6 @@ telescope.setup({
 
                 ["<Tab>"] = actions.toggle_selection + actions.move_selection_better,
                 ["<S-Tab>"] = actions.toggle_selection + actions.move_selection_worse,
-                -- ["<leader>"] = actions.toggle_selection + actions.move_selection_better,
-                -- ["<C-leader>"] = actions.toggle_selection + actions.move_selection_worse,
-                ["<space>"] = actions.toggle_selection + actions.move_selection_better,
-                ["<S-space>"] = actions.toggle_selection + actions.move_selection_worse,
 
                 ["<C-q>"] = actions.send_to_qflist + actions.open_qflist,
                 ["<M-q>"] = actions.send_selected_to_qflist + actions.open_qflist,
@@ -216,9 +208,10 @@ telescope.setup({
         --- @help {telescope-lazy.nvim-configuratio}
         lazy = {
             mappings = {
-                open_in_browser = "<cr>",
-                change_cwd_to_plugin = "<leader>",
+                open_in_browser = "<leader>",
+                change_cwd_to_plugin = "<S-leader>",
             },
+
         }
 
     },
