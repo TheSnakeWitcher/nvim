@@ -34,7 +34,8 @@ neodev.setup({
 })
 
 
---- @help {lspconfig-setup-on_attach}
+--- @help {lspconfig-keybindings}
+--- @help {lsp-buf}
 local on_attach = function(client, bufnr)
 
     local nmap = function(keys, func, desc)
@@ -47,25 +48,22 @@ local on_attach = function(client, bufnr)
 
     nmap('gD', vim.lsp.buf.declaration, '[G]oto [D]eclaration')
     nmap('gd', vim.lsp.buf.definition, '[G]oto [D]efinition')
+    nmap('gI',  "<cmd>Telescope lsp_implementations<cr>", '[G]oto [I]mplementation')
+    nmap('gr', "<cmd>Telescope lsp_references<cr>", '[G]oto [R]eferences')
+    nmap('gR', "<cmd>Trouble lsp_references<cr>", '[G]oto [R]eferences')
 
-    nmap('gr', "Telescope lsp_references", '[G]oto [R]eferences')
-    nmap('gR', vim.lsp.buf.references, '[G]oto [R]eferences')
-    -- nmap(']]', vim.lsp.buf.references, '[G]oto [R]eferences')
-    nmap('gI', vim.lsp.buf.implementation, '[G]oto [I]mplementation')
-    nmap('<leader>ls', "Telescope lsp_document_symbols", '[L]sp [s]ymbols')
-    nmap('<leader>lS', "Telescope lsp_dynamic_workspace_symbols", '[L]sp [S]ymbols (workspace)')
-
-    -- See `:help K` for why this keymap
-    nmap('<leader>?', vim.lsp.buf.hover, 'Hover Documentation')
-    -- nmap('<leader>?', vim.lsp.buf.signature_help, 'Signature Documentation')
+    nmap('<leader>ls', "<cmd>Telescope lsp_document_symbols<cr>", '[L]sp [s]ymbols')
+    nmap('<leader>lS', "<cmd>Telescope lsp_dynamic_workspace_symbols<cr>", '[L]sp [S]ymbols (workspace)')
     nmap('<leader>lf', function() vim.lsp.buf.format { async = true } end, '[L]sp [f]ormat')
 
+    nmap('<leader>?', vim.lsp.buf.hover, 'Hover Documentation')
+
     -- workspace
-    nmap('<leader>wa', vim.lsp.buf.add_workspace_folder, '[W]orkspace [A]dd Folder')
-    nmap('<leader>wr', vim.lsp.buf.remove_workspace_folder, '[W]orkspace [R]emove Folder')
-    nmap('<leader>wl', function()
-        print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
-    end, '[W]orkspace [L]ist Folders')
+    -- nmap('<leader>wa', vim.lsp.buf.add_workspace_folder, '[W]orkspace [A]dd Folder')
+    -- nmap('<leader>wr', vim.lsp.buf.remove_workspace_folder, '[W]orkspace [R]emove Folder')
+    -- nmap('<leader>wl', function()
+    --     print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
+    -- end, '[W]orkspace [L]ist Folders')
 
 
     vim.api.nvim_buf_create_user_command(bufnr, 'LspFormat', function(_)
@@ -88,6 +86,8 @@ if not ok then
     return
 end
 
+--- @help {https://github.com/hrsh7th/cmp-nvim-lsp/issues/38}
+--- @help {https://github.com/hrsh7th/cmp-nvim-lsp/issues/38#issuecomment-1815265121}
 local capabilities = vim.tbl_deep_extend(
     "force",
     vim.lsp.protocol.make_client_capabilities(),
@@ -114,7 +114,6 @@ for _, server in ipairs(servers) do
             on_attach = on_attach,
             capabilities = capabilities,
             settings = server_config.settings,
-            -- filetypes = server_config.filetypes or {},
         })
     else
         lspconfig[server].setup({
