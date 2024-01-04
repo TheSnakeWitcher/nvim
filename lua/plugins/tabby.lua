@@ -26,7 +26,7 @@ tabline.set(function(line) return {
 			tab.number(),
 			tab.name(),
 			tab.close_btn(""),
-			line.sep("", hl, theme.fill),
+			line.sep("", hl, theme.fill),
 			hl = hl,
 			margin = " ",
 		}
@@ -37,7 +37,7 @@ tabline.set(function(line) return {
 			line.sep("", theme.win, theme.fill),
 			win.is_current() and "●" or "",
 			win.buf_name(),
-			line.sep("", theme.win, theme.fill),
+			line.sep("", theme.win, theme.fill),
 			hl = theme.win,
 			margin = " ",
 		}
