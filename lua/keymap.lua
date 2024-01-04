@@ -24,10 +24,6 @@ local opts = { noremap = true, silent = true }
 
 -- TODO:
 -- ]] [[ references management
--- ][ e for errors
--- ][ w for warnings
--- ][ d for diagnostics
--- ][ n for diagnostics
 -- ][ t for test
 
 --------------------------------------------------------------
@@ -171,6 +167,7 @@ set("n", "<leader>fq", "<cmd>Telescope quickfix<cr>", { desc = "[f]ind [q]uickfi
 -- file pickers
 set("n", "<C-f>", "<cmd> Telescope git_files<cr>", { desc = "[f]ind [g]itfiles(tracked by git according to .gitignore)" })
 set("n", "<leader>ff", "<cmd>Telescope find_files<cr>", { desc = "[f]ind [f]iles" })
+set("n", "<leader>fF", "<cmd>Telescope find_files hidden=false<cr>", { desc = "[f]ind [f]iles" })
 set("n", "<leader>fg", "<cmd>Telescope live_grep<cr>", { desc = "[f]ind [g]rep"  })
 set("n", "<leader>fo", "<cmd>Telescope oldfiles<cr>",{ desc = "[f]ind [o]ldfiles" })
 set("n", "<leader>fP", "<cmd>Telescope lazy<cr>", { desc = "[f]ind [P]ics" })
@@ -201,13 +198,11 @@ set("n", "<leader>fH", "<cmd>Telescope heading<cr>", { desc = "[f]ind [H]eaders"
 --------------------------------------------------------------
 -- Diagnostic keymaps
 --------------------------------------------------------------
---set('n', '<leader>D', vim.diagnostic.open_float, opts)
-set('n', '[d', vim.diagnostic.goto_prev, opts)
-set('n', ']d', vim.diagnostic.goto_next, opts)
-set('n', '<space>q', vim.diagnostic.setloclist, opts)
---set('n', '[d', vim.diagnostic.goto_prev)
---set('n', ']d', vim.diagnostic.goto_next)
---set('n', '<leader>e', vim.diagnostic.open_float)
+set('n', '[d', vim.diagnostic.goto_prev, { noremap = true , desc = "next diagnostic"})
+set('n', ']d', vim.diagnostic.goto_next, { noremap = true , desc = "next diagnostic"})
+-- set('n', '[e', function() vim.diagnostic.goto_prev({ severity = vim.diagnostic.severity.ERROR }) end, opts)
+-- set('n', ']e', function() vim.diagnostic.goto_next({ severity = vim.diagnostic.severity.ERROR }) end, opts)
+set('n', '<leader>q', vim.diagnostic.setloclist, opts)
 
 
 --------------------------------------------------------------
@@ -258,11 +253,11 @@ set("n", "<leader>tv", "<Cmd>ToggleTerm direction=vertical size=100<CR>", { desc
 --------------------------------------------------------------
 -- urlview
 --------------------------------------------------------------
-set("n", "<leader>fu", "<Cmd>UrlView buffer<CR>", { desc = "[f]ind [u]rls in buffer" })
+set("n", "<leader>fu", "<cmd>UrlView buffer<cr>", { desc = "[f]ind [u]rls in buffer" })
 
 
 --------------------------------------------------------------
--- tabby
+-- tab management
 --------------------------------------------------------------
 vim.api.nvim_set_keymap("n", "<leader>ta", ":$tabnew<CR>", { desc = "create new tab",noremap = true })
 vim.api.nvim_set_keymap("n", "<leader>tq", ":tabclose<CR>", {desc = "close selected tab", noremap = true })
@@ -291,8 +286,8 @@ set("n", "<leader>N", "<cmd>TroubleToggle todo<CR>", { desc = "[N]otes toggle" }
 -- git
 ------------------------------------------------------------
 -- gitsigns
-set("n", "[c", "<cmd>Gitsign prev_hunk<cr>", { desc = "prev chunk/change/hunk" })
-set("n", "]c", "<cmd>Gitsign next_hunk<cr>", { desc = "next chunk/change/hunk" })
+set("n", "[c", "<cmd>Gitsign prev_hunk<cr>", { desc = "prev change/chunk/hunk" })
+set("n", "]c", "<cmd>Gitsign next_hunk<cr>", { desc = "next change/chunk/hunk" })
 -- diffview
 set("n", "<leader>G", "<cmd>DiffviewOpen<cr>", { desc = "open diffview" })
 
@@ -357,6 +352,8 @@ set("n", "<leader>Tl", "<cmd>OverseerRestartLast<cr>", { desc = "[T]ask [l]ast" 
 set("n", "<leader>tR", '<cmd>lua require("neotest").run.run({ suite= true})<cr>', { desc = "[t]est [R]un all/suite" })
 set("n", "<leader>tr", "<cmd>Neotest run<cr>", { desc = "[t]est [r]un" })
 set("n", "<leader>ts", "<cmd>Neotest summary<cr>", { desc = "[t]est [r]un" })
+set("n", "]t", '<cmd>lua require("neotest").jump.next({ status = "failed" })', { desc = "next failed test" })
+set("n", "[t", '<cmd>lua require("neotest").jump.prev({ status = "failed" })', { desc = "prev failed test" })
 
 
 --------------------------------------------------------------
