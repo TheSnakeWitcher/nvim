@@ -104,6 +104,13 @@ set("n", "<C-j>", "<C-w>j", opts)
 set("n", "<C-k>", "<C-w>k", opts)
 set("n", "<C-l>", "<C-w>l", opts)
 
+-- detour
+set("n", "<C-w>f", "<cmd>Detour<cr>", { desc = "float global window"})
+set("n", "<C-w>F", "<cmd>DetourCurrentWindow<cr>", { desc = "float local window" })
+set("n", "<C-w><C-f>", "<cmd>Detour<cr>", { desc = "float global window"})
+set("n", "<C-w><C-F>", "<cmd>DetourCurrentWindow<cr>", { desc = "float local window" })
+
+
 --set("n", "<leader>th>", "<C-w>t<C-w>H", opts)
 --set("n", "<leader>tk>", "<C-w>t<C-w>K", opts)
 
