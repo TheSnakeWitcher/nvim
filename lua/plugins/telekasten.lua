@@ -12,6 +12,7 @@ local template_dir = vim.env.HOME .. "/Templates/zettelkasten"
 
 --- @help {telekasten.setup()}
 telekasten.setup({
+
     home = zettelkasten_dir,
     daily = zettelkasten_dir,
     weekly = zettelkasten_dir,
