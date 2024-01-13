@@ -43,8 +43,6 @@ local on_attach = function(client, bufnr)
         vim.keymap.set('n', keys, func, { buffer = bufnr, desc = desc })
     end
 
-    nmap('<leader>lr', vim.lsp.buf.rename, '[L]sp [r]ename')
-    nmap('<leader>la', vim.lsp.buf.code_action, '[L]sp [A]ction (code actions)')
 
     nmap('gD', vim.lsp.buf.declaration, '[G]oto [D]eclaration')
     nmap('gd', vim.lsp.buf.definition, '[G]oto [D]efinition')
@@ -52,6 +50,9 @@ local on_attach = function(client, bufnr)
     nmap('gr', "<cmd>Telescope lsp_references<cr>", '[G]oto [R]eferences')
     nmap('gR', "<cmd>Trouble lsp_references<cr>", '[G]oto [R]eferences')
 
+    nmap('<leader>lr', vim.lsp.buf.rename, '[L]sp [r]ename')
+    nmap('<leader>la', vim.lsp.buf.code_action, '[L]sp [A]ction (code actions)')
+    -- nmap('<leader>la', require("actions-preview").code_actions, '[L]sp [A]ction (code actions)')
     nmap('<leader>ls', "<cmd>Telescope lsp_document_symbols<cr>", '[L]sp [s]ymbols')
     nmap('<leader>lS', "<cmd>Telescope lsp_dynamic_workspace_symbols<cr>", '[L]sp [S]ymbols (workspace)')
     nmap('<leader>lf', function() vim.lsp.buf.format { async = true } end, '[L]sp [f]ormat')
