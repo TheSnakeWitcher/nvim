@@ -6,7 +6,7 @@ end
 
 
 --- @help {ts-context-commentstring-commentstring-configuration}
-local ok ,ts_context_commentstring = pcall(require,'ts_context_commentstring')
+local ok, ts_context_commentstring = pcall(require,'ts_context_commentstring')
 if ok then
     vim.g.skip_ts_context_commentstring_module = true
     ts_context_commentstring.setup()
@@ -17,6 +17,7 @@ end
 nvim_treesitter_config.setup({
 
 ensure_installed = {
+    "vimdoc",
     "lua",
     "rust",
     "solidity",
@@ -37,11 +38,7 @@ ignore_install = {},
 
 
 --- @help {nvim-treesitter-highlight-mod}
-highlight = {
-    enable = true,
-    --disable = {}, -- list of languajes that will be disabled
-    additional_vim_regex_highlighting = false,
-},
+highlight = { enable = true },
 
 
 --- @help {nvim-treesitter-incremental-selection-mod}
@@ -57,10 +54,7 @@ incremenmal_selection = {
 
 
 --- @help {nvim-treesitter-indentation-mod}
-indent = {
-    enable = true ,
-    -- disable = {} ,
-},
+indent = { enable = true },
 
 
 --- @help {nvim-ts-autotag-setup}
@@ -181,7 +175,7 @@ playground = {
 query_linter = {
    enable = true,
    use_virtual_text = true,
-   lint_events = {"BufWrite","CursorHold"},
+   lint_events = { "BufWrite","CursorHold" },
 },
 
 
