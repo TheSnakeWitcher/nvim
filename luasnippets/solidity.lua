@@ -144,6 +144,7 @@ ls.add_snippets("solidity", {
           t("")
         }),
         c(3, {
+          i(1, "/* code */"),
           sn(nil, fmt([[
             constructor({1}) {2} {{
               {3}
@@ -162,7 +163,6 @@ ls.add_snippets("solidity", {
             i(3, "/* code */"),
             i(4, "/* code */"),
           })),
-          i(1, "/* code */"),
         }),
       }
     )
