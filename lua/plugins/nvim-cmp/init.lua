@@ -10,6 +10,11 @@ if not ok then
     vim.notify("lspkind config don't loaded")
     return
 end
+lspkind.init({
+    symbol_map = {
+        Codeium = "󰚩 ", -- vim.api.nvim_set_hl(0, "CmpItemKindCopilot", {fg ="#6CC644"})
+    },
+})
 
 
 local ok, luasnip = pcall(require,'luasnip')
@@ -30,10 +35,10 @@ cmp.setup({
 
     formatting = {
         format = function(entry, vim_item)
-            -- vim_item.kind = lspkind.presets.default[vim_item.kind] .. ' [' .. vim_item.kind ..  ']'
-            vim_item.kind = lspkind.presets.default[vim_item.kind]
+            vim_item.kind = lspkind.symbol_map[vim_item.kind]
             vim_item.menu = ({
                 luasnip = '[snip]',
+                codeium = '[codeium]',
                 -- copilot = '[copilot]',
                 -- cmp_ai = '[ai]',
                 nvim_lsp = '[lsp]',
@@ -46,14 +51,12 @@ cmp.setup({
     },
 
     sources = cmp.config.sources({
-        { name = 'luasnip' , priority = 1000 },
-        -- { name = 'codeium' , priority = 1000 },
-        -- { name = 'copilot' , priority = 1000 },
-        -- { name = 'cmp_ai' , priority = 1000 },
-        { name = 'nvim_lsp' , priority = 750 },
-        { name = 'nvim_lua' , priority = 750 }, -- by default active only in lua files
-        { name = 'buffer' , priority = 500 },
-        { name = 'path' , keyworkd_length = 2 , priority = 250 },
+        { name = 'luasnip' },
+        { name = 'codeium' },
+        { name = 'nvim_lsp' },
+        { name = 'nvim_lua' }, -- by default active only in lua files
+        { name = 'buffer' },
+        { name = 'path' , keyworkd_length = 2 },
         { name = 'calc' },
     }),
 
@@ -109,7 +112,7 @@ cmp.setup({
     -- },
 
     experimental = {
-        ghost_text = true, -- put virtual text of current suggestion in front of cursor
+        ghost_text = true,
     }
 
 })
