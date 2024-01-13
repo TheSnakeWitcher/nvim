@@ -7,11 +7,9 @@ end
 
 local actions = require("telescope.actions")
 local action_state = require "telescope.actions.state"
--- local builtin = require("telescope.builtin")
--- local previewers = telescope.previewers
 
--- local ok, trouble = pcall(require,"trouble.providers.telescope")
--- if not ok then vim.notify("trouble not loaded in telescope config") end
+local ok, trouble = pcall(require,"trouble.providers.telescope")
+if not ok then vim.notify("trouble not loaded in telescope config") end
 
 
 --------------------------------------------------------------
@@ -98,7 +96,7 @@ telescope.setup({
                 ["<C-l>"] = actions.complete_tag,
                 ["<C-_>"] = actions.which_key, -- keys from pressing <C-/>
 
-                -- ["<c-D>"] = trouble.open_with_trouble,
+                ["<c-q>"] = trouble.smart_open_with_trouble,
             },
 
             n = {
@@ -133,7 +131,7 @@ telescope.setup({
 
                 ["?"] = actions.which_key,
 
-                -- ["<c-D>"] = trouble.open_with_trouble,
+                ["<c-q>"] = trouble.smart_open_with_trouble,
             },
         },
 
@@ -172,16 +170,6 @@ telescope.setup({
             case_mode = "smart_case",
         },
 
-        bookmarks = {
-            selected_browser = 'firefox', -- options: 'waterfox','vivaldi','brave','brave_beta','buku','chrome','chrome_beta','edge', 'qutebrowser' , 'safari',
-            url_open_command = 'open',    -- Either provide a shell command to open the URL
-            url_open_plugin = nil,        -- Available: 'vim_external', 'open_browser'
-            full_path = true,             -- show bookmark full path , false show just bookmark name
-            profile_name = nil,           -- 'firefox' , waterfox,vivaldi , 'brave' , 'brave_beta' , 'chrome' , 'chrome_beta' , 'edge'
-            buku_include_tags = false,    -- Add a column which contains the tags for each bookmark for buku
-            debug = false,                -- Provide debug messages
-        },
-
         --- @help {telescope-media-files.nvim-configuration}
         media_files = {
            filetypes = {"png", "jpg", "jpeg", "mp4", "webm", "webp"},
@@ -208,10 +196,18 @@ telescope.setup({
         --- @help {telescope-lazy.nvim-configuratio}
         lazy = {
             mappings = {
-                open_in_browser = "<leader>",
-                change_cwd_to_plugin = "<S-leader>",
+                -- default  open_in_browser = "<C-o>",
+                open_in_browser = "<C-c>d",
+                open_in_file_browser = "<M-b>",
+                open_in_find_files = "<C-f>",
+                open_in_live_grep = "<C-g>",
+                open_in_terminal = "<C-t>",
+                open_plugins_picker = "<C-b>", -- Works only after having called first another action
+                open_lazy_root_find_files = "<C-r>f",
+                open_lazy_root_live_grep = "<C-r>g",
+                change_cwd_to_plugin = "<C-o>",
+                -- default change_cwd_to_plugin = "<C-c>d",
             },
-
         }
 
     },

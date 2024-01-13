@@ -6,38 +6,38 @@ end
 
 --- @help {neo-tree-configuration}
 neo_tree.setup({
+
+    --- @help {neo-tree-source-selector}
     source_selector = {
         winbar = true,
-        statusline = false,
-        show_scrolled_off_parent_node = false,
         sources = {
-            {
-                source = "filesystem",
-                display_name = " 󰈙 Files "
-            },
-            {
-                source = "buffers",
-                display_name = "  Buffers "
-            },
-            {
-                source = "git_status",
-                display_name = " 󰊢 Git "
-            },
+            { source = "filesystem", display_name = " 󰈙 Files " },
+            { source = "buffers", display_name = "  Buffers " },
+            { source = "git_status", display_name = " 󰊢 Git " },
+            { source = "netman.ui.neo-tree", display_name = " 󰢹 Netman" },
         },
-        content_layout = "start",
-        tabs_layout = "equal",
-        truncation_character = "…",
-        tabs_min_width = nil,
-        tabs_max_width = nil,
-        padding = 0,
-        separator = { left = "▏", right = "▕" },
-        separator_active = nil,
-        show_separator_on_edge = false,
-        highlight_tab = "NeoTreeTabInactive",
-        highlight_tab_active = "NeoTreeTabActive",
-        highlight_background = "NeoTreeTabInactive",
-        highlight_separator = "NeoTreeTabSeparatorInactive",
-        highlight_separator_active = "NeoTreeTabSeparatorActive",
+    },
+
+    filesystem = {
+        --- @help {neo-tree-filtered-items}
+        filtered_items = {},
+        follow_current_file = true,
+        group_empty_dirs = false,
+        hijack_netrw_behavior = "open_default",
+        use_libuv_file_watcher = true,
+        window = {
+            mappings = {
+                ["<bs>"] = "navigate_up",
+                ["."] = "set_root",
+                ["H"] = "toggle_hidden",
+                ["/"] = "fuzzy_finder",
+                ["D"] = "fuzzy_finder_directory",
+                ["f"] = "filter_on_submit",
+                ["<c-x>"] = "clear_filter",
+                ["[g"] = "prev_git_modified",
+                ["]g"] = "next_git_modified",
+            }
+        }
     },
 
     close_if_last_window = false,
@@ -47,23 +47,18 @@ neo_tree.setup({
     sort_case_insensitive = false,
     sort_function = nil,
 
+    --- @help {neo-tree-component-configs}
     default_component_configs = {
         container = {
             enable_character_fade = true
         },
+
+        --- @help {neo-tree-expanders}
         indent = {
-            indent_size = 2,
             padding = 1,
-
-            with_markers = true,
-            indent_marker = "│",
-            last_indent_marker = "└",
-            highlight = "NeoTreeIndentMarker",
-
             with_expanders = nil,
             expander_collapsed = "",
             expander_expanded = "",
-            expander_highlight = "NeoTreeExpander",
         },
         icon = {
             folder_closed = "",
@@ -146,36 +141,6 @@ neo_tree.setup({
         }
     },
     nesting_rules = {},
-    filesystem = {
-        filtered_items = {
-            visible = false,
-            hide_dotfiles = true,
-            hide_gitignored = true,
-            hide_hidden = true,
-            hide_by_name = {},
-            hide_by_pattern = {},
-            always_show = {},
-            never_show = {},
-            never_show_by_pattern = {},
-        },
-        follow_current_file = true,
-        group_empty_dirs = false,
-        hijack_netrw_behavior = "open_default",
-        use_libuv_file_watcher = true,
-        window = {
-            mappings = {
-                ["<bs>"] = "navigate_up",
-                ["."] = "set_root",
-                ["H"] = "toggle_hidden",
-                ["/"] = "fuzzy_finder",
-                ["D"] = "fuzzy_finder_directory",
-                ["f"] = "filter_on_submit",
-                ["<c-x>"] = "clear_filter",
-                ["[g"] = "prev_git_modified",
-                ["]g"] = "next_git_modified",
-            }
-        }
-    },
     buffers = {
         follow_current_file = true,
         group_empty_dirs = true,
