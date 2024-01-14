@@ -6,4 +6,4 @@ end
 
 
 --- @help {fidget.txt}
-fidget.setup()
+fidget.setup({})
