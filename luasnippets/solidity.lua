@@ -93,6 +93,7 @@ ls.add_snippets("solidity", {
       name = "comment",
       trig = "/**",
       dscr = "declare a comment block",
+      snippetType = "autosnippet",
     },
     fmt([[
         /**

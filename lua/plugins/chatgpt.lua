@@ -6,5 +6,6 @@ end
 
 
 --- @help {chatgpt}
-chatgpt.setup()
--- api_key_cmd = "pass services/openai | jq .api | xargs echo",
+chatgpt.setup({
+    -- api_key_cmd = "pass services/openai | jq .api | xargs echo",
+})
