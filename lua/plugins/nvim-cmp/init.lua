@@ -123,7 +123,7 @@ cmp.setup({
 --------------------------------------------------------------
 
 local cmp_dir = "plugins.nvim-cmp."
-require(cmp_dir .. 'cmp-cmdline')
-require(cmp_dir .. 'cmp-git')
-require(cmp_dir .. 'cmp-latex')
+require(cmp_dir .. "cmp-cmdline")
+require(cmp_dir .. "cmp-git")
+require(cmp_dir .. "cmp-latex")
 -- require(cmp_dir .. 'cmp-otter')
