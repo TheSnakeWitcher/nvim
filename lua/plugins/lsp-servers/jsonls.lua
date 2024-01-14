@@ -4,7 +4,7 @@ if not ok then
     return nil
 end
 
----@doc {schemastore-usage}
+---@help {schemastore-usage}
 return {
     settings = {
         json = {
