@@ -173,6 +173,7 @@ set("n", "<C-f>", "<cmd> Telescope git_files<cr>", { desc = "[f]ind [g]itfiles(t
 set("n", "<leader>ff", "<cmd>Telescope find_files<cr>", { desc = "[f]ind [f]iles" })
 set("n", "<leader>fF", "<cmd>Telescope find_files hidden=false<cr>", { desc = "[f]ind [f]iles" })
 set("n", "<leader>fg", "<cmd>Telescope live_grep<cr>", { desc = "[f]ind [g]rep"  })
+-- set("n", "<leader>fG", "<cmd>Telescope live_grep grep_open_files=true<cr>", { desc = "[f]ind [G]rep"  })
 set("n", "<leader>fo", "<cmd>Telescope oldfiles<cr>",{ desc = "[f]ind [o]ldfiles" })
 set("n", "<leader>fP", "<cmd>Telescope lazy<cr>", { desc = "[f]ind [P]ics" })
 --set("n","<leader>fF",
@@ -206,7 +207,7 @@ set('n', '[d', vim.diagnostic.goto_prev, { noremap = true , desc = "next diagnos
 set('n', ']d', vim.diagnostic.goto_next, { noremap = true , desc = "next diagnostic"})
 -- set('n', '[e', function() vim.diagnostic.goto_prev({ severity = vim.diagnostic.severity.ERROR }) end, opts)
 -- set('n', ']e', function() vim.diagnostic.goto_next({ severity = vim.diagnostic.severity.ERROR }) end, opts)
-set('n', '<leader>q', vim.diagnostic.setloclist, opts)
+set('n', '<leader>q', vim.diagnostic.setloclist, { desc = "[q]uickfix set loclist" })
 
 
 --------------------------------------------------------------
@@ -282,8 +283,9 @@ set("n", "<leader>tl", "<CMD>Telescope telescope-tabs list_tabs<CR>", { desc = "
 set("n", "<leader>e", "<cmd>NeoTreeFocusToggle<CR>", { desc = "[e]xplorer" })
 set("n", "<leader>E", "<cmd>AerialToggle<CR>", { desc = "[E]xplorer summary/outline(aerial)" })
 set("n", "<leader>u", "<cmd>UndotreeToggle<CR>", { desc = "[u]ndo tree toggle" })
-set("n", "<leader>D", "<cmd>TroubleToggle workspace_diagnostics<CR>", { desc = "[D]iagnostic toggle" }) -- for nvim-dap
-set("n", "<leader>N", "<cmd>TroubleToggle todo<CR>", { desc = "[N]otes toggle" }) -- for notes/todo
+set("n", "<leader>D", "<cmd>TroubleToggle workspace_diagnostics<CR>", { desc = "[D]iagnostic toggle" })
+set("n", "<leader>Q", "<cmd>TroubleToggle quickfix<CR>", { desc = "[Q]uickfix toggle" })
+set("n", "<leader>N", "<cmd>TroubleToggle todo<CR>", { desc = "[N]otes toggle" })
 
 
 --------------------------------------------------------------
