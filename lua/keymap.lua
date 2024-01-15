@@ -253,6 +253,7 @@ end
 --------------------------------------------------------------
 set("n", "<leader>tf", "<Cmd>ToggleTerm direction=float<CR>", { desc = "[t]erminal [f]loat" })
 set("n", "<leader>tv", "<Cmd>ToggleTerm direction=vertical size=100<CR>", { desc = "[t]erminal [v]ertical" })
+set("n", "<leader>tt", "<Cmd>ToggleTerm direction=tab<CR>", { desc = "[t]erminal [f]loat" })
 
 
 --------------------------------------------------------------
