@@ -96,7 +96,7 @@ telescope.setup({
                 ["<C-l>"] = actions.complete_tag,
                 ["<C-_>"] = actions.which_key, -- keys from pressing <C-/>
 
-                ["<c-q>"] = trouble.smart_open_with_trouble,
+                ["<c-q>"] = actions.smart_send_to_qflist,
             },
 
             n = {
@@ -131,7 +131,7 @@ telescope.setup({
 
                 ["?"] = actions.which_key,
 
-                ["<c-q>"] = trouble.smart_open_with_trouble,
+                ["<c-q>"] = actions.smart_send_to_qflist,
             },
         },
 
