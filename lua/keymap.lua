@@ -175,7 +175,7 @@ set("n", "<leader>fF", "<cmd>Telescope find_files hidden=false<cr>", { desc = "[
 set("n", "<leader>fg", "<cmd>Telescope live_grep<cr>", { desc = "[f]ind [g]rep"  })
 -- set("n", "<leader>fG", "<cmd>Telescope live_grep grep_open_files=true<cr>", { desc = "[f]ind [G]rep"  })
 set("n", "<leader>fo", "<cmd>Telescope oldfiles<cr>",{ desc = "[f]ind [o]ldfiles" })
-set("n", "<leader>fP", "<cmd>Telescope lazy<cr>", { desc = "[f]ind [P]ics" })
+set("n", "<leader>fP", "<cmd>Telescope lazy<cr>", { desc = "[f]ind [P]lugins" })
 --set("n","<leader>fF",
 --    function () builtin.find_files{ hidden = true, no_ignore = true} end,
 --    telescope_opts
