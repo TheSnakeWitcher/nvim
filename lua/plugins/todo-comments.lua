@@ -4,7 +4,7 @@ if not ok then
     return
 end
 
----@help {todo-comments.nvim-todo-comments-configuration}
+--- @help {todo-comments.nvim-todo-comments-configuration}
 todo_comments.setup({
 
     keywords = {
