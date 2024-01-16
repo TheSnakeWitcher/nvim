@@ -359,8 +359,8 @@ set("n", "<leader>Tl", "<cmd>OverseerRestartLast<cr>", { desc = "[T]ask [l]ast" 
 set("n", "<leader>tR", '<cmd>lua require("neotest").run.run({ suite= true})<cr>', { desc = "[t]est [R]un all/suite" })
 set("n", "<leader>tr", "<cmd>Neotest run<cr>", { desc = "[t]est [r]un" })
 set("n", "<leader>ts", "<cmd>Neotest summary<cr>", { desc = "[t]est [r]un" })
-set("n", "]t", '<cmd>lua require("neotest").jump.next({ status = "failed" })', { desc = "next failed test" })
-set("n", "[t", '<cmd>lua require("neotest").jump.prev({ status = "failed" })', { desc = "prev failed test" })
+set("n", "]t", '<cmd>lua require("neotest").jump.next({ status = "failed" })<cr>', { desc = "next failed test" })
+set("n", "[t", '<cmd>lua require("neotest").jump.prev({ status = "failed" })<cr>', { desc = "prev failed test" })
 
 
 --------------------------------------------------------------
