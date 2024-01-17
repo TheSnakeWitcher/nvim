@@ -88,17 +88,17 @@ set("n", "N", "Nzz")
 
 
 --------------------------------------------------------------
--- buffer navigations
+-- navigations
 --------------------------------------------------------------
+-- tabs
 set("n", "<S-l>", ":tabnext<CR>", opts)
 set("n", "<S-h>", ":tabprev<CR>", opts)
+
+-- buffers
 set("n", "]b", ":bnext<CR>", opts)
 set("n", "[b", ":bprevious<CR>", opts)
 
-
---------------------------------------------------------------
--- window navigation
---------------------------------------------------------------
+-- windows
 set("n", "<C-h>", "<C-w>h", opts)
 set("n", "<C-j>", "<C-w>j", opts)
 set("n", "<C-k>", "<C-w>k", opts)
