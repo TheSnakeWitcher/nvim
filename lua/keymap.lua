@@ -234,18 +234,9 @@ end,{desc = "select choice" , silent = true})
 --------------------------------------------------------------
 -- buffer_manager
 --------------------------------------------------------------
-local ok, _ = pcall(require,'buffer_manager')
-if not ok then
-    vim.notify("buffer_manager keymaps not defined")
-else
-    set("n", "<leader>b", "<cmd>lua require('buffer_manager.ui').toggle_quick_menu()<cr>", {} )
-    local keys = '123456789'
-    for i = 1, #keys do
-        local key = keys:sub(i,i)
-        set( 'n', string.format('<A>%s', key), function() require("buffer_manager.ui").nav_file(i) end, {})
-    end
+for key = 1, 9 do
+    set('n', string.format('<A-%d>', key), string.format('<cmd>lua require("buffer_manager.ui").nav_file(%d)<cr>', key), { desc = "go to buffer " .. key  })
 end
-
 
 
 --------------------------------------------------------------
@@ -379,10 +370,5 @@ set("n", "<leader>j", "<cmd>lua require('treesj').toggle()<cr>", { desc = "toggl
 --------------------------------------------------------------
 -- nvim-ufo
 --------------------------------------------------------------
-local ok , ufo = pcall(require,"ufo")
-if not ok then
-    vim.notify("ufo keymaps not created")
-else
-    set("n", "zR", ufo.openAllFolds, { desc = "open all folds" })
-    set("n", "zM", ufo.closeAllFolds, { desc = "close all folds" })
-end
+set("n", "zR", "<cmd>lua require('ufo').openAllFolds()<cr>", { desc = "open all folds" })
+set("n", "zM", "<cmd>lua require('ufo').closeAllFolds()<cr>", { desc = "close all folds" })
