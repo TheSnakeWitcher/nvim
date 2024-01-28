@@ -1,8 +1,4 @@
-local ok, cmp = pcall(require,'cmp')
-if not ok then
-    vim.notify("nvim-cmp config don't loaded")
-    return
-end
+local cmp = require("cmp")
 
 local ok, cmp_git = pcall(require,"cmp_git")
 if not ok then

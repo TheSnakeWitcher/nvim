@@ -1,8 +1,4 @@
-local ok, cmp = pcall(require, 'cmp')
-if not ok then
-    vim.notify("nvim-cmp config don't loaded")
-    return
-end
+local cmp = require("cmp")
 
 --- @help {cmp-usage}
 cmp.setup.cmdline(':', {
