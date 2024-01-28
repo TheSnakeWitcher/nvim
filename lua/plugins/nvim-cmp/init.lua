@@ -10,6 +10,7 @@ if not ok then
     vim.notify("lspkind config don't loaded")
     return
 end
+
 lspkind.init({
     symbol_map = {
         Codeium = "󰚩 ", -- vim.api.nvim_set_hl(0, "CmpItemKindCopilot", {fg ="#6CC644"})
@@ -126,4 +127,5 @@ local cmp_dir = "plugins.nvim-cmp."
 require(cmp_dir .. "cmp-cmdline")
 require(cmp_dir .. "cmp-git")
 require(cmp_dir .. "cmp-latex")
+require(cmp_dir .. "cmp-dap")
 -- require(cmp_dir .. 'cmp-otter')
