@@ -1,5 +1,5 @@
-local status_ok, buffer_manager = pcall(require,"buffer_manager")
-if not status_ok then
+local ok, buffer_manager = pcall(require,"buffer_manager")
+if not ok then
     vim.notify("buffer_manager config not loaded")
     return
 end
