@@ -16,5 +16,11 @@ todo_comments.setup({
         NOTE = { icon = "󰎚", color = "hint", alt = { "INFO", "IMPORTANT" } },
         TEST = { icon = "⏲", color = "test", alt = { "TESTING", "PASSED", "FAILED" } },
     },
+    highlight = {
+        pattern = {
+            [[.*<(KEYWORDS)\s*:]],
+            [[.*\@<(KEYWORDS)\s*]], -- vscode-like pattern
+        }
+    },
 
 })
