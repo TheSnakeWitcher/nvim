@@ -9,7 +9,7 @@ paint.setup({
 	highlights = {
 		{
 			filter = { filetype = "lua" },
-			pattern = "%s*%-%-%s*(@%w+)",
+			pattern = "%s*%-%-%-%s*(@%w+)",
 			hl = "Constant",
 		},
 		{
@@ -19,6 +19,16 @@ paint.setup({
 		},
 		{
 			filter = { filetype = "solidity" },
+			pattern ="%s*%/%/%/%s*(@%w+)",
+			hl = "Constant",
+		},
+		{
+			filter = { filetype = "typescript" },
+			pattern = "%s*%*%s*(@%w+)",
+			hl = "Constant",
+		},
+		{
+			filter = { filetype = "typescript" },
 			pattern ="%s*%/%/%/%s*(@%w+)",
 			hl = "Constant",
 		},
