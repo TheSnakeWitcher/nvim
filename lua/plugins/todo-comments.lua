@@ -11,10 +11,10 @@ todo_comments.setup({
         FIX = { icon = "", color = "error", alt = { "FIXME", "BUG", "FIXIT", "ISSUE", "ERROR" } },
         TODO = { icon = "", color = "info" },
         HACK = { icon = "", color = "warning", alt = { "TIP" } },
-        WARN = { icon = "", color = "warning", alt = { "WARNING", "XXX" } },
+        WARN = { icon = "", color = "warning", alt = { "WARNING" } },
         PERF = { icon = "󱐋", alt = { "OPTIM", "PERFORMANCE", "OPTIMIZE" } },
         NOTE = { icon = "󰎚", color = "hint", alt = { "INFO", "IMPORTANT" } },
-        TEST = { icon = "⏲", color = "test", alt = { "TESTING", "PASSED", "FAILED" } },
+        TEST = { icon = "⏲", color = "test", alt = { "TESTING" } },
     },
     highlight = {
         pattern = {
