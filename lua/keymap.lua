@@ -272,6 +272,7 @@ set("n", "<leader>tl", "<CMD>Telescope telescope-tabs list_tabs<CR>", { desc = "
 --------------------------------------------------------------
 -- trees/views/explorers
 --------------------------------------------------------------
+-- set("n", "<leader>e", '<cmd>lua require("edgy").toggle("left")<CR>', { desc = "[e]xplorers(edgy)" })
 set("n", "<leader>e", "<cmd>NeoTreeFocusToggle<CR>", { desc = "[e]xplorer" })
 set("n", "<leader>E", "<cmd>AerialToggle<CR>", { desc = "[E]xplorer summary/outline(aerial)" })
 set("n", "<leader>u", "<cmd>UndotreeToggle<CR>", { desc = "[u]ndo tree toggle" })
@@ -286,6 +287,7 @@ set("n", "<leader>N", "<cmd>TroubleToggle todo<CR>", { desc = "[N]otes toggle" }
 -- gitsigns
 set("n", "[c", "<cmd>Gitsign prev_hunk<cr>", { desc = "prev change/chunk/hunk" })
 set("n", "]c", "<cmd>Gitsign next_hunk<cr>", { desc = "next change/chunk/hunk" })
+set("n", "<leader>g", "<cmd>Gitsign setloclist<cr>", { desc = "add current changes to loclist" })
 -- diffview
 set("n", "<leader>G", "<cmd>DiffviewOpen<cr>", { desc = "open diffview" })
 

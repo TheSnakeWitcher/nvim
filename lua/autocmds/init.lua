@@ -5,7 +5,6 @@ for _, module in ipairs {
     "autocmds.highlight",
     "autocmds.projections",
     "autocmds.overseer",
-    "autocmds.foundry",
     -- "autocmds.package-info",
     "autocmds.experimental",
 } do
