@@ -72,6 +72,8 @@ local options = {
     --------------------------------
     ignorecase = true,
     smartcase = true,
+    grepprg = "rg --vimgrep --smart-case --hidden --follow",
+    -- grepformat^=%f:%l:%c:%m
 
 
     --------------------------------
