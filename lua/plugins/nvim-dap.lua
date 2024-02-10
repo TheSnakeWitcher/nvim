@@ -4,16 +4,15 @@ if not ok then
 	return
 end
 
+--- @help {dapui.setup()}
+dapui.setup()
+
+
 local ok, nvim_dap_virtual_text = pcall(require, "nvim-dap-virtual-text")
 if not ok then
 	vim.notify("nvim-dap-virtual-text config not loaded")
 	return
 end
-
-
---- @help {dapui.setup()}
-dapui.setup()
-
 
 --- @help {nvim-dap-virtual-text}
 nvim_dap_virtual_text.setup({
@@ -28,7 +27,6 @@ nvim_dap_virtual_text.setup({
 	display_callback = function(variable, _buf, _stackframe, _node)
 		return variable.name .. " = " .. variable.value
 	end,
-
 	virt_text_pos = "eol",
 	all_frames = false,
 	virt_lines = false,
