@@ -8,8 +8,9 @@ end
 local actions = require("telescope.actions")
 local action_state = require "telescope.actions.state"
 
-local ok, trouble = pcall(require,"trouble.providers.telescope")
-if not ok then vim.notify("trouble not loaded in telescope config") end
+-- TODO: C-q keymap send to quickfix and open trouble 
+-- local ok, trouble = pcall(require,"trouble.providers.telescope")
+-- if not ok then vim.notify("trouble not loaded in telescope config") end
 
 
 --------------------------------------------------------------
@@ -27,8 +28,8 @@ for _, module in ipairs {
     "zoxide",
     "lazy",
 
-    "chisel",
     "hardhat",
+    "foundry",
     -- "dap",
     -- "color_names",
     -- "telescope-tabs",
