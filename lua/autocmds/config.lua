@@ -18,8 +18,8 @@ vim.api.nvim_create_autocmd("BufWritePost", {
 })
 
 vim.api.nvim_create_autocmd("BufWritePre", {
-    group = config,
     desc = "when saving a file create directories if needed",
+    group = config,
     callback = function(event)
         if event.match:match("^%w%w+://") then return end
         local file = vim.loop.fs_realpath(event.match) or event.match
@@ -27,11 +27,10 @@ vim.api.nvim_create_autocmd("BufWritePre", {
     end,
 })
 
---- NOTE: last edited
 vim.api.nvim_create_autocmd({ "FileType" }, {
+    desc = "Set wrap and spell in markdown and gitcommit filetypes",
     group = config,
     pattern = { "gitcommit", "markdown" },
-    desc = "Set wrap and spell in markdown and gitcommit",
     callback = function(opts)
         vim.opt_local.wrap = true
         vim.opt_local.spell = true
