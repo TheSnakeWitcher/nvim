@@ -9,7 +9,7 @@ ufo.setup({
 
     provider_selector = function(bufnr, filetype, buftype)
 
-        local disabled_filetypes = { "dashboard", "neo-tree" }
+        local disabled_filetypes = { "dashboard", "neo-tree", "octo" }
         if vim.tbl_contains(disabled_filetypes, filetype) then
             return ""
         else
