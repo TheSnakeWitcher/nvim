@@ -7,7 +7,7 @@ end
 --- @help {silicon.lua-configuration}
 silicon.setup({
 	theme = "auto",
-	output = vim.env.HOME .. "/Pictures/Screenshots/${year}-${month}-${date}_${time}.png",
+	output = vim.env.HOME .. "/Pictures/screenshots/${year}-${month}-${date}_${time}.png",
 	font = "Iosevka Term Nerd Font Mono",
 	shadowOffsetX = 10,
 	shadowOffsetY = 10,
