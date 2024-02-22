@@ -4,7 +4,6 @@ for _, module in ipairs({
     "options",     --- @help {options}
     "plugins",
     "keymap",      --- @help {lua-keymap}
-    "diagnostics", --- @help {diagnostic.txt}
     "signs",       --- @help {sign.txt}
     "highlight",   --- @help {highlight}
     "autocmds",    --- @help {lua-guide-autocommands}
