@@ -171,7 +171,7 @@ set("n", "<leader>fq", "<cmd>Telescope quickfix<cr>", { desc = "[f]ind [q]uickfi
 -- file pickers
 set("n", "<C-f>", "<cmd> Telescope git_files<cr>", { desc = "[f]ind [g]itfiles(tracked by git according to .gitignore)" })
 set("n", "<leader>ff", "<cmd>Telescope find_files<cr>", { desc = "[f]ind [f]iles" })
-set("n", "<leader>fF", "<cmd>Telescope find_files hidden=false<cr>", { desc = "[f]ind [f]iles" })
+set("n", "<leader>fF", "<cmd>Telescope find_files hidden=false<cr>", { desc = "[f]ind [F]iles(including hidden)" })
 set("n", "<leader>fg", "<cmd>Telescope live_grep<cr>", { desc = "[f]ind [g]rep"  })
 -- set("n", "<leader>fG", "<cmd>Telescope live_grep grep_open_files=true<cr>", { desc = "[f]ind [G]rep"  })
 set("n", "<leader>fo", "<cmd>Telescope oldfiles<cr>",{ desc = "[f]ind [o]ldfiles" })
