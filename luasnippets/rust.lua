@@ -358,7 +358,7 @@ ls.add_snippets("rust", {
   s(
     {
       name = "method",
-      trig = "fm",
+      trig = "fnm",
       dscr = "method declaration, note: methdos are asociated with a datastruct & must be inside and impl",
     },
     fmt([[
