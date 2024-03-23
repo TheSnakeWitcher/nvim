@@ -9,7 +9,7 @@ overseer.setup({
     strategy = "terminal",
     templates = { "builtin" },
     auto_detect_success_color = true,
-    dap = true,
+    dap = false,
     task_list = {
         default_detail = 1,
         max_width = { 100, 0.2 },
