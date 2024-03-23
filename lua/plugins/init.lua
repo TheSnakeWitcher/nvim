@@ -69,13 +69,10 @@ require("lazy").setup({
     },
     -- statusline (bottom bar)
     -- {
-    --     "tjdevries/express_line.nvim",
-    --     lazy = true,
-    --     config = function() load_config("express_line") end,
+    --     "rebelot/heirline.nvim",
+    --     config = function() load_config("heirline") end,
     -- },
     {
-        -- watch "tjdevries/express_line.nvim",
-        -- alternative: "rebelot/heirline.nvim" with cookbook https://github.com/rebelot/heirline.nvim/blob/master/cookbook.md
         "nvim-lualine/lualine.nvim",
         config = function() load_config("lualine") end,
     },
@@ -93,11 +90,11 @@ require("lazy").setup({
     --     "Bekaboo/dropbar.nvim",
     --     config = function() load_config("dropbar") end,
     -- },
-    {
-        "glepnir/lspsaga.nvim",
-        event = "LspAttach",
-        config = function() load_config("lspsaga") end,
-    },
+    -- {
+    --     "glepnir/lspsaga.nvim",
+    --     event = "LspAttach",
+    --     config = function() load_config("lspsaga") end,
+    -- },
     -- startup screen/dashboard
     {
         "glepnir/dashboard-nvim",
@@ -154,8 +151,6 @@ require("lazy").setup({
         config = function() load_config("colorizer") end,
     },
     -- folds
-    -- "malbertzard/inline-fold.nvim", -- inline fold, note: check if highligh.scm can be i
-    -- "anuvyklack/fold-preview.nvim", -- fold preview
     {
         "yaocccc/nvim-foldsign",
         config = function() load_config("nvim-foldsign") end,
@@ -165,6 +160,11 @@ require("lazy").setup({
         dependencies = "kevinhwang91/promise-async",
         config = function() load_config("nvim-ufo") end,
     },
+    -- "malbertzard/inline-fold.nvim", -- inline fold, note: check if highligh.scm can be i
+    -- "anuvyklack/fold-preview.nvim", -- fold preview
+    -- {
+    --      "Vonr/foldcus.nvim/",
+    -- }
     -- signcolumn
     -- {
     --     "luukvbaal/statuscol.nvim",
@@ -199,7 +199,12 @@ require("lazy").setup({
     },
     -- { "AckslD/messages.nvim", opts = {} }, -- buf for better messages management
     -- generic sidebar
-    -- "folke/edgy.nvim",
+    -- {
+    --     "folke/edgy.nvim",
+    --     event = "VeryLazy",
+    --     init = function() vim.opt.splitkeep = "screen" end,
+    --     config = function() load_config("edgy") end,
+    -- },
     -- { "sidebar-nvim/sidebar.nvim" },
     -- command preview
     {
@@ -237,13 +242,14 @@ require("lazy").setup({
     ----------------------------------------------------------------
     {
         "nvim-treesitter/nvim-treesitter",
-        config = function() load_config("nvim-treesitter") end,
         build = ":TSUpdate",
+        config = function() load_config("nvim-treesitter") end,
         dependencies = {
             "nvim-treesitter/playground",                  -- NOTE: deprecated
             "nvim-treesitter/nvim-treesitter-context",     -- show code context
             "JoosepAlviste/nvim-ts-context-commentstring", -- to embeded languaje trees jsx/tsx
             "nvim-treesitter/nvim-tree-docs",              -- documentation
+            -- nvim-treesitter/nvim-treesitter-refactor    -- refactor module
             "nvim-treesitter/nvim-treesitter-textobjects", -- additional text objects via treesitter
             "windwp/nvim-ts-autotag",                      -- use treesitter to autocose & autorename html tags
             "RRethy/nvim-treesitter-endwise",              -- add `end` to non-brackets base languajes
@@ -275,6 +281,7 @@ require("lazy").setup({
     -- bridge/hook up non-LSP tools to the LSP UX to inject LSP diagnostics, code actions via lua
     {
         "nvimtools/none-ls.nvim",
+        event = "LspAttach",
         config = function() load_config("none-ls") end,
     },
     -- diagnostics
@@ -286,6 +293,7 @@ require("lazy").setup({
     -- formatter
     {
         "stevearc/conform.nvim",
+        lazy = true,
         opts = {}
     },
     -- lsp navigation
@@ -300,10 +308,9 @@ require("lazy").setup({
     -- lsp for code embeded in other documents 
     {
         "jmbuhr/otter.nvim",
-        opts = {},
         ft = "markdown",
+        opts = {},
     },
-
 
 
     --------------------------------------------------------------
@@ -314,6 +321,7 @@ require("lazy").setup({
         "nvim-telescope/telescope.nvim",
         branch = "0.1.x",
         cmd = { "Telescope", "TodoTelescope" },
+        keys = "<leader>f",
         config = function() load_config("telescope") end,
         dependencies = {
             "tsakirist/telescope-lazy.nvim",              -- search plugins installed with lazy
@@ -331,6 +339,7 @@ require("lazy").setup({
                 "nvim-telescope/telescope-fzf-native.nvim",
                 build = "make",
             },
+            "nvim-telescope/telescope-dap.nvim",         -- search for dap
             "FabianWirth/search.nvim",                   -- tabs for telescope layout
             -- "nvim-telescope/telescope-media-files.nvim", -- search media files
             -- "nat-418/telescope-color-names.nvim",         -- search colors
@@ -359,10 +368,8 @@ require("lazy").setup({
     {
         -- old alternatives: https://github.com/preservim/tagbar
         "stevearc/aerial.nvim",
-        config = function() load_config("aerial") end,
-        keys = "<leader>E",
         cmd = { "AerialToggle",  "AerialOpen",  "AerialOpenAll" },
-
+        config = function() load_config("aerial") end,
     },
     -- search unicode/emojis characters management
     {
@@ -393,16 +400,25 @@ require("lazy").setup({
     -- completion engine
     {
         "hrsh7th/nvim-cmp",
+        event = { "InsertEnter", "CmdlineEnter" },
         config = function() load_config("nvim-cmp") end,
         dependencies = {
             "hrsh7th/cmp-buffer",        -- buffers completion source
             "hrsh7th/cmp-path",          -- paths completion source
             "hrsh7th/cmp-cmdline",       -- cmdline completion source
             "hrsh7th/cmp-nvim-lua",      -- neovim lua api completion source
-            "hrsh7th/cmp-nvim-lsp",      -- lsp completion source
+            -- lsp completion source
+            {
+                "hrsh7th/cmp-nvim-lsp",
+                event = "LspAttach",
+            },
             "saadparwaiz1/cmp_luasnip",  -- luasnip snippet engine completion source
 
-            "rcarriga/cmp-dap",                      -- completion for dap
+            -- completion for dap
+            {
+                "rcarriga/cmp-dap",
+                cmd = "DapUI",
+            },
             "uga-rosa/cmp-dynamic",                  -- dynamic generation candidates sources
             "petertriho/cmp-git",                    -- git completion source
             "davidsierradz/cmp-conventionalcommits", -- conventional commtis
@@ -433,8 +449,10 @@ require("lazy").setup({
     --------------------------------------------------------------
     -- operational
     --------------------------------------------------------------
-    "mong8se/actually.nvim", -- ask for correct file to open when autocompletion doesn't work because multiple files share the same prefix
-    "zdcthomas/yop.nvim",    -- easier custom operator management
+    "mong8se/actually.nvim",  -- ask for correct file to open when autocompletion doesn't work because multiple files share the same prefix
+    "zdcthomas/yop.nvim",     -- easier custom operator management
+    "mg979/vim-visual-multi", --  enhaced multiline editing
+    "LunarVim/bigfile.nvim",  -- automatic option management when editing big files 
     -- keybindings help/documentation
     {
         "folke/which-key.nvim",
@@ -521,11 +539,11 @@ require("lazy").setup({
         config = function() load_config("silicon") end,
         cmd = "Screenshot",
     },
-    -- {
-    --     -- refactoring tool
-    --     "ThePrimeagen/refactoring.nvim",
-    --     cmd = "Refactor",
-    -- },
+    {
+        -- refactoring tool
+        "ThePrimeagen/refactoring.nvim",
+        cmd = "Refactor",
+    },
     -- json
     -- "gennaro-tedesco/nvim-jqx",
     -- yaml
@@ -550,25 +568,24 @@ require("lazy").setup({
         cmd = "Neotest",
         config = function() load_config("neotest") end,
         dependencies = {
+            "nvim-neotest/nvim-nio",
             "antoinemadec/FixCursorHold.nvim",
             "nvim-neotest/neotest-plenary",
-            "nvim-neotest/neotest-go",
             "rouge8/neotest-rust",
+            "nvim-neotest/neotest-go",
             "llllvvuu/neotest-foundry",
         },
     },
     -- dap(debug adapter protocol) integration
     {
-        -- TODO: lazy load (it is loaded by overseer because of dap=true option)
         -- alternative "puremourning/vimspector",
         "mfussenegger/nvim-dap",
-        config = function() load_config("nvim-dap") end,
         cmd = "DapUI",
+        config = function() load_config("nvim-dap") end,
         dependencies = {
             "rcarriga/nvim-dap-ui",
             "theHamsta/nvim-dap-virtual-text",
             "leoluz/nvim-dap-go",
-            "nvim-telescope/telescope-dap.nvim",
         },
     },
 
@@ -580,11 +597,13 @@ require("lazy").setup({
     -- knowledgebase/notes management
     {
         "epwalsh/obsidian.nvim",
+        version = "*",
+        lazy = true,
         ft = "markdown",
         opts = {
             workspaces = {
-                { name = "zettelkasten", vim.env.HOME .. "/Knowledgebase/zettelkasten/" },
-                { name = "wiki", path = vim.env.HOME .. "/Knowledgebase/wiki/" },
+                { name = "zettelkasten", vim.g.path.knowledgebase .. "/zettelkasten" },
+                { name = "wiki", path = vim.g.path.knowledgebase .. "/wiki" },
             },
         },
     },
@@ -682,6 +701,8 @@ require("lazy").setup({
     --------------------------------------------------------------
     -- integrations
     --------------------------------------------------------------
+    -- grep like tools
+    -- "mhinz/vim-grepper",
     -- git
     -- use "Almo7aya/openingh.nvim"  -- open file or project in github for neovim wirtten in lua
     "tpope/vim-fugitive", -- git integration for cmdline
@@ -712,6 +733,20 @@ require("lazy").setup({
     -- github
     -- "dlvhdr/gh-dash.git", -- github dashboard
     -- "rawnly/gist.nvim",   -- gist management
+    {
+        "ldelossa/gh.nvim",
+        dependencies = {
+            {
+            "ldelossa/litee.nvim",
+            config = function()
+                require("litee.lib").setup()
+            end,
+            },
+        },
+        config = function()
+            require("litee.gh").setup()
+        end,
+    },
     {
         -- edit & review github issues
         "pwntester/octo.nvim",
@@ -833,6 +868,7 @@ require("lazy").setup({
     ---- motions
     --{
     --    -- motions for every coordinate of the viewport
+    --    -- alternative: flash.nvim
     --    "ggandor/leap.nvim",
     --    opt = true,
     --    config = function() load_config("leap") end,
@@ -917,20 +953,25 @@ require("lazy").setup({
     ---- development
     ----------------------------------------------------------------
 
+     -- hardhat framework for web3 development
+    {
+        "TheSnakeWitcher/hardhat.nvim",
+        dev = true,
+        lazy = true,
+        filetype = "solidity",
+        config = function() load_config("hardhat") end,
+    },
     -- foundry toolkit integration for web3 development
     {
         "TheSnakeWitcher/foundry.nvim",
         dev = true,
         lazy = true,
+        filetype = "solidity",
         config = function() load_config("foundry") end,
     },
-     -- hardhat framework
-    {
-        "TheSnakeWitcher/hardhat.nvim",
-        dev = true,
-        lazy = true,
-        config = function() load_config("hardhat") end,
-    },
+
+    -- git integration
+    -- graphite.nvim https://marketplace.visualstudio.com/items?itemName=Graphite.gti-vscode
 
     ---- integration with common web3 tools for dApp development
     ---- {
@@ -938,11 +979,11 @@ require("lazy").setup({
     ----      config = function() load_config("web3tools") end,
     ----      dependencies  = {
     ----            -- tool list: https://github.com/ConsenSys/ethereum-developer-tools-list
+    ----            -- slither ( analysis diagnostic integration )
     ----            -- inline bookmarks by diligence
     ----            -- solidity visual auditor :
     ----                    https://consensys.io/diligence/blog/2019/10/solidity-visual-auditor-extension-for-vs-code/
-    ----                    https://marketplace.visualstudio.com/items?itemName=tintinweb.solidity-visual-auditor&ssr=false#overview
-    ----            -- slither ( analysis diagnostic integration )
+    ---                    https://marketplace.visualstudio.com/items?itemName=tintinweb.solidity-visual-auditor&ssr=false#overview
     ----            -- mythril : https://github.com/dyng/eth-ramen
     ----            -- ramen ui: https://github.com/dyng/eth-ramen
     ----            -- crytic-compile: https://github.com/crytic/crytic-compile/#crytic-compile
@@ -957,10 +998,10 @@ require("lazy").setup({
     ----      "TheSnakeWitcher/web3utils.nvim",
     ----      config = function() load_config("web3utils") end,
     ----      dependencies  = {
+    ----            "TheSnakeWitcher/ethersmode.nvim"          -- https://marketplace.visualstudio.com/items?itemName=acuarica.ethers-mode
     ----            "TheSnakeWitcher/selectorclash.nvim"       -- detect automatically storage and function selector clashes in poxy-like contracts(pattern independent)
     ----            "TheSnakeWitcher/opcodes.nvim"             -- opcode used and his price
     ----            "TheSnakeWitcher/gasmeter.nvim"            -- contract gas estimates of storage and operations
-    ----            "TheSnakeWitcher/ethersmode.nvim"          -- https://marketplace.visualstudio.com/items?itemName=acuarica.ethers-mode
     ----            "TheSnakeWitcher/crypto-address-lens.nvim" -- https://marketplace.visualstudio.com/items?itemName=peetzweg.crypto-address-lens
     ----            "TheSnakeWitcher/sourcify.nvim"            -- sourcify is a solidity source code and metadata verification tool
     ----            "TheSnakeWitcher/inheritviz.nvim"          -- view what and from where data/methods are being inherited
