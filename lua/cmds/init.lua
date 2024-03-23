@@ -3,7 +3,6 @@ for _, module in ipairs({
 	"cmds.projections",
 	"cmds.luasnip",
 	"cmds.overseer",
-	"cmds.nvim-dap-ui",
 	"cmds.silicon",
 	"cmds.foundry",
 	"cmds.web3",
