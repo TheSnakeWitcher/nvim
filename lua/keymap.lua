@@ -16,7 +16,7 @@
 --     < ESC >    = escape
 --     < CR >     = enter (stands for [C]arrier [R]eturn)
 --     < leader > = user seted leader key
---     <nop> = do nothing action
+--     < nop >    = do nothing action
 
 local set = vim.keymap.set
 local opts = { noremap = true, silent = true }
