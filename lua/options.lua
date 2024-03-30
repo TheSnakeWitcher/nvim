@@ -79,7 +79,7 @@ local options = {
     --------------------------------
     -- gui
     --------------------------------
-    guifont = "Source Code Pro:h11", --  "Hack:h11",  "Iosevka Nerd Font:h11"
+    guifont = "Source Code Pro:h9.5", --  "Hack:h9.5",  "Iosevka Nerd Font:h11",  "Source Code Pro:h9.5"
 
 
     --------------------------------
