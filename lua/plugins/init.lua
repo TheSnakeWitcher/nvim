@@ -602,7 +602,7 @@ require("lazy").setup({
         ft = "markdown",
         opts = {
             workspaces = {
-                { name = "zettelkasten", vim.g.path.knowledgebase .. "/zettelkasten" },
+                { name = "zettelkasten", path = vim.g.path.knowledgebase .. "/zettelkasten" },
                 { name = "wiki", path = vim.g.path.knowledgebase .. "/wiki" },
             },
         },
