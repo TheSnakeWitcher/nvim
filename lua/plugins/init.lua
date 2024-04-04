@@ -64,7 +64,7 @@ require("lazy").setup({
     -- file explorer
     {
         "nvim-neo-tree/neo-tree.nvim",
-        branch = "v2.x",
+        branch = "v3.x",
         config = function() load_config("neo-tree") end,
     },
     -- statusline (bottom bar)
