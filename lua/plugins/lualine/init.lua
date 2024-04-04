@@ -8,7 +8,7 @@ end
 local diff = util.load_config("lualine.diff")
 local project = util.load_config("lualine.project")
 local tests = util.load_config("lualine.neotest")
-
+local ruler = "%5(%l/%L%):%2c %p%%"  --- @help {statusline}
 
 ---@help {lualine-Default-configuration}
 lualine.setup({
@@ -26,14 +26,14 @@ lualine.setup({
 
     sections = {
         lualine_a = { "mode" },
-        lualine_b = { "progress","location" },
+        lualine_b = { ruler },
         lualine_c = {
             project,
             'branch',
-            diff, --- @help {lualine-diff-component-options}
-            'diagnostics', --- @help {lualine-diagnostics-component-options}
+            { "filetype", icon_only = true }, --- @help {lualine-filetype-component-options}
             {
                 'filename', --- @help {lualine-filename-component-options}
+                path = 1,
                 symbols = {
                     modified = ' ',
                     readonly = ' ',
@@ -41,7 +41,8 @@ lualine.setup({
                     newfile = '[new]',
                 },
             },
-            "filetype",
+            diff, --- @help {lualine-diff-component-options}
+            'diagnostics', --- @help {lualine-diagnostics-component-options}
         },
         lualine_x = {
             "overseer",
@@ -51,30 +52,30 @@ lualine.setup({
         lualine_z = {}
     },
 
-    tabline = {
-        lualine_a = {
-            --- @help {lualine-tabs-component-options}
-            {
-                "tabs",
-                mode = 2,
-            }
-        },
-        lualine_z = {
-            --- @help {lualine-windows-component-options}
-            {
-                "windows",
-                mode = 2,
-                filetype_names = {
-                    ["neo-tree"] = 'Neotree',
-                },
-                disabled_buftypes = {
-                    "prompt",
-                    "quickfix",
-                    "trouble"
-                },
-            },
-        }
-    },
+    -- tabline = {
+    --     lualine_c = {
+    --         --- @help {lualine-tabs-component-options}
+    --         {
+    --             "tabs",
+    --             mode = 2,
+    --         }
+    --     },
+    --     lualine_y = {
+    --         --- @help {lualine-windows-component-options}
+    --         {
+    --             "windows",
+    --             mode = 2,
+    --             filetype_names = {
+    --                 ["neo-tree"] = 'Neotree',
+    --             },
+    --             disabled_buftypes = {
+    --                 "prompt",
+    --                 "quickfix",
+    --                 "trouble"
+    --             },
+    --         },
+    --     }
+    -- },
 
     -- winbar = {
     --     lualine_c = {
@@ -84,7 +85,7 @@ lualine.setup({
     --         tests.stats_buf,
     --     },
     -- },
-    --
+
     -- inactive_winbar = {
     --     lualine_c = {
     --         function() return require("lspsaga.symbol.winbar").get_bar() or "" end,
