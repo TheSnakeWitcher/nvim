@@ -7,6 +7,18 @@ end
 --- @help {neo-tree-configuration}
 neo_tree.setup({
 
+    close_if_last_window = false,
+    popup_border_style = "rounded",
+    enable_git_status = true,
+    enable_diagnostics = true,
+    sort_case_insensitive = false,
+    sort_function = nil,
+
+    -- sources = {
+    --     "document_symbols",
+    --     "netman.ui.neo-tree",
+    -- },
+
     --- @help {neo-tree-source-selector}
     source_selector = {
         winbar = true,
@@ -14,14 +26,17 @@ neo_tree.setup({
             { source = "filesystem", display_name = " 󰈙 Files " },
             { source = "buffers", display_name = "  Buffers " },
             { source = "git_status", display_name = " 󰊢 Git " },
-            { source = "netman.ui.neo-tree", display_name = " 󰢹 Netman" },
+            -- { source = "document_symbols", display_name = "  Symbols" },
+            -- { source = "netman.ui.neo-tree", display_name = " 󰢹 Netman" },
         },
     },
 
     filesystem = {
         --- @help {neo-tree-filtered-items}
         filtered_items = {},
-        follow_current_file = true,
+        follow_current_file = {
+            enabled = true,
+        },
         group_empty_dirs = false,
         hijack_netrw_behavior = "open_default",
         use_libuv_file_watcher = true,
@@ -39,13 +54,6 @@ neo_tree.setup({
             }
         }
     },
-
-    close_if_last_window = false,
-    popup_border_style = "rounded",
-    enable_git_status = true,
-    enable_diagnostics = true,
-    sort_case_insensitive = false,
-    sort_function = nil,
 
     --- @help {neo-tree-component-configs}
     default_component_configs = {
@@ -142,7 +150,9 @@ neo_tree.setup({
     },
     nesting_rules = {},
     buffers = {
-        follow_current_file = true,
+        follow_current_file = {
+            enabled = true,
+        },
         group_empty_dirs = true,
         show_unloaded = true,
         window = {
