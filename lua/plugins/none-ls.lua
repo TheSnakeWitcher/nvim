@@ -32,7 +32,7 @@ null_ls.setup({
         -- { null_ls.builtins.diagnostics.eslint_d }
 
         -- sh
-        null_ls.builtins.diagnostics.shellcheck,
+        -- null_ls.builtins.diagnostics.shellcheck,
         null_ls.builtins.formatting.shfmt,
 
         --lua
