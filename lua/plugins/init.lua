@@ -63,6 +63,7 @@ require("lazy").setup({
     },
     -- file explorer
     {
+        -- https://github.com/Rolv-Apneseth/tfm.nvim
         "nvim-neo-tree/neo-tree.nvim",
         branch = "v3.x",
         config = function() load_config("neo-tree") end,
@@ -627,9 +628,14 @@ require("lazy").setup({
     },
     -- terminal management
     {
-        -- alternative: https://github.com/kassio/neoterm
+        -- alternative: https://github.com/rebelot/terminal.nvim , https://github.com/kassio/neoterm
         "akinsho/toggleterm.nvim",
-        keys = { "<leader>tf",  "<leader>tv" },
+        -- keys = { "<leader>tf",  "<leader>tv" },
+        keys = {
+            { "<leader>tf", "<cmd>ToggleTerm direction=float<cr>" },
+            { "<leader>tv", "<cmd>ToggleTerm direction=vertical size=100<cr>" },
+            { "<leader>tt", "<Cmd>ToggleTerm direction=tab<CR>" }
+        },
         cmd = 'Toggleterm',
         version = '*',
         config = function() load_config("toggleterm") end,
@@ -654,6 +660,7 @@ require("lazy").setup({
     {
         'rest-nvim/rest.nvim',
         lazy = true,
+        dependencies = { "luarocks.nvim" },
         config = function() load_config("rest") end,
     },
     --  image previewer
