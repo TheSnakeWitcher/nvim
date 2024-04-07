@@ -19,7 +19,7 @@ require("lazy").setup({
     "nvim-lua/popup.nvim",   -- popup api implementation of vim for neovim
     "ray-x/guihua.lua",      -- GUI library
     "MunifTanjim/nui.nvim",  -- UI component library
-    "folke/neodev.nvim",     -- plugin development setup, alternative https://github.com/danymat/neogen
+    "folke/neodev.nvim",     -- plugin development setup
     -- tools management UI to easily install lsp,dap,linters,formatters,etc
     {
         "williamboman/mason.nvim",
@@ -685,13 +685,20 @@ require("lazy").setup({
         dependencies = { "kristijanhusak/vim-dadbod-ui" },
     },
     -- doc generation
-    -- chekc neogen
-    -- chekc mini.doc
+    -- annotation generations in comment
     {
-        -- treesitter base markdown to vimdoc convertion tool
-        "ibhagwan/ts-vimdoc.nvim",
-        ft = "markdown",
+        "danymat/neogen",
+        opts = {
+            input_after_comment = true,
+            snippet_engine = "luasnip"
+        },
     },
+    -- chekc mini.doc
+    -- {
+    --     -- treesitter base markdown to vimdoc convertion tool
+    --     "ibhagwan/ts-vimdoc.nvim",
+    --     ft = "markdown",
+    -- },
     -- "milanglacier/yarepl.nvim" --
 
     -- conceal
@@ -1040,9 +1047,6 @@ require("lazy").setup({
     ----          dbm/tabbot for window manager like experience
     ----      }
     ---- }
-
-    ---- devops
-    ---- use "TheSnakeWitcher/cmp-gh-actions"        -- completion source for github actions
 
     ---- knowledgebase management(zetelkasten or unstructured and wiki or structured)
     ---- {
