@@ -240,14 +240,6 @@ end
 
 
 --------------------------------------------------------------
--- toggleterm
---------------------------------------------------------------
-set("n", "<leader>tf", "<Cmd>ToggleTerm direction=float<CR>", { desc = "[t]erminal [f]loat" })
-set("n", "<leader>tv", "<Cmd>ToggleTerm direction=vertical size=100<CR>", { desc = "[t]erminal [v]ertical" })
-set("n", "<leader>tt", "<Cmd>ToggleTerm direction=tab<CR>", { desc = "[t]erminal [f]loat" })
-
-
---------------------------------------------------------------
 -- urlview
 --------------------------------------------------------------
 set("n", "<leader>fu", "<cmd>UrlView buffer<cr>", { desc = "[f]ind [u]rls in buffer" })
@@ -273,7 +265,7 @@ set("n", "<leader>tl", "<CMD>Telescope telescope-tabs list_tabs<CR>", { desc = "
 -- trees/views/explorers
 --------------------------------------------------------------
 -- set("n", "<leader>e", '<cmd>lua require("edgy").toggle("left")<CR>', { desc = "[e]xplorers(edgy)" })
-set("n", "<leader>e", "<cmd>NeoTreeFocusToggle<CR>", { desc = "[e]xplorer" })
+set("n", "<leader>e", "<cmd>Neotree toggle<CR>", { desc = "[e]xplorer" })
 set("n", "<leader>E", "<cmd>AerialToggle<CR>", { desc = "[E]xplorer summary/outline(aerial)" })
 set("n", "<leader>u", "<cmd>UndotreeToggle<CR>", { desc = "[u]ndo tree toggle" })
 set("n", "<leader>D", "<cmd>TroubleToggle workspace_diagnostics<CR>", { desc = "[D]iagnostic toggle" })
