@@ -35,6 +35,8 @@ cmp.setup({
     },
 
     formatting = {
+        -- fields = {},
+        -- expandable_indicator = true,
         format = function(entry, vim_item)
             vim_item.kind = lspkind.symbol_map[vim_item.kind]
             vim_item.menu = ({
@@ -49,6 +51,24 @@ cmp.setup({
             })[entry.source.name]
             return vim_item
         end,
+        -- format = lspkind.cmp_format({
+        --     mode = 'symbol',
+        --     before = function(entry, vim_item)
+        --         vim_item.kind = lspkind.symbol_map[vim_item.kind]
+        --         vim_item.menu = ({
+        --             luasnip = '[snip]',
+        --             codeium = '[codeium]',
+        --             -- copilot = '[copilot]',
+        --             -- cmp_ai = '[ai]',
+        --             nvim_lsp = '[lsp]',
+        --             buffer = '[buf]',
+        --             path = '[path]',
+        --             nvim_lua = '[nvim]',
+        --         })[entry.source.name]
+        --         return vim_item
+        --     end,
+        -- }),
+
     },
 
     sources = cmp.config.sources({
