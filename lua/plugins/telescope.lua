@@ -17,7 +17,7 @@ local action_state = require "telescope.actions.state"
 -- extensions
 --------------------------------------------------------------
 
-for _, module in ipairs {
+for _, module in ipairs({
     "fzf",
     "notify",
     "projections",
@@ -38,7 +38,7 @@ for _, module in ipairs {
     -- "software-licenses",
     -- "neoclip",
     -- "cheat",
-} do
+}) do
     local ok, _ = pcall(telescope.load_extension, module)
     if not ok then
         vim.notify(string.format("%s telescope extension not loaded",module))
@@ -46,7 +46,7 @@ for _, module in ipairs {
 end
 
 
----@help {telescope.setup()}
+--- @help {telescope.setup()}
 telescope.setup({
 
     defaults = {
