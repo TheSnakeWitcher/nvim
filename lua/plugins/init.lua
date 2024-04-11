@@ -608,13 +608,6 @@ require("lazy").setup({
             },
         },
     },
-    {
-        -- "Furkanzmc/zettelkasten.nvim",
-        "renerocksai/telekasten.nvim",
-        cmd = "Telekasten",
-        ft = "telekasten",
-        config = function() load_config("telekasten") end,
-    },
     -- {
     --     -- wiki management and utilities for markdown files navigation and organization
     --     alternative: "vimwiki/vimwiki",
@@ -628,7 +621,7 @@ require("lazy").setup({
     },
     -- terminal management
     {
-        -- alternative: https://github.com/rebelot/terminal.nvim , https://github.com/kassio/neoterm
+        -- alternative: https://github.com/rebelot/terminal.nvim , https://github.com/pianocomposer321/consolation.nvim
         "akinsho/toggleterm.nvim",
         -- keys = { "<leader>tf",  "<leader>tv" },
         keys = {
