@@ -15,6 +15,14 @@ require("lazy").setup({
     ----------------------------------------------------------------
     -- base/libraries
     ----------------------------------------------------------------
+    -- luarocks support for lazy.nvim
+    {
+        "vhyrro/luarocks.nvim",
+        priority = 1001,
+        opts = {
+            rocks = { "magick" },
+        },
+    },
     "nvim-lua/plenary.nvim", -- usefull collection of lua functions for neovim
     "nvim-lua/popup.nvim",   -- popup api implementation of vim for neovim
     "ray-x/guihua.lua",      -- GUI library
@@ -601,12 +609,7 @@ require("lazy").setup({
         version = "*",
         lazy = true,
         ft = "markdown",
-        opts = {
-            workspaces = {
-                { name = "zettelkasten", path = vim.g.path.knowledgebase .. "/zettelkasten" },
-                { name = "wiki", path = vim.g.path.knowledgebase .. "/wiki" },
-            },
-        },
+        config = function() load_config("obsidian") end,
     },
     -- {
     --     -- wiki management and utilities for markdown files navigation and organization
@@ -614,11 +617,12 @@ require("lazy").setup({
     --     'jakewvincent/mkdnflow.nvim',
     --     config = function() load_config("mkdnflow") end
     -- },
-    {
-        "anuvyklack/hydra.nvim",
-        lazy = true,
-        config = function() load_config("hydra") end,
-    },
+    -- submodes
+    -- {
+    --     "anuvyklack/hydra.nvim",
+    --     lazy = true,
+    --     config = function() load_config("hydra") end,
+    -- },
     -- terminal management
     {
         -- alternative: https://github.com/rebelot/terminal.nvim , https://github.com/pianocomposer321/consolation.nvim
@@ -641,13 +645,22 @@ require("lazy").setup({
         cmds = { "OverseerToggle", "OverseerOpen", "OverseerBuild", "OverseerRun", "OverseerRunCmd" },
         config = function() load_config("overseer") end,
     },
-    -- previewiers
+    -- markdown previewiers
     {
         -- alternatives:
         -- https://github.com/iamcco/markdown-preview.nvim
         "ellisonleao/glow.nvim",
         config = true,
         cmd = "Glow",
+    },
+    --  image previewer
+    {
+        "3rd/image.nvim",
+        opts =  {},
+        init = function()
+            package.path = package.path .. ";" .. vim.fn.expand("$HOME") .. "/.luarocks/share/lua/5.1/?/init.lua;"
+            package.path = package.path .. ";" .. vim.fn.expand("$HOME") .. "/.luarocks/share/lua/5.1/?.lua;"
+        end,
     },
     -- http client
     {
@@ -656,17 +669,6 @@ require("lazy").setup({
         dependencies = { "luarocks.nvim" },
         config = function() load_config("rest") end,
     },
-    --  image previewer
-    -- {
-    --     -- "edluffy/hologram.nvim",
-    --     "3rd/image.nvim",
-    --     config = function() load_config("image") end,
-    --     opts =  {},
-    --     init = function()
-    --         package.path = package.path .. ";" .. vim.fn.expand("$HOME") .. "/.luarocks/share/lua/5.1/?/init.lua;"
-    --         package.path = package.path .. ";" .. vim.fn.expand("$HOME") .. "/.luarocks/share/lua/5.1/?.lua;"
-    --     end,
-    -- },
     -- database interaction management
     {
         -- alternatives:
@@ -776,6 +778,12 @@ require("lazy").setup({
         dependencies = { "nvim-lua/plenary.nvim", "nvim-telescope/telescope.nvim" },
         config = function() load_config("sg") end,
     },
+    -- literature programming / jupyter notebooks
+    -- {
+    --     -- https://github.com/GCBallesteros/NotebookNavigator.nvim
+    --     -- alternatives: 'dccsillag/magma-nvim',  "luk400/vim-jukit",  "GCBallesteros/jupytext.nvim"
+    --     'benlubas/molten-nvim ',
+    -- },
     -- AI
     -- "gsuuon/model.nvim", -- model agnostic ai integration
     -- "aduros/ai.vim",     -- generate and edit text using OpenAI and GPT.
@@ -902,26 +910,11 @@ require("lazy").setup({
     --    config = function() load_config("sniprun") end,
     --}
 
-    -- REPLS
-    --{
-    --    'benlubas/molten-nvim ',
-    --},
-    --{
-    --    -- jupyter interaction
-    --    'dccsillag/magma-nvim',
-    --    opt = true,
-    --    run = ':UpdateRemotePlugins',
-    --    config = function()
-    --        vim.g.magma_automatically_open_output = false
-    --        vim.g.magma_image_provider = "ueberzug"
-    --    end,
-    --},
     -- {
     --     -- develop integration with overseer
     --     "kndndrj/nvim-dbee",
     -- },
-    ---- "luk400/vim-jukit",
-    ---- "GCBallesteros/jupytext.nvim",
+
     ---- "Jxstxs/conceal.nvim"  -- conceal management
 
     ----  containers integration
