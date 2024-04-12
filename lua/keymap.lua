@@ -298,33 +298,13 @@ set("v", "<leader>R", "<cmd>ExecuteSelection<cr>", { desc = "[R]un selection" })
 
 
 --------------------------------------------------------------
--- zetelkasten
+-- knowledgebase/zettelkasten
 --------------------------------------------------------------
-set("n", "<leader>zn", "<cmd>Telekasten new_note<cr>", { desc = "[z]ettelkasten [n]ote" })
+set("n", "<leader>zn", "<cmd>ObsidianNew<cr>", { desc = "[z]ettelkasten [n]ote" })
 set("n", "<leader>zN", "<cmd>Telekasten new_templated_note<cr>", { desc = "[z]ettelkasten [N]ote templated" })
-set("n", "<leader>zf", "<cmd>Telekasten find_notes<cr>", { desc = "[z]ettelkasten [f]ind" })
-set("n", "<leader>zs", "<cmd>Telekasten find_notes<cr>", { desc = "[z]ettelkasten [s]earch" })
-set("n", "<leader>zg", "<cmd>Telekasten search_notes<cr>")
-set("n", "<leader>zt", "<cmd>Telekasten show_tags<cr>", { desc = "[z]ettelkasten [t]ag" })
-set("n", "<leader>zv", "<cmd>Telekasten switch_vault<cr>", { desc = "[z]ettelkasten [v]ault" })
--- set("i","<leader>[[","<esc><cmd>Telekasten insert_link<cr>",{desc = "insert link"})
--- set("n","<leader>z#","<cmd>Telekasten show_tags<cr>")
--- set("n","<leader>zb","<cmd>Telekasten show_backlinks<cr>")
--- set("n","<leader>zF","<cmd>Telekasten find_friends<cr>")
--- set("n","<leader>zd","<cmd>Telekasten find_daily_notes<cr>")
--- set("n","<leader>zz","<cmd>Telekasten follow_link<cr>")
--- set("n","<leader>zT","<cmd>Telekasten goto_today<cr>")
--- set("n","<leader>zW","<cmd>Telekasten goto_thisweek<cr>")
--- set("n","<leader>zw","<cmd>Telekasten find_weekly_notes<cr>")
--- set("n","<leader>zy","<cmd>Telekasten yank_notelink<cr>")
--- set("n","<leader>zc","<cmd>Telekasten show_calendar<cr>")
--- set("<leader>zi",":lua require('telekasten').paste_img_and_link()<CR>)
--- set("n","<leader>zI","<cmd>Telekasten insert_img_link({ i=true })<cr>")
--- set("n","<leader>zp","<cmd>Telekasten preview_img<cr>")
--- set("n","<leader>zm","<cmd>Telekasten browse_media<cr>")
--- set("<leader>zt",":lua require('telekasten').toggle_todo()<CR>)
- -- vnoremap <leader>zt :lua require('telekasten').toggle_todo({ v = true })<CR>
--- set("n","<leader>zC",":CalendarT<CR>)
+set("n", "<leader>zf", "<cmd>ObsidianQuickSwitch<cr>", { desc = "[z]ettelkasten [f]ind" })
+set("n", "<leader>zt", "<cmd>ObsidianTags<cr>", { desc = "[z]ettelkasten [t]ag" })
+set("n", "<leader>zv", "<cmd>ObsidianWorkspace<cr>", { desc = "[z]ettelkasten [v]ault" })
 
 
 --------------------------------------------------------------
