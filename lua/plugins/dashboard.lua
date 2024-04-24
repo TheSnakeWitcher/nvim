@@ -61,7 +61,14 @@ dashboard.setup({
                 desc = "New note",
                 group = "Label",
                 key = "n",
-                action = "Telekasten new_note",
+                action = function()
+                    local ok, _ = pcall(require, "obsidian")
+                    if not ok then
+                        vim.notify("obsidian not available")
+                        return
+                    end
+                    vim.cmd("ObsidianNew")
+                end,
             },
             {
                 icon = "🔍 ",
@@ -69,7 +76,14 @@ dashboard.setup({
                 desc = "Search notes",
                 group = "Number",
                 key = "N",
-                action = "Telekasten find_notes",
+                action = function()
+                    local ok, _ = pcall(require, "obsidian")
+                    if not ok then
+                        vim.notify("obsidian not available")
+                        return
+                    end
+                    vim.cmd("ObsidianQuickSwitch")
+                end,
             },
         },
     },
