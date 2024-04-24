@@ -171,18 +171,10 @@ set("n", "<leader>fq", "<cmd>Telescope quickfix<cr>", { desc = "[f]ind [q]uickfi
 -- file pickers
 set("n", "<C-f>", "<cmd> Telescope git_files<cr>", { desc = "[f]ind [g]itfiles(tracked by git according to .gitignore)" })
 set("n", "<leader>ff", "<cmd>Telescope find_files<cr>", { desc = "[f]ind [f]iles" })
-set("n", "<leader>fF", "<cmd>Telescope find_files hidden=false<cr>", { desc = "[f]ind [F]iles(including hidden)" })
 set("n", "<leader>fg", "<cmd>Telescope live_grep<cr>", { desc = "[f]ind [g]rep"  })
 -- set("n", "<leader>fG", "<cmd>Telescope live_grep grep_open_files=true<cr>", { desc = "[f]ind [G]rep"  })
 set("n", "<leader>fo", "<cmd>Telescope oldfiles<cr>",{ desc = "[f]ind [o]ldfiles" })
 set("n", "<leader>fP", "<cmd>Telescope lazy<cr>", { desc = "[f]ind [P]lugins" })
---set("n","<leader>fF",
---    function () builtin.find_files{ hidden = true, no_ignore = true} end,
---    telescope_opts
---} -- search all files
-
--- lsp pickers
--- set('n', '<leader>f', builtin.lsp_definitions, {desc = "[f]ind [t]reesitter"})
 
 -- git pickers
 set("n", "<C-s>", "<cmd>Telescope git_status<cr>", { desc = "[f]ind [S]tatus" })
@@ -282,6 +274,7 @@ set("n", "]c", "<cmd>Gitsign next_hunk<cr>", { desc = "next change/chunk/hunk" }
 set("n", "<leader>g", "<cmd>Gitsign setloclist<cr>", { desc = "add current changes to loclist" })
 -- diffview
 set("n", "<leader>G", "<cmd>DiffviewOpen<cr>", { desc = "open diffview" })
+set("n", "<leader>Gv", "<cmd>GV --all<cr>", { desc = "git viewer all" })
 
 
 --------------------------------------------------------------
@@ -304,6 +297,7 @@ set("n", "<leader>zn", "<cmd>ObsidianNew<cr>", { desc = "[z]ettelkasten [n]ote" 
 set("n", "<leader>zN", "<cmd>Telekasten new_templated_note<cr>", { desc = "[z]ettelkasten [N]ote templated" })
 set("n", "<leader>zf", "<cmd>ObsidianQuickSwitch<cr>", { desc = "[z]ettelkasten [f]ind" })
 set("n", "<leader>zt", "<cmd>ObsidianTags<cr>", { desc = "[z]ettelkasten [t]ag" })
+set("n", "<leader>zl", "<cmd>ObsidianLinks<cr>", { desc = "[z]ettelkasten [l]inks" })
 set("n", "<leader>zv", "<cmd>ObsidianWorkspace<cr>", { desc = "[z]ettelkasten [v]ault" })
 
 
