@@ -8,8 +8,10 @@ end
 --- @help {obsidian-setup}
 obsidian.setup({
     workspaces = {
-        { name = "zettelkasten", path = vim.g.path.knowledgebase .. "/zettelkasten" },
-        { name = "wiki",         path = vim.g.path.knowledgebase .. "/wiki" },
+        { name = "zettels", path = vim.g.path.knowledgebase .. "/zettels" },
+        { name = "wikis",         path = vim.g.path.knowledgebase .. "/wikis" },
+        { name = "fleetings",         path = vim.g.path.knowledgebase .. "/fleetings" },
+        { name = "references",         path = vim.g.path.knowledgebase .. "/references" },
     },
     ui = {
         enable = true,
@@ -21,7 +23,7 @@ obsidian.setup({
             ["~"] = { char = "󰰱 ", hl_group = "ObsidianTilde" },
         },
         bullets = { char = "•", hl_group = "ObsidianBullet" },
-        external_link_icon = { char = "", hl_group = "ObsidianExtLinkIcon" },
+        external_link_icon = { char = " ", hl_group = "ObsidianExtLinkIcon" },
         reference_text = { hl_group = "ObsidianRefText" },
         highlight_text = { hl_group = "ObsidianHighlightText" },
         tags = { hl_group = "ObsidianTag" },
