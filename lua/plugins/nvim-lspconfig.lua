@@ -48,7 +48,14 @@ local on_attach = function(client, bufnr)
     nmap('gd', vim.lsp.buf.definition, '[G]oto [D]efinition')
     nmap('gI',  "<cmd>Telescope lsp_implementations<cr>", '[G]oto [I]mplementation')
     nmap('gr', "<cmd>Telescope lsp_references<cr>", '[G]oto [R]eferences')
-    nmap('gR', "<cmd>Trouble lsp_references<cr>", '[G]oto [R]eferences')
+    nmap('gR',vim.lsp.buf.references, '[G]oto [R]eferences')
+    -- nmap('gR',  "<cmd>Trouble lsp_references<cr>",'[G]oto [R]eferences')
+    -- nmap('gR', function()
+    --     -- vim.lsp.buf.references()
+    --     -- vim.cmd("cclose")
+    --     -- vim.cmd("Trouble quickfix")
+    --     -- "<cmd>Trouble lsp_references<cr>"
+    -- end, '[G]oto [R]eferences')
 
     nmap('<leader>lr', vim.lsp.buf.rename, '[L]sp [r]ename')
     nmap('<leader>la', vim.lsp.buf.code_action, '[L]sp [A]ction (code actions)')
@@ -58,6 +65,7 @@ local on_attach = function(client, bufnr)
     nmap('<leader>lf', function() vim.lsp.buf.format { async = true } end, '[L]sp [f]ormat')
 
     nmap('<leader>?', vim.lsp.buf.hover, 'Hover Documentation')
+    nmap("<leader>fF", "<cmd>Telescope lsp_document_symbols symbols={'function','method'}<cr>", "[f]ind [F]iles(including hidden)")
 
     -- workspace
     -- nmap('<leader>wa', vim.lsp.buf.add_workspace_folder, '[W]orkspace [A]dd Folder')
