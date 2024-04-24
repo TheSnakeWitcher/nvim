@@ -294,10 +294,11 @@ set("v", "<leader>R", "<cmd>ExecuteSelection<cr>", { desc = "[R]un selection" })
 -- knowledgebase/zettelkasten
 --------------------------------------------------------------
 set("n", "<leader>zn", "<cmd>ObsidianNew<cr>", { desc = "[z]ettelkasten [n]ote" })
-set("n", "<leader>zN", "<cmd>Telekasten new_templated_note<cr>", { desc = "[z]ettelkasten [N]ote templated" })
+set("n", "<leader>zN", "<cmd>ObsidianTemplate<cr>", { desc = "[z]ettelkasten [N]ote templated" })
 set("n", "<leader>zf", "<cmd>ObsidianQuickSwitch<cr>", { desc = "[z]ettelkasten [f]ind" })
 set("n", "<leader>zt", "<cmd>ObsidianTags<cr>", { desc = "[z]ettelkasten [t]ag" })
 set("n", "<leader>zl", "<cmd>ObsidianLinks<cr>", { desc = "[z]ettelkasten [l]inks" })
+set("n", "<leader>zb", "<cmd>ObsidianBacklinks<cr>", { desc = "[z]ettelkasten [l]inks" })
 set("n", "<leader>zv", "<cmd>ObsidianWorkspace<cr>", { desc = "[z]ettelkasten [v]ault" })
 
 
