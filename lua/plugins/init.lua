@@ -654,14 +654,10 @@ require("lazy").setup({
         cmd = "Glow",
     },
     --  image previewer
-    {
-        "3rd/image.nvim",
-        opts =  {},
-        init = function()
-            package.path = package.path .. ";" .. vim.fn.expand("$HOME") .. "/.luarocks/share/lua/5.1/?/init.lua;"
-            package.path = package.path .. ";" .. vim.fn.expand("$HOME") .. "/.luarocks/share/lua/5.1/?.lua;"
-        end,
-    },
+    -- {
+    --     "3rd/image.nvim",
+    --     opts =  {},
+    -- },
     -- http client
     {
         'rest-nvim/rest.nvim',
