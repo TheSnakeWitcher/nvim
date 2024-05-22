@@ -4,13 +4,15 @@ if not ok then
 	return
 end
 
---- @help {silicon.lua-configuration}
+--- @help {nvim-silicon-setup}
 silicon.setup({
-	theme = "auto",
-	output = vim.env.HOME .. "/Pictures/screenshots/${year}-${month}-${date}_${time}.png",
-	font = "Iosevka Term Nerd Font Mono",
-	shadowOffsetX = 10,
-	shadowOffsetY = 10,
-	gobble = true,
-	debug = true,
+	font = "Iosevka Nerd Font",
+	theme = "doom-one_dark",
+    output = function()
+		return string.format(
+		    "%s/Pictures/screenshots/%s.png",
+		    vim.env.HOME,
+            os.date("!%Y-%m-%dT%H-%M-%S")
+		)
+	end,
 })
