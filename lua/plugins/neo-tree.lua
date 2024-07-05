@@ -84,6 +84,17 @@ neo_tree.setup({
             use_git_status_colors = true,
             highlight = "NeoTreeFileName",
         },
+
+        --- @help {neo-tree-diagnostics}
+        diagnostics = {
+            symbols = {
+                hint = require("util.icons").DiagnosticHint,
+                info = require("util.icons").DiagnosticInfo,
+                warn = require("util.icons").DiagnosticWarn,
+                error = require("util.icons").DiagnosticError,
+            },
+        },
+
         git_status = {
             symbols = {
                 added     = "",
