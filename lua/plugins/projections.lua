@@ -13,17 +13,16 @@ local patterns = {
 
 local function get_workspaces()
     local workspaces = {
-        { vim.g.code_dir , { patterns.readme } },
-        { vim.g.projects_dir , { patterns.git } },
-        { vim.g.projects_dir .. "/nvim" , { patterns.git } },
-        { vim.g.projects_dir .. "/hardhat" , { patterns.git } },
-        { vim.g.plugin_dev_dir , { patterns.git} },
+        { vim.g.path.code , { patterns.readme } },
+        { vim.g.path.projects , { patterns.git } },
+        { vim.g.path.plugin_dev , { patterns.git} },
+        { vim.g.path.projects .. "/hardhat" , { patterns.git } },
         { "~/.config/" , { patterns.readme } },
     }
 
-    local path = vim.g.work_projects_dir
+    local path = vim.g.path.work_projects
     for inner_path in vim.fs.dir(path) do
-        table.insert(workspaces,{ path .. "/" .. inner_path , {} })
+        table.insert(workspaces,{ vim.fs.joinpath(path, inner_path), {} })
     end
 
     return workspaces
