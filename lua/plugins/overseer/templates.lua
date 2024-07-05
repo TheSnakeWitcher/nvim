@@ -39,7 +39,7 @@ overseer.register_template({
     end,
     condition = {
         callback = function(search)
-            local info = Session.info(vim.loop.cwd())
+            local info = Session.info(vim.uv.cwd())
             if info ~= nil and info.project.name == "nvim" then
                 return true
             else

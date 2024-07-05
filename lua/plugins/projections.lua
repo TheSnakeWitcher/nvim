@@ -43,7 +43,7 @@ projections.setup({
     restore_hooks = {
         pre = nil,
         post = function()
-            vim.cmd("Neotree " .. vim.loop.cwd())
+            vim.cmd("Neotree " .. vim.uv.cwd())
         end,
     },
     workspaces_file = vim.fn.stdpath("cache") .. "/projections/workspaces.json",

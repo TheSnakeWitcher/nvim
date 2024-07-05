@@ -6,14 +6,14 @@ local Switcher = require("projections.switcher")
 local Workspace = require("projections.workspace")
 
 vim.api.nvim_create_user_command("SessionSave", function()
-    Session.store(vim.loop.cwd())
+    Session.store(vim.uv.cwd())
 end, {})
 
 vim.api.nvim_create_user_command("SessionLoad", function()
-    Session.restore(vim.loop.cwd())
+    Session.restore(vim.uv.cwd())
 end, {})
 
 
 vim.api.nvim_create_user_command("AddWorkspace", function()
-    Workspace.add(vim.loop.cwd())
+    Workspace.add(vim.uv.cwd())
 end, {})

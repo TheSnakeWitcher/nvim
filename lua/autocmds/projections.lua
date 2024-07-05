@@ -7,17 +7,17 @@ local Workspace = require("projections.workspace")
 
 vim.api.nvim_create_autocmd({ 'VimLeavePre' }, {
     desc =  "Autostore session on VimExit",
-    callback = function() Session.store(vim.loop.cwd()) end,
+    callback = function() Session.store(vim.uv.cwd()) end,
 })
 
 vim.api.nvim_create_autocmd({ "VimEnter" }, {
     callback = function()
         if vim.fn.argc() ~= 0 then return end
-        local session_info = Session.info(vim.loop.cwd())
+        local session_info = Session.info(vim.uv.cwd())
         if session_info == nil then
             vim.cmd("Dashboard")
         else
-            Session.restore(vim.loop.cwd())
+            Session.restore(vim.uv.cwd())
         end
     end,
     desc = "restore last session automatically if exists else show Dashboard",

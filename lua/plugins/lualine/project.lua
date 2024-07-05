@@ -4,10 +4,10 @@ return function()
     local icon = '  '
 
     if not projections_available then
-        return icon .. vim.loop.cwd()
+        return icon .. vim.uv.cwd()
     end
 
-    local info = Session.info(vim.loop.cwd())
+    local info = Session.info(vim.uv.cwd())
     if info ~= nil then
         local project_name = info.project.name
         return icon .. project_name

@@ -72,7 +72,7 @@ end
 --- @param adapters string[]
 --- @return string
 local function get_current_project_adapter(adapters)
-    local project_path = vim.loop.cwd()
+    local project_path = vim.uv.cwd()
     return get_project_adapter(adapters, project_path)
 end
 
@@ -83,7 +83,7 @@ local function condition()
     local adaptersNumber = #adapters
     if  adaptersNumber < 1 then return false end
 
-    local project_path = vim.loop.cwd()
+    local project_path = vim.uv.cwd()
     if not project_path then return false end
 
     if adaptersNumber < 2 then

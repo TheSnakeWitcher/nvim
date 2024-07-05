@@ -13,7 +13,7 @@ vim.api.nvim_create_autocmd("BufWritePost", {
 	group = web3,
 	pattern = "*.sol",
 	callback = function()
-		local root = vim.loop.cwd()
+		local root = vim.uv.cwd()
 		local path = vim.fn.expand("%:p:h")
 
 		local in_lib_dir = string.match(path, "lib")
