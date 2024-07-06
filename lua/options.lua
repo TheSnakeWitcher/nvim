@@ -72,14 +72,12 @@ local options = {
     --------------------------------
     ignorecase = true,
     smartcase = true,
-    grepprg = "rg --vimgrep --smart-case --hidden --follow",
-    -- grepformat^=%f:%l:%c:%m
 
 
     --------------------------------
     -- gui
     --------------------------------
-    guifont = "Iosevka Nerd Font:h10", --  "Hack:h9.3",  "Iosevka Nerd Font:h9.8",  "Iosevka Nerd Font:h9.7",  "Source Code Pro:h9.5"
+    guifont = "Iosevka Nerd Font:h11.5", --  "Hack:h9.3",  "Iosevka Nerd Font:h9.8",  "Iosevka Nerd Font:h9.7",  "Source Code Pro:h9.5"
 
 
     --------------------------------
