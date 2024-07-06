@@ -75,6 +75,7 @@ cmp.setup({
         { name = 'luasnip' },
         { name = 'codeium' },
         { name = 'nvim_lsp' },
+        { name = 'otter' }, -- to use with quarrto
         { name = 'nvim_lua' }, -- by default active only in lua files
         { name = 'buffer' },
         { name = 'path' , keyworkd_length = 2 },
