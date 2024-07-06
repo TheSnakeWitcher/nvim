@@ -1,5 +1,5 @@
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
-if not vim.loop.fs_stat(lazypath) then
+if not vim.uv.fs_stat(lazypath) then
     vim.fn.system({"git", "clone", "--filter=blob:none", "https://github.com/folke/lazy.nvim.git", "--branch=stable", lazypath})
 end
 vim.opt.rtp:prepend(lazypath)
@@ -51,19 +51,17 @@ require("lazy").setup({
     -- ui
     --------------------------------------------------------------
     -- colorschemes
-    {
-        "romgrk/doom-one.vim",
+    { "romgrk/doom-one.vim",
+        lazy = true,
         priority = 1000,
-        lazy = false,
         init = function() vim.cmd("colorscheme doom-one") end,
     },
-    { "folke/tokyonight.nvim", lazy = true },
-    { "Mofiqul/dracula.nvim",  lazy = true },
-    -- { "NTBBloodbath/doom-one.nvim", lazy = true },
-    -- { "doom-neovim/doom-nvim", lazy = true },
-    -- { "scottmckendry/cyberdream.nvim", lazy = true, },
-    -- { "catppuccin/nvim", name = "catppuccin", lazy = true },
+    -- { "NTBBloodbath/doom-one.nvim", lazy = true, },
+    { "folke/tokyonight.nvim", lazy = true, },
+    { "Mofiqul/dracula.nvim", lazy = true },
+    -- { 'Mofiqul/vscode.nvim', lazy = true },
     -- { "marko-cerovac/material.nvim" , lazy = true },
+    -- { "catppuccin/nvim", name = "catppuccin", lazy = true },
     -- icons
     {
         "nvim-tree/nvim-web-devicons",
@@ -94,11 +92,7 @@ require("lazy").setup({
         "nanozuki/tabby.nvim",
         config = function() load_config("tabby") end,
     },
-    -- lsp symbols in winbar(just below tabline)
-    -- {
-    --     "Bekaboo/dropbar.nvim",
-    --     config = function() load_config("dropbar") end,
-    -- },
+    -- "Bekaboo/dropbar.nvim", -- lsp symbols in winbar(just below tabline)
     -- {
     --     "glepnir/lspsaga.nvim",
     --     event = "LspAttach",
@@ -254,8 +248,8 @@ require("lazy").setup({
         build = ":TSUpdate",
         config = function() load_config("nvim-treesitter") end,
         dependencies = {
-            "nvim-treesitter/playground",                  -- NOTE: deprecated
             "nvim-treesitter/nvim-treesitter-context",     -- show code context
+            -- remove with v0.10
             "JoosepAlviste/nvim-ts-context-commentstring", -- to embeded languaje trees jsx/tsx
             "nvim-treesitter/nvim-tree-docs",              -- documentation
             -- nvim-treesitter/nvim-treesitter-refactor    -- refactor module
@@ -296,7 +290,7 @@ require("lazy").setup({
     -- diagnostics
     {
         "folke/trouble.nvim",
-        cmd = { "Trouble",  "TroubleToggle" },
+        cmd = "Trouble",
         config = function() load_config("trouble") end,
     },
     -- formatter
@@ -314,18 +308,12 @@ require("lazy").setup({
     --    "RishabhRD/nvim-lsputils",
     --    requires = "RishabhRD/popfix",
     --}
-    -- lsp for code embeded in other documents 
-    {
-        "jmbuhr/otter.nvim",
-        ft = "markdown",
-        opts = {},
-    },
 
 
     --------------------------------------------------------------
     -- navigation
     --------------------------------------------------------------
-    -- fzf
+    -- fzf 
     {
         "nvim-telescope/telescope.nvim",
         branch = "0.1.x",
@@ -339,17 +327,13 @@ require("lazy").setup({
             "crispgm/telescope-heading.nvim",             -- search headers
             "jvgrootveld/telescope-zoxide",               -- search zoxide paths
             {
-                -- create telescope pickers from shell commands
-                "axkirillov/easypick.nvim",
-                config = function() load_config("easypick") end,
-            },
-            {
                 -- use fzf
                 "nvim-telescope/telescope-fzf-native.nvim",
                 build = "make",
             },
             "nvim-telescope/telescope-dap.nvim",         -- search for dap
             "FabianWirth/search.nvim",                   -- tabs for telescope layout
+            -- "jmbuhr/telescope-zotero.nvim",
             -- "nvim-telescope/telescope-media-files.nvim", -- search media files
             -- "nat-418/telescope-color-names.nvim",         -- search colors
             -- "ryanmsnyder/toggleterm-manager.nvim",        -- search toggleterm terminals
@@ -443,6 +427,7 @@ require("lazy").setup({
             -- "hrsh7th/cmp-emoji",             -- emoji completion source
             -- "nat-418/cmp-color-names.nvim"   -- color sources
             -- "jc-doyle/cmp-pandoc-references" -- pandoc/markdown/bibliography completion sources
+            -- "jalvesaq/cmp-zotcite"           -- zotero completion sources
         }
     },
     -- snippet engine
@@ -505,7 +490,7 @@ require("lazy").setup({
         event = "InsertEnter",
         config = function() load_config("nvim-autopairs") end,
     },
-    -- easily comment code(treesiter integration)
+    -- easily comment code(treesiter integration) (remove with v0.10)
     {
         "numToStr/Comment.nvim",
         config = function() load_config("Comment") end,
@@ -544,9 +529,9 @@ require("lazy").setup({
     --use "andymass/vim-matchup"           --  even better % fist_oncoming navigate and highlight matching words
     -- code screenshots
     {
-        "0oAstro/silicon.lua",
+        "michaelrommel/nvim-silicon",
+        cmd = "Silicon",
         config = function() load_config("silicon") end,
-        cmd = "Screenshot",
     },
     {
         -- refactoring tool
@@ -597,12 +582,17 @@ require("lazy").setup({
             "leoluz/nvim-dap-go",
         },
     },
+    -- test coverage
+    -- {
+    --      -- show coverage stats in lualine
+    --      -- show test file coverage stats in file 
+    --      "andythigpen/nvim-coverage",
+    -- }
 
 
     --------------------------------------------------------------
     -- tools
     --------------------------------------------------------------
-    -- custom submodes management (create custom submodes and menus)
     -- knowledgebase/notes management
     {
         "epwalsh/obsidian.nvim",
@@ -617,9 +607,9 @@ require("lazy").setup({
     --     'jakewvincent/mkdnflow.nvim',
     --     config = function() load_config("mkdnflow") end
     -- },
-    -- submodes
+    -- custom submodes management (create custom submodes and menus)
     -- {
-    --     "anuvyklack/hydra.nvim",
+    --     "nvimtools/hydra.nvim",
     --     lazy = true,
     --     config = function() load_config("hydra") end,
     -- },
@@ -702,7 +692,6 @@ require("lazy").setup({
     -- "niuiic/translate.nvim",
 
 
-
     --------------------------------------------------------------
     -- integrations
     --------------------------------------------------------------
@@ -758,31 +747,26 @@ require("lazy").setup({
         cmd = "Octo",
         config = function() load_config("octo") end,
     },
-    -- pandoc
-    -- {
-    --    -- latex like editing experience while writing markdown
-    --    -- https://github.ink/aspeddro/pandoc.nvim
-    --    -- https://github.com/vim-pandoc/vim-pandoc
-    --    "abeleinin/papyrus",
-    --    "vim-pandoc/vim-pandoc"
-    --    config = function() load_config("papyrus") end,
-    -- },
-    -- sourcegraph integration
-    {
-        "sourcegraph/sg.nvim",
-        lazy = true,
-        dependencies = { "nvim-lua/plenary.nvim", "nvim-telescope/telescope.nvim" },
-        config = function() load_config("sg") end,
-    },
     -- literature programming / jupyter notebooks
+    {
+        "quarto-dev/quarto-nvim",
+        dependencies = {
+            -- lsp for code embeded in other documents 
+            -- { "jmbuhr/otter.nvim", ft = "markdown", opts = {} },
+            { "jmbuhr/otter.nvim", opts = {} },
+        },
+        config = function() require("quarto").setup() end,
+    },
     -- {
     --     -- https://github.com/GCBallesteros/NotebookNavigator.nvim
-    --     -- alternatives: 'dccsillag/magma-nvim',  "luk400/vim-jukit",  "GCBallesteros/jupytext.nvim"
-    --     'benlubas/molten-nvim ',
+    --     -- alternatives old: 'dccsillag/magma-nvim',  "luk400/vim-jukit",  "GCBallesteros/jupytext.nvim"
+    --     -- alternatives : https://github.com/GCBallesteros/NotebookNavigator.nvim
+    --     -- resources: https://github.com/ahmedkhalf/jupyter-nvim
+    --     "benlubas/molten-nvim",
+    --     opts =  {},
     -- },
     -- AI
     -- "gsuuon/model.nvim", -- model agnostic ai integration
-    -- "aduros/ai.vim",     -- generate and edit text using OpenAI and GPT.
     {
        -- chatgpt
        -- https://dotfyle.com/plugins/Robitx/gp.nvim
@@ -816,6 +800,30 @@ require("lazy").setup({
     --      https://github.com/jmorganca/ollama
     --      https://github.com/ziontee113/ollama.nvim
     --      https://github.com/jpmcb/nvim-llama
+    -- },
+    -- {
+    --      -- supermaven
+    --      "supermaven-inc/supermaven-nvim",
+    -- },
+    -- pandoc
+    -- {
+    --    -- latex like editing experience while writing markdown
+    --    -- https://github.ink/aspeddro/pandoc.nvim
+    --    -- https://github.com/vim-pandoc/vim-pandoc
+    --    "abeleinin/papyrus",
+    --    "vim-pandoc/vim-pandoc"
+    --    config = function() load_config("papyrus") end,
+    -- },
+    -- zotero
+    -- {
+    --     "jalvesaq/zotcite",
+    -- },
+    -- sourcegraph integration
+    -- {
+    --     "sourcegraph/sg.nvim",
+    --     lazy = true,
+    --     dependencies = { "nvim-lua/plenary.nvim", "nvim-telescope/telescope.nvim" },
+    --     config = function() load_config("sg") end,
     -- },
 
 
@@ -862,19 +870,14 @@ require("lazy").setup({
     ----------------------------------------------------------------
     ---- experimental
     ----------------------------------------------------------------
-    -- ui
-    -- "ldelossa/litee.nvim", -- ui widgets library
-
     --{
     --    -- lsp in statusline
     --    "nvim-lua/lsp-status.nvim",
     --}
 
-    -- collaborative coding,check https://github.com/Floobits/floobits-neovim
-    {
-        "jbyuki/instant.nvim",
-        cmd = "Instant",
-    },
+    -- cross-editor collaborative coding
+    -- https://github.com/Floobits/floobits-neovim
+    -- https://github.com/jbyuki/instant.nvim
 
     ---- motions
     --{
