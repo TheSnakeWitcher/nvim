@@ -1,4 +1,4 @@
--------------------------------------------------------------
+--------------------------------------------------------------
 -- documentation
 --------------------------------------------------------------
 -- Modes:
@@ -28,7 +28,7 @@ local opts = { noremap = true, silent = true }
 --------------------------------------------------------------
 local ok , yop = pcall(require,"yop")
 if not ok then
-    vim.noitfy("yop not loaded in keymaps")
+    vim.notify("yop not loaded in keymaps")
 else
     yop.op_map({"n", "v"}, "<leader>h", function(lines, info)
         vim.cmd(string.format("help %s",lines[1]))
@@ -90,6 +90,9 @@ set("n", "N", "Nzz")
 --------------------------------------------------------------
 -- navigations
 --------------------------------------------------------------
+-- go to
+set("n","gl", "<cmd>norm gx<cr>", opts)
+
 -- tabs
 set("n", "<S-l>", ":tabnext<CR>", opts)
 set("n", "<S-h>", ":tabprev<CR>", opts)
@@ -105,9 +108,9 @@ set("n", "<C-k>", "<C-w>k", opts)
 set("n", "<C-l>", "<C-w>l", opts)
 
 -- detour
-set("n", "<C-w>f", "<cmd>Detour<cr>", { desc = "float global window"})
+set("n", "<C-w>f", "<cmd>Detour<cr>", { desc = "float global window" })
 set("n", "<C-w>F", "<cmd>DetourCurrentWindow<cr>", { desc = "float local window" })
-set("n", "<C-w><C-f>", "<cmd>Detour<cr>", { desc = "float global window"})
+set("n", "<C-w><C-f>", "<cmd>Detour<cr>", { desc = "float global window" })
 set("n", "<C-w><C-F>", "<cmd>DetourCurrentWindow<cr>", { desc = "float local window" })
 
 
