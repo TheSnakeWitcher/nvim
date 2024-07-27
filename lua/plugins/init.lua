@@ -3,15 +3,14 @@ if not vim.uv.fs_stat(lazypath) then
     vim.fn.system({"git", "clone", "--filter=blob:none", "https://github.com/folke/lazy.nvim.git", "--branch=stable", lazypath})
 end
 vim.opt.rtp:prepend(lazypath)
-
 local load_config = util.load_config
-
 
 --- @PluginList https://neovimcraft.com/
 --- @PluginList https://dotfyle.com/
 --- @PluginList https://github.com/yutkat/my-neovim-pluginlist
 --- @PluginList https://github.com/rockerBOO/awesome-neovim.git
 require("lazy").setup({
+
     ----------------------------------------------------------------
     -- base/libraries
     ----------------------------------------------------------------
@@ -400,13 +399,12 @@ require("lazy").setup({
             "hrsh7th/cmp-path",          -- paths completion source
             "hrsh7th/cmp-cmdline",       -- cmdline completion source
             "hrsh7th/cmp-nvim-lua",      -- neovim lua api completion source
+            "saadparwaiz1/cmp_luasnip",  -- luasnip snippet engine completion source
             -- lsp completion source
             {
                 "hrsh7th/cmp-nvim-lsp",
                 event = "LspAttach",
             },
-            "saadparwaiz1/cmp_luasnip",  -- luasnip snippet engine completion source
-
             -- completion for dap
             {
                 "rcarriga/cmp-dap",
@@ -462,7 +460,6 @@ require("lazy").setup({
         "tpope/vim-surround",
         event = "InsertEnter",
     },
-
     -- allow C-a/C-x to increment/decrement dates and times
     {
         "tpope/vim-speeddating",
@@ -615,7 +612,7 @@ require("lazy").setup({
     -- },
     -- terminal management
     {
-        -- alternative: https://github.com/rebelot/terminal.nvim , https://github.com/pianocomposer321/consolation.nvim
+        -- alternative: https://github.com/Rolv-Apneseth/tfm.nvim, https://github.com/rebelot/terminal.nvim , https://github.com/pianocomposer321/consolation.nvim
         "akinsho/toggleterm.nvim",
         -- keys = { "<leader>tf",  "<leader>tv" },
         keys = {
@@ -680,13 +677,11 @@ require("lazy").setup({
     --     "ibhagwan/ts-vimdoc.nvim",
     --     ft = "markdown",
     -- },
-    -- "milanglacier/yarepl.nvim" --
-
+    -- "milanglacier/yarepl.nvim",
     -- conceal
     ---- use "KeitaNakamura/tex-conceal.vim",
     -- "ziontee113/color-picker.nvim", -- color picker
     -- "duane9/nvim-rg" -- run rg async from neovim
-
     -- translation
     -- "potamides/pantran.nvim",
     -- "niuiic/translate.nvim",
@@ -755,6 +750,7 @@ require("lazy").setup({
             -- { "jmbuhr/otter.nvim", ft = "markdown", opts = {} },
             { "jmbuhr/otter.nvim", opts = {} },
         },
+        ft = "quarto",
         config = function() require("quarto").setup() end,
     },
     -- {
@@ -830,8 +826,6 @@ require("lazy").setup({
     ----------------------------------------------------------------
     ---- languaje
     ----------------------------------------------------------------
-    -- lua
-    --
     -- rust
     -- {
     --     -- TODO: replace with mrcjkb/rustaceanvim
@@ -848,12 +842,16 @@ require("lazy").setup({
     --     end,
     -- }
     -- go
-    ----
+    --
     -- latex
-    -- "lervag/vimtex",
     -- "frabjous/knap",
-    --
-    --
+    {
+        "lervag/vimtex",
+        ft = { "tex", "latex" },
+        init = function()
+            vim.g.vimtex_view_general_viewer = "okular"
+        end
+    },
     -- javascrtp/typescript
     -- {
     --      -- manage pnpm workspace with telescope
@@ -865,20 +863,16 @@ require("lazy").setup({
     --    dependencies = "MunifTanjim/nui.nvim",
     --    config = function() load_config("package-info") end ,
     -- },
+    -- kotlin
+    -- https://github.com/mfussenegger/nvim-jdtls
 
 
     ----------------------------------------------------------------
     ---- experimental
     ----------------------------------------------------------------
-    --{
-    --    -- lsp in statusline
-    --    "nvim-lua/lsp-status.nvim",
-    --}
-
     -- cross-editor collaborative coding
     -- https://github.com/Floobits/floobits-neovim
     -- https://github.com/jbyuki/instant.nvim
-
     ---- motions
     --{
     --    -- motions for every coordinate of the viewport
@@ -887,20 +881,15 @@ require("lazy").setup({
     --    opt = true,
     --    config = function() load_config("leap") end,
     --}
-
     ---- lsp
     -- "smjonas/inc-rename.nvim" -- incremental LSP renaming based on Neovim's command-preview feature.
-
     ---- markdown
     -- "SidOfc/mkdx" -- markdown utils
-
     ---- cmds
     -- "protex/better-digraphs.nvim"      -- better digraphs
-
     ---- test interaction
     ---- "tpope/vim-unimpaired",          -- complementary mapping
     ---- "tpope/vim-sleuth"               -- detect tabstop and shiftwidth automatically
-
     ---- code runner
     --{
     --    "michaelb/sniprun",
@@ -908,50 +897,40 @@ require("lazy").setup({
     --    run = "bash ./install.sh",
     --    config = function() load_config("sniprun") end,
     --}
-
     -- {
     --     -- develop integration with overseer
     --     "kndndrj/nvim-dbee",
     -- },
-
     ---- "Jxstxs/conceal.nvim"  -- conceal management
-
     ----  containers integration
     ---- {
     ----   'dgrbrady/nvim-docker',
     ----   rocks = '4O4/reactivex' -- ReactiveX Lua implementation
     ---- }
     ---- "jamestthompson3/nvim-remote-containers"
-
     ---- "nvim-pack/nvim-spectre"   -- substitute content in various files
     ---- "ap/vim-buftabline"        -- tabs management
     ---- "LintaoAmons/scratch.nvim"  -- open scratch buffers
-
     ---- ui
     ---- "notomo/cmdbuf.nvim"      -- alternative cmdline
     ---- "SmitheshP/nvim-navbuddy" -- pop up menu to navigate buffer lsp symbols
-
     ---- formater
     ---- "cbochs/grapple.nvim" -- tagging import files and manage their
     ---- "mhartington/formatter.nvim"  -- emmet integration
-
     ---- remote development / collaboration
     ---- "mhinz/neovim-remote"        -- support for --remote and fiends
     ---- "chipsenkbeil/distant.nvim"  -- ALPHA STAGE: remote development from local environment
-
     ---- NOTE: buffers per tabs
     ---- stackoverflow.com/questions/7595642/buffers-per-tab-in-vim
     ---- redis.com/r/neovim/comments/101f4w0/how_can_i_get_all_buffers_of_current_tab
     ---- vim.fn.tabpagebuflist()
     ---- scope.nvim / tabby.nvim
-
     -- https://github.com/someone-stole-my-name/yaml-companion.nvim
 
 
     ----------------------------------------------------------------
     ---- development
     ----------------------------------------------------------------
-
      -- hardhat framework for web3 development
     {
         "TheSnakeWitcher/hardhat.nvim",
@@ -968,10 +947,8 @@ require("lazy").setup({
         filetype = "solidity",
         config = function() load_config("foundry") end,
     },
-
     -- git integration
     -- graphite.nvim https://marketplace.visualstudio.com/items?itemName=Graphite.gti-vscode
-
     ---- integration with common web3 tools for dApp development
     ---- {
     ----      "TheSnakeWitcher/web3tools.nvim",
@@ -991,7 +968,6 @@ require("lazy").setup({
     ----            -- brokentoken: https://github.com/zeroknots/brokentoken
     ----      }
     ---- }
-
     ---- utilities to aid in dAPP development process using autocmds/cmds/and others
     ---- use {
     ----      "TheSnakeWitcher/web3utils.nvim",
@@ -1007,13 +983,11 @@ require("lazy").setup({
     ----            "TheSnakeWitcher/openzeppelin-wizard"      -- openzeppelin bindings
     ----      }
     ---- }
-
     ---- AI integration
     ---- use {
     ----     "TheSnakeWitcher/phind.nvim",
     ----     config = function() load_config("phind") end,
     ---- }
-
     ---- utilities
     ---- use "multi-highlight.nvim"                  -- to highligh diferent visual selected text pieces
     ---- use "TheSnakeWitcher/tee.nvim"              -- analog to `tee` linux command for neovim to manage eficiently multiple input/ouput sources
@@ -1032,7 +1006,6 @@ require("lazy").setup({
     ----          dbm/tabbot for window manager like experience
     ----      }
     ---- }
-
     ---- knowledgebase management(zetelkasten or unstructured and wiki or structured)
     ---- {
     ----      "TheSnakeWitcher/knowledgebase.nvim",
