@@ -50,14 +50,20 @@ require("lazy").setup({
     -- ui
     --------------------------------------------------------------
     -- colorschemes
-    { "romgrk/doom-one.vim",
+    {
+        -- 'NTBBloodbath/doom-one.nvim'
+        "romgrk/doom-one.vim",
         lazy = true,
         priority = 1000,
-        init = function() vim.cmd("colorscheme doom-one") end,
+        init = function()
+            vim.g.doom_one_terminal_colors = true
+            vim.cmd("colorscheme doom-one")
+            vim.cmd("hi! link NormalFloat Normal")
+            vim.cmd("hi link LazyNormal Pmenu")
+        end,
     },
-    -- { "NTBBloodbath/doom-one.nvim", lazy = true, },
-    { "folke/tokyonight.nvim", lazy = true, },
-    { "Mofiqul/dracula.nvim", lazy = true },
+    { "folke/tokyonight.nvim", lazy = true },
+    -- { "Mofiqul/dracula.nvim", lazy = true },
     -- { 'Mofiqul/vscode.nvim', lazy = true },
     -- { "marko-cerovac/material.nvim" , lazy = true },
     -- { "catppuccin/nvim", name = "catppuccin", lazy = true },
@@ -74,11 +80,8 @@ require("lazy").setup({
         config = function() load_config("neo-tree") end,
     },
     -- statusline (bottom bar)
-    -- {
-    --     "rebelot/heirline.nvim",
-    --     config = function() load_config("heirline") end,
-    -- },
     {
+        -- "rebelot/heirline.nvim",
         "nvim-lualine/lualine.nvim",
         config = function() load_config("lualine") end,
     },
@@ -88,10 +91,10 @@ require("lazy").setup({
     --     config = function() load_config("nvim-cokeline") end,
     -- },
     {
+        -- https://github.com/utilyre/barbecue.nvim
         "nanozuki/tabby.nvim",
         config = function() load_config("tabby") end,
     },
-    -- "Bekaboo/dropbar.nvim", -- lsp symbols in winbar(just below tabline)
     -- {
     --     "glepnir/lspsaga.nvim",
     --     event = "LspAttach",
@@ -138,8 +141,14 @@ require("lazy").setup({
         "folke/paint.nvim",
         config = function() load_config("paint") end,
     },
-    "itchyny/vim-highlighturl", -- highlighturl urls in buffer
-    -- "utilyre/sentiment.nvim" -- highlighturl parents `(` , `[` or `{`
+    -- highlighturl parents `(` , `[` or `{`
+    {
+        "utilyre/sentiment.nvim",
+        version = "*",
+        event = "VeryLazy",
+        opts = {},
+        init = function() vim.g.loaded_matchparen = 1 end,
+    },
     -- highlighturl indent
     {
         -- alternative https://github.com/echasnovski/mini.indentscope
@@ -149,10 +158,13 @@ require("lazy").setup({
     },
     -- colorizer
     {
+        -- alternative: 'brenoprata10/nvim-highlight-colors',
         "norcalli/nvim-colorizer.lua",
-        config = function() load_config("colorizer") end,
+        config = function() require("colorizer").setup() end
     },
     -- folds
+    -- "anuvyklack/fold-preview.nvim", -- fold preview
+    --  "Vonr/foldcus.nvim/",          -- fold multiline comments
     {
         "yaocccc/nvim-foldsign",
         config = function() load_config("nvim-foldsign") end,
@@ -162,81 +174,43 @@ require("lazy").setup({
         dependencies = "kevinhwang91/promise-async",
         config = function() load_config("nvim-ufo") end,
     },
-    -- "malbertzard/inline-fold.nvim", -- inline fold, note: check if highligh.scm can be i
-    -- "anuvyklack/fold-preview.nvim", -- fold preview
-    -- {
-    --      "Vonr/foldcus.nvim/",
-    -- }
-    -- signcolumn
-    -- {
-    --     "luukvbaal/statuscol.nvim",
-    --     config = function() require("statuscol").setup() end,
-    -- },
-    -- windows
-    -- {
-    --     "sindrets/winshift.nvim", -- rearrange window easily
-    -- },
     -- vscode like icons for completion menu
     {
         "onsails/lspkind.nvim",
         event = "InsertEnter"
     },
-    -- animated signs
-    -- {
-    --     "ElPiloto/significant.nvim",
-    --     config = function() load_config("significant") end,
-    -- }
-    -- wildmenu
-    -- "gelguy/wilder.nvim",
-    -- "VonHeikemen/fine-cmdline.nvim" -- enhaced cmdline
-    -- highligh headers and codeblocks
-    -- {
-    --     "lukas-reineke/headlines.nvim",
-    --     opts = {},
-    -- },
     {
         -- funny animation in ui
         "Eandrju/cellular-automaton.nvim",
         cmd = "CellularAutomaton",
     },
-    -- { "AckslD/messages.nvim", opts = {} }, -- buf for better messages management
-    -- generic sidebar
+    -- sidebar
     -- {
     --     "folke/edgy.nvim",
     --     event = "VeryLazy",
     --     init = function() vim.opt.splitkeep = "screen" end,
     --     config = function() load_config("edgy") end,
     -- },
-    -- { "sidebar-nvim/sidebar.nvim" },
+    -- "sidebar-nvim/sidebar.nvim",
     -- command preview
     {
         "smjonas/live-command.nvim",
         config = function() load_config("live-command") end,
         cmd = "Norm",
     },
+    "itchyny/vim-highlighturl",        -- highlighturl urls in buffer
+    -- "gelguy/wilder.nvim",           -- wildmenu
+    --  "sindrets/winshift.nvim",      -- windowss rearrange window easily
+    -- "Bekaboo/dropbar.nvim",         -- lsp symbols in winbar(just below tabline)
+    -- "VonHeikemen/fine-cmdline.nvim" -- enhaced cmdline
     -- help
-    -- { "Tyler-Barham/floating-help.nvim" }, -- help in anchorable/resizable floating window
-    {
-        -- lsp help in split pane 
-        "roobert/hoversplit.nvim",
-        keys = "<leader>H",
-        opts = {
-            key_bindings = {
-                split = "<leader>HS",
-                vsplit = "<leader>HV",
-                split_remain_focused = "<leader>H",
-                vsplit_remain_focused = "<leader>H",
-            },
-        },
-    },
-    -- preview for lsp code actions picker 
-    -- {
-    --     "aznhe21/actions-preview.nvim",
-    --     keys = "<leader>la",
-    --     config = function() load_config("actions-preview") end,
-    -- },
-    -- diagnostics
-    -- { "dgagn/diagflow.nvim" },             -- message of focused diagnostics in top-rigth corner
+    -- "Tyler-Barham/floating-help.nvim", -- help in anchorable/resizable floating window
+    -- "roobert/hoversplit.nvim",         -- lsp help in split pane 
+    -- "aznhe21/actions-preview.nvim",    -- preview for lsp code actions picker 
+    -- "dgagn/diagflow.nvim" ,            -- message of focused diagnostics in top-rigth corner
+    -- "AckslD/messages.nvim",            -- buf for better messages management
+    -- "ElPiloto/significant.nvim",       -- animated signs
+    -- "luukvbaal/statuscol.nvim",        -- container for fold signs in signcolumn
 
 
     ----------------------------------------------------------------
@@ -248,8 +222,6 @@ require("lazy").setup({
         config = function() load_config("nvim-treesitter") end,
         dependencies = {
             "nvim-treesitter/nvim-treesitter-context",     -- show code context
-            -- remove with v0.10
-            "JoosepAlviste/nvim-ts-context-commentstring", -- to embeded languaje trees jsx/tsx
             "nvim-treesitter/nvim-tree-docs",              -- documentation
             -- nvim-treesitter/nvim-treesitter-refactor    -- refactor module
             "nvim-treesitter/nvim-treesitter-textobjects", -- additional text objects via treesitter
@@ -298,15 +270,6 @@ require("lazy").setup({
         lazy = true,
         opts = {}
     },
-    -- lsp navigation
-    -- {
-    --     "ray-x/navigator.lua",
-    --     config = function() load_config("navigator") end,
-    -- },
-    --{
-    --    "RishabhRD/nvim-lsputils",
-    --    requires = "RishabhRD/popfix",
-    --}
 
 
     --------------------------------------------------------------
@@ -334,17 +297,17 @@ require("lazy").setup({
             "FabianWirth/search.nvim",                   -- tabs for telescope layout
             -- "jmbuhr/telescope-zotero.nvim",
             -- "nvim-telescope/telescope-media-files.nvim", -- search media files
-            -- "nat-418/telescope-color-names.nvim",         -- search colors
-            -- "ryanmsnyder/toggleterm-manager.nvim",        -- search toggleterm terminals
-            -- "nvim-telescope/telescope-cheat.nvim",  -- an attempt to recreate cheat.sh
-            -- "sdushantha/fontpreview",               -- search fonts
+            -- "nat-418/telescope-color-names.nvim",        -- search colors
+            -- "ryanmsnyder/toggleterm-manager.nvim",       -- search toggleterm terminals
+            -- "nvim-telescope/telescope-cheat.nvim",   -- an attempt to recreate cheat.sh
+            -- "sdushantha/fontpreview",                -- search fonts
             -- "chip/telescope-software-licenses.nvim", -- search licenses
             -- "piersolenski/telescope-import.nvim"     -- seach imports statements
         },
     },
     -- buffer and mark management
     {
-        -- for tab scoped buffers "tiagovla/scope.nvim" or  "backdround/tabscope.nvim"
+        -- tab scoped buffers "tiagovla/scope.nvim" or  "backdround/tabscope.nvim"
         -- alternative: "nvimdev/flybuf.nvim"
         "j-morano/buffer_manager.nvim",
         keys = { { "<leader>b", "<cmd>lua require('buffer_manager.ui').toggle_quick_menu()<cr>" } },
@@ -383,7 +346,6 @@ require("lazy").setup({
         '2kabhishek/nerdy.nvim',
         cmd = 'Nerdy',
     },
-    -- "s1n7ax/nvim-window-picker", -- select between open windows
 
 
     --------------------------------------------------------------
@@ -410,11 +372,10 @@ require("lazy").setup({
                 "rcarriga/cmp-dap",
                 cmd = "DapUI",
             },
-            "uga-rosa/cmp-dynamic",                  -- dynamic generation candidates sources
             "petertriho/cmp-git",                    -- git completion source
+            "uga-rosa/cmp-dynamic",                  -- dynamic generation candidates sources
             "davidsierradz/cmp-conventionalcommits", -- conventional commtis
             "kdheepak/cmp-latex-symbols",            -- latex completion source
-            "hrsh7th/cmp-calc",                      -- math calculation source
             -- github copilot source
             -- {
             --     "zbirenbaum/copilot-cmp",
@@ -455,27 +416,16 @@ require("lazy").setup({
         "tpope/vim-repeat",
         keys = ".",
     },
-    -- surround operations on vim textobjects/symbols `"`,`()` ,`[]`,`{}`,`<>`,etc , check: https://github.com/kylechui/nvim-surround
+    -- surround operations on vim textobjects/symbols `"`,`()` ,`[]`,`{}`,`<>`
     {
         "tpope/vim-surround",
-        event = "InsertEnter",
+        event = "InsertEnter"
     },
     -- allow C-a/C-x to increment/decrement dates and times
     {
         "tpope/vim-speeddating",
         keys = { "<C-a>", "<C-x>" },
     },
-    {
-        -- save tree of undo operations
-        "mbbill/undotree",
-        keys = "<leader>u",
-        cmd = { "UndotreeShow", "UndotreeToggle" },
-    },
-    -- {
-    --      -- undotree visualizer
-    --      "simnalamburt/vim-mundo",
-    --      keys = "<leader>u",
-    -- },
     {
         -- highligh unique chars per word in line(to use with `f`,`F`,`t`,`T`)
         "unblevable/quick-scope",
@@ -487,11 +437,12 @@ require("lazy").setup({
         event = "InsertEnter",
         config = function() load_config("nvim-autopairs") end,
     },
-    -- easily comment code(treesiter integration) (remove with v0.10)
+    -- easily comment code with treesiter integration
     {
-        "numToStr/Comment.nvim",
-        config = function() load_config("Comment") end,
-        keys = { "gc", "gb" },
+        -- old: "numToStr/Comment.nvim",
+        "folke/ts-comments.nvim",
+        event = "VeryLazy",
+        opts = {},
     },
     -- popup movements
     {
@@ -509,7 +460,6 @@ require("lazy").setup({
         "sbulav/nredir.nvim",
         cmd = "Nredir"
     },
-    -- { "m-demare/attempt.nvim" }, temp buffer or scrach buffer management
     -- split/joint text blocks efficiently
     {
         -- https://github.com/echasnovski/mini.nvim/blob/main/readmes/mini-splitjoin.md
@@ -548,6 +498,13 @@ require("lazy").setup({
     -- },
     -- "mg979/vim-visual-multi",
     -- "nvimdev/template.nvim" -- template management
+    {
+        -- save tree of undo operations
+        "mbbill/undotree",
+        keys = "<leader>u",
+        cmd = { "UndotreeShow", "UndotreeToggle" },
+    },
+    -- { "m-demare/attempt.nvim" }, temp buffer or scrach buffer management
 
 
     --------------------------------------------------------------
@@ -635,23 +592,32 @@ require("lazy").setup({
     -- markdown previewiers
     {
         -- alternatives:
-        -- https://github.com/iamcco/markdown-preview.nvim
-        "ellisonleao/glow.nvim",
-        config = true,
-        cmd = "Glow",
+        -- "lukas-reineke/headlines.nvim",
+        -- "iamcco/markdown-preview.nvim",
+        -- "ellisonleao/glow.nvim",
+        -- "OXY2DEV/markview.nvim",
+        'MeanderingProgrammer/markdown.nvim',
+        main = "render-markdown",
+        ft = "markdown",
+        dependencies = { 'nvim-treesitter/nvim-treesitter', 'nvim-tree/nvim-web-devicons' }, -- if you prefer nvim-web-devicons
+        config = function()
+            require("render-markdown").setup({
+                pipe_table = {
+                    border = { "╭", "┬", "╮", "├", "┼", "┤", "╰", "┴", "╯", "│", "─" },
+                },
+            })
+        end,
+
     },
     --  image previewer
-    -- {
-    --     "3rd/image.nvim",
-    --     opts =  {},
-    -- },
+    -- { "3rd/image.nvim", opts =  {}, },
     -- http client
-    {
-        'rest-nvim/rest.nvim',
-        lazy = true,
-        dependencies = { "luarocks.nvim" },
-        config = function() load_config("rest") end,
-    },
+    -- {
+    --     'rest-nvim/rest.nvim',
+    --     lazy = true,
+    --     dependencies = { "luarocks.nvim" },
+    --     config = function() load_config("rest") end,
+    -- },
     -- database interaction management
     {
         -- alternatives:
@@ -722,20 +688,16 @@ require("lazy").setup({
     -- github
     -- "dlvhdr/gh-dash.git", -- github dashboard
     -- "rawnly/gist.nvim",   -- gist management
-    {
-        "ldelossa/gh.nvim",
-        dependencies = {
-            {
-            "ldelossa/litee.nvim",
-            config = function()
-                require("litee.lib").setup()
-            end,
-            },
-        },
-        config = function()
-            require("litee.gh").setup()
-        end,
-    },
+    -- {
+    --     "ldelossa/gh.nvim",
+    --     dependencies = {
+    --         {
+    --             "ldelossa/litee.nvim",
+    --             config = function() require("litee.lib").setup() end,
+    --         },
+    --     },
+    --     config = function() require("litee.gh").setup() end,
+    -- },
     {
         -- edit & review github issues
         "pwntester/octo.nvim",
@@ -747,8 +709,7 @@ require("lazy").setup({
         "quarto-dev/quarto-nvim",
         dependencies = {
             -- lsp for code embeded in other documents 
-            -- { "jmbuhr/otter.nvim", ft = "markdown", opts = {} },
-            { "jmbuhr/otter.nvim", opts = {} },
+            { "jmbuhr/otter.nvim", ft = { "markdown", "quarto" }, opts = {} },
         },
         ft = "quarto",
         config = function() require("quarto").setup() end,
@@ -865,6 +826,16 @@ require("lazy").setup({
     -- },
     -- kotlin
     -- https://github.com/mfussenegger/nvim-jdtls
+    -- markdown
+    -- {
+    --     "tadmccorkle/markdown.nvim",
+    --     ft = "markdown",
+    --     config = function() require("markdown").setup({
+    --         enable = true,
+    --         -- inline_surround = { --[[ ... ]] },
+    --     })
+    --     end,
+    -- },
 
 
     ----------------------------------------------------------------
