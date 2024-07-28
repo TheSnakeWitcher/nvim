@@ -58,8 +58,9 @@ require("lazy").setup({
         init = function()
             vim.g.doom_one_terminal_colors = true
             vim.cmd("colorscheme doom-one")
-            vim.cmd("hi! link NormalFloat Normal")
+            -- vim.cmd("hi! link NormalFloat Normal")
             vim.cmd("hi link LazyNormal Pmenu")
+            vim.cmd("hi link TrobleNormal Pmenu")
         end,
     },
     { "folke/tokyonight.nvim", lazy = true },
@@ -86,20 +87,12 @@ require("lazy").setup({
         config = function() load_config("lualine") end,
     },
     -- tabline (top bar)
-    -- {
-    --     "willothy/nvim-cokeline",
-    --     config = function() load_config("nvim-cokeline") end,
-    -- },
     {
-        -- https://github.com/utilyre/barbecue.nvim
+        -- "willothy/nvim-cokeline",
+        -- utilyre/barbecue.nvim
         "nanozuki/tabby.nvim",
         config = function() load_config("tabby") end,
     },
-    -- {
-    --     "glepnir/lspsaga.nvim",
-    --     event = "LspAttach",
-    --     config = function() load_config("lspsaga") end,
-    -- },
     -- startup screen/dashboard
     {
         "glepnir/dashboard-nvim",
@@ -214,7 +207,7 @@ require("lazy").setup({
 
 
     ----------------------------------------------------------------
-    -- treesiter
+    -- treesiter / lsp
     ----------------------------------------------------------------
     {
         "nvim-treesitter/nvim-treesitter",
@@ -229,13 +222,6 @@ require("lazy").setup({
             "RRethy/nvim-treesitter-endwise",              -- add `end` to non-brackets base languajes
         },
     },
-    -- "CKolkey/ts-node-action", -- run arbitrary actions in treesitter nodes
-    -- "Jxstxs/conceal.nvim",    -- uses Treesitter to conceal typical boiler Code Resources
-
-
-    ----------------------------------------------------------------
-    -- lsp
-    ----------------------------------------------------------------
     {
         "neovim/nvim-lspconfig",
         dependencies = {
@@ -266,10 +252,16 @@ require("lazy").setup({
     },
     -- formatter
     {
+        -- "mhartington/formatter.nvim"  -- emmet integration
         "stevearc/conform.nvim",
         lazy = true,
         opts = {}
     },
+    -- {
+    --     "glepnir/lspsaga.nvim",
+    --     event = "LspAttach",
+    --     config = function() load_config("lspsaga") end,
+    -- },
 
 
     --------------------------------------------------------------
@@ -308,7 +300,9 @@ require("lazy").setup({
     -- buffer and mark management
     {
         -- tab scoped buffers "tiagovla/scope.nvim" or  "backdround/tabscope.nvim"
-        -- alternative: "nvimdev/flybuf.nvim"
+        -- alternative:
+        -- "nvimdev/flybuf.nvim"
+        -- "cbochs/grapple.nvim"
         "j-morano/buffer_manager.nvim",
         keys = { { "<leader>b", "<cmd>lua require('buffer_manager.ui').toggle_quick_menu()<cr>" } },
         config = function() load_config("buffer_manager") end,
@@ -343,6 +337,7 @@ require("lazy").setup({
     -- search nerd fonts glyphs
     {
         -- alternative: "nvimdev/nerdicons.nvim"
+        -- "protex/better-digraphs.nvim"
         '2kabhishek/nerdy.nvim',
         cmd = 'Nerdy',
     },
@@ -449,12 +444,6 @@ require("lazy").setup({
         "carbon-steel/detour.nvim",
         cmd = { "Detour", "DetourCurrentWindow" },
     },
-    -- macro management
-    -- {
-    --     -- must clean default @recording message 
-    --     "ecthelionvi/NeoComposer.nvim",
-    --     dependencies = { "kkharji/sqlite.lua" },
-    -- },
     -- redirect outputs of commands and filters(external commands) to temp sidebuffer
     {
         "sbulav/nredir.nvim",
@@ -468,12 +457,6 @@ require("lazy").setup({
         config = function() load_config('treesj') end,
         keys = { '<leader>j' },
     },
-    -- move line/blocks
-    -- {
-    --     "willothy/moveline.nvim",
-    --     build = "make",
-    -- },
-    --use "andymass/vim-matchup"           --  even better % fist_oncoming navigate and highlight matching words
     -- code screenshots
     {
         "michaelrommel/nvim-silicon",
@@ -485,26 +468,30 @@ require("lazy").setup({
         "ThePrimeagen/refactoring.nvim",
         cmd = "Refactor",
     },
-    -- json
-    -- "gennaro-tedesco/nvim-jqx",
-    -- yaml
-    -- {
-    --     "cuducos/yaml.nvim",
-    --     ft = { "yaml" },
-    --     dependencies = {
-    --         "nvim-treesitter/nvim-treesitter",
-    --         "nvim-telescope/telescope.nvim",
-    --     },
-    -- },
-    -- "mg979/vim-visual-multi",
-    -- "nvimdev/template.nvim" -- template management
     {
         -- save tree of undo operations
         "mbbill/undotree",
         keys = "<leader>u",
         cmd = { "UndotreeShow", "UndotreeToggle" },
     },
-    -- { "m-demare/attempt.nvim" }, temp buffer or scrach buffer management
+    -- macro management
+    -- {
+    --     -- must clean default @recording message 
+    --     "ecthelionvi/NeoComposer.nvim",
+    --     dependencies = { "kkharji/sqlite.lua" },
+    -- },
+    -- json/yaml
+    -- {
+    --     -- alternative to work with yaml: "cuducos/yaml.nvim",
+    --      "gennaro-tedesco/nvim-jqx"
+    --      ft = { "json", "yaml" },
+    --  },
+    -- "nvimdev/template.nvim" -- template management
+    -- scratch/temp buffer management
+    -- "m-demare/attempt.nvim",
+    -- "LintaoAmons/scratch.nvim"
+    -- "CKolkey/ts-node-action", -- run arbitrary actions in treesitter nodes
+    -- "Jxstxs/conceal.nvim",    -- uses Treesitter to conceal typical boiler Code Resources
 
 
     --------------------------------------------------------------
@@ -549,24 +536,13 @@ require("lazy").setup({
     --------------------------------------------------------------
     -- knowledgebase/notes management
     {
+        --  alternative: "vimwiki/vimwiki",
         "epwalsh/obsidian.nvim",
         version = "*",
         lazy = true,
         ft = "markdown",
         config = function() load_config("obsidian") end,
     },
-    -- {
-    --     -- wiki management and utilities for markdown files navigation and organization
-    --     alternative: "vimwiki/vimwiki",
-    --     'jakewvincent/mkdnflow.nvim',
-    --     config = function() load_config("mkdnflow") end
-    -- },
-    -- custom submodes management (create custom submodes and menus)
-    -- {
-    --     "nvimtools/hydra.nvim",
-    --     lazy = true,
-    --     config = function() load_config("hydra") end,
-    -- },
     -- terminal management
     {
         -- alternative: https://github.com/Rolv-Apneseth/tfm.nvim, https://github.com/rebelot/terminal.nvim , https://github.com/pianocomposer321/consolation.nvim
@@ -607,17 +583,12 @@ require("lazy").setup({
                 },
             })
         end,
-
     },
     --  image previewer
-    -- { "3rd/image.nvim", opts =  {}, },
-    -- http client
     -- {
-    --     'rest-nvim/rest.nvim',
-    --     lazy = true,
-    --     dependencies = { "luarocks.nvim" },
-    --     config = function() load_config("rest") end,
-    -- },
+    --      "3rd/image.nvim",
+    --      opts =  {},
+    --  },
     -- database interaction management
     {
         -- alternatives:
@@ -629,14 +600,27 @@ require("lazy").setup({
         dependencies = { "kristijanhusak/vim-dadbod-ui" },
     },
     -- doc generation
-    -- annotation generations in comment
     {
+        -- annotation generations in comment
         "danymat/neogen",
         opts = {
             input_after_comment = true,
             snippet_engine = "luasnip"
         },
     },
+    -- http client
+    -- {
+    --     'rest-nvim/rest.nvim',
+    --     lazy = true,
+    --     dependencies = { "luarocks.nvim" },
+    --     config = function() load_config("rest") end,
+    -- },
+    -- custom submodes management (create custom submodes and menus)
+    -- {
+    --     "nvimtools/hydra.nvim",
+    --     lazy = true,
+    --     config = function() load_config("hydra") end,
+    -- },
     -- chekc mini.doc
     -- {
     --     -- treesitter base markdown to vimdoc convertion tool
@@ -645,9 +629,8 @@ require("lazy").setup({
     -- },
     -- "milanglacier/yarepl.nvim",
     -- conceal
-    ---- use "KeitaNakamura/tex-conceal.vim",
+    -- "KeitaNakamura/tex-conceal.vim",
     -- "ziontee113/color-picker.nvim", -- color picker
-    -- "duane9/nvim-rg" -- run rg async from neovim
     -- translation
     -- "potamides/pantran.nvim",
     -- "niuiic/translate.nvim",
@@ -656,9 +639,8 @@ require("lazy").setup({
     --------------------------------------------------------------
     -- integrations
     --------------------------------------------------------------
-    -- grep like tools
-    -- "mhinz/vim-grepper",
     -- git
+    -- https://github.com/SuperBo/fugit2.nvim
     -- use "Almo7aya/openingh.nvim"  -- open file or project in github for neovim wirtten in lua
     "tpope/vim-fugitive", -- git integration for cmdline
     {
@@ -814,19 +796,17 @@ require("lazy").setup({
         end
     },
     -- javascrtp/typescript
-    -- {
-    --      -- manage pnpm workspace with telescope
-    --      "lukahartwig/pnpm.nvim",
-    -- },
-    -- {
-    --    -- package info
-    --    "vuki656/package-info.nvim",
-    --    dependencies = "MunifTanjim/nui.nvim",
-    --    config = function() load_config("package-info") end ,
-    -- },
+    {
+        -- alternative: ts-languaje-server
+        "pmizio/typescript-tools.nvim",
+        config = function() require("typescript-tools").setup({}) end,
+    },
+    -- "lukahartwig/pnpm.nvim", -- manage pnpm workspace with telescope
+    -- "vuki656/package-info.nvim", -- package info
     -- kotlin
     -- https://github.com/mfussenegger/nvim-jdtls
     -- markdown
+    -- 'jakewvincent/mkdnflow.nvim',
     -- {
     --     "tadmccorkle/markdown.nvim",
     --     ft = "markdown",
@@ -857,7 +837,6 @@ require("lazy").setup({
     ---- markdown
     -- "SidOfc/mkdx" -- markdown utils
     ---- cmds
-    -- "protex/better-digraphs.nvim"      -- better digraphs
     ---- test interaction
     ---- "tpope/vim-unimpaired",          -- complementary mapping
     ---- "tpope/vim-sleuth"               -- detect tabstop and shiftwidth automatically
@@ -879,15 +858,6 @@ require("lazy").setup({
     ----   rocks = '4O4/reactivex' -- ReactiveX Lua implementation
     ---- }
     ---- "jamestthompson3/nvim-remote-containers"
-    ---- "nvim-pack/nvim-spectre"   -- substitute content in various files
-    ---- "ap/vim-buftabline"        -- tabs management
-    ---- "LintaoAmons/scratch.nvim"  -- open scratch buffers
-    ---- ui
-    ---- "notomo/cmdbuf.nvim"      -- alternative cmdline
-    ---- "SmitheshP/nvim-navbuddy" -- pop up menu to navigate buffer lsp symbols
-    ---- formater
-    ---- "cbochs/grapple.nvim" -- tagging import files and manage their
-    ---- "mhartington/formatter.nvim"  -- emmet integration
     ---- remote development / collaboration
     ---- "mhinz/neovim-remote"        -- support for --remote and fiends
     ---- "chipsenkbeil/distant.nvim"  -- ALPHA STAGE: remote development from local environment
@@ -918,81 +888,11 @@ require("lazy").setup({
         filetype = "solidity",
         config = function() load_config("foundry") end,
     },
-    -- git integration
-    -- graphite.nvim https://marketplace.visualstudio.com/items?itemName=Graphite.gti-vscode
-    ---- integration with common web3 tools for dApp development
-    ---- {
-    ----      "TheSnakeWitcher/web3tools.nvim",
-    ----      config = function() load_config("web3tools") end,
-    ----      dependencies  = {
-    ----            -- tool list: https://github.com/ConsenSys/ethereum-developer-tools-list
-    ----            -- slither ( analysis diagnostic integration )
-    ----            -- inline bookmarks by diligence
-    ----            -- solidity visual auditor :
-    ----                    https://consensys.io/diligence/blog/2019/10/solidity-visual-auditor-extension-for-vs-code/
-    ---                    https://marketplace.visualstudio.com/items?itemName=tintinweb.solidity-visual-auditor&ssr=false#overview
-    ----            -- mythril : https://github.com/dyng/eth-ramen
-    ----            -- ramen ui: https://github.com/dyng/eth-ramen
-    ----            -- crytic-compile: https://github.com/crytic/crytic-compile/#crytic-compile
-    ----            -- echidna: https://github.com/crytic/echidna
-    ----            -- manticore: https://github.com/trailofbits/manticore/
-    ----            -- brokentoken: https://github.com/zeroknots/brokentoken
-    ----      }
-    ---- }
-    ---- utilities to aid in dAPP development process using autocmds/cmds/and others
-    ---- use {
-    ----      "TheSnakeWitcher/web3utils.nvim",
-    ----      config = function() load_config("web3utils") end,
-    ----      dependencies  = {
-    ----            "TheSnakeWitcher/ethersmode.nvim"          -- https://marketplace.visualstudio.com/items?itemName=acuarica.ethers-mode
-    ----            "TheSnakeWitcher/selectorclash.nvim"       -- detect automatically storage and function selector clashes in poxy-like contracts(pattern independent)
-    ----            "TheSnakeWitcher/opcodes.nvim"             -- opcode used and his price
-    ----            "TheSnakeWitcher/gasmeter.nvim"            -- contract gas estimates of storage and operations
-    ----            "TheSnakeWitcher/crypto-address-lens.nvim" -- https://marketplace.visualstudio.com/items?itemName=peetzweg.crypto-address-lens
-    ----            "TheSnakeWitcher/sourcify.nvim"            -- sourcify is a solidity source code and metadata verification tool
-    ----            "TheSnakeWitcher/inheritviz.nvim"          -- view what and from where data/methods are being inherited
-    ----            "TheSnakeWitcher/openzeppelin-wizard"      -- openzeppelin bindings
-    ----      }
-    ---- }
-    ---- AI integration
-    ---- use {
-    ----     "TheSnakeWitcher/phind.nvim",
-    ----     config = function() load_config("phind") end,
-    ---- }
-    ---- utilities
-    ---- use "multi-highlight.nvim"                  -- to highligh diferent visual selected text pieces
-    ---- use "TheSnakeWitcher/tee.nvim"              -- analog to `tee` linux command for neovim to manage eficiently multiple input/ouput sources
-    ---- use "TheSnakeWitcher/architect.nvim"        -- boilerplate/project init/scaffold structure management
-    ---- use "TheSnakeWitcher/persistenfolds.nvim"   -- save folds in session
-    ---- use "TheSnakeWitcher/doc-patterns.nvim"     -- get patterns in comments
-    ---- use "TheSnakeWitcher/doc-hooks.nvim"        -- execute actions on patterns
-    ---- use "TheSnakeWitcher/doc-traductions.nvim"  -- traduce documentation
-    ---- use "TheSnakeWitcher/AIchat.nvim"           -- allow interaction/chat with AI tools
-    ---- use {
-    ----      "TheSnakeWitcher/tab_manager",
-    ----      inspired = {
-    ----          buffer_manager/harpoon
-    ----          buffers per tab like scope
-    ----          telescope integration like telescope-tabs
-    ----          dbm/tabbot for window manager like experience
-    ----      }
-    ---- }
-    ---- knowledgebase management(zetelkasten or unstructured and wiki or structured)
-    ---- {
-    ----      "TheSnakeWitcher/knowledgebase.nvim",
-    ----      -- features
-    ----      --     preview like obsidian or vim help files
-    ----      --     tag pane plugin from obsidian
-    ----      --     citations plugin
-    ----      --     admonition plugin from obsidian
-    ----      --     MOCs(maps of contents)
-    ----      check: https://github.com/oniony/TMSU
-    ----      -- inspiration
-    ----      --    "epwalsh/obsidian.nvim"
-    ----      --    "renerocksai/telekasten.nvim"
-    ----      --    "Furkanzmc/zettelkasten.nvim"
-    ----      --    "jakewvincent/mkdnflow.nvim"
-    ---- },
+    -- utilities
+    -- {
+    ---     -- inspired https://github.com/Pocco81/high-str.nvim
+    ---     "multi-highlight.nvim",                   -- to highligh diferent visual selected text pieces
+    ---  },
 
 },{
     dev = {
