@@ -474,6 +474,23 @@ require("lazy").setup({
         keys = "<leader>u",
         cmd = { "UndotreeShow", "UndotreeToggle" },
     },
+    {
+        -- change words naming style (camelCase, PascalCase, kebab-case, snake_case)
+        "johmsalas/text-case.nvim",
+        keys = { { "ga.", "<cmd>TextCaseOpenTelescope<CR>", mode = { "n", "x" }, desc = "Telescope" }, },
+        cmd = {
+            "Subs",
+            "TextCaseOpenTelescope",
+            "TextCaseOpenTelescopeQuickChange",
+            "TextCaseOpenTelescopeLSPChange",
+            "TextCaseStartReplacingCommand",
+        },
+        -- lazy = true,
+        config = function()
+            require("textcase").setup({})
+            require("telescope").load_extension("textcase")
+        end,
+    },
     -- macro management
     -- {
     --     -- must clean default @recording message 
