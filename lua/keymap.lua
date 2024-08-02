@@ -263,9 +263,9 @@ set("n", "<leader>tl", "<CMD>Telescope telescope-tabs list_tabs<CR>", { desc = "
 set("n", "<leader>e", "<cmd>Neotree toggle<CR>", { desc = "[e]xplorer" })
 set("n", "<leader>E", "<cmd>AerialToggle<CR>", { desc = "[E]xplorer summary/outline(aerial)" })
 set("n", "<leader>u", "<cmd>UndotreeToggle<CR>", { desc = "[u]ndo tree toggle" })
-set("n", "<leader>D", "<cmd>TroubleToggle workspace_diagnostics<CR>", { desc = "[D]iagnostic toggle" })
-set("n", "<leader>Q", "<cmd>TroubleToggle quickfix<CR>", { desc = "[Q]uickfix toggle" })
-set("n", "<leader>N", "<cmd>TroubleToggle todo<CR>", { desc = "[N]otes toggle" })
+set("n", "<leader>D", "<cmd>Trouble diagnostics toggle <CR>", { desc = "[D]iagnostic toggle" })
+set("n", "<leader>Q", "<cmd>Trouble quickfix toggle<CR>", { desc = "[Q]uickfix toggle" })
+set("n", "<leader>N", "<cmd>Trouble todo toggle<CR>", { desc = "[N]otes toggle" })
 
 
 --------------------------------------------------------------
