@@ -19,6 +19,7 @@ nvim_treesitter_config.setup({
 ensure_installed = {
     "vimdoc",
     "lua",
+    "bash",
     "rust",
     "solidity",
     "go",
@@ -38,7 +39,10 @@ ignore_install = {},
 
 
 --- @help {nvim-treesitter-highlight-mod}
-highlight = { enable = true },
+highlight = {
+    enable = true,
+    disable = { "latex" },
+},
 
 
 --- @help {nvim-treesitter-incremental-selection-mod}
