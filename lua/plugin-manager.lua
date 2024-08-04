@@ -1,7 +1,7 @@
 -- TODO: move cmds/autocmds to after/
 -- TODO: enable spell in specific filetypes and comments
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
-if not vim.loop.fs_stat(lazypath) then
+if not vim.uv.fs_stat(lazypath) then
   vim.fn.system({
       "git",
       "clone",

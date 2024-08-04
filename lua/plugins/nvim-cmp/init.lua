@@ -79,7 +79,6 @@ cmp.setup({
         { name = 'nvim_lua' }, -- by default active only in lua files
         { name = 'buffer' },
         { name = 'path' , keyworkd_length = 2 },
-        { name = 'calc' },
     }),
 
     mapping = {
@@ -127,11 +126,6 @@ cmp.setup({
             end
         end,{"i","s"}),
     },
-
-    -- window = {
-    --     completion = cmp.config.window.bordered(),
-    --     documentation = cmp.config.window.bordered(),
-    -- },
 
     experimental = {
         ghost_text = true,
