@@ -58,9 +58,8 @@ require("lazy").setup({
         init = function()
             vim.g.doom_one_terminal_colors = true
             vim.cmd("colorscheme doom-one")
-            -- vim.cmd("hi! link NormalFloat Normal")
-            vim.cmd("hi link LazyNormal Pmenu")
-            vim.cmd("hi link TrobleNormal Pmenu")
+            vim.cmd("hi! link NormalFloat Normal")
+            vim.cmd("hi! link LazyNormal Pmenu")
         end,
     },
     { "folke/tokyonight.nvim", lazy = true },
@@ -224,18 +223,6 @@ require("lazy").setup({
     },
     {
         "neovim/nvim-lspconfig",
-        dependencies = {
-            {
-                "b0o/schemastore.nvim",
-                event = "LspAttach",
-            },
-            -- lsp signature hint as typing
-            {
-                "ray-x/lsp_signature.nvim",
-                event = "LspAttach",
-                config = function() load_config("lsp_signature") end,
-            },
-        },
         config = function() load_config("nvim-lspconfig") end,
     },
     -- bridge/hook up non-LSP tools to the LSP UX to inject LSP diagnostics, code actions via lua
@@ -249,6 +236,17 @@ require("lazy").setup({
         "folke/trouble.nvim",
         cmd = "Trouble",
         config = function() load_config("trouble") end,
+    },
+    -- access to SchemaStore catalog from nvim
+    {
+        "b0o/schemastore.nvim",
+        event = "LspAttach",
+    },
+    -- lsp signature hint as typing
+    {
+        "ray-x/lsp_signature.nvim",
+        event = "LspAttach",
+        config = function() load_config("lsp_signature") end,
     },
     -- formatter
     {
@@ -475,6 +473,7 @@ require("lazy").setup({
         cmd = { "UndotreeShow", "UndotreeToggle" },
     },
     {
+        -- honey: https://www.reddit.com/r/vim/comments/lwr56a/search_and_replace_camelcase_to_snake_case/
         -- change words naming style (camelCase, PascalCase, kebab-case, snake_case)
         "johmsalas/text-case.nvim",
         keys = { { "ga.", "<cmd>TextCaseOpenTelescope<CR>", mode = { "n", "x" }, desc = "Telescope" }, },
@@ -520,8 +519,8 @@ require("lazy").setup({
         cmd = "Neotest",
         config = function() load_config("neotest") end,
         dependencies = {
-            "nvim-neotest/nvim-nio",
             "antoinemadec/FixCursorHold.nvim",
+            "nvim-neotest/nvim-nio",
             "nvim-neotest/neotest-plenary",
             "rouge8/neotest-rust",
             "nvim-neotest/neotest-go",
@@ -582,11 +581,8 @@ require("lazy").setup({
         cmds = { "OverseerToggle", "OverseerOpen", "OverseerBuild", "OverseerRun", "OverseerRunCmd" },
         config = function() load_config("overseer") end,
     },
-    -- markdown previewiers
     {
         -- alternatives:
-        -- "lukas-reineke/headlines.nvim",
-        -- "iamcco/markdown-preview.nvim",
         -- "ellisonleao/glow.nvim",
         -- "OXY2DEV/markview.nvim",
         'MeanderingProgrammer/markdown.nvim',
@@ -597,6 +593,12 @@ require("lazy").setup({
             require("render-markdown").setup({
                 pipe_table = {
                     border = { "╭", "┬", "╮", "├", "┼", "┤", "╰", "┴", "╯", "│", "─" },
+                },
+                bullet = {
+                    icons = { '', '', '◆', '◇' },
+                    enabled = true,
+                    right_pad = 0,
+                    highlight = 'RenderMarkdownBullet',
                 },
             })
         end,
@@ -661,6 +663,7 @@ require("lazy").setup({
     -- use "Almo7aya/openingh.nvim"  -- open file or project in github for neovim wirtten in lua
     "tpope/vim-fugitive", -- git integration for cmdline
     {
+        -- alternative: https://github.com/isakbm/gitgraph.nvim
         -- git commit browser
         "junegunn/gv.vim",
         cmd = "GV",
@@ -687,16 +690,16 @@ require("lazy").setup({
     -- github
     -- "dlvhdr/gh-dash.git", -- github dashboard
     -- "rawnly/gist.nvim",   -- gist management
-    -- {
-    --     "ldelossa/gh.nvim",
-    --     dependencies = {
-    --         {
-    --             "ldelossa/litee.nvim",
-    --             config = function() require("litee.lib").setup() end,
-    --         },
-    --     },
-    --     config = function() require("litee.gh").setup() end,
-    -- },
+    {
+        "ldelossa/gh.nvim",
+        dependencies = {
+            {
+                "ldelossa/litee.nvim",
+                config = function() require("litee.lib").setup() end,
+            },
+        },
+        config = function() require("litee.gh").setup() end,
+    },
     {
         -- edit & review github issues
         "pwntester/octo.nvim",
@@ -707,8 +710,7 @@ require("lazy").setup({
     {
         "quarto-dev/quarto-nvim",
         dependencies = {
-            -- lsp for code embeded in other documents 
-            { "jmbuhr/otter.nvim", ft = { "markdown", "quarto" }, opts = {} },
+            { "jmbuhr/otter.nvim", ft = { "markdown", "quarto" }, opts = {} }, -- lsp for code embeded in other documents 
         },
         ft = "quarto",
         config = function() require("quarto").setup() end,
@@ -788,21 +790,33 @@ require("lazy").setup({
     ----------------------------------------------------------------
     -- rust
     -- {
-    --     -- TODO: replace with mrcjkb/rustaceanvim
-    --     "simrat39/rust-tools.nvim",
+    --     'mrcjkb/rustaceanvim',
+    --     version = '^5',
+    --     lazy = false,
     --     config = function() load_config("rust-tools") end,
     -- },
     -- {
-    --     'saecki/crates.nvim',
+    --     "saecki/crates.nvim",
     --     -- tag = 'v0.3.0',
     --     event = { "BufRead Cargo.toml" },
     --     dependencies = { 'nvim-lua/plenary.nvim' },
     --     config = function()
     --         require('crates').setup()
     --     end,
-    -- }
+    -- },
     -- go
-    --
+    -- {
+    --     "ray-x/go.nvim",
+    --     dependencies = {  -- optional packages
+    --         "ray-x/guihua.lua",
+    --         "neovim/nvim-lspconfig",
+    --         "nvim-treesitter/nvim-treesitter",
+    --     },
+    --     config = function() require("go").setup() end,
+    --     event = { "CmdlineEnter" },
+    --     ft = {"go", 'gomod'},
+    --     build = ':lua require("go.install").update_all_sync()'
+    -- },
     -- latex
     -- "frabjous/knap",
     {
@@ -820,8 +834,6 @@ require("lazy").setup({
     },
     -- "lukahartwig/pnpm.nvim", -- manage pnpm workspace with telescope
     -- "vuki656/package-info.nvim", -- package info
-    -- kotlin
-    -- https://github.com/mfussenegger/nvim-jdtls
     -- markdown
     -- 'jakewvincent/mkdnflow.nvim',
     -- {
@@ -833,6 +845,8 @@ require("lazy").setup({
     --     })
     --     end,
     -- },
+    -- kotlin
+    -- https://github.com/mfussenegger/nvim-jdtls
 
 
     ----------------------------------------------------------------
