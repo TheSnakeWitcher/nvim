@@ -160,30 +160,30 @@ set({"v","x"}, "<C-k>", ":move '<-2<CR>gv-gv", opts)
 -- telescope
 --------------------------------------------------------------
 -- vim pickers
-set('n', '<leader>/', "<cmd>Telescope current_buffer_fuzzy_find<cr>", { desc = '[/] Fuzzily search in current buffer]' })
-set("n" , "<leader>fh" , "<cmd>Telescope help_tags<cr>", { desc = "[f]ind [h]elp" })
-set("n" , "<leader>fM" , "<cmd>Telescope man_pages<cr>", { desc = "[f]ind [M]an pages" })
-set("n" , "<leader>fm" , "<cmd>Telescope marks<cr>", { desc = "[f]ind [m]arks" })
-set("n" , "<leader>fr" , "<cmd>Telescope registers<cr>", { desc = "[f]ind [r]registers" })
-set("n" , "<leader>fk" , "<cmd>Telescope keymaps<cr>", { desc = "[f]ind [k]eymaps" })
-set("n" , "<leader>fC" , "<cmd>Telescope command_history<cr>", { desc = "[f]ind [c]ommand history" })
+set('n', '<leader>/', "<cmd>lua require('telescope.builtin').current_buffer_fuzzy_find()<cr>", { desc = '[/] Fuzzily search in current buffer]' })
+set("n" , "<leader>fh", "<cmd>lua require('telescope.builtin').help_tags()<cr>", { desc = "[f]ind [h]elp" })
+set("n" , "<leader>fM", "<cmd>lua require('telescope.builtin').man_pages()<cr>", { desc = "[f]ind [M]an pages" })
+set("n" , "<leader>fm", "<cmd>lua require('telescope.builtin').marks()<cr>", { desc = "[f]ind [m]arks" })
+set("n" , "<leader>fr", "<cmd>lua require('telescope.builtin').registers()<cr>", { desc = "[f]ind [r]registers" })
+set("n" , "<leader>fk", "<cmd>lua require('telescope.builtin').keymaps()<cr>", { desc = "[f]ind [k]eymaps" })
+set("n" , "<leader>fC", "<cmd>lua require('telescope.builtin').command_history()<cr>", { desc = "[f]ind [c]ommand history" })
 
-set("n", "<leader>fd", "<cmd>Telescope diagnostics<cr>", { desc = "[f]ind [d]iagnostics" })
-set("n", "<leader>fq", "<cmd>Telescope quickfix<cr>", { desc = "[f]ind [q]uickfix" })
+set("n", "<leader>fd", "<cmd>lua require('telescope.builtin').diagnostics()<cr>", { desc = "[f]ind [d]iagnostics" })
+set("n", "<leader>fq", "<cmd>lua require('telescope.builtin').quickfix()<cr>", { desc = "[f]ind [q]uickfix" })
 
 -- file pickers
-set("n", "<C-f>", "<cmd> Telescope git_files<cr>", { desc = "[f]ind [g]itfiles(tracked by git according to .gitignore)" })
-set("n", "<leader>ff", "<cmd>Telescope find_files<cr>", { desc = "[f]ind [f]iles" })
-set("n", "<leader>fg", "<cmd>Telescope live_grep<cr>", { desc = "[f]ind [g]rep"  })
--- set("n", "<leader>fG", "<cmd>Telescope live_grep grep_open_files=true<cr>", { desc = "[f]ind [G]rep"  })
-set("n", "<leader>fo", "<cmd>Telescope oldfiles<cr>",{ desc = "[f]ind [o]ldfiles" })
-set("n", "<leader>fP", "<cmd>Telescope lazy<cr>", { desc = "[f]ind [P]lugins" })
+set("n", "<C-f>", "<cmd> lua require('telescope.builtin').git_files()<cr>", { desc = "[f]ind [g]itfiles(tracked by git according to .gitignore)" })
+set("n", "<leader>ff", "<cmd>lua require('telescope.builtin').find_files()<cr>", { desc = "[f]ind [f]iles" })
+set("n", "<leader>fg", "<cmd>lua require('telescope.builtin').live_grep()<cr>", { desc = "[f]ind [g]rep"  })
+-- set("n", "<leader>fG", "<cmd>lua require('telescope.builtin').live_grep grep_open_files=true()<cr>", { desc = "[f]ind [G]rep"  })
+set("n", "<leader>fo", "<cmd>lua require('telescope.builtin').oldfiles()<cr>",{ desc = "[f]ind [o]ldfiles" })
+set("n", "<leader>fP", "<cmd>lua require('telescope.builtin').lazy()<cr>", { desc = "[f]ind [P]lugins" })
 
 -- git pickers
-set("n", "<C-s>", "<cmd>Telescope git_status<cr>", { desc = "[f]ind [S]tatus" })
-set("n","<leader>fs","<cmd>Telescope git_status<cr>", { desc = "[f]ind [S]tatus" })
-set("n", "<leader>fb", "<cmd>Telescope git_branches<cr>", { desc = "[f]ind [B]ranches" })
-set("n", "<leader>fc", "<cmd>Telescope git_commits<cr>", { desc = "[f]ind [C]ommits" })
+set("n", "<C-s>", "<cmd>lua require('telescope.builtin').git_status()<cr>", { desc = "[f]ind [S]tatus" })
+set("n","<leader>fs","<cmd>lua require('telescope.builtin').git_status()<cr>", { desc = "[f]ind [S]tatus" })
+set("n", "<leader>fb", "<cmd>lua require('telescope.builtin').git_branches()<cr>", { desc = "[f]ind [B]ranches" })
+set("n", "<leader>fc", "<cmd>lua require('telescope.builtin').git_commits()<cr>", { desc = "[f]ind [C]ommits" })
 
 -- extensions pickers
 set("n", "<leader>fn", "<cmd>TodoTelescope<CR>", { desc = "[f]ind [n]otes" })                     -- todo-comments
