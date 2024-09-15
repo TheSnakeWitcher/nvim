@@ -19,27 +19,11 @@ local action_state = require "telescope.actions.state"
 
 for _, module in ipairs({
     "fzf",
-    "notify",
-    "projections",
     "dap",
-    "env",
-    "heading",
-    "aerial",
-    "zoxide",
-    "lazy",
-
     "hardhat",
     "foundry",
-    -- "dap",
-    -- "color_names",
-    -- "telescope-tabs",
-    -- "media_files",
-    -- "macros",
-    -- "software-licenses",
-    -- "neoclip",
-    -- "cheat",
 }) do
-    local ok, _ = pcall(telescope.load_extension, module)
+    local ok, _ = pcall(telescope.register_extension, module)
     if not ok then
         vim.notify(string.format("%s telescope extension not loaded",module))
     end
@@ -197,20 +181,9 @@ telescope.setup({
         --- @help {telescope-lazy.nvim-configuratio}
         lazy = {
             mappings = {
-                -- default  open_in_browser = "<C-o>",
-                open_in_browser = "<C-c>d",
-                open_in_file_browser = "<M-b>",
-                open_in_find_files = "<C-f>",
-                open_in_live_grep = "<C-g>",
-                open_in_terminal = "<C-t>",
-                open_plugins_picker = "<C-b>", -- Works only after having called first another action
-                open_lazy_root_find_files = "<C-r>f",
-                open_lazy_root_live_grep = "<C-r>g",
-                change_cwd_to_plugin = "<C-o>",
-                -- default change_cwd_to_plugin = "<C-c>d",
+                open_in_browser = "<cr>",
             },
-        }
-
+        },
     },
 
 })

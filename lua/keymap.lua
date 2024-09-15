@@ -43,6 +43,9 @@ end
 set("i", "<C-c>", "<Esc>", { silent = true })
 -- set("v", "S", ":s/\v/g<LEFT><LEFT>",{desc = "substitute pattern in range globally"})
 
+-- terminal
+set("t", "<C-c>", "<Esc>", { silent = true })
+
 -- folds
 -- set("c", "C-h","<cmd>history<cr>",{desc = "command history"})
 --
@@ -177,7 +180,7 @@ set("n", "<leader>ff", "<cmd>lua require('telescope.builtin').find_files()<cr>",
 set("n", "<leader>fg", "<cmd>lua require('telescope.builtin').live_grep()<cr>", { desc = "[f]ind [g]rep"  })
 -- set("n", "<leader>fG", "<cmd>lua require('telescope.builtin').live_grep grep_open_files=true()<cr>", { desc = "[f]ind [G]rep"  })
 set("n", "<leader>fo", "<cmd>lua require('telescope.builtin').oldfiles()<cr>",{ desc = "[f]ind [o]ldfiles" })
-set("n", "<leader>fP", "<cmd>lua require('telescope.builtin').lazy()<cr>", { desc = "[f]ind [P]lugins" })
+set("n", "<leader>fP", "<cmd>lua require('telescope').extensions.lazy.lazy()<cr>", { desc = "[f]ind [P]lugins" })
 
 -- git pickers
 set("n", "<C-s>", "<cmd>lua require('telescope.builtin').git_status()<cr>", { desc = "[f]ind [S]tatus" })
@@ -186,13 +189,14 @@ set("n", "<leader>fb", "<cmd>lua require('telescope.builtin').git_branches()<cr>
 set("n", "<leader>fc", "<cmd>lua require('telescope.builtin').git_commits()<cr>", { desc = "[f]ind [C]ommits" })
 
 -- extensions pickers
-set("n", "<leader>fn", "<cmd>TodoTelescope<CR>", { desc = "[f]ind [n]otes" })                     -- todo-comments
-set("n", "<leader>fN", "<cmd>Telescope notify<CR>", { desc = "[f]ind [N]otifications" })          -- notify
-set("n", "<leader>fp", "<cmd>Telescope projections<CR>", { desc = "[f]ind [p]rojects" })          -- projections
-set("n", "<C-p>", "<cmd>Telescope projections<CR>", { desc = "[f]ind [p]rojects" })               -- projections
-set("n", "<leader>fe", "<cmd>Telescope env<CR>", { desc = "[f]ind [e]nvironment" })               -- telescope-env
-set("n", "<leader>ft", "<cmd>Telescope telescope-tabs list_tabs<CR>", { desc = "[f]ind [t]abs" }) -- telescope-tabs
-set("n", "<leader>fH", "<cmd>Telescope heading<cr>", { desc = "[f]ind [H]eaders" })               -- telescope-heading
+set("n", "<C-p>", "<cmd>lua require('telescope').extensions.projections.projections()<CR>", { desc = "[f]ind [p]rojects" })
+set("n", "<leader>fp", "<cmd>lua require('telescope').extensions.projections.projections()<CR>", { desc = "[f]ind [p]rojects" })
+set("n", "<leader>fn", "<cmd>lua require('telescope').extensions['todo-comments'].todo()<CR>", { desc = "[f]ind [n]otes" })
+set("n", "<leader>fN", "<cmd>lua require('telescope').extensions.notify.notify()<CR>", { desc = "[f]ind [N]otifications" })
+set("n", "<leader>fe", "<cmd>lua require('telescope').extensions.env.env()<CR>", { desc = "[f]ind [e]nvironment" })
+set("n", "<leader>ft", "<cmd>lua require('telescope').extensions.telescope-tabs.list_tabs()<CR>", { desc = "[f]ind [t]abs" })
+set("n", "<leader>fH", "<cmd>lua require('telescope').extensions.heading.heading()<cr>", { desc = "[f]ind [H]eaders" })
+set("n", "<leader>fz", "<cmd>lua require('telescope').extensions.zoxide.list()<cr>", { desc = "[f]ind [z]oxide" })
 
 
 --------------------------------------------------------------

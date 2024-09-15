@@ -5,10 +5,13 @@ end
 vim.opt.rtp:prepend(lazypath)
 local load_config = util.load_config
 
---- @PluginList https://neovimcraft.com/
---- @PluginList https://dotfyle.com/
---- @PluginList https://github.com/yutkat/my-neovim-pluginlist
---- @PluginList https://github.com/rockerBOO/awesome-neovim.git
+
+-- plugins list
+-- https://neovimcraft.com/
+-- https://dotfyle.com/
+-- https://github.com/yutkat/my-neovim-pluginlist
+-- https://github.com/rockerBOO/awesome-neovim.git
+-- https://yutkat.github.io/my-neovim-pluginlist
 require("lazy").setup({
 
     ----------------------------------------------------------------
@@ -273,11 +276,6 @@ require("lazy").setup({
         keys = "<leader>f",
         config = function() load_config("telescope") end,
         dependencies = {
-            "tsakirist/telescope-lazy.nvim",              -- search plugins installed with lazy
-            "LinArcX/telescope-env.nvim",                 -- search environment variables
-            "LukasPietzschmann/telescope-tabs",           -- search tabs
-            "crispgm/telescope-heading.nvim",             -- search headers
-            "jvgrootveld/telescope-zoxide",               -- search zoxide paths
             {
                 -- use fzf
                 "nvim-telescope/telescope-fzf-native.nvim",
@@ -285,16 +283,22 @@ require("lazy").setup({
             },
             "nvim-telescope/telescope-dap.nvim",         -- search for dap
             "FabianWirth/search.nvim",                   -- tabs for telescope layout
-            -- "jmbuhr/telescope-zotero.nvim",
-            -- "nvim-telescope/telescope-media-files.nvim", -- search media files
-            -- "nat-418/telescope-color-names.nvim",        -- search colors
-            -- "ryanmsnyder/toggleterm-manager.nvim",       -- search toggleterm terminals
-            -- "nvim-telescope/telescope-cheat.nvim",   -- an attempt to recreate cheat.sh
-            -- "sdushantha/fontpreview",                -- search fonts
-            -- "chip/telescope-software-licenses.nvim", -- search licenses
-            -- "piersolenski/telescope-import.nvim"     -- seach imports statements
         },
     },
+    -- telescope extensions
+    -- "jmbuhr/telescope-zotero.nvim",
+    -- "nvim-telescope/telescope-media-files.nvim", -- search media files
+    -- "nat-418/telescope-color-names.nvim",        -- search colors
+    -- "ryanmsnyder/toggleterm-manager.nvim",       -- search toggleterm terminals
+    -- "nvim-telescope/telescope-cheat.nvim",   -- an attempt to recreate cheat.sh
+    -- "sdushantha/fontpreview",                -- search fonts
+    -- "chip/telescope-software-licenses.nvim", -- search licenses
+    -- "piersolenski/telescope-import.nvim"     -- seach imports statements
+    { "tsakirist/telescope-lazy.nvim", keys = "<leader>fP" },   -- search plugins installed with lazy
+    { "LinArcX/telescope-env.nvim", keys = "<leader>fe" },      -- search environment variables 
+    { "crispgm/telescope-heading.nvim", keys = "<leader>fH" },  -- search headers
+    { "LukasPietzschmann/telescope-tabs", keys = "<leader>ft"}, -- search tabs
+    { "jvgrootveld/telescope-zoxide", keys = "<leader>fz"},  -- search zoxide paths
     -- buffer and mark management
     {
         -- tab scoped buffers "tiagovla/scope.nvim" or  "backdround/tabscope.nvim"
@@ -309,13 +313,14 @@ require("lazy").setup({
     {
         "GnikDroy/projections.nvim",
         branch = "pre_release",
+        keys = { "<C-p>" ,"<leader>fp" },
         config = function() load_config("projections") end,
     },
     -- tree view for lsp symbols/tags(code outline )
     {
         -- old alternatives: https://github.com/preservim/tagbar
         "stevearc/aerial.nvim",
-        cmd = { "AerialToggle",  "AerialOpen",  "AerialOpenAll" },
+        cmd = { "Telescope aerial",  "AerialToggle",  "AerialOpen",  "AerialOpenAll" },
         config = function() load_config("aerial") end,
     },
     -- search unicode/emojis characters management
@@ -369,6 +374,7 @@ require("lazy").setup({
             "uga-rosa/cmp-dynamic",                  -- dynamic generation candidates sources
             "davidsierradz/cmp-conventionalcommits", -- conventional commtis
             "kdheepak/cmp-latex-symbols",            -- latex completion source
+            -- https://github.com/hrsh7th/cmp-emoji
             -- github copilot source
             -- {
             --     "zbirenbaum/copilot-cmp",
@@ -581,12 +587,14 @@ require("lazy").setup({
         cmds = { "OverseerToggle", "OverseerOpen", "OverseerBuild", "OverseerRun", "OverseerRunCmd" },
         config = function() load_config("overseer") end,
     },
+    -- markdown preview in browser
+    --https://github.com/iamcco/markdown-preview.nvim
+    -- markdown preview
     {
         -- alternatives:
         -- "ellisonleao/glow.nvim",
         -- "OXY2DEV/markview.nvim",
-        'MeanderingProgrammer/markdown.nvim',
-        main = "render-markdown",
+        "MeanderingProgrammer/render-markdown.nvim",
         ft = "markdown",
         dependencies = { 'nvim-treesitter/nvim-treesitter', 'nvim-tree/nvim-web-devicons' }, -- if you prefer nvim-web-devicons
         config = function()
@@ -600,9 +608,23 @@ require("lazy").setup({
                     right_pad = 0,
                     highlight = 'RenderMarkdownBullet',
                 },
+                link = {
+                    custom = {
+                        web = { pattern = "^http[s]?://", icon = "󰌷 " , highlight = "RenderMarkdownLink" },
+                    },
+                }
             })
         end,
     },
+    -- help preiew
+    -- {
+    --     "OXY2DEV/helpview.nvim",
+    --     lazy = false, -- Recommended
+    --     ft = "help",
+    --     dependencies = {
+    --         "nvim-treesitter/nvim-treesitter"
+    --     }
+    -- },
     --  image previewer
     -- {
     --      "3rd/image.nvim",
@@ -690,16 +712,17 @@ require("lazy").setup({
     -- github
     -- "dlvhdr/gh-dash.git", -- github dashboard
     -- "rawnly/gist.nvim",   -- gist management
-    {
-        "ldelossa/gh.nvim",
-        dependencies = {
-            {
-                "ldelossa/litee.nvim",
-                config = function() require("litee.lib").setup() end,
-            },
-        },
-        config = function() require("litee.gh").setup() end,
-    },
+    -- {
+    --     -- https://who.ldelossa.is/posts/gh-nvim/
+    --     "ldelossa/gh.nvim",
+    --     dependencies = {
+    --         {
+    --             "ldelossa/litee.nvim",
+    --             config = function() require("litee.lib").setup() end,
+    --         },
+    --     },
+    --     config = function() require("litee.gh").setup() end,
+    -- },
     {
         -- edit & review github issues
         "pwntester/octo.nvim",
