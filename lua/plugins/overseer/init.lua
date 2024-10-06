@@ -147,3 +147,4 @@ overseer.setup({
 })
 
 require("plugins.overseer.templates")
+require("plugins.overseer.cmds")
