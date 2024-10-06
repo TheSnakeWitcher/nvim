@@ -1,3 +1,4 @@
+--- @help {lua-guide-commands}
 vim.api.nvim_create_user_command(
     "DAPUI",
     'lua require("dapui").toggle()<cr>',
