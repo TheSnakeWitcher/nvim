@@ -24,5 +24,11 @@ ls.config.set_config({
     },
 })
 
-lua_loader.lazy_load({path = vim.g.path.snippets })
+lua_loader.lazy_load({ path = vim.g.path.snippets })
 ls.filetype_extend("typescriptreact", { "typescript" })
+
+vim.api.nvim_create_user_command(
+    "LuaSnipEdit",
+    require("luasnip.loaders").edit_snippet_files,
+    {desc = "edit filetype snippets"}
+)
