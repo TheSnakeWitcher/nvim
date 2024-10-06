@@ -5,9 +5,6 @@ for _, module in ipairs({
     "plugins",
     "keymap",      --- @help {lua-keymap}
     "signs",       --- @help {sign.txt}
-    "highlight",   --- @help {highlight}
-    "autocmds",    --- @help {lua-guide-autocommands}
-    "cmds",        --- @help {lua-guide-commands}
 }) do
     local ok, _ = pcall(require, module)
     if not ok then
