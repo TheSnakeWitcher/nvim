@@ -21,6 +21,6 @@ buffer_manager.setup({
             command = "split"
         }
     },
-    width = 100,
+    width = 80,
     height = 20,
 })
