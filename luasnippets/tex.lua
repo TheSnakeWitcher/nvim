@@ -52,36 +52,8 @@ ls.add_snippets("tex", {
             \end{document}
         ]],
             {
-                -- i(1),
-                -- documentclass classess
-                c(1, {
-                    t "article",
-                    t "IEEEtran",
-                    t "letter",
-                    t "books",
-                    t "report",
-                    t "slides",
-                    t "beamer",
-                }),
-                -- documentclass options
-                -- c(1, {
-                --     t "titlepage",
-                --     t "notitle",
-                --     t "oneside",
-                --     t "twoside",
-                --     t "twcolumn",
-                --     t "a4paper",
-                --     t "letter",
-                --     t "paper",
-                --     t "fleqn", -- align math formula to lefth
-                --     t "leqno", -- put  numbering of formula on lefth
-                -- }),
-                c(2, {
-                    t "amsmath",
-                    t "color",
-                    t "geometry",
-                    t "graphicx",
-                }),
+                i(1),
+                i(2),
                 i(3, "title"),
                 i(4, "code"),
             }
@@ -137,18 +109,7 @@ ls.add_snippets("tex", {
             \end{<>}
         ]],
             {
-                c(1, {
-                    t "figure",
-                    t "math",
-                    t "equation", -- numbered equation
-                    t "displaymath", -- unnumbered equation
-                    t "abstract",
-                    t "matrix",
-                    t "table",
-                    t "enumerate",
-                    t "itemize",
-                    t "description",
-                }),
+                i(1),
                 d(2, function(args, parent, old_state, user_args)
                     if args[1][1] == "figure" then
                         return sn(nil,
