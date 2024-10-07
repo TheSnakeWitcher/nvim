@@ -6,6 +6,11 @@ end
 
 --- @help {toggleterm}
 toggleterm.setup({
+    highlights = {
+        Normal = {
+          link = "Normal",
+        },
+    },
     size = function(term)
         if term.direction == "horizontal" then
           return 30
