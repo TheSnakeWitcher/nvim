@@ -4,12 +4,14 @@ if not ok then
     return
 end
 
+--- @help {render-markdown-setup}
 render_markdown.setup({
+    file_types = { 'markdown', 'Avante' },
     pipe_table = {
         border = { "╭", "┬", "╮", "├", "┼", "┤", "╰", "┴", "╯", "│", "─" },
     },
     bullet = {
-        icons = { '', '', '◆', '◇' },
+        icons = { '•', '•', '◆', '◇' },
         enabled = true,
         right_pad = 0,
         highlight = 'RenderMarkdownBullet',
