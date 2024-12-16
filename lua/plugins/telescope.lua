@@ -178,7 +178,7 @@ telescope.setup({
             },
         },
 
-        --- @help {telescope-lazy.nvim-configuratio}
+        --- @help {telescope-lazy.nvim-configuration}
         lazy = {
             mappings = {
                 open_in_browser = "<cr>",

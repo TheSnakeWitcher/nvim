@@ -173,6 +173,7 @@ set("n" , "<leader>fC", "<cmd>lua require('telescope.builtin').command_history()
 
 set("n", "<leader>fd", "<cmd>lua require('telescope.builtin').diagnostics()<cr>", { desc = "[f]ind [d]iagnostics" })
 set("n", "<leader>fq", "<cmd>lua require('telescope.builtin').quickfix()<cr>", { desc = "[f]ind [q]uickfix" })
+set("n", "<leader>fp", "<cmd>lua require('telescope.builtin').find_files({cwd = vim.fs.joinpath(vim.fn.stdpath('data'), 'lazy') })<cr>", { desc = "[f]ind [p]lugins files" })
 
 -- file pickers
 set("n", "<C-f>", "<cmd> lua require('telescope.builtin').git_files()<cr>", { desc = "[f]ind [g]itfiles(tracked by git according to .gitignore)" })
@@ -187,10 +188,10 @@ set("n", "<C-s>", "<cmd>lua require('telescope.builtin').git_status()<cr>", { de
 set("n","<leader>fs","<cmd>lua require('telescope.builtin').git_status()<cr>", { desc = "[f]ind [S]tatus" })
 set("n", "<leader>fb", "<cmd>lua require('telescope.builtin').git_branches()<cr>", { desc = "[f]ind [B]ranches" })
 set("n", "<leader>fc", "<cmd>lua require('telescope.builtin').git_commits()<cr>", { desc = "[f]ind [C]ommits" })
+set("n", "<leader>B", "<cmd>lua require('telescope.builtin').buffers({ sort_mru=true, sort_lastused=true, initial_mode=normal, theme=ivy})<cr>", { desc = "[f]ind [C]ommits" })
 
 -- extensions pickers
 set("n", "<C-p>", "<cmd>lua require('telescope').extensions.projections.projections()<CR>", { desc = "[f]ind [p]rojects" })
-set("n", "<leader>fp", "<cmd>lua require('telescope').extensions.projections.projections()<CR>", { desc = "[f]ind [p]rojects" })
 set("n", "<leader>fn", "<cmd>lua require('telescope').extensions['todo-comments'].todo()<CR>", { desc = "[f]ind [n]otes" })
 set("n", "<leader>fN", "<cmd>lua require('telescope').extensions.notify.notify()<CR>", { desc = "[f]ind [N]otifications" })
 set("n", "<leader>fe", "<cmd>lua require('telescope').extensions.env.env()<CR>", { desc = "[f]ind [e]nvironment" })

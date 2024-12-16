@@ -30,7 +30,7 @@ vim.api.nvim_create_autocmd("BufWritePre", {
     end,
 })
 
-vim.api.nvim_create_autocmd({ "FileType" }, {
+vim.api.nvim_create_autocmd("FileType", {
     desc = "Set wrap and spell in markdown and gitcommit filetypes",
     group = config,
     pattern = { "gitcommit", "markdown" },
@@ -49,3 +49,19 @@ vim.api.nvim_create_autocmd("TextYankPost", {
     pattern = "*",
     callback = function() vim.highlight.on_yank() end,
 })
+
+-- vim.api.nvim_create_autocmd("LspAttach", {
+--     group = vim.api.nvim_create_augroup("UserLspConfig", {}),
+--     callback = function(args)
+--
+--         local client = vim.lsp.get_client_by_id(args.data.client_id)
+--
+--         if client.server_capabilities.inlayHintProvider then
+--             vim.lsp.inlay_hint.enable(
+--                 not vim.lsp.inlay_hint.is_enabled(),
+--                 { bufnr = args.buf }
+--             )
+--         end
+--
+--     end
+-- })
