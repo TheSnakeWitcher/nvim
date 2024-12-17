@@ -35,15 +35,15 @@ nvim_web_devicons.setup({
         }
     };
     override_by_extension = {
-        ["log"] = {
-            icon = "",
-            color = "#81e043",
-            name = "Log"
-        },
         ["sol"] = {
-            icon = "",
+            icon = "",
             color = "#4F709C",
             name = "Solidity"
+        },
+        ["cairo"] = {
+            icon = "", -- ""
+            color = "#f1502f",
+            name = "Cairo"
         },
     };
 })
