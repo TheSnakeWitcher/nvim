@@ -8,7 +8,7 @@ end
 todo_comments.setup({
 
     keywords = {
-        FIX = { icon = "", color = "error", alt = { "FIXME", "BUG", "FIXIT", "ISSUE", "ERROR" } },
+        FIX = { icon = "", color = "error", alt = { "FIXME", "DEBUG", "BUG", "FIXIT", "ISSUE", "ERROR" } },
         TODO = { icon = "", color = "info" },
         HACK = { icon = "", color = "warning", alt = { "TIP" } },
         WARN = { icon = "", color = "warning", alt = { "WARNING" } },
