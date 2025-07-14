@@ -4,26 +4,25 @@ if not ok then
     return
 end
 
-local patterns = {
-    git = ".git",
-    svn = ".svn",
-    hg = ".hg",
-    readme = "README.md"
-}
+local patterns = { git = ".git", readme = "README.md" }
 
 local function get_workspaces()
     local workspaces = {
+        { "~/.config/" , { patterns.readme } },
         { vim.g.path.code , { patterns.readme } },
         { vim.g.path.projects , { patterns.git } },
-        { vim.g.path.plugin_dev , { patterns.git} },
-        { vim.g.path.projects .. "/hardhat" , { patterns.git } },
-        { "~/.config/" , { patterns.readme } },
+        { vim.g.path.plugin_dev , { patterns.git } },
+        vim.g.path.test_projects,
     }
 
-    local path = vim.g.path.work_projects
-    for inner_path in vim.fs.dir(path) do
-        table.insert(workspaces,{ vim.fs.joinpath(path, inner_path), {} })
-    end
+    vim.iter({ vim.g.path.work_projects }):each(function(path)
+        for inner_path in vim.fs.dir(path) do
+            table.insert(
+                workspaces,
+                { vim.fs.joinpath(path, inner_path), {} }
+            )
+        end
+    end)
 
     return workspaces
 end
