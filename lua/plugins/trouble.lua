@@ -5,4 +5,10 @@ if not ok then
 end
 
 ---@help {trouble.nvim-trouble-configuration}
-trouble.setup()
+trouble.setup({
+    win = {
+        type = "split",
+        position = "right",
+        size = 50,
+    }
+})
