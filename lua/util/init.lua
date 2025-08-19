@@ -16,7 +16,6 @@ function util.load_config(module)
     return util.load("plugins", module, "config")
 end
 
-util.ui = require("util.ui")
 util.icons = require("util.icons")
 
 
