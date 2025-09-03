@@ -4,7 +4,6 @@ for _, module in ipairs({
     "options",     --- @help {options}
     "plugins",
     "keymap",      --- @help {lua-keymap}
-    "diagnostic",  --- @help {diagnostic.txt}
 }) do
     local ok, _ = pcall(require, module)
     if not ok then
