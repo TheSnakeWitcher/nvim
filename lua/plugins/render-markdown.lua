@@ -7,9 +7,7 @@ end
 --- @help {render-markdown-setup}
 render_markdown.setup({
     file_types = { 'markdown', 'Avante' },
-    pipe_table = {
-        border = { "╭", "┬", "╮", "├", "┼", "┤", "╰", "┴", "╯", "│", "─" },
-    },
+    completions = { lsp = { enabled = true } },
     bullet = {
         icons = { '•', '•', '◆', '◇' },
         enabled = true,
