@@ -27,7 +27,6 @@ require("lazy").setup({
     },
     "ray-x/guihua.lua",      -- GUI library
     "MunifTanjim/nui.nvim",  -- UI component library
-    "folke/neodev.nvim",     -- plugin development setup
     -- usefull collection of lua functions for neovim
     "nvim-lua/plenary.nvim",
     {
@@ -44,6 +43,16 @@ require("lazy").setup({
             "williamboman/mason-lspconfig.nvim",
             "jayp0521/mason-null-ls.nvim",
             "jay-babu/mason-nvim-dap.nvim",
+        },
+    },
+    -- plugin development setup
+    {
+        "folke/lazydev.nvim", 
+        ft = "lua", -- only load on lua files
+        opts = {
+            library = {
+                { path = "${3rd}/luv/library", words = { "vim%.uv" } },
+            },
         },
     },
     -- network resource manager
@@ -87,6 +96,7 @@ require("lazy").setup({
         config = function() load_config("dressing") end,
     },
     -- file explorer
+    -- https://github.com/A7Lavinraj/fyler.nvim
     -- {
     --     'stevearc/oil.nvim',
     --     opts = {},
@@ -240,6 +250,7 @@ require("lazy").setup({
         config = function() load_config("none-ls") end,
     },
     -- diagnostics
+    -- https://github.com/rachartier/tiny-inline-diagnostic.nvim
     {
         "folke/trouble.nvim",
         cmd = "Trouble",
@@ -251,15 +262,10 @@ require("lazy").setup({
         event = "LspAttach",
     },
     -- lsp signature hint as typing
-    {
-        "ray-x/lsp_signature.nvim",
-        event = "LspAttach",
-        config = function() load_config("lsp_signature") end,
-    },
-    -- diagnostics
     -- {
-    --     "https://git.sr.ht/~whynothugo/lsp_lines.nvim",
-    --     config = function() require("lsp_lines").setup() end,
+    --     "ray-x/lsp_signature.nvim",
+    --     event = "LspAttach",
+    --     config = function() load_config("lsp_signature") end,
     -- },
     -- formatter
     {
@@ -267,6 +273,7 @@ require("lazy").setup({
         "stevearc/conform.nvim",
         lazy = true,
         opts = {}
+    --     config = function() load_config("conform") end,
     },
     -- {
     --     "glepnir/lspsaga.nvim",
@@ -315,6 +322,7 @@ require("lazy").setup({
         -- alternative:
         -- "nvimdev/flybuf.nvim"
         -- "cbochs/grapple.nvim"
+        -- "iofq/dart.nvim"
         "j-morano/buffer_manager.nvim",
         keys = { { "<leader>b", "<cmd>lua require('buffer_manager.ui').toggle_quick_menu()<cr>" } },
         config = function() load_config("buffer_manager") end,
@@ -333,13 +341,6 @@ require("lazy").setup({
         cmd = { "Telescope aerial",  "AerialToggle",  "AerialOpen",  "AerialOpenAll" },
         config = function() load_config("aerial") end,
     },
-    -- search unicode/emojis characters management
-    {
-        "ziontee113/icon-picker.nvim",
-        cmd = { "IconPickerNormal",  "IconPickerYank",  "IconPickerInsert"},
-        keys = "<A-i>",
-        config = function() load_config("icon-picker") end,
-    },
     -- search urls in buffer
     {
         -- "chrishrb/gx.nvim"
@@ -347,13 +348,20 @@ require("lazy").setup({
         cmd = "UrlView",
         config = function() load_config("urlview") end,
     },
+    -- search unicode/emojis characters management
+    -- {
+    --     "ziontee113/icon-picker.nvim",
+    --     cmd = { "IconPickerNormal",  "IconPickerYank",  "IconPickerInsert"},
+    --     keys = "<A-i>",
+    --     config = function() load_config("icon-picker") end,
+    -- },
     -- search nerd fonts glyphs
-    {
-        -- alternative: "nvimdev/nerdicons.nvim"
-        -- "protex/better-digraphs.nvim"
-        '2kabhishek/nerdy.nvim',
-        cmd = 'Nerdy',
-    },
+    -- {
+    --     -- alternative: "nvimdev/nerdicons.nvim"
+    --     -- "protex/better-digraphs.nvim"
+    --     '2kabhishek/nerdy.nvim',
+    --     cmd = 'Nerdy',
+    -- },
 
 
     --------------------------------------------------------------
@@ -362,9 +370,19 @@ require("lazy").setup({
     -- completion engine
     -- {
     --     'saghen/blink.cmp',
-    --     version = '*',
+    --     version = '1.*',
     --     -- config = function() load_config("blink") end,
-    --     opts = {}
+    --     opts = {
+    --         keymap = { preset = 'default' },
+    --         appearance = {
+    --           nerd_font_variant = 'mono'
+    --         },
+    --         completion = { documentation = { auto_show = false } },
+    --         sources = {
+    --           default = { 'lsp', 'path', 'snippets', 'buffer' },
+    --         },
+    --         opts_extend = { "sources.default" }
+    --     }
     -- },
     {
         -- alternatives: https://github.com/Saghen/blink.cmp
@@ -417,6 +435,7 @@ require("lazy").setup({
     --------------------------------------------------------------
     -- operational
     --------------------------------------------------------------
+    -- https://github.com/MagicDuck/grug-far.nvim  TODO: CHECK:
     "mong8se/actually.nvim",  -- ask for correct file to open when autocompletion doesn't work because multiple files share the same prefix
     "zdcthomas/yop.nvim",     -- easier custom operator management
     "mg979/vim-visual-multi", --  enhaced multiline editing
@@ -496,7 +515,7 @@ require("lazy").setup({
         -- honey: https://www.reddit.com/r/vim/comments/lwr56a/search_and_replace_camelcase_to_snake_case/
         -- change words naming style (camelCase, PascalCase, kebab-case, snake_case)
         "johmsalas/text-case.nvim",
-        keys = { { "ga.", "<cmd>TextCaseOpenTelescope<CR>", mode = { "n", "x" }, desc = "Telescope" }, },
+        keys = { { "gs", "<cmd>TextCaseOpenTelescope<CR>", mode = { "n", "x" }, desc = "Telescope" }, },
         cmd = {
             "Subs",
             "TextCaseOpenTelescope",
@@ -510,6 +529,8 @@ require("lazy").setup({
             require("telescope").load_extension("textcase")
         end,
     },
+    -- https://github.com/monaqa/dial.nvim --enhaced C-a and C-d
+    -- https://github.com/AndrewRadev/switch.vim --switch predefined segment of text
     -- macro management
     -- {
     --     -- must clean default @recording message 
@@ -534,6 +555,7 @@ require("lazy").setup({
     -- testing/debugging
     --------------------------------------------------------------
     -- tests framework/runner
+    -- debugmaster.nvim
     {
         -- TODO: split adapters dependencies(load adapters when LSP for ft is started)
         "nvim-neotest/neotest",
@@ -574,7 +596,7 @@ require("lazy").setup({
     -- knowledgebase/notes management
     {
         --  alternative: "vimwiki/vimwiki",
-        "epwalsh/obsidian.nvim",
+        "obsidian-nvim/obsidian.nvim",
         version = "*",
         lazy = true,
         ft = "markdown",
@@ -626,11 +648,6 @@ require("lazy").setup({
     --         "nvim-treesitter/nvim-treesitter"
     --     }
     -- },
-    --  image previewer
-    -- {
-    --      "3rd/image.nvim",
-    --      opts =  {},
-    --  },
     -- database interaction management
     -- {
     --     -- alternatives:
@@ -642,6 +659,7 @@ require("lazy").setup({
     --     dependencies = { "kristijanhusak/vim-dadbod-ui" },
     -- },
     -- doc generation
+    -- https://github.com/kkoomen/vim-doge
     {
         -- annotation generations in comment
         "danymat/neogen",
@@ -651,6 +669,7 @@ require("lazy").setup({
         },
     },
     -- http client
+    -- https://github.com/romek-codes/bruno.nvim
     -- {
     --     'rest-nvim/rest.nvim',
     --     lazy = true,
@@ -732,6 +751,12 @@ require("lazy").setup({
     },
     -- literature programming / jupyter notebooks
     {
+
+        -- https://github.com/GCBallesteros/NotebookNavigator.nvim
+        -- alternatives old: 'dccsillag/magma-nvim',  "luk400/vim-jukit",  "GCBallesteros/jupytext.nvim"
+        -- alternatives : https://github.com/GCBallesteros/NotebookNavigator.nvim
+        -- resources: https://github.com/ahmedkhalf/jupyter-nvim
+        -- "benlubas/molten-nvim",
         "quarto-dev/quarto-nvim",
         dependencies = {
             { "jmbuhr/otter.nvim", ft = { "markdown", "quarto" }, opts = {} }, -- lsp for code embeded in other documents 
@@ -739,18 +764,14 @@ require("lazy").setup({
         ft = "quarto",
         config = function() require("quarto").setup() end,
     },
-    -- {
-    --     -- https://github.com/GCBallesteros/NotebookNavigator.nvim
-    --     -- alternatives old: 'dccsillag/magma-nvim',  "luk400/vim-jukit",  "GCBallesteros/jupytext.nvim"
-    --     -- alternatives : https://github.com/GCBallesteros/NotebookNavigator.nvim
-    --     -- resources: https://github.com/ahmedkhalf/jupyter-nvim
-    --     "benlubas/molten-nvim",
-    --     opts =  {},
-    -- },
     -- AI
+    -- https://github.com/dlants/magenta.nvim
+    -- https://github.com/ColinKennedy/neovim-ai-plugins
+    -- "ravitemer/mcphub.nvim"
     -- model agnostic ai integration
     -- "magicalne/nvim.ai",
     -- "gsuuon/model.nvim", 
+    --  "milanglacier/minuet-ai.nvim"
     {
         "yetone/avante.nvim",
         version = false,
@@ -776,20 +797,13 @@ require("lazy").setup({
             },
         },
     },
-    -- {
-    --      -- zed AI
-    --      "olimorris/codecompanion.nvim",
-    -- }, 
-    -- {
-    --      -- pair program with LLMs
-    --      "Aider-AI/aider",
-    -- },
     {
        -- chatgpt
        -- https://dotfyle.com/plugins/Robitx/gp.nvim
        -- https://github.com/dense-analysis/neural
        -- https://dotfyle.com/plugins/dpayne/CodeGPT.nvim
        -- https://dotfyle.com/plugins/martineausimon/nvim-bard
+       -- https://github.com/copilotlsp-nvim/copilot-lsp
        -- https://github.com/CopilotC-Nvim/CopilotChat.nvim
        "jackMort/ChatGPT.nvim",
        cmd = "ChatGpt",
@@ -799,7 +813,6 @@ require("lazy").setup({
         -- codeium ai toolkit integration
         "Exafunction/codeium.nvim",
         event = "InsertEnter",
-        dependencies = { "nvim-lua/plenary.nvim", "hrsh7th/nvim-cmp" },
         config = function() load_config("codeium") end,
     },
     -- {
@@ -811,21 +824,12 @@ require("lazy").setup({
     --      "David-Kunz/gen.nvim"
     --      config = function() load_config("gen") end,
     -- },
-    -- {
-    --     -- github copilot
-    --     -- alternatives: "github/copilot.vim", -- preferred
-    --     "zbirenbaum/copilot.lua",
-    -- },
-    -- {
-    --      -- supermaven
-    --      "supermaven-inc/supermaven-nvim",
-    -- },
-    -- {
-    --      -- others
-    --      https://github.com/codota/tabnine-nvim
-    --      https://github.com/milanglacier/minuet-ai.nvim
-    -- }
-    -- https://github.com/supermaven-inc/supermaven-nvim
+    --  "zbirenbaum/copilot.lua",        -- copilot
+    --  "IntoTheNull/claude.nvim"        -- claude
+    --  "olimorris/codecompanion.nvim",  -- zed AI
+    --  "Aider-AI/aider",                -- pair program with LLMs
+    --  "codota/tabnine-nvim"            -- tabnine
+    --  "supermaven-inc/supermaven-nvim" -- supermaven
     -- pandoc
     -- {
     --    -- latex like editing experience while writing markdown
@@ -847,7 +851,7 @@ require("lazy").setup({
     --     config = function() load_config("sg") end,
     -- },
     -- arduino
-    -- "glebzlat"/arduino-nvim",
+    -- "glebzlat/arduino-nvim",
     -- "Vlelo/arduino-helper.nvim",
 
 
@@ -861,25 +865,9 @@ require("lazy").setup({
     --     lazy = false,
     --     config = function() load_config("rust-tools") end,
     -- },
-    -- {
-    --     "saecki/crates.nvim",
-    --     -- tag = 'v0.3.0',
-    --     event = { "BufRead Cargo.toml" },
-    --     dependencies = { 'nvim-lua/plenary.nvim' },
-    --     config = function()
-    --         require('crates').setup()
-    --     end,
-    -- },
     -- go
     -- {
     --     "ray-x/go.nvim",
-    --     dependencies = {  -- optional packages
-    --         "ray-x/guihua.lua",
-    --         "neovim/nvim-lspconfig",
-    --         "nvim-treesitter/nvim-treesitter",
-    --     },
-    --     config = function() require("go").setup() end,
-    --     event = { "CmdlineEnter" },
     --     ft = {"go", 'gomod'},
     --     build = ':lua require("go.install").update_all_sync()'
     -- },
@@ -890,6 +878,10 @@ require("lazy").setup({
         ft = { "tex", "latex" },
         init = function()
             vim.g.vimtex_view_general_viewer = "okular"
+            -- vim.cmd([[
+            --   let g:vimtex_view_general_viewer = 'okular'
+            --   let g:vimtex_view_general_options = '--unique file:@pdf\#src:@line@tex'
+            -- ]])
         end
     },
     -- javascrtp/typescript
@@ -900,6 +892,13 @@ require("lazy").setup({
         "pmizio/typescript-tools.nvim",
         config = function() require("typescript-tools").setup({}) end,
     },
+    {
+        'dmmulroy/ts-error-translator.nvim',
+        ft = { "typescript", "typescriptreact" },
+        opts = { auto_override_publish_diagnostics = true }
+    },
+    -- python
+    -- https://github.com/joshzcold/python.nvim
     -- markdown
     -- { "bullets-vim/bullets.vim" },
     -- 'jakewvincent/mkdnflow.nvim',
