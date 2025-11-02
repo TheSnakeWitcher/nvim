@@ -11,29 +11,6 @@ if not ok then
 end
 
 
-------------------------------------------------------------
--- neodev
-------------------------------------------------------------
-local ok, neodev = pcall(require,"neodev")
-if not ok then
-    vim.notify "neodev config not loaded in nvim-lspconfig"
-    return
-end
-
---- @help {neodev.nvim-neodev.nvim-configuration}
-neodev.setup({
-    library = {
-        enabled = true,
-        runtime = true,
-        types = true,
-        plugins = true,
-    },
-    setup_jsonls = true,
-    lspconfig = true,
-    pathStrict = true,
-})
-
-
 --- @help {lspconfig-keybindings}
 --- @help {lsp-buf}
 local on_attach = function(client, bufnr)
