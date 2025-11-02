@@ -4,24 +4,39 @@ if not ok then
     return
 end
 
+local function get_wikis()
+    local wikis = {}
+    local wikis_dir = vim.g.path.knowledgebase .. "/wikis"
+
+    -- NOTE: use vim.iter
+    for dir, _ in vim.fs.dir(wikis_dir) do
+        local wiki_name = string.format('wiki %s', dir)
+        local wiki_path = vim.fs.joinpath(wikis_dir, dir)
+        table.insert(wikis, { name = wiki_name, path = wiki_path })
+    end
+
+    return wikis
+end
+
+local function get_workspaces()
+    local workspaces = {
+        { name = "zettels", path = vim.g.path.knowledgebase .. "/zettels" },
+        { name = "fleetings",path = vim.g.path.knowledgebase .. "/fleetings" },
+        { name = "references", path = vim.g.path.knowledgebase .. "/references" },
+    }
+    local wikis = get_wikis()
+
+    vim.list_extend(workspaces,wikis)
+    return workspaces
+end
 
 --- @help {obsidian-setup}
 obsidian.setup({
-    workspaces = {
-        { name = "zettels", path = vim.g.path.knowledgebase .. "/zettels" },
-        { name = "wikis",         path = vim.g.path.knowledgebase .. "/wikis" },
-        { name = "fleetings",         path = vim.g.path.knowledgebase .. "/fleetings" },
-        { name = "references",         path = vim.g.path.knowledgebase .. "/references" },
-    },
+    workspaces = get_workspaces(),
+    checkbox = { enable = true, order =  "󰄱 ", " ", " ", "󰰱 " },
     ui = {
         enable = true,
         update_debounce = 200,
-        checkboxes = {
-            [" "] = { char = "󰄱 ", hl_group = "ObsidianTodo" },
-            ["x"] = { char = " ", hl_group = "ObsidianDone" },
-            [">"] = { char = " ", hl_group = "ObsidianRightArrow" },
-            ["~"] = { char = "󰰱 ", hl_group = "ObsidianTilde" },
-        },
         bullets = { char = "•", hl_group = "ObsidianBullet" },
         external_link_icon = { char = " ", hl_group = "ObsidianExtLinkIcon" },
         reference_text = { hl_group = "ObsidianRefText" },
