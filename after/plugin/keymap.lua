@@ -1,3 +1,4 @@
+--- @help {lua-keymap}
 --------------------------------------------------------------
 -- documentation
 --------------------------------------------------------------
@@ -100,7 +101,7 @@ set("n","gl", "<cmd>norm gx<cr>", opts)
 set("n", "<S-l>", ":tabnext<CR>", opts)
 set("n", "<S-h>", ":tabprev<CR>", opts)
 
--- buffers
+-- buffers, TODO: remove, included by deafault with nvim 0.11
 set("n", "]b", ":bnext<CR>", opts)
 set("n", "[b", ":bprevious<CR>", opts)
 
@@ -185,17 +186,17 @@ set("n", "<leader>fP", "<cmd>lua require('telescope').extensions.lazy.lazy()<cr>
 
 -- git pickers
 set("n", "<C-s>", "<cmd>lua require('telescope.builtin').git_status()<cr>", { desc = "[f]ind [S]tatus" })
-set("n","<leader>fs","<cmd>lua require('telescope.builtin').git_status()<cr>", { desc = "[f]ind [S]tatus" })
-set("n", "<leader>fb", "<cmd>lua require('telescope.builtin').git_branches()<cr>", { desc = "[f]ind [B]ranches" })
-set("n", "<leader>fc", "<cmd>lua require('telescope.builtin').git_commits()<cr>", { desc = "[f]ind [C]ommits" })
-set("n", "<leader>B", "<cmd>lua require('telescope.builtin').buffers({ sort_mru=true, sort_lastused=true, initial_mode=normal, theme=ivy})<cr>", { desc = "[f]ind [C]ommits" })
+set("n","<leader>fs","<cmd>lua require('telescope.builtin').lsp_document_symbols()<cr>", { desc = "[f]ind [S]tatus" })
+set("n", "<leader>fb", "<cmd>lua require('telescope.builtin').git_branches()<cr>", { desc = "[f]ind [b]ranches" })
+set("n", "<leader>fc", "<cmd>lua require('telescope.builtin').git_commits()<cr>", { desc = "[f]ind [c]ommits" })
+set("n", "<leader>B", "<cmd>lua require('telescope.builtin').buffers({ sort_mru=true, sort_lastused=true, initial_mode=normal, theme=ivy})<cr>", { desc = "[f]ind [B]uffers" })
 
 -- extensions pickers
 set("n", "<C-p>", "<cmd>lua require('telescope').extensions.projections.projections()<CR>", { desc = "[f]ind [p]rojects" })
 set("n", "<leader>fn", "<cmd>lua require('telescope').extensions['todo-comments'].todo()<CR>", { desc = "[f]ind [n]otes" })
 set("n", "<leader>fN", "<cmd>lua require('telescope').extensions.notify.notify()<CR>", { desc = "[f]ind [N]otifications" })
 set("n", "<leader>fe", "<cmd>lua require('telescope').extensions.env.env()<CR>", { desc = "[f]ind [e]nvironment" })
-set("n", "<leader>ft", "<cmd>lua require('telescope').extensions.telescope-tabs.list_tabs()<CR>", { desc = "[f]ind [t]abs" })
+set("n", "<leader>ft", "<cmd>lua require('telescope').extensions['telescope-tabs'].list_tabs()<CR>", { desc = "[f]ind [t]abs" })
 set("n", "<leader>fH", "<cmd>lua require('telescope').extensions.heading.heading()<cr>", { desc = "[f]ind [H]eaders" })
 set("n", "<leader>fz", "<cmd>lua require('telescope').extensions.zoxide.list()<cr>", { desc = "[f]ind [z]oxide" })
 
@@ -203,8 +204,9 @@ set("n", "<leader>fz", "<cmd>lua require('telescope').extensions.zoxide.list()<c
 --------------------------------------------------------------
 -- Diagnostic keymaps
 --------------------------------------------------------------
-set('n', '[d', vim.diagnostic.goto_prev, { noremap = true , desc = "next diagnostic"})
-set('n', ']d', vim.diagnostic.goto_next, { noremap = true , desc = "next diagnostic"})
+-- TODO: changed api, use vim.diagnostic.jump
+-- set('n', '[d', vim.diagnostic.goto_prev, { noremap = true , desc = "next diagnostic"})
+-- set('n', ']d', vim.diagnostic.goto_next, { noremap = true , desc = "next diagnostic"})
 -- set('n', '[e', function() vim.diagnostic.goto_prev({ severity = vim.diagnostic.severity.ERROR }) end, opts)
 -- set('n', ']e', function() vim.diagnostic.goto_next({ severity = vim.diagnostic.severity.ERROR }) end, opts)
 set('n', '<leader>q', vim.diagnostic.setloclist, { desc = "[q]uickfix set loclist" })
@@ -279,7 +281,8 @@ set("n", "<leader>N", "<cmd>Trouble todo toggle<CR>", { desc = "[N]otes toggle" 
 -- gitsigns
 set("n", "[c", "<cmd>Gitsign prev_hunk<cr>", { desc = "prev change/chunk/hunk" })
 set("n", "]c", "<cmd>Gitsign next_hunk<cr>", { desc = "next change/chunk/hunk" })
-set("n", "<leader>g", "<cmd>Gitsign setloclist<cr>", { desc = "add current changes to loclist" })
+-- set("n", "<leader>g", "<cmd>Gitsign setloclist<cr>", { desc = "add current changes to loclist" })
+set("n", "<leader>g", "<cmd>G difftool<cr>", { desc = "add current changes to quickfix" })
 -- diffview
 set("n", "<leader>G", "<cmd>DiffviewOpen<cr>", { desc = "open diffview" })
 set("n", "<leader>Gv", "<cmd>GV --all<cr>", { desc = "git viewer all" })
@@ -301,14 +304,14 @@ set("v", "<leader>R", "<cmd>ExecuteSelection<cr>", { desc = "[R]un selection" })
 --------------------------------------------------------------
 -- knowledgebase/zettelkasten
 --------------------------------------------------------------
-set("n", "<leader>zn", "<cmd>ObsidianNew<cr>", { desc = "[z]ettelkasten [n]ote" })
-set("n", "<leader>zN", "<cmd>ObsidianTemplate<cr>", { desc = "[z]ettelkasten [N]ote templated" })
-set("n", "<leader>zf", "<cmd>ObsidianSearch<cr>", { desc = "[z]ettelkasten [F]ind" })
-set("n", "<leader>zF", "<cmd>ObsidianQuickSwitch<cr>", { desc = "[z]ettelkasten [f]ind" })
-set("n", "<leader>zt", "<cmd>ObsidianTags<cr>", { desc = "[z]ettelkasten [t]ag" })
-set("n", "<leader>zl", "<cmd>ObsidianLinks<cr>", { desc = "[z]ettelkasten [l]inks" })
-set("n", "<leader>zb", "<cmd>ObsidianBacklinks<cr>", { desc = "[z]ettelkasten [l]inks" })
-set("n", "<leader>zv", "<cmd>ObsidianWorkspace<cr>", { desc = "[z]ettelkasten [v]ault" })
+set("n", "<leader>zn", "<cmd>Obsidian new<cr>", { desc = "[z]ettelkasten [n]ote" })
+set("n", "<leader>zN", "<cmd>Obsidian template<cr>", { desc = "[z]ettelkasten [N]ote templated" })
+set("n", "<leader>zf", "<cmd>Obsidian search<cr>", { desc = "[z]ettelkasten [F]ind" })
+set("n", "<leader>zF", "<cmd>Obsidian quickSwitch<cr>", { desc = "[z]ettelkasten [f]ind" })
+set("n", "<leader>zt", "<cmd>Obsidian tags<cr>", { desc = "[z]ettelkasten [t]ag" })
+set("n", "<leader>zl", "<cmd>Obsidian links<cr>", { desc = "[z]ettelkasten [l]inks" })
+set("n", "<leader>zb", "<cmd>Obsidian backlinks<cr>", { desc = "[z]ettelkasten [l]inks" })
+set("n", "<leader>zv", "<cmd>Obsidian workspace<cr>", { desc = "[z]ettelkasten [v]ault" })
 
 
 --------------------------------------------------------------
@@ -327,9 +330,9 @@ set("n", "<leader>Tl", "<cmd>OverseerRestartLast<cr>", { desc = "[T]ask [l]ast" 
 --------------------------------------------------------------
 set("n", "<leader>tR", '<cmd>lua require("neotest").run.run({ suite= true})<cr>', { desc = "[t]est [R]un all/suite" })
 set("n", "<leader>tr", "<cmd>Neotest run<cr>", { desc = "[t]est [r]un" })
-set("n", "<leader>ts", "<cmd>Neotest summary<cr>", { desc = "[t]est [r]un" })
-set("n", "]t", '<cmd>lua require("neotest").jump.next({ status = "failed" })<cr>', { desc = "next failed test" })
-set("n", "[t", '<cmd>lua require("neotest").jump.prev({ status = "failed" })<cr>', { desc = "prev failed test" })
+set("n", "<leader>ts", "<cmd>Neotest summary<cr>", { desc = "[t]est [s]umary" })
+-- set("n", "]t", '<cmd>lua require("neotest").jump.next({ status = "failed" })<cr>', { desc = "next failed test" })
+-- set("n", "[t", '<cmd>lua require("neotest").jump.prev({ status = "failed" })<cr>', { desc = "prev failed test" })
 
 
 --------------------------------------------------------------

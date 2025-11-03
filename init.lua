@@ -3,7 +3,6 @@ for _, module in ipairs({
     "variables",   --- @help {lua-vim-variables}
     "options",     --- @help {options}
     "plugins",
-    "keymap",      --- @help {lua-keymap}
 }) do
     local ok, _ = pcall(require, module)
     if not ok then
