@@ -25,9 +25,9 @@ overseer.register_template({
     name = "global scripts",
     generator = function(search,cb)
         local scripts = {}
-        local scripts_dir = vim.g.scripts_dir .. "/sync"
+        local scripts_dir = vim.g.path.scripts
 
-        for script in vim.fs.dir(scripts_dir) do
+        for script in vim.fs.dir(scripts_dir, { depth = 3 }) do
             table.insert(scripts, overseer.wrap_template(
                 scripts_tmpl,
                 { name = string.format("script %s",script) },
