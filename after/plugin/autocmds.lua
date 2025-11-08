@@ -61,5 +61,10 @@ vim.api.nvim_create_autocmd("LspAttach", {
             vim.wo[win][0].foldexpr = 'v:lua.vim.lsp.foldexpr()'
         end
 
+        -- builting completion
+        -- if client:supports_method(vim.lsp.protocol.Methods.textDocument_completion) then
+        --     vim.lsp.completion.enable(true, client.id, args.buf, { autotrigger = true })
+        -- end
+
     end
 })
