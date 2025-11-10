@@ -40,6 +40,12 @@ vim.api.nvim_create_autocmd("FileType", {
     end,
 })
 
+vim.api.nvim_create_autocmd("VimResized", {
+    desc = "autoresize splits when the terminal window is resized",
+    group = config,
+    command = "wincmd =",
+})
+
 vim.api.nvim_create_autocmd("LspAttach", {
     desc = "enable features supported by lsp",
     group = vim.api.nvim_create_augroup("UserLspConfig", {}),
