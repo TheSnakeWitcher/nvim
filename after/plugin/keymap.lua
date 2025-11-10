@@ -101,10 +101,6 @@ set("n","gl", "<cmd>norm gx<cr>", opts)
 set("n", "<S-l>", ":tabnext<CR>", opts)
 set("n", "<S-h>", ":tabprev<CR>", opts)
 
--- buffers, TODO: remove, included by deafault with nvim 0.11
-set("n", "]b", ":bnext<CR>", opts)
-set("n", "[b", ":bprevious<CR>", opts)
-
 -- windows
 set("n", "<C-h>", "<C-w>h", opts)
 set("n", "<C-j>", "<C-w>j", opts)
