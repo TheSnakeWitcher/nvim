@@ -1,8 +1,4 @@
-local options = {
-
-    --------------------------------
-    -- buffer
-    --------------------------------
+for key,value in pairs({
     termguicolors = true,
     title = true,
     ruler = false,
@@ -15,27 +11,11 @@ local options = {
     lazyredraw = true,
     showmode = false,
     cursorline = true,
-    cursorlineopt =  "both",
-    timeout = true,
-    timeoutlen = 500,
     showtabline = 2,
     laststatus = 3,
-
-
-    --------------------------------
-    -- highligh
-    --------------------------------
-    hlsearch = false,
-    incsearch = true,
     sessionoptions = vim.opt.sessionoptions:append("localoptions"),
     conceallevel = 2,
-
-
-    --------------------------------
-    -- indent,scroll and wrap
-    --------------------------------
     smartindent = true,
-    smarttab = true,
     expandtab = true,
     preserveindent = true,
     copyindent = true,
@@ -45,16 +25,21 @@ local options = {
     scrolloff = 8,
     sidescrolloff = 8,
     wrap = false,
-
-
-    --------------------------------
-    -- splits and folds
-    --------------------------------
-    splitbelow = true,
-    splitright = true,
     foldlevel = 99,
     foldlevelstart = 99,
-    foldenable = true,
+    ignorecase = true,
+    smartcase = true,
+    backup = false,
+    guifont = "Iosevka Nerd Font:h13", --  "Hack:h9.3",  "Iosevka Nerd Font:h9.8",  "Iosevka Nerd Font:h9.7",  "Source Code Pro:h9.5"
+
+    -- splitbelow = true,
+    -- splitright = true,
+    -- undofile = true
+    -- undodir = vim.fn.stdpath("cache") .. "/undodir"
+    -- mouse = "a",
+    -- mousefocus = true,
+    -- spell = true,
+    -- spelllang = en_us,
     -- foldexpr = "nvim_treesitter#foldexpr()",
     --formatexpr = "nvim_treesitter#foldexpr()",
     -- fillchars = {
@@ -65,44 +50,6 @@ local options = {
     --     diff = "╱",
     --     eob = "",
     -- },
-
-
-    --------------------------------
-    -- search patterns
-    --------------------------------
-    ignorecase = true,
-    smartcase = true,
-
-
-    --------------------------------
-    -- gui
-    --------------------------------
-    guifont = "Iosevka Nerd Font:h13", --  "Hack:h9.3",  "Iosevka Nerd Font:h9.8",  "Iosevka Nerd Font:h9.7",  "Source Code Pro:h9.5"
-
-
-    --------------------------------
-    -- backup and undo
-    --------------------------------
-    backup = false,
-    -- undofile = true
-    -- undodir = vim.fn.stdpath("cache") .. "/undodir"
-
-
-    --------------------------------
-    -- mouse
-    --------------------------------
-    mouse = "a",
-    mousefocus = true,
-
-
-    --------------------------------
-    -- spell
-    --------------------------------
-    -- spell = true,
-    -- spelllang = en_us,
-
-}
-
-for key,value in pairs(options) do
+}) do
     vim.opt[key] = value
 end
