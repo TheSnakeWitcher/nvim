@@ -13,6 +13,13 @@ vim.api.nvim_create_autocmd("BufWinEnter", {
     end
 })
 
+vim.api.nvim_create_autocmd("FileType", {
+    pattern = { "fugitive","git","man" },
+    desc = "open help window to the right",
+    group = config,
+    command = "wincmd L",
+})
+
 vim.api.nvim_create_autocmd("TextYankPost", {
     desc = "highlight yanked text",
     group = vim.api.nvim_create_augroup("HighlightYank", { clear = true }),
