@@ -3,7 +3,7 @@
 local config = vim.api.nvim_create_augroup("Config", { clear = true })
 
 -- vim.cmd("autocmd! BufEnter * if &ft ==# 'help' | wincmd L | endif")
-vim.api.nvim_create_autocmd("BufEnter", {
+vim.api.nvim_create_autocmd("BufWinEnter", {
     desc = "open help window to the right",
     group = config,
     callback = function()
