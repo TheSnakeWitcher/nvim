@@ -186,6 +186,7 @@ set("n","<leader>fs","<cmd>lua require('telescope.builtin').lsp_document_symbols
 set("n", "<leader>fb", "<cmd>lua require('telescope.builtin').git_branches()<cr>", { desc = "[f]ind [b]ranches" })
 set("n", "<leader>fc", "<cmd>lua require('telescope.builtin').git_commits()<cr>", { desc = "[f]ind [c]ommits" })
 set("n", "<leader>B", "<cmd>lua require('telescope.builtin').buffers({ sort_mru=true, sort_lastused=true, initial_mode=normal, theme=ivy})<cr>", { desc = "[f]ind [B]uffers" })
+set("n", "<C-b>", "<cmd>lua require('telescope.builtin').buffers({ sort_mru=true, sort_lastused=true, initial_mode=normal, theme=ivy})<cr>", { desc = "[f]ind [B]uffers" })
 
 -- extensions pickers
 set("n", "<C-p>", "<cmd>lua require('telescope').extensions.projections.projections()<CR>", { desc = "[f]ind [p]rojects" })
