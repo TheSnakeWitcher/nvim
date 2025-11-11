@@ -14,7 +14,7 @@ vim.api.nvim_create_autocmd("BufWinEnter", {
 })
 
 vim.api.nvim_create_autocmd("FileType", {
-    pattern = { "fugitive","git","man" },
+    pattern = { "fugitive","git","man", "gitcommit" },
     desc = "open help window to the right",
     group = config,
     command = "wincmd L",
