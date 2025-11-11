@@ -13,13 +13,6 @@ vim.api.nvim_create_autocmd("BufWinEnter", {
     end
 })
 
-vim.api.nvim_create_autocmd("FileType", {
-    pattern = { "fugitive","git","man", "gitcommit" },
-    desc = "open help window to the right",
-    group = config,
-    command = "wincmd L",
-})
-
 vim.api.nvim_create_autocmd("TextYankPost", {
     desc = "highlight yanked text",
     group = config,
@@ -37,6 +30,19 @@ vim.api.nvim_create_autocmd("BufWritePre", {
     end,
 })
 
+vim.api.nvim_create_autocmd("VimResized", {
+    desc = "autoresize splits when the terminal window is resized",
+    group = config,
+    command = "wincmd =",
+})
+
+vim.api.nvim_create_autocmd("FileType", {
+    pattern = { "fugitive","git","man", "gitcommit" },
+    desc = "open help window to the right",
+    group = config,
+    command = "wincmd L",
+})
+
 vim.api.nvim_create_autocmd("FileType", {
     desc = "Set wrap and spell in markdown and gitcommit filetypes",
     group = config,
@@ -45,12 +51,6 @@ vim.api.nvim_create_autocmd("FileType", {
         vim.opt_local.wrap = true
         vim.opt_local.spell = true
     end,
-})
-
-vim.api.nvim_create_autocmd("VimResized", {
-    desc = "autoresize splits when the terminal window is resized",
-    group = config,
-    command = "wincmd =",
 })
 
 vim.api.nvim_create_autocmd("LspAttach", {
