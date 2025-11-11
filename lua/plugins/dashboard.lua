@@ -53,7 +53,7 @@ dashboard.setup({
                 desc = "Update",
                 group = "@property",
                 key = "u",
-                action = "Lazy update",
+                action = "Lazy sync",
             },
             {
                 icon = "📝 ",
