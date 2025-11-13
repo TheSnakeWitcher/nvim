@@ -18,6 +18,9 @@
 --     < CR >     = enter (stands for [C]arrier [R]eturn)
 --     < leader > = user seted leader key
 --     < nop >    = do nothing action
+--
+-- TODO: very important, try defining keymaps that is {bufnr}B to jump to the corresponding buffer 
+--       that should only be feasible using a sidebar with open buffers
 
 local set = vim.keymap.set
 local opts = { noremap = true, silent = true }
@@ -191,7 +194,7 @@ set("n", "<C-b>", "<cmd>lua require('telescope.builtin').buffers({ sort_mru=true
 -- extensions pickers
 set("n", "<C-p>", "<cmd>lua require('telescope').extensions.projections.projections()<CR>", { desc = "[f]ind [p]rojects" })
 set("n", "<leader>fn", "<cmd>lua require('telescope').extensions['todo-comments'].todo()<CR>", { desc = "[f]ind [n]otes" })
-set("n", "<leader>fN", "<cmd>lua require('telescope').extensions.notify.notify()<CR>", { desc = "[f]ind [N]otifications" })
+set("n", "<leader>fN", "<cmd>lua require('snacks.notifier').show_history()<CR>", { desc = "[f]ind [N]otifications" })
 set("n", "<leader>fe", "<cmd>lua require('telescope').extensions.env.env()<CR>", { desc = "[f]ind [e]nvironment" })
 set("n", "<leader>ft", "<cmd>lua require('telescope').extensions['telescope-tabs'].list_tabs()<CR>", { desc = "[f]ind [t]abs" })
 set("n", "<leader>fH", "<cmd>lua require('telescope').extensions.heading.heading()<cr>", { desc = "[f]ind [H]eaders" })
@@ -207,16 +210,6 @@ set("n", "<leader>fz", "<cmd>lua require('telescope').extensions.zoxide.list()<c
 -- set('n', '[e', function() vim.diagnostic.goto_prev({ severity = vim.diagnostic.severity.ERROR }) end, opts)
 -- set('n', ']e', function() vim.diagnostic.goto_next({ severity = vim.diagnostic.severity.ERROR }) end, opts)
 set('n', '<leader>q', vim.diagnostic.setloclist, { desc = "[q]uickfix set loclist" })
-
-
---------------------------------------------------------------
--- quickfix list
---------------------------------------------------------------
---set('n', '<leader>q', vim.diagnostic.setloclist)
-set('n', ']q', "<cmd>cnext<cr>", { desc = "go to next item in quickfix" })
-set('n', '[q', "<cmd>cprevious<cr>", { desc = "go to previous item in quickfix" })
-set('n', ']Q', "<cmd>clast<cr>", { desc = "go to last item in quickfix" })
-set('n', '[Q', "<cmd>cfirst<cr>", { desc = "go to first item in quickfix" })
 
 
 --------------------------------------------------------------
