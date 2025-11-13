@@ -6,8 +6,9 @@ end
 
 --- @help {snacks.nvim}
 snacks.setup({
-    bigfile = { enabled = true },
-    input = { enabled = true },
+    bigfile = { enabled = true },                   -- improve nvim performance in big files
+    image = { enabled = true },                     -- image previewer, alternatives: "3rd/image.nvim"
+    notifier = { enabled = true, style = "fancy" }, -- improve notifications(vim.notify)
 })
 
 _G.dd = function(...)
@@ -16,4 +17,6 @@ end
 _G.bt = function()
     snacks.debug.backtrace()
 end
+
+vim.ui.input = snacks.input.input
 vim.print = _G.dd
