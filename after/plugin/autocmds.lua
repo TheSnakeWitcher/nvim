@@ -2,7 +2,6 @@
 
 local config = vim.api.nvim_create_augroup("Config", { clear = true })
 
--- vim.cmd("autocmd! BufEnter * if &ft ==# 'help' | wincmd L | endif")
 vim.api.nvim_create_autocmd("BufWinEnter", {
     desc = "open help window to the right",
     group = config,
@@ -37,14 +36,14 @@ vim.api.nvim_create_autocmd("VimResized", {
 })
 
 vim.api.nvim_create_autocmd("FileType", {
-    pattern = { "fugitive","git","man", "gitcommit" },
-    desc = "open help window to the right",
+    pattern = { "fugitive", "git", "man", "gitcommit" },
+    desc = "open specified filetypes windows to the right",
     group = config,
     command = "wincmd L",
 })
 
 vim.api.nvim_create_autocmd("FileType", {
-    desc = "Set wrap and spell in markdown and gitcommit filetypes",
+    desc = "set wrap and spell in markdown and gitcommit filetypes",
     group = config,
     pattern = { "gitcommit", "markdown" },
     callback = function(opts)
