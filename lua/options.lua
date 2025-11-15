@@ -1,55 +1,39 @@
-for key,value in pairs({
-    termguicolors = true,
-    title = true,
-    ruler = false,
-    number = true,
-    relativenumber = true,
-    numberwidth = 2,
-    cmdheight = 1,
-    clipboard = "unnamedplus",
-    signcolumn = "yes:3",
-    lazyredraw = true,
-    showmode = false,
-    cursorline = true,
-    showtabline = 2,
-    laststatus = 3,
-    sessionoptions = vim.opt.sessionoptions:append("localoptions"),
-    conceallevel = 2,
-    smartindent = true,
-    expandtab = true,
-    preserveindent = true,
-    copyindent = true,
-    shiftwidth = 4,
-    tabstop = 4,
-    softtabstop = 4,
-    scrolloff = 8,
-    sidescrolloff = 8,
-    wrap = false,
-    foldlevel = 99,
-    foldlevelstart = 99,
-    ignorecase = true,
-    smartcase = true,
-    backup = false,
-    guifont = "Iosevka Nerd Font:h13", --  "Hack:h9.3",  "Iosevka Nerd Font:h9.8",  "Iosevka Nerd Font:h9.7",  "Source Code Pro:h9.5"
+--- @help {options}
+--- @help {option-list}
+--- @help {vim.opt}
 
-    -- splitbelow = true,
-    -- splitright = true,
-    -- undofile = true
-    -- undodir = vim.fn.stdpath("cache") .. "/undodir"
-    -- mouse = "a",
-    -- mousefocus = true,
-    -- spell = true,
-    -- spelllang = en_us,
-    -- foldexpr = "nvim_treesitter#foldexpr()",
-    --formatexpr = "nvim_treesitter#foldexpr()",
-    -- fillchars = {
-    --     foldopen = "",
-    --     foldclose = "",
-    --     fold = "",
-    --     foldsep = "",
-    --     diff = "╱",
-    --     eob = "",
-    -- },
-}) do
-    vim.opt[key] = value
-end
+vim.opt.termguicolors = true
+vim.opt.title = true
+vim.opt.ruler = false
+vim.opt.number = true
+vim.opt.relativenumber = true
+vim.opt.numberwidth = 2
+vim.opt.cmdheight = 1
+vim.opt.clipboard = "unnamedplus"
+vim.opt.signcolumn = "yes:3"
+vim.opt.lazyredraw = true
+vim.opt.showmode = false
+vim.opt.cursorline = true
+vim.opt.showtabline = 2
+vim.opt.laststatus = 3
+vim.opt.conceallevel = 2
+vim.opt.smartindent = true
+vim.opt.expandtab = true
+vim.opt.preserveindent = true
+vim.opt.copyindent = true
+vim.opt.scrolloff = 8
+vim.opt.sidescrolloff = 8
+-- vim.opt.shiftwidth = 4
+-- vim.opt.tabstop = 4
+-- vim.opt.softtabstop = 4
+-- vim.opt.wrap = false
+vim.opt.foldlevel = 99
+vim.opt.foldlevelstart = 99
+vim.opt.ignorecase = true
+vim.opt.smartcase = true
+vim.opt.backup = false
+vim.opt.guifont = "Iosevka Nerd Font:h13"  --  "Hack:h9.3",  "Iosevka Nerd Font:h9.8",  "Iosevka Nerd Font:h9.7",  "Source Code Pro:h9.5"
+vim.opt.sessionoptions:append({ "localoptions" })
+vim.opt.undofile = true
+vim.opt.undodir = vim.fn.stdpath("cache") .. "/undodir"
+vim.opt.mouse = "a"
