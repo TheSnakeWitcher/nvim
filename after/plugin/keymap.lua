@@ -1,34 +1,15 @@
---- @help {lua-keymap}
---------------------------------------------------------------
--- documentation
---------------------------------------------------------------
--- Modes:
---     normal_mode = "n"
---     insert_mode = "i"
---     select_mode = "s"
---     visual_mode = "v"
---     visual_block_mode = "x"
---     term_mode = "t"
---     command_mode = "c"
--- Special keys:
---     < C >      = control
---     < S >      = shifth
---     < A >      = alt
---     < ESC >    = escape
---     < CR >     = enter (stands for [C]arrier [R]eturn)
---     < leader > = user seted leader key
---     < nop >    = do nothing action
---
+--- @help {vim.keymap}
+--- @help {key-notation}
+
 -- TODO: very important, try defining keymaps that is {bufnr}B to jump to the corresponding buffer 
 --       that should only be feasible using a sidebar with open buffers
 
 local set = vim.keymap.set
 local opts = { noremap = true, silent = true }
--- local term_opts = { silent = true }
 
 
 --------------------------------------------------------------
--- help
+-- custom operators
 --------------------------------------------------------------
 local ok , yop = pcall(require,"yop")
 if not ok then
@@ -37,6 +18,11 @@ else
     yop.op_map({"n", "v"}, "<leader>h", function(lines, info)
         vim.cmd(string.format("help %s",lines[1]))
     end)
+
+    yop.op_map("v", "<leader>fg", function(lines, info)
+        if #lines > 1 then return end
+        vim.cmd(string.format("Telescope grep_string search=%s",lines[1]))
+    end, { desc = '[f]ind [g]rep' })
 end
 
 
