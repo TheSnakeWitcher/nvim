@@ -117,27 +117,13 @@ set("n", "<C-w><C-f>", "<cmd>Detour<cr>", { desc = "float global window" })
 set("n", "<C-w><C-F>", "<cmd>DetourCurrentWindow<cr>", { desc = "float local window" })
 
 
---set("n", "<leader>th>", "<C-w>t<C-w>H", opts)
---set("n", "<leader>tk>", "<C-w>t<C-w>K", opts)
-
--- set("n", "<C-k>", "<cmd>cnext<CR>zz")
--- set("n", "<C-j>", "<cmd>cprev<CR>zz")
--- set("n", "<leader>j", "<cmd>lprev<CR>zz")
--- set("n", "<leader>k", "<cmd>lnext<CR>zz")
-
--- set("t", "<C-h>", "<C-\\><C-N><C-w>h", term_opts)
--- set("t", "<C-j>", "<C-\\><C-N><C-w>j", term_opts)
--- set("t", "<C-k>", "<C-\\><C-N><C-w>k", term_opts)
--- set("t", "<C-l>", "<C-\\><C-N><C-w>l", term_opts)
-
-
 --------------------------------------------------------------
 -- resize windows with arrows
 --------------------------------------------------------------
-set("n", "<C-Up>", ":resize -5<CR>", opts)
-set("n", "<C-Down>", ":resize +5<CR>", opts)
-set("n", "<C-Left>", ":vertical resize -5<CR>", opts)
-set("n", "<C-Right>", ":vertical resize +5<CR>", opts)
+set("n", "<C-Up>", ":resize -10<CR>", opts)
+set("n", "<C-Down>", ":resize +10<CR>", opts)
+set("n", "<C-Left>", ":vertical resize -10<CR>", opts)
+set("n", "<C-Right>", ":vertical resize +10<CR>", opts)
 
 
 --------------------------------------------------------------
