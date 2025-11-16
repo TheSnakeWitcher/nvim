@@ -14,7 +14,6 @@ vim.opt.signcolumn = "yes:3"
 vim.opt.lazyredraw = true
 vim.opt.showmode = false
 vim.opt.cursorline = true
-vim.opt.showtabline = 2
 vim.opt.laststatus = 3
 vim.opt.conceallevel = 2
 vim.opt.smartindent = true
