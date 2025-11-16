@@ -15,7 +15,7 @@ local load_config = util.load_config
 require("lazy").setup({
 
     ----------------------------------------------------------------
-    -- base/libraries
+    -- base
     ----------------------------------------------------------------
     -- luarocks support for lazy.nvim
     {
@@ -27,8 +27,7 @@ require("lazy").setup({
     },
     "ray-x/guihua.lua",      -- GUI library
     "MunifTanjim/nui.nvim",  -- UI component library
-    -- usefull collection of lua functions for neovim
-    "nvim-lua/plenary.nvim",
+    "nvim-lua/plenary.nvim", -- utility functions library
     {
         "folke/snacks.nvim",
         priority = 1000,
@@ -47,20 +46,14 @@ require("lazy").setup({
     },
     -- plugin development setup
     {
-        "folke/lazydev.nvim", 
-        ft = "lua", -- only load on lua files
+        "folke/lazydev.nvim",
+        ft = "lua",
         opts = {
             library = {
                 { path = "${3rd}/luv/library", words = { "vim%.uv" } },
             },
         },
     },
-    -- network resource manager
-    -- {
-    --     "miversen33/netman.nvim",
-    --     lazy = true,
-    --     config = function() require("netman").setup() end,
-    -- },
 
 
     --------------------------------------------------------------
@@ -90,17 +83,27 @@ require("lazy").setup({
         "nvim-tree/nvim-web-devicons",
         config = function() load_config("nvim-web-devicons") end,
     },
-    -- enhace vim.ui
+    -- enhace ui
     {
-        'stevearc/dressing.nvim',
-        config = function() load_config("dressing") end,
+      "folke/noice.nvim",
+      event = "VeryLazy",
+      opts = {},
+      dependencies = {
+        "MunifTanjim/nui.nvim",
+        "rcarriga/nvim-notify",
+        }
     },
-    -- file explorer
-    -- https://github.com/A7Lavinraj/fyler.nvim
+    -- enhace cursor
     -- {
-    --     'stevearc/oil.nvim',
-    --     opts = {},
-    --     config = function() load_config("oil") end,
+    --     "sphamba/smear-cursor.nvim",
+    --     opts = { cursor_color = "none" },
+    -- },
+    -- file explorer
+    -- {
+    --     -- 'stevearc/oil.nvim',
+    --     "A7Lavinraj/fyler.nvim",
+    --     branch = "stable",
+    --     config = function() load_config("fyler") end,
     -- },
     {
         -- https://github.com/Rolv-Apneseth/tfm.nvim
@@ -239,11 +242,8 @@ require("lazy").setup({
             "RRethy/nvim-treesitter-endwise",              -- add `end` to non-brackets base languajes
         },
     },
-    {
-        "neovim/nvim-lspconfig",
-        config = function() load_config("nvim-lspconfig") end,
-    },
-    -- bridge/hook up non-LSP tools to the LSP UX to inject LSP diagnostics, code actions via lua
+    { "neovim/nvim-lspconfig" },
+    -- bridge/hook up non-LSP tools to the LSP UX via lua to inject LSP diagnostics, code actions 
     {
         "nvimtools/none-ls.nvim",
         event = "LspAttach",
@@ -311,12 +311,17 @@ require("lazy").setup({
     -- "sdushantha/fontpreview",                -- search fonts
     -- "chip/telescope-software-licenses.nvim", -- search licenses
     -- "piersolenski/telescope-import.nvim"     -- seach imports statements
+    { "nvim-telescope/telescope-ui-select.nvim" },--  BUG: it is not working
     { "tsakirist/telescope-lazy.nvim", keys = "<leader>fP" },   -- search plugins installed with lazy
     { "LinArcX/telescope-env.nvim", keys = "<leader>fe" },      -- search environment variables 
     { "crispgm/telescope-heading.nvim", keys = "<leader>fH" },  -- search headers
     { "LukasPietzschmann/telescope-tabs", keys = "<leader>ft"}, -- search tabs
     { "jvgrootveld/telescope-zoxide", keys = "<leader>fz"},     -- search zoxide paths
     -- buffer and mark management
+    -- {
+    --     "ThePrimeagen/harpoon",
+    --     opts = {},
+    -- },
     {
         -- tab scoped buffers "tiagovla/scope.nvim" or  "backdround/tabscope.nvim"
         -- alternative:
@@ -373,15 +378,15 @@ require("lazy").setup({
     --     version = '1.*',
     --     -- config = function() load_config("blink") end,
     --     opts = {
-    --         keymap = { preset = 'default' },
-    --         appearance = {
-    --           nerd_font_variant = 'mono'
-    --         },
-    --         completion = { documentation = { auto_show = false } },
-    --         sources = {
-    --           default = { 'lsp', 'path', 'snippets', 'buffer' },
-    --         },
-    --         opts_extend = { "sources.default" }
+    --         -- keymap = { preset = 'default' },
+    --         -- appearance = {
+    --         --   nerd_font_variant = 'mono'
+    --         -- },
+    --         -- completion = { documentation = { auto_show = false } },
+    --         -- sources = {
+    --         --   default = { 'lsp', 'path', 'snippets', 'buffer' },
+    --         -- },
+    --         -- opts_extend = { "sources.default" }
     --     }
     -- },
     {
@@ -402,10 +407,10 @@ require("lazy").setup({
                 event = "LspAttach",
             },
             -- completion for dap
-            {
-                "rcarriga/cmp-dap",
-                cmd = "DapUI",
-            },
+            -- {
+            --     "rcarriga/cmp-dap",
+            --     cmd = "DapUI",
+            -- },
             "petertriho/cmp-git",                    -- git completion source
             "uga-rosa/cmp-dynamic",                  -- dynamic generation candidates sources
             "davidsierradz/cmp-conventionalcommits", -- conventional commtis
@@ -623,12 +628,11 @@ require("lazy").setup({
     {
         -- alternative: https://github.com/arjunmahishi/flow.nvim
         'stevearc/overseer.nvim',
+        version = "1.6.0",
         keys = { "<leader>Te",  "<leader>Tr",  "<leader>TR" },
         cmds = { "OverseerToggle", "OverseerOpen", "OverseerBuild", "OverseerRun", "OverseerRunCmd" },
         config = function() load_config("overseer") end,
     },
-    -- markdown preview in browser
-    --https://github.com/iamcco/markdown-preview.nvim
     -- markdown preview
     {
         -- alternatives:
@@ -704,7 +708,7 @@ require("lazy").setup({
     -- https://github.com/SuperBo/fugit2.nvim
     -- use "Almo7aya/openingh.nvim",  -- open file or project in github for neovim wirtten in lua
     -- "kdheepak/lazygit.nvim",       -- open lazygit from neovim
-    "tpope/vim-fugitive", -- git integration for cmdline
+    "tpope/vim-fugitive",             -- git integration for cmdline
     {
         -- alternative: https://github.com/isakbm/gitgraph.nvim
         -- git commit browser
@@ -749,6 +753,8 @@ require("lazy").setup({
         cmd = "Octo",
         config = function() load_config("octo") end,
     },
+    -- task management
+    -- https://github.com/georgeharker/comment-tasks.nvim
     -- literature programming / jupyter notebooks
     {
 
@@ -765,6 +771,7 @@ require("lazy").setup({
         config = function() require("quarto").setup() end,
     },
     -- AI
+    -- https://github.com/olimorris/codecompanion.nvim
     -- https://github.com/dlants/magenta.nvim
     -- https://github.com/ColinKennedy/neovim-ai-plugins
     -- "ravitemer/mcphub.nvim"
@@ -917,10 +924,11 @@ require("lazy").setup({
     ---- experimental
     ----------------------------------------------------------------
     -- cross-editor collaborative coding
-    -- pacman pkg libinfinity
-    -- { "azratul/live-share.nvim" },
-    -- https://github.com/Floobits/floobits-neovim
-    -- https://github.com/jbyuki/instant.nvim
+    {
+        -- "azratul/live-share.nvim" 
+        "teamtype/teamtype-nvim",
+        event = "VeryLazy",
+    },
     ---- motions
     --{
     --    -- motions for every coordinate of the viewport
