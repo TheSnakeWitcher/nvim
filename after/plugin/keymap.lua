@@ -1,6 +1,5 @@
 --- @help {vim.keymap}
 --- @help {key-notation}
-
 -- TODO: very important, try defining keymaps that is {bufnr}B to jump to the corresponding buffer 
 --       that should only be feasible using a sidebar with open buffers
 
@@ -288,13 +287,6 @@ set("n", "<leader>tr", "<cmd>Neotest run<cr>", { desc = "[t]est [r]un" })
 set("n", "<leader>ts", "<cmd>Neotest summary<cr>", { desc = "[t]est [s]umary" })
 -- set("n", "]t", '<cmd>lua require("neotest").jump.next({ status = "failed" })<cr>', { desc = "next failed test" })
 -- set("n", "[t", '<cmd>lua require("neotest").jump.prev({ status = "failed" })<cr>', { desc = "prev failed test" })
-
-
---------------------------------------------------------------
--- IconPicker
---------------------------------------------------------------
-set("n", "<A-i>", "<cmd>IconPickerNormal<cr>", { desc = "[i]con" })
-set("i", "<A-i>", "<cmd>IconPickerInsert<cr>", { desc = "[i]con" })
 
 
 --------------------------------------------------------------
