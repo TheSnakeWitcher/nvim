@@ -6,9 +6,11 @@ end
 
 --- @help {snacks.nvim}
 snacks.setup({
-    bigfile = { enabled = true },                   -- improve nvim performance in big files
-    image = { enabled = true },                     -- image previewer, alternatives: "3rd/image.nvim"
-    notifier = { enabled = true, style = "fancy" }, -- improve notifications(vim.notify)
+    bigfile = { enabled = true },                -- improve nvim performance in big files
+    indent = { enabled = true },                 -- highlighturl indent, alternative to lukas-reineke/indent-blankline.nvim
+    image = { enabled = true },                  -- image previewer, alternatives: "3rd/image.nvim"
+    -- gh = { enabled = true },                     -- image previewer, alternatives: "3rd/image.nvim"
+    -- notifier = { enabled = true, style = "fancy" }, -- improve notifications(vim.notify)
 })
 
 _G.dd = function(...)
