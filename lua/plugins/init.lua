@@ -296,30 +296,21 @@ require("lazy").setup({
     },
     -- telescope extensions
     -- "jmbuhr/telescope-zotero.nvim",
-    -- "nvim-telescope/telescope-media-files.nvim", -- search media files
-    -- "nat-418/telescope-color-names.nvim",        -- search colors
-    -- "ryanmsnyder/toggleterm-manager.nvim",       -- search toggleterm terminals
-    -- "nvim-telescope/telescope-cheat.nvim",   -- an attempt to recreate cheat.sh
-    -- "sdushantha/fontpreview",                -- search fonts
-    -- "chip/telescope-software-licenses.nvim", -- search licenses
-    -- "piersolenski/telescope-import.nvim"     -- seach imports statements
-    { "nvim-telescope/telescope-ui-select.nvim" },--  BUG: it is not working
+    {
+        "nvim-telescope/telescope-ui-select.nvim",
+        init = function() require("telescope").load_extension("ui-select") end
+    },
     { "tsakirist/telescope-lazy.nvim", keys = "<leader>fP" },   -- search plugins installed with lazy
     { "LinArcX/telescope-env.nvim", keys = "<leader>fe" },      -- search environment variables 
     { "crispgm/telescope-heading.nvim", keys = "<leader>fH" },  -- search headers
-    { "LukasPietzschmann/telescope-tabs", keys = "<leader>ft"}, -- search tabs
-    { "jvgrootveld/telescope-zoxide", keys = "<leader>fz"},     -- search zoxide paths
-    -- buffer and mark management
+    -- pinned buffer management
     -- {
     --     "ThePrimeagen/harpoon",
-    --     opts = {},
+    --     branch = "harpoon2",
+    --     dependencies = { "nvim-lua/plenary.nvim" },
+    --     init = function() require("harpoon"):setup() end
     -- },
     {
-        -- tab scoped buffers "tiagovla/scope.nvim" or  "backdround/tabscope.nvim"
-        -- alternative:
-        -- "nvimdev/flybuf.nvim"
-        -- "cbochs/grapple.nvim"
-        -- "iofq/dart.nvim"
         "j-morano/buffer_manager.nvim",
         keys = { { "<leader>b", "<cmd>lua require('buffer_manager.ui').toggle_quick_menu()<cr>" } },
         config = function() load_config("buffer_manager") end,
@@ -331,9 +322,8 @@ require("lazy").setup({
         keys = { "<C-p>" ,"<leader>fp" },
         config = function() load_config("projections") end,
     },
-    -- tree view for lsp symbols/tags(code outline )
+    -- tree view/code outline for lsp symbols/tags
     {
-        -- old alternatives: https://github.com/preservim/tagbar
         "stevearc/aerial.nvim",
         cmd = { "Telescope aerial",  "AerialToggle",  "AerialOpen",  "AerialOpenAll" },
         config = function() load_config("aerial") end,
@@ -345,20 +335,6 @@ require("lazy").setup({
         cmd = "UrlView",
         config = function() load_config("urlview") end,
     },
-    -- search unicode/emojis characters management
-    -- {
-    --     "ziontee113/icon-picker.nvim",
-    --     cmd = { "IconPickerNormal",  "IconPickerYank",  "IconPickerInsert"},
-    --     keys = "<A-i>",
-    --     config = function() load_config("icon-picker") end,
-    -- },
-    -- search nerd fonts glyphs
-    -- {
-    --     -- alternative: "nvimdev/nerdicons.nvim"
-    --     -- "protex/better-digraphs.nvim"
-    --     '2kabhishek/nerdy.nvim',
-    --     cmd = 'Nerdy',
-    -- },
 
 
     --------------------------------------------------------------
@@ -453,6 +429,7 @@ require("lazy").setup({
     },
     -- allow C-a/C-x to increment/decrement dates and times
     {
+        -- alternative: https://github.com/monaqa/dial.nvim
         "tpope/vim-speeddating",
         keys = { "<C-a>", "<C-x>" },
     },
@@ -526,8 +503,7 @@ require("lazy").setup({
             require("telescope").load_extension("textcase")
         end,
     },
-    -- https://github.com/monaqa/dial.nvim --enhaced C-a and C-d
-    -- https://github.com/AndrewRadev/switch.vim --switch predefined segment of text
+    -- "piersolenski/import.nvim"          -- enhaced imports statements
     -- macro management
     -- {
     --     -- must clean default @recording message 
