@@ -5,13 +5,6 @@ end
 vim.opt.rtp:prepend(lazypath)
 local load_config = util.load_config
 
-
--- plugins list
--- https://neovimcraft.com/
--- https://dotfyle.com/
--- https://github.com/yutkat/my-neovim-pluginlist
--- https://github.com/rockerBOO/awesome-neovim.git
--- https://yutkat.github.io/my-neovim-pluginlist
 require("lazy").setup({
 
     ----------------------------------------------------------------
