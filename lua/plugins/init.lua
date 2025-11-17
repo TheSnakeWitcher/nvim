@@ -73,9 +73,8 @@ require("lazy").setup({
         end,
     },
     { "folke/tokyonight.nvim", lazy = true },
-    -- { "eldritch-theme/eldritch.nvim", lazy = true },
+    { "eldritch-theme/eldritch.nvim", lazy = true },
     -- { "Mofiqul/dracula.nvim", lazy = true },
-    -- { 'Mofiqul/vscode.nvim', lazy = true },
     -- { "marko-cerovac/material.nvim" , lazy = true },
     -- { "catppuccin/nvim", name = "catppuccin", lazy = true },
     -- icons
@@ -162,13 +161,6 @@ require("lazy").setup({
         opts = {},
         init = function() vim.g.loaded_matchparen = 1 end,
     },
-    -- highlighturl indent
-    {
-        -- alternative https://github.com/echasnovski/mini.indentscope
-        "lukas-reineke/indent-blankline.nvim",
-        main = "ibl",
-        opts = { exclude = { filetypes = { "dashboard", "trouble", "neo-tree" } } },
-    },
     -- colorizer
     {
         -- alternative: 'brenoprata10/nvim-highlight-colors',
@@ -235,11 +227,11 @@ require("lazy").setup({
         config = function() load_config("nvim-treesitter") end,
         dependencies = {
             "nvim-treesitter/nvim-treesitter-context",     -- show code context
-            "nvim-treesitter/nvim-tree-docs",              -- documentation
-            -- nvim-treesitter/nvim-treesitter-refactor    -- refactor module
             "nvim-treesitter/nvim-treesitter-textobjects", -- additional text objects via treesitter
             "windwp/nvim-ts-autotag",                      -- use treesitter to autocose & autorename html tags
             "RRethy/nvim-treesitter-endwise",              -- add `end` to non-brackets base languajes
+            -- "nvim-treesitter/nvim-tree-docs",           -- documentation
+            -- nvim-treesitter/nvim-treesitter-refactor    -- refactor module
         },
     },
     { "neovim/nvim-lspconfig" },
@@ -706,9 +698,13 @@ require("lazy").setup({
     --------------------------------------------------------------
     -- git
     -- https://github.com/SuperBo/fugit2.nvim
-    -- use "Almo7aya/openingh.nvim",  -- open file or project in github for neovim wirtten in lua
     -- "kdheepak/lazygit.nvim",       -- open lazygit from neovim
     "tpope/vim-fugitive",             -- git integration for cmdline
+    {
+        -- git integration for buffers
+        "lewis6991/gitsigns.nvim",
+        config = function() load_config("gitsigns") end,
+    },
     {
         -- alternative: https://github.com/isakbm/gitgraph.nvim
         -- git commit browser
@@ -720,11 +716,6 @@ require("lazy").setup({
         "linrongbin16/gitlinker.nvim",
         config = function() load_config("gitlinker") end,
         cmd = "GL",
-    },
-    {
-        -- git integration for buffers
-        "lewis6991/gitsigns.nvim",
-        config = function() load_config("gitsigns") end,
     },
     {
         -- single tabpage interface for easily view diffs
@@ -885,10 +876,6 @@ require("lazy").setup({
         ft = { "tex", "latex" },
         init = function()
             vim.g.vimtex_view_general_viewer = "okular"
-            -- vim.cmd([[
-            --   let g:vimtex_view_general_viewer = 'okular'
-            --   let g:vimtex_view_general_options = '--unique file:@pdf\#src:@line@tex'
-            -- ]])
         end
     },
     -- javascrtp/typescript
