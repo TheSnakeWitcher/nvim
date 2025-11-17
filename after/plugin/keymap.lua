@@ -257,13 +257,6 @@ set({"n","v"}, "<leader>!", ":Nredir ", { desc = "[!]execute command and redirec
 
 
 --------------------------------------------------------------
--- vim-shell-executor
---------------------------------------------------------------
-set("n", "<leader>R", "<cmd>ExecuteBuffer<cr>", { desc = "[R]un buffer" })
-set("v", "<leader>R", "<cmd>ExecuteSelection<cr>", { desc = "[R]un selection" })
-
-
---------------------------------------------------------------
 -- knowledgebase/zettelkasten
 --------------------------------------------------------------
 set("n", "<leader>zn", "<cmd>Obsidian new<cr>", { desc = "[z]ettelkasten [n]ote" })
