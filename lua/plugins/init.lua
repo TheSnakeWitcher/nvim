@@ -11,13 +11,13 @@ require("lazy").setup({
     -- base
     ----------------------------------------------------------------
     -- luarocks support for lazy.nvim
-    {
-        "vhyrro/luarocks.nvim",
-        priority = 1001,
-        opts = {
-            rocks = { "magick" },
-        },
-    },
+    -- {
+    --     "vhyrro/luarocks.nvim",
+    --     priority = 1001,
+    --     opts = {
+    --         rocks = { "magick" },
+    --     },
+    -- },
     "ray-x/guihua.lua",      -- GUI library
     "MunifTanjim/nui.nvim",  -- UI component library
     "nvim-lua/plenary.nvim", -- utility functions library
@@ -65,8 +65,8 @@ require("lazy").setup({
             vim.cmd("hi! link LazyNormal Pmenu")
         end,
     },
-    { "folke/tokyonight.nvim", lazy = true },
-    { "eldritch-theme/eldritch.nvim", lazy = true },
+    -- { "folke/tokyonight.nvim", lazy = true },
+    -- { "eldritch-theme/eldritch.nvim", lazy = true },
     -- { "Mofiqul/dracula.nvim", lazy = true },
     -- { "marko-cerovac/material.nvim" , lazy = true },
     -- { "catppuccin/nvim", name = "catppuccin", lazy = true },
@@ -85,37 +85,23 @@ require("lazy").setup({
         "rcarriga/nvim-notify",
         }
     },
-    -- enhace cursor
-    -- {
-    --     "sphamba/smear-cursor.nvim",
-    --     opts = { cursor_color = "none" },
-    -- },
     -- file explorer
-    -- {
-    --     -- 'stevearc/oil.nvim',
-    --     "A7Lavinraj/fyler.nvim",
-    --     branch = "stable",
-    --     config = function() load_config("fyler") end,
-    -- },
     {
-        -- https://github.com/Rolv-Apneseth/tfm.nvim
+        --     -- 'stevearc/oil.nvim',
+        --     "A7Lavinraj/fyler.nvim",
+        --     branch = "stable",
+        --     config = function() load_config("fyler") end,
         "nvim-neo-tree/neo-tree.nvim",
         branch = "v3.x",
+        cmd = "Neotree",
         config = function() load_config("neo-tree") end,
     },
-    -- statusline (bottom bar)
+    -- statusline
     {
         -- "rebelot/heirline.nvim",
         "nvim-lualine/lualine.nvim",
         config = function() load_config("lualine") end,
     },
-    -- tabline (top bar)
-    -- {
-    --     -- "willothy/nvim-cokeline",
-    --     -- utilyre/barbecue.nvim
-    --     "nanozuki/tabby.nvim",
-    --     config = function() load_config("tabby") end,
-    -- },
     -- startup screen/dashboard
     {
         -- TODO: check if could be substituted by snacks.dashboad
@@ -137,11 +123,12 @@ require("lazy").setup({
         init = function() vim.opt.splitkeep = "screen" end,
         config = function() load_config("edgy") end,
     },
+    -- topbar
+    -- "Bekaboo/dropbar.nvim",  -- lsp symbols in winbar(just below tabline)
     -- cursorline (highligh all word in buffer equals to word under cursor)
     {
-        -- alternatives: https://github.com/tzachar/local-highlight
         "yamatsum/nvim-cursorline",
-        config = function() load_config("nvim-cursorline") end,
+        opts = { cursorline = { enable = false } },
     },
     -- highlight, list and search notes (todo-comments)
     {
@@ -163,14 +150,15 @@ require("lazy").setup({
     },
     -- colorizer
     {
-        -- alternative: 'brenoprata10/nvim-highlight-colors',
-        "norcalli/nvim-colorizer.lua",
-        config = function() require("colorizer").setup() end
+        'brenoprata10/nvim-highlight-colors',
+        -- "norcalli/nvim-colorizer.lua",
+        ft = { "md", "html", "css"},
+        opts = {}
     },
     -- folds
-    -- "anuvyklack/fold-preview.nvim", -- fold preview
-    --  "Vonr/foldcus.nvim/",          -- fold multiline comments
     {
+        -- "anuvyklack/fold-preview.nvim", -- fold preview
+        --  "Vonr/foldcus.nvim/",          -- fold multiline comments
         "yaocccc/nvim-foldsign",
         config = function() load_config("nvim-foldsign") end,
     },
@@ -182,7 +170,7 @@ require("lazy").setup({
     -- vscode like icons for completion menu
     {
         "onsails/lspkind.nvim",
-        event = "InsertEnter"
+        event = { "InsertEnter", "CmdlineEnter" },
     },
     {
         -- funny animation in ui
@@ -192,21 +180,13 @@ require("lazy").setup({
     -- command preview
     {
         "smjonas/live-command.nvim",
-        config = function() load_config("live-command") end,
         cmd = "Norm",
+        config = function() load_config("live-command") end,
     },
     "itchyny/vim-highlighturl",        -- highlighturl urls in buffer
-    -- "gelguy/wilder.nvim",           -- wildmenu
-    --  "sindrets/winshift.nvim",      -- windowss rearrange window easily
-    -- "Bekaboo/dropbar.nvim",         -- lsp symbols in winbar(just below tabline)
-    -- "VonHeikemen/fine-cmdline.nvim" -- enhaced cmdline
     -- help
     -- "Tyler-Barham/floating-help.nvim", -- help in anchorable/resizable floating window
     -- "roobert/hoversplit.nvim",         -- lsp help in split pane 
-    -- "aznhe21/actions-preview.nvim",    -- preview for lsp code actions picker 
-    -- "dgagn/diagflow.nvim" ,            -- message of focused diagnostics in top-rigth corner
-    -- "AckslD/messages.nvim",            -- buf for better messages management
-    -- "ElPiloto/significant.nvim",       -- animated signs
     -- "luukvbaal/statuscol.nvim",        -- container for fold signs in signcolumn
 
 
@@ -222,8 +202,6 @@ require("lazy").setup({
             "nvim-treesitter/nvim-treesitter-textobjects", -- additional text objects via treesitter
             "windwp/nvim-ts-autotag",                      -- use treesitter to autocose & autorename html tags
             "RRethy/nvim-treesitter-endwise",              -- add `end` to non-brackets base languajes
-            -- "nvim-treesitter/nvim-tree-docs",           -- documentation
-            -- nvim-treesitter/nvim-treesitter-refactor    -- refactor module
         },
     },
     { "neovim/nvim-lspconfig" },
@@ -253,7 +231,6 @@ require("lazy").setup({
     -- },
     -- formatter
     {
-        -- "mhartington/formatter.nvim"  -- emmet integration
         "stevearc/conform.nvim",
         lazy = true,
         opts = {}
@@ -322,7 +299,6 @@ require("lazy").setup({
     },
     -- search urls in buffer
     {
-        -- "chrishrb/gx.nvim"
         "axieax/urlview.nvim",
         cmd = "UrlView",
         config = function() load_config("urlview") end,
@@ -520,7 +496,6 @@ require("lazy").setup({
     -- testing/debugging
     --------------------------------------------------------------
     -- tests framework/runner
-    -- debugmaster.nvim
     {
         -- TODO: split adapters dependencies(load adapters when LSP for ft is started)
         "nvim-neotest/neotest",
@@ -537,7 +512,6 @@ require("lazy").setup({
     },
     -- dap(debug adapter protocol) integration
     {
-        -- alternative "puremourning/vimspector",
         "mfussenegger/nvim-dap",
         cmd = "DapUI",
         config = function() load_config("nvim-dap") end,
@@ -627,6 +601,7 @@ require("lazy").setup({
     {
         -- annotation generations in comment
         "danymat/neogen",
+        cmd = "Neogen",
         opts = {
             input_after_comment = true,
             snippet_engine = "luasnip"
@@ -738,31 +713,31 @@ require("lazy").setup({
     -- "magicalne/nvim.ai",
     -- "gsuuon/model.nvim", 
     --  "milanglacier/minuet-ai.nvim"
-    {
-        "yetone/avante.nvim",
-        version = false,
-        build = "make",
-        event = "VeryLazy",
-        config = function() load_config("avante") end,
-        dependencies = {
-            {
-                -- support for image pasting
-                "HakonHarnes/img-clip.nvim",
-                event = "VeryLazy",
-                opts = {
-                    default = {
-                        embed_image_as_base64 = false,
-                        prompt_for_file_name = false,
-                        drag_and_drop = {
-                            insert_mode = true,
-                        },
-                        -- required for Windows users
-                        use_absolute_path = true,
-                    },
-                },
-            },
-        },
-    },
+    -- {
+    --     "yetone/avante.nvim",
+    --     version = false,
+    --     build = "make",
+    --     event = "VeryLazy",
+    --     config = function() load_config("avante") end,
+    --     dependencies = {
+    --         {
+    --             -- support for image pasting
+    --             "HakonHarnes/img-clip.nvim",
+    --             event = "VeryLazy",
+    --             opts = {
+    --                 default = {
+    --                     embed_image_as_base64 = false,
+    --                     prompt_for_file_name = false,
+    --                     drag_and_drop = {
+    --                         insert_mode = true,
+    --                     },
+    --                     -- required for Windows users
+    --                     use_absolute_path = true,
+    --                 },
+    --             },
+    --         },
+    --     },
+    -- },
     {
        -- chatgpt
        -- https://dotfyle.com/plugins/Robitx/gp.nvim
@@ -824,6 +799,7 @@ require("lazy").setup({
     ----------------------------------------------------------------
     ---- languaje
     ----------------------------------------------------------------
+    -- zig
     -- rust
     -- {
     --     'mrcjkb/rustaceanvim',
@@ -837,21 +813,12 @@ require("lazy").setup({
     --     ft = {"go", 'gomod'},
     --     build = ':lua require("go.install").update_all_sync()'
     -- },
-    -- latex
-    -- "frabjous/knap",
-    {
-        "lervag/vimtex",
-        ft = { "tex", "latex" },
-        init = function()
-            vim.g.vimtex_view_general_viewer = "okular"
-        end
-    },
-    -- javascrtp/typescript
-    -- "lukahartwig/pnpm.nvim", -- manage pnpm workspace with telescope
-    -- "vuki656/package-info.nvim", -- package info
+    -- javascript/typescript
     {
         -- alternative: ts-languaje-server
         "pmizio/typescript-tools.nvim",
+        ft = { "typescript", "typescriptreact" },
+        dependencies = { "nvim-lua/plenary.nvim", "neovim/nvim-lspconfig" },
         config = function() require("typescript-tools").setup({}) end,
     },
     {
@@ -860,7 +827,17 @@ require("lazy").setup({
         opts = { auto_override_publish_diagnostics = true }
     },
     -- python
-    -- https://github.com/joshzcold/python.nvim
+    -- {
+    --     "joshzcold/python.nvim",
+    --     dependencies = {
+    --         "mfussenegger/nvim-dap",
+    --         "mfussenegger/nvim-dap-python",
+    --         "neovim/nvim-lspconfig",
+    --         "nvim-neotest/neotest",
+    --         "nvim-neotest/neotest-python",
+    --     },
+    --     opts = {},
+    -- },
     -- markdown
     -- { "bullets-vim/bullets.vim" },
     -- 'jakewvincent/mkdnflow.nvim',
@@ -872,6 +849,17 @@ require("lazy").setup({
     --         -- inline_surround = { --[[ ... ]] },
     --     })
     --     end,
+    -- },
+    -- latex
+    {
+        "lervag/vimtex",
+        ft = { "tex", "latex" },
+        init = function() vim.g.vimtex_view_general_viewer = "okular" end
+    },
+    -- -- latex preview
+    -- {
+    --     "frabjous/knap",
+    --     ft = { "tex", "latex" },
     -- },
 
 
@@ -920,15 +908,6 @@ require("lazy").setup({
     ----   rocks = '4O4/reactivex' -- ReactiveX Lua implementation
     ---- }
     ---- "jamestthompson3/nvim-remote-containers"
-    ---- remote development / collaboration
-    ---- "mhinz/neovim-remote"        -- support for --remote and fiends
-    ---- "chipsenkbeil/distant.nvim"  -- ALPHA STAGE: remote development from local environment
-    ---- NOTE: buffers per tabs
-    ---- stackoverflow.com/questions/7595642/buffers-per-tab-in-vim
-    ---- redis.com/r/neovim/comments/101f4w0/how_can_i_get_all_buffers_of_current_tab
-    ---- vim.fn.tabpagebuflist()
-    ---- scope.nvim / tabby.nvim
-    -- https://github.com/someone-stole-my-name/yaml-companion.nvim
 
 
     ----------------------------------------------------------------
