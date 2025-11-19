@@ -184,10 +184,6 @@ require("lazy").setup({
         config = function() load_config("live-command") end,
     },
     "itchyny/vim-highlighturl",        -- highlighturl urls in buffer
-    -- help
-    -- "Tyler-Barham/floating-help.nvim", -- help in anchorable/resizable floating window
-    -- "roobert/hoversplit.nvim",         -- lsp help in split pane 
-    -- "luukvbaal/statuscol.nvim",        -- container for fold signs in signcolumn
 
 
     ----------------------------------------------------------------
@@ -204,7 +200,7 @@ require("lazy").setup({
             "RRethy/nvim-treesitter-endwise",              -- add `end` to non-brackets base languajes
         },
     },
-    { "neovim/nvim-lspconfig" },
+    "neovim/nvim-lspconfig",
     -- bridge/hook up non-LSP tools to the LSP UX via lua to inject LSP diagnostics, code actions 
     {
         "nvimtools/none-ls.nvim",
@@ -212,7 +208,6 @@ require("lazy").setup({
         config = function() load_config("none-ls") end,
     },
     -- diagnostics
-    -- https://github.com/rachartier/tiny-inline-diagnostic.nvim
     {
         "folke/trouble.nvim",
         cmd = "Trouble",
@@ -454,7 +449,6 @@ require("lazy").setup({
         cmd = { "UndotreeShow", "UndotreeToggle" },
     },
     {
-        -- honey: https://www.reddit.com/r/vim/comments/lwr56a/search_and_replace_camelcase_to_snake_case/
         -- change words naming style (camelCase, PascalCase, kebab-case, snake_case)
         "johmsalas/text-case.nvim",
         keys = { { "gs", "<cmd>TextCaseOpenTelescope<CR>", mode = { "n", "x" }, desc = "Telescope" }, },
@@ -471,20 +465,12 @@ require("lazy").setup({
             require("telescope").load_extension("textcase")
         end,
     },
-    -- "piersolenski/import.nvim"          -- enhaced imports statements
     -- macro management
     -- {
     --     -- must clean default @recording message 
     --     "ecthelionvi/NeoComposer.nvim",
     --     dependencies = { "kkharji/sqlite.lua" },
     -- },
-    -- json/yaml
-    -- {
-    --     -- alternative to work with yaml: "cuducos/yaml.nvim",
-    --      "gennaro-tedesco/nvim-jqx"
-    --      ft = { "json", "yaml" },
-    --  },
-    -- "nvimdev/template.nvim" -- template management
     -- scratch/temp buffer management
     -- "m-demare/attempt.nvim",
     -- "LintaoAmons/scratch.nvim"
@@ -521,12 +507,6 @@ require("lazy").setup({
             "leoluz/nvim-dap-go",
         },
     },
-    -- test coverage
-    -- {
-    --      -- show coverage stats in lualine
-    --      -- show test file coverage stats in file 
-    --      "andythigpen/nvim-coverage",
-    -- }
 
 
     --------------------------------------------------------------
@@ -534,7 +514,7 @@ require("lazy").setup({
     --------------------------------------------------------------
     -- knowledgebase/notes management
     {
-        --  alternative: "vimwiki/vimwiki",
+        --  "vimwiki/vimwiki",
         "obsidian-nvim/obsidian.nvim",
         version = "*",
         lazy = true,
@@ -543,12 +523,10 @@ require("lazy").setup({
     },
     -- terminal management
     {
-        -- alternatives:
         -- https://github.com/Rolv-Apneseth/tfm.nvim
         -- https://github.com/rebelot/terminal.nvim
         -- https://github.com/pianocomposer321/consolation.nvim
         "akinsho/toggleterm.nvim",
-        -- keys = { "<leader>tf",  "<leader>tv" },
         keys = {
             { "<leader>tf", "<cmd>ToggleTerm direction=float<cr>" },
             { "<leader>tv", "<cmd>ToggleTerm direction=vertical size=100<cr>" },
@@ -558,9 +536,8 @@ require("lazy").setup({
         version = '*',
         config = function() load_config("toggleterm") end,
     },
-    -- task/jobs management
+    -- task/job management
     {
-        -- alternative: https://github.com/arjunmahishi/flow.nvim
         'stevearc/overseer.nvim',
         version = "1.6.0",
         keys = { "<leader>Te",  "<leader>Tr",  "<leader>TR" },
@@ -569,9 +546,6 @@ require("lazy").setup({
     },
     -- markdown preview
     {
-        -- alternatives:
-        -- "ellisonleao/glow.nvim",
-        -- "OXY2DEV/markview.nvim",
         "MeanderingProgrammer/render-markdown.nvim",
         ft = "markdown",
         dependencies = { 'nvim-treesitter/nvim-treesitter', 'nvim-tree/nvim-web-devicons' }, -- if you prefer nvim-web-devicons
@@ -580,15 +554,11 @@ require("lazy").setup({
     -- help preiew
     -- {
     --     "OXY2DEV/helpview.nvim",
-    --     lazy = false, -- Recommended
+    --     lazy = false,
     --     ft = "help",
-    --     dependencies = {
-    --         "nvim-treesitter/nvim-treesitter"
-    --     }
     -- },
     -- database interaction management
     -- {
-    --     -- alternatives:
     --     -- "https://github.com/kndndrj/nvim-dbee",
     --     -- "https://github.com/abenz1267/nvim-databasehelper",
     --     -- "tpope/vim-dadbod-completion",
@@ -615,32 +585,24 @@ require("lazy").setup({
     --     dependencies = { "luarocks.nvim" },
     --     config = function() load_config("rest") end,
     -- },
-    -- custom submodes management (create custom submodes and menus)
-    -- {
-    --     "nvimtools/hydra.nvim",
-    --     lazy = true,
-    --     config = function() load_config("hydra") end,
-    -- },
     -- chekc mini.doc
     -- {
     --     -- treesitter base markdown to vimdoc convertion tool
     --     "ibhagwan/ts-vimdoc.nvim",
     --     ft = "markdown",
     -- },
-    -- "milanglacier/yarepl.nvim",
-    -- conceal
-    -- "KeitaNakamura/tex-conceal.vim",
-    -- "ziontee113/color-picker.nvim", -- color picker
     -- translation
-    -- "potamides/pantran.nvim",
-    -- "niuiic/translate.nvim",
+    -- {
+    --     "niuiic/translate.nvim",
+    --     "potamides/pantran.nvim",
+    --     cmd = "Pantran",
+    -- },
 
 
     --------------------------------------------------------------
     -- integrations
     --------------------------------------------------------------
     -- git
-    -- https://github.com/SuperBo/fugit2.nvim
     -- "kdheepak/lazygit.nvim",       -- open lazygit from neovim
     "tpope/vim-fugitive",             -- git integration for cmdline
     {
@@ -649,7 +611,8 @@ require("lazy").setup({
         config = function() load_config("gitsigns") end,
     },
     {
-        -- alternative: https://github.com/isakbm/gitgraph.nvim
+        -- "isakbm/gitgraph.nvim",
+        -- "SuperBo/fugit2.nvim",
         -- git commit browser
         "junegunn/gv.vim",
         cmd = "GV",
@@ -662,7 +625,7 @@ require("lazy").setup({
     },
     {
         -- single tabpage interface for easily view diffs
-        -- similar: https://github.com/akinsho/git-conflict.nvim
+        -- https://github.com/akinsho/git-conflict.nvim
         "sindrets/diffview.nvim",
         cmd = { "Diffview", "DiffviewOpen" },
         config = function() load_config("diffview") end,
@@ -705,9 +668,9 @@ require("lazy").setup({
     --     config = function() require("quarto").setup() end,
     -- },
     -- AI
-    -- https://github.com/olimorris/codecompanion.nvim
-    -- https://github.com/dlants/magenta.nvim
-    -- https://github.com/ColinKennedy/neovim-ai-plugins
+    -- "olimorris/codecompanion.nvim",
+    -- "dlants/magenta.nvim",
+    -- "ColinKennedy/neovim-ai-plugins,
     -- "ravitemer/mcphub.nvim"
     -- model agnostic ai integration
     -- "magicalne/nvim.ai",
@@ -780,20 +743,6 @@ require("lazy").setup({
     --    "vim-pandoc/vim-pandoc"
     --    config = function() load_config("papyrus") end,
     -- },
-    -- zotero
-    -- {
-    --     "jalvesaq/zotcite",
-    -- },
-    -- sourcegraph integration
-    -- {
-    --     "sourcegraph/sg.nvim",
-    --     lazy = true,
-    --     dependencies = { "nvim-lua/plenary.nvim", "nvim-telescope/telescope.nvim" },
-    --     config = function() load_config("sg") end,
-    -- },
-    -- arduino
-    -- "glebzlat/arduino-nvim",
-    -- "Vlelo/arduino-helper.nvim",
 
 
     ----------------------------------------------------------------
@@ -852,12 +801,13 @@ require("lazy").setup({
     -- },
     -- latex
     {
+        -- integrations
         "lervag/vimtex",
         ft = { "tex", "latex" },
         init = function() vim.g.vimtex_view_general_viewer = "okular" end
     },
-    -- -- latex preview
     -- {
+    -- -- preview
     --     "frabjous/knap",
     --     ft = { "tex", "latex" },
     -- },
