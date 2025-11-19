@@ -109,6 +109,13 @@ require("lazy").setup({
         "nvim-lualine/lualine.nvim",
         config = function() load_config("lualine") end,
     },
+    -- tabline (top bar)
+    -- {
+    --     -- "willothy/nvim-cokeline",
+    --     -- utilyre/barbecue.nvim
+    --     "nanozuki/tabby.nvim",
+    --     config = function() load_config("tabby") end,
+    -- },
     -- startup screen/dashboard
     {
         -- TODO: check if could be substituted by snacks.dashboad
@@ -122,6 +129,13 @@ require("lazy").setup({
         "j-hui/fidget.nvim",
         event = "LspAttach",
         config = function() load_config("fidget") end,
+    },
+    -- sidebar
+    {
+        "folke/edgy.nvim",
+        ft = "trouble",
+        init = function() vim.opt.splitkeep = "screen" end,
+        config = function() load_config("edgy") end,
     },
     -- cursorline (highligh all word in buffer equals to word under cursor)
     {
