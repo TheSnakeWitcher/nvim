@@ -67,7 +67,7 @@ dashboard.setup({
                         vim.notify("obsidian not available")
                         return
                     end
-                    vim.cmd("ObsidianNew")
+                    vim.cmd("Obsidian new")
                 end,
             },
             {
@@ -82,7 +82,7 @@ dashboard.setup({
                         vim.notify("obsidian not available")
                         return
                     end
-                    vim.cmd("ObsidianQuickSwitch")
+                    vim.cmd("Obsidian quick_switch")
                 end,
             },
         },
