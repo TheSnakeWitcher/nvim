@@ -109,13 +109,6 @@ require("lazy").setup({
         "nvim-lualine/lualine.nvim",
         config = function() load_config("lualine") end,
     },
-    -- tabline (top bar)
-    -- {
-    --     -- "willothy/nvim-cokeline",
-    --     -- utilyre/barbecue.nvim
-    --     "nanozuki/tabby.nvim",
-    --     config = function() load_config("tabby") end,
-    -- },
     -- startup screen/dashboard
     {
         -- TODO: check if could be substituted by snacks.dashboad
@@ -182,14 +175,6 @@ require("lazy").setup({
         "Eandrju/cellular-automaton.nvim",
         cmd = "CellularAutomaton",
     },
-    -- sidebar
-    -- {
-    --     "folke/edgy.nvim",
-    --     event = "VeryLazy",
-    --     init = function() vim.opt.splitkeep = "screen" end,
-    --     config = function() load_config("edgy") end,
-    -- },
-    -- "sidebar-nvim/sidebar.nvim",
     -- command preview
     {
         "smjonas/live-command.nvim",
@@ -707,29 +692,29 @@ require("lazy").setup({
     --     },
     --     config = function() require("litee.gh").setup() end,
     -- },
-    {
-        -- edit & review github issues
-        "pwntester/octo.nvim",
-        cmd = "Octo",
-        config = function() load_config("octo") end,
-    },
+    -- {
+    --     -- edit & review github issues
+    --     "pwntester/octo.nvim",
+    --     cmd = "Octo",
+    --     config = function() load_config("octo") end,
+    -- },
     -- task management
     -- https://github.com/georgeharker/comment-tasks.nvim
     -- literature programming / jupyter notebooks
-    {
-
-        -- https://github.com/GCBallesteros/NotebookNavigator.nvim
-        -- alternatives old: 'dccsillag/magma-nvim',  "luk400/vim-jukit",  "GCBallesteros/jupytext.nvim"
-        -- alternatives : https://github.com/GCBallesteros/NotebookNavigator.nvim
-        -- resources: https://github.com/ahmedkhalf/jupyter-nvim
-        -- "benlubas/molten-nvim",
-        "quarto-dev/quarto-nvim",
-        dependencies = {
-            { "jmbuhr/otter.nvim", ft = { "markdown", "quarto" }, opts = {} }, -- lsp for code embeded in other documents 
-        },
-        ft = "quarto",
-        config = function() require("quarto").setup() end,
-    },
+    -- {
+    --
+    --     -- https://github.com/GCBallesteros/NotebookNavigator.nvim
+    --     -- alternatives old: 'dccsillag/magma-nvim',  "luk400/vim-jukit",  "GCBallesteros/jupytext.nvim"
+    --     -- alternatives : https://github.com/GCBallesteros/NotebookNavigator.nvim
+    --     -- resources: https://github.com/ahmedkhalf/jupyter-nvim
+    --     -- "benlubas/molten-nvim",
+    --     "quarto-dev/quarto-nvim",
+    --     dependencies = {
+    --         { "jmbuhr/otter.nvim", ft = { "markdown", "quarto" }, opts = {} }, -- lsp for code embeded in other documents 
+    --     },
+    --     ft = "quarto",
+    --     config = function() require("quarto").setup() end,
+    -- },
     -- AI
     -- https://github.com/olimorris/codecompanion.nvim
     -- https://github.com/dlants/magenta.nvim
@@ -885,6 +870,8 @@ require("lazy").setup({
         "teamtype/teamtype-nvim",
         event = "VeryLazy",
     },
+    -- https://github.com/chriswritescode-dev/consolelog.nvim
+    -- https://github.com/walkingshamrock/optiongroup.nvim
     ---- motions
     --{
     --    -- motions for every coordinate of the viewport
