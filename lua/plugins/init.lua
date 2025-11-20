@@ -814,7 +814,6 @@ require("lazy").setup({
     ----------------------------------------------------------------
     -- cross-editor collaborative coding
     {
-        -- "azratul/live-share.nvim" 
         "teamtype/teamtype-nvim",
         event = "VeryLazy",
     },
@@ -828,14 +827,6 @@ require("lazy").setup({
     --    opt = true,
     --    config = function() load_config("leap") end,
     --}
-    ---- lsp
-    -- "smjonas/inc-rename.nvim" -- incremental LSP renaming based on Neovim's command-preview feature.
-    ---- markdown
-    -- "SidOfc/mkdx" -- markdown utils
-    ---- cmds
-    ---- test interaction
-    ---- "tpope/vim-unimpaired",          -- complementary mapping
-    ---- "tpope/vim-sleuth"               -- detect tabstop and shiftwidth automatically
     ---- code runner
     --{
     --    "michaelb/sniprun",
@@ -847,13 +838,6 @@ require("lazy").setup({
     --     -- develop integration with overseer
     --     "kndndrj/nvim-dbee",
     -- },
-    ---- "Jxstxs/conceal.nvim"  -- conceal management
-    ----  containers integration
-    ---- {
-    ----   'dgrbrady/nvim-docker',
-    ----   rocks = '4O4/reactivex' -- ReactiveX Lua implementation
-    ---- }
-    ---- "jamestthompson3/nvim-remote-containers"
 
 
     ----------------------------------------------------------------
