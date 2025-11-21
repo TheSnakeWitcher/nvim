@@ -3,7 +3,6 @@
 --- @help {vim.opt}
 
 vim.opt.termguicolors = true
-vim.opt.title = true
 vim.opt.ruler = false
 vim.opt.number = true
 vim.opt.relativenumber = true
