@@ -9,7 +9,6 @@ vim.opt.relativenumber = true
 vim.opt.numberwidth = 2
 vim.opt.clipboard = "unnamedplus"
 vim.opt.signcolumn = "yes:3"
-vim.opt.showmode = false
 vim.opt.cursorline = true
 vim.opt.laststatus = 3
 vim.opt.conceallevel = 2
