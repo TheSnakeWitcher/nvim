@@ -29,4 +29,3 @@ vim.opt.guifont = "Iosevka Nerd Font:h13"  --  "Hack:h9.3",  "Iosevka Nerd Font:
 vim.opt.sessionoptions:append({ "localoptions" })
 vim.opt.undofile = true
 vim.opt.undodir = vim.fn.stdpath("cache") .. "/undodir"
-vim.opt.mouse = "a"
