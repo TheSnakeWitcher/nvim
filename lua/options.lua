@@ -27,7 +27,6 @@ vim.opt.foldlevel = 99
 vim.opt.foldlevelstart = 99
 vim.opt.ignorecase = true
 vim.opt.smartcase = true
-vim.opt.backup = false
 vim.opt.guifont = "Iosevka Nerd Font:h13"  --  "Hack:h9.3",  "Iosevka Nerd Font:h9.8",  "Iosevka Nerd Font:h9.7",  "Source Code Pro:h9.5"
 vim.opt.sessionoptions:append({ "localoptions" })
 vim.opt.undofile = true
