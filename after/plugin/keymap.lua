@@ -1,7 +1,5 @@
 --- @help {vim.keymap}
 --- @help {key-notation}
--- TODO: very important, try defining keymaps that is {bufnr}B to jump to the corresponding buffer 
---       that should only be feasible using a sidebar with open buffers
 
 local set = vim.keymap.set
 local opts = { noremap = true, silent = true }
@@ -82,6 +80,13 @@ set("n", "N", "Nzz")
 --------------------------------------------------------------
 -- navigations
 --------------------------------------------------------------
+-- buffers
+-- set('n', 'B', function() vim.cmd('buffer ' .. vim.v.count) end, {
+--     desc = "Usa {number}B para ir a un buffer específico" ,
+--     noremap = true,
+--     silent = true
+-- })
+
 -- go to
 set("n","gl", "<cmd>norm gx<cr>", opts)
 
@@ -186,20 +191,11 @@ set('n', '<leader>q', vim.diagnostic.setloclist, { desc = "[q]uickfix set loclis
 --------------------------------------------------------------
 -- luasnip
 --------------------------------------------------------------
-set("n", "<leader>fS", "<CMD>LuaSnipEdit<CR>" , { desc = "[f]ind [s]snippets", silent = true })
 set({"i","s"},"<C-s>",function()
     if require('luasnip').choice_active() then
         require('luasnip.extras.select_choice')()
     end
 end,{desc = "select choice" , silent = true})
-
-
---------------------------------------------------------------
--- buffer_manager
---------------------------------------------------------------
-for key = 1, 9 do
-    set('n', string.format('<A-%d>', key), string.format('<cmd>lua require("buffer_manager.ui").nav_file(%d)<cr>', key), { desc = "go to buffer " .. key  })
-end
 
 
 --------------------------------------------------------------
@@ -228,7 +224,7 @@ set("n", "<leader>tl", "<CMD>Telescope telescope-tabs list_tabs<CR>", { desc = "
 -- trees/views/explorers
 --------------------------------------------------------------
 -- set("n", "<leader>e", '<cmd>lua require("edgy").toggle("left")<CR>', { desc = "[e]xplorers(edgy)" })
-set("n", "<leader>e", "<cmd>Neotree toggle<CR>", { desc = "[e]xplorer" })
+set("n", "<leader>e", "<cmd>Neotree source=buffers action=show toggle<CR>", { desc = "[e]xplorer" })
 set("n", "<leader>E", "<cmd>AerialToggle<CR>", { desc = "[E]xplorer summary/outline(aerial)" })
 set("n", "<leader>u", "<cmd>UndotreeToggle<CR>", { desc = "[u]ndo tree toggle" })
 set("n", "<leader>D", "<cmd>Trouble diagnostics toggle <CR>", { desc = "[D]iagnostic toggle" })
