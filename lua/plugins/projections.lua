@@ -45,35 +45,20 @@ projections.setup({
             vim.cmd("Neotree " .. vim.uv.cwd())
         end,
     },
-    workspaces_file = vim.fn.stdpath("cache") .. "/projections/workspaces.json",
-    sessions_directory = vim.fn.stdpath("cache") .. "/projections/sessions",
 })
 
 local Session = require("projections.session")
-local Switcher = require("projections.switcher")
-local Workspace = require("projections.workspace")
 
-vim.api.nvim_create_user_command("SessionSave", function()
-    Session.store(vim.uv.cwd())
-end, {})
-
-vim.api.nvim_create_user_command("SessionLoad", function()
-    Session.restore(vim.uv.cwd())
-end, {})
-
-
-vim.api.nvim_create_user_command("AddWorkspace", function()
-    Workspace.add(vim.uv.cwd())
-end, {})
-
-vim.api.nvim_create_autocmd({ 'VimLeavePre' }, {
-    desc =  "Autostore session on VimExit",
+vim.api.nvim_create_autocmd('VimLeavePre', {
+    desc =  "Autostore session on exit",
     callback = function() Session.store(vim.uv.cwd()) end,
 })
 
-vim.api.nvim_create_autocmd({ "VimEnter" }, {
+vim.api.nvim_create_autocmd("VimEnter", {
+    desc = "restore last session automatically if exists else show Dashboard",
     callback = function()
         if vim.fn.argc() ~= 0 then return end
+
         local session_info = Session.info(vim.uv.cwd())
         if session_info == nil then
             vim.cmd("Dashboard")
@@ -81,5 +66,4 @@ vim.api.nvim_create_autocmd({ "VimEnter" }, {
             Session.restore(vim.uv.cwd())
         end
     end,
-    desc = "restore last session automatically if exists else show Dashboard",
 })
