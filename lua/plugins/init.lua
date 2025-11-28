@@ -14,9 +14,7 @@ require("lazy").setup({
     -- {
     --     "vhyrro/luarocks.nvim",
     --     priority = 1001,
-    --     opts = {
-    --         rocks = { "magick" },
-    --     },
+    --     opts = { rocks = { "magick" } },
     -- },
     "ray-x/guihua.lua",      -- GUI library
     "MunifTanjim/nui.nvim",  -- UI component library
@@ -61,8 +59,13 @@ require("lazy").setup({
             vim.cmd("hi! link LazyNormal Pmenu")
         end,
     },
+    -- {
+    --     "eldritch-theme/eldritch.nvim",
+    --     lazy = true,
+    --     config = function() load_config("eldritch") end,
+    --     init = function() vim.cmd("colorscheme eldritch") end,
+    -- },
     -- { "folke/tokyonight.nvim", lazy = true },
-    -- { "eldritch-theme/eldritch.nvim", lazy = true },
     -- { "Mofiqul/dracula.nvim", lazy = true },
     -- { "marko-cerovac/material.nvim" , lazy = true },
     -- { "catppuccin/nvim", name = "catppuccin", lazy = true },
@@ -82,6 +85,7 @@ require("lazy").setup({
         }
     },
     -- file explorer
+    -- {'stevearc/oil.nvim', opts = {} },
     {
         --     -- 'stevearc/oil.nvim',
         --     "A7Lavinraj/fyler.nvim",
@@ -461,17 +465,12 @@ require("lazy").setup({
             require("telescope").load_extension("textcase")
         end,
     },
-    -- macro management
-    -- {
-    --     -- must clean default @recording message 
-    --     "ecthelionvi/NeoComposer.nvim",
-    --     dependencies = { "kkharji/sqlite.lua" },
-    -- },
-    -- scratch/temp buffer management
-    -- "m-demare/attempt.nvim",
-    -- "LintaoAmons/scratch.nvim"
-    -- "CKolkey/ts-node-action", -- run arbitrary actions in treesitter nodes
-    -- "Jxstxs/conceal.nvim",    -- uses Treesitter to conceal typical boiler Code Resources
+    -- support for image embedding and pasting
+    {
+        "HakonHarnes/img-clip.nvim",
+        ft = "markdown",
+        opts = {},
+    },
 
 
     --------------------------------------------------------------
@@ -510,7 +509,6 @@ require("lazy").setup({
     --------------------------------------------------------------
     -- knowledgebase/notes management
     {
-        --  "vimwiki/vimwiki",
         "obsidian-nvim/obsidian.nvim",
         version = "*",
         lazy = true,
@@ -542,17 +540,20 @@ require("lazy").setup({
     },
     -- markdown preview
     {
+
+        --  "OXY2DEV/helpview.nvim" for help preiew
         "MeanderingProgrammer/render-markdown.nvim",
         ft = "markdown",
-        dependencies = { 'nvim-treesitter/nvim-treesitter', 'nvim-tree/nvim-web-devicons' }, -- if you prefer nvim-web-devicons
         config = function() load_config("render-markdown") end,
     },
-    -- help preiew
-    -- {
-    --     "OXY2DEV/helpview.nvim",
-    --     lazy = false,
-    --     ft = "help",
-    -- },
+    -- doc generation
+    -- https://github.com/kkoomen/vim-doge
+    {
+        -- annotation generations in comment
+        "danymat/neogen",
+        cmd = "Neogen",
+        opts = { input_after_comment = true, snippet_engine = "luasnip" },
+    },
     -- database interaction management
     -- {
     --     -- "https://github.com/kndndrj/nvim-dbee",
@@ -562,17 +563,6 @@ require("lazy").setup({
     --     cmd = "DB",
     --     dependencies = { "kristijanhusak/vim-dadbod-ui" },
     -- },
-    -- doc generation
-    -- https://github.com/kkoomen/vim-doge
-    {
-        -- annotation generations in comment
-        "danymat/neogen",
-        cmd = "Neogen",
-        opts = {
-            input_after_comment = true,
-            snippet_engine = "luasnip"
-        },
-    },
     -- http client
     -- https://github.com/romek-codes/bruno.nvim
     -- {
@@ -599,7 +589,6 @@ require("lazy").setup({
     -- integrations
     --------------------------------------------------------------
     -- git
-    -- "kdheepak/lazygit.nvim",       -- open lazygit from neovim
     "tpope/vim-fugitive",             -- git integration for cmdline
     {
         -- git integration for buffers
@@ -621,7 +610,6 @@ require("lazy").setup({
     },
     {
         -- single tabpage interface for easily view diffs
-        -- https://github.com/akinsho/git-conflict.nvim
         "sindrets/diffview.nvim",
         cmd = { "Diffview", "DiffviewOpen" },
         config = function() load_config("diffview") end,
@@ -663,48 +651,33 @@ require("lazy").setup({
     --     ft = "quarto",
     --     config = function() require("quarto").setup() end,
     -- },
+    -- pandoc
+    -- {
+    --    -- latex like editing experience while writing markdown
+    --    -- https://github.ink/aspeddro/pandoc.nvim
+    --    -- https://github.com/vim-pandoc/vim-pandoc
+    --    "abeleinin/papyrus",
+    --    "vim-pandoc/vim-pandoc"
+    --    config = function() load_config("papyrus") end,
+    -- },
     -- AI
-    -- "olimorris/codecompanion.nvim",
-    -- "dlants/magenta.nvim",
-    -- "ColinKennedy/neovim-ai-plugins,
-    -- "ravitemer/mcphub.nvim"
+    -- {"olimorris/codecompanion.nvim"},
+    -- {"dlants/magenta.nvim"},
+    -- {"ravitemer/mcphub.nvim"}
     -- model agnostic ai integration
-    -- "magicalne/nvim.ai",
-    -- "gsuuon/model.nvim", 
-    --  "milanglacier/minuet-ai.nvim"
+    -- {"magicalne/nvim.ai"},
+    -- {"gsuuon/model.nvim"}, 
+    -- {"milanglacier/minuet-ai.nvim"}
     -- {
     --     "yetone/avante.nvim",
     --     version = false,
     --     build = "make",
     --     event = "VeryLazy",
     --     config = function() load_config("avante") end,
-    --     dependencies = {
-    --         {
-    --             -- support for image pasting
-    --             "HakonHarnes/img-clip.nvim",
-    --             event = "VeryLazy",
-    --             opts = {
-    --                 default = {
-    --                     embed_image_as_base64 = false,
-    --                     prompt_for_file_name = false,
-    --                     drag_and_drop = {
-    --                         insert_mode = true,
-    --                     },
-    --                     -- required for Windows users
-    --                     use_absolute_path = true,
-    --                 },
-    --             },
-    --         },
-    --     },
     -- },
+    -- { "CopilotC-Nvim/CopilotChat.nvim" },
     {
        -- chatgpt
-       -- https://dotfyle.com/plugins/Robitx/gp.nvim
-       -- https://github.com/dense-analysis/neural
-       -- https://dotfyle.com/plugins/dpayne/CodeGPT.nvim
-       -- https://dotfyle.com/plugins/martineausimon/nvim-bard
-       -- https://github.com/copilotlsp-nvim/copilot-lsp
-       -- https://github.com/CopilotC-Nvim/CopilotChat.nvim
        "jackMort/ChatGPT.nvim",
        cmd = "ChatGpt",
        config = function() load_config("chatgpt") end,
@@ -730,15 +703,6 @@ require("lazy").setup({
     --  "Aider-AI/aider",                -- pair program with LLMs
     --  "codota/tabnine-nvim"            -- tabnine
     --  "supermaven-inc/supermaven-nvim" -- supermaven
-    -- pandoc
-    -- {
-    --    -- latex like editing experience while writing markdown
-    --    -- https://github.ink/aspeddro/pandoc.nvim
-    --    -- https://github.com/vim-pandoc/vim-pandoc
-    --    "abeleinin/papyrus",
-    --    "vim-pandoc/vim-pandoc"
-    --    config = function() load_config("papyrus") end,
-    -- },
 
 
     ----------------------------------------------------------------
@@ -817,8 +781,9 @@ require("lazy").setup({
         "teamtype/teamtype-nvim",
         event = "VeryLazy",
     },
-    -- https://github.com/chriswritescode-dev/consolelog.nvim
-    -- https://github.com/walkingshamrock/optiongroup.nvim
+    -- "abecodes/tabout.nvim"                -- exit from within close symbols with <tab>
+    -- "vimpostor/vim-tpipeline"             -- statusline merged with tmux
+    -- "chriswritescode-dev/consolelog.nvim" -- show console commands output next to the code as virtual text
     ---- motions
     --{
     --    -- motions for every coordinate of the viewport
