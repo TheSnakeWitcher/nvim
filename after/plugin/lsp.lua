@@ -72,13 +72,6 @@ vim.api.nvim_create_autocmd("LspAttach", {
         nmap('<leader>?', vim.lsp.buf.hover, 'Hover Documentation')
         nmap("<leader>fF", "<cmd>Telescope lsp_document_symbols symbols={'function','method'}<cr>", "[f]ind [F]iles(including hidden)")
 
-        -- workspace
-        -- nmap('<leader>wa', vim.lsp.buf.add_workspace_folder, '[W]orkspace [A]dd Folder')
-        -- nmap('<leader>wr', vim.lsp.buf.remove_workspace_folder, '[W]orkspace [R]emove Folder')
-        -- nmap('<leader>wl', function()
-        --     print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
-        -- end, '[W]orkspace [L]ist Folders')
-
         vim.api.nvim_buf_create_user_command(bufnr, 'LspFormat', function(_)
             if vim.lsp.buf.format then
                 vim.lsp.buf.format()
