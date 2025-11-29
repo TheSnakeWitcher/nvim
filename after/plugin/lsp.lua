@@ -4,35 +4,22 @@ if not ok then
     return
 end
 
---------------------------------------------------------------
--- completion capabilities for server
---------------------------------------------------------------
-local ok, cmp_nvim_lsp = pcall(require,"cmp_nvim_lsp")
+local ok, blink = pcall(require,"blink.cmp")
 if not ok then
-    vim.notify("cmp-nvim-lsp not loaded in" .. vim.fn.expand("%"))
+    vim.notify("blink.cmp not loaded in" .. vim.fn.expand("%"))
     return
 end
 
---- @help {https://github.com/hrsh7th/cmp-nvim-lsp/issues/38}
---- @help {https://github.com/hrsh7th/cmp-nvim-lsp/issues/38#issuecomment-1815265121}
-local capabilities = vim.tbl_deep_extend(
-    "force",
-    vim.lsp.protocol.make_client_capabilities(),
-    cmp_nvim_lsp.default_capabilities()
-)
-
---- @help {nvim-ufo}
-capabilities.textDocument.foldingRange = {
-    dynamicRegistration = false,
-    lineFoldingOnly = true
-}
-capabilities.textDocument.completion.completionItem.snippetSupport = true --- @help {schemastore-usage}
-
-
---------------------------------------------------------------
--- config servers
---------------------------------------------------------------
 local servers = mason_lspconfig.get_installed_servers()
+local capabilities = blink.get_lsp_capabilities({
+  textDocument = {
+    foldingRange = {
+      dynamicRegistration = false,
+      lineFoldingOnly = true
+    }
+  }
+})
+
 vim.lsp.config("*", capabilities)
 vim.lsp.enable(servers)
 
