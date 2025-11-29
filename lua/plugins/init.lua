@@ -304,59 +304,15 @@ require("lazy").setup({
     -- completion
     --------------------------------------------------------------
     -- completion engine
-    -- {
-    --     'saghen/blink.cmp',
-    --     version = '1.*',
-    --     -- config = function() load_config("blink") end,
-    --     opts = {
-    --         -- keymap = { preset = 'default' },
-    --         -- appearance = {
-    --         --   nerd_font_variant = 'mono'
-    --         -- },
-    --         -- completion = { documentation = { auto_show = false } },
-    --         -- sources = {
-    --         --   default = { 'lsp', 'path', 'snippets', 'buffer' },
-    --         -- },
-    --         -- opts_extend = { "sources.default" }
-    --     }
-    -- },
     {
-        -- alternatives: https://github.com/Saghen/blink.cmp
-        -- https://github.com/chrisgrieser/.config/blob/main/nvim/lua/plugins/blink-cmp.lua
-        "hrsh7th/nvim-cmp",
+        "saghen/blink.cmp",
+        version = '1.*',
         event = { "InsertEnter", "CmdlineEnter" },
-        config = function() load_config("nvim-cmp") end,
         dependencies = {
-            "hrsh7th/cmp-buffer",        -- buffers completion source
-            "hrsh7th/cmp-path",          -- paths completion source
-            "hrsh7th/cmp-cmdline",       -- cmdline completion source
-            "hrsh7th/cmp-nvim-lua",      -- neovim lua api completion source
-            "saadparwaiz1/cmp_luasnip",  -- luasnip snippet engine completion source
-            -- lsp completion source
-            {
-                "hrsh7th/cmp-nvim-lsp",
-                event = "LspAttach",
-            },
-            -- completion for dap
-            -- {
-            --     "rcarriga/cmp-dap",
-            --     cmd = "DapUI",
-            -- },
-            "petertriho/cmp-git",                    -- git completion source
-            "uga-rosa/cmp-dynamic",                  -- dynamic generation candidates sources
-            "davidsierradz/cmp-conventionalcommits", -- conventional commtis
-            "kdheepak/cmp-latex-symbols",            -- latex completion source
-            -- github copilot source
-            -- {
-            --     "zbirenbaum/copilot-cmp",
-            --     dependencies = "zbirenbaum/copilot.lua",
-            --     config = function () require("copilot_cmp").setup() end
-            -- }
-            -- "tzachar/cmp-ai",                -- ai completion source
-            -- "nat-418/cmp-color-names.nvim"   -- color sources
-            -- "jc-doyle/cmp-pandoc-references" -- pandoc/markdown/bibliography completion sources
-            -- "jalvesaq/cmp-zotcite"           -- zotero completion sources
-        }
+            'Kaiser-Yang/blink-cmp-git',
+            'disrupted/blink-cmp-conventional-commits',
+        },
+        config = function() load_config("blink") end,
     },
     -- snippet engine
     {
@@ -400,12 +356,6 @@ require("lazy").setup({
         -- highligh unique chars per word in line(to use with `f`,`F`,`t`,`T`)
         "unblevable/quick-scope",
         event = "InsertEnter",
-    },
-    -- to close automatically `(`,`[`,`"`,`'`
-    {
-        "windwp/nvim-autopairs",
-        event = "InsertEnter",
-        config = function() load_config("nvim-autopairs") end,
     },
     -- easily comment code with treesiter integration
     {
@@ -661,10 +611,12 @@ require("lazy").setup({
     --    config = function() load_config("papyrus") end,
     -- },
     -- AI
-    -- {"olimorris/codecompanion.nvim"},
+    -- {"olimorris/codecompanion.nvim"},     -- zed AI
+    -- {"zbirenbaum/copilot.lua"},           -- copilot
+    -- { "CopilotC-Nvim/CopilotChat.nvim" }, -- copilot
+    -- model agnostic ai integration
     -- {"dlants/magenta.nvim"},
     -- {"ravitemer/mcphub.nvim"}
-    -- model agnostic ai integration
     -- {"magicalne/nvim.ai"},
     -- {"gsuuon/model.nvim"}, 
     -- {"milanglacier/minuet-ai.nvim"}
@@ -675,7 +627,6 @@ require("lazy").setup({
     --     event = "VeryLazy",
     --     config = function() load_config("avante") end,
     -- },
-    -- { "CopilotC-Nvim/CopilotChat.nvim" },
     {
        -- chatgpt
        "jackMort/ChatGPT.nvim",
@@ -688,21 +639,12 @@ require("lazy").setup({
         event = "InsertEnter",
         config = function() load_config("codeium") end,
     },
-    -- {
-    --      -- ollama
-    --      -- alternatives:
-    --      -- https://github.com/jmorganca/ollama
-    --      -- https://github.com/ziontee113/ollama.nvim
-    --      -- https://github.com/jpmcb/nvim-llama
-    --      "David-Kunz/gen.nvim"
-    --      config = function() load_config("gen") end,
-    -- },
-    --  "zbirenbaum/copilot.lua",        -- copilot
-    --  "IntoTheNull/claude.nvim"        -- claude
-    --  "olimorris/codecompanion.nvim",  -- zed AI
-    --  "Aider-AI/aider",                -- pair program with LLMs
-    --  "codota/tabnine-nvim"            -- tabnine
-    --  "supermaven-inc/supermaven-nvim" -- supermaven
+    {
+        -- ollama
+        "David-Kunz/gen.nvim",
+        cmd = "Gen",
+        config = function() load_config("gen") end,
+    },
 
 
     ----------------------------------------------------------------
