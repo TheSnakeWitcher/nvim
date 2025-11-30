@@ -406,6 +406,12 @@ require("lazy").setup({
         ft = "markdown",
         opts = {},
     },
+    -- support for custom highlight utilities
+    {
+        "Pocco81/high-str.nvim",
+        cmd = "HSHighlight",
+        opts = {},
+    },
 
 
     --------------------------------------------------------------
@@ -731,7 +737,7 @@ require("lazy").setup({
 
 
     ----------------------------------------------------------------
-    ---- development
+    ---- dev
     ----------------------------------------------------------------
      -- hardhat framework for web3 development
     {
@@ -747,11 +753,6 @@ require("lazy").setup({
         ft = "solidity",
         config = function() load_config("foundry") end,
     },
-    -- utilities
-    -- {
-    ---     -- inspired https://github.com/Pocco81/high-str.nvim
-    ---     "multi-highlight.nvim",                   -- to highligh diferent visual selected text pieces
-    ---  },
 
 },{
     dev = {
