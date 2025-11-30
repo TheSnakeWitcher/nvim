@@ -6,16 +6,13 @@
 vim.g.mapleader = " "
 
 local code_dir = vim.env.HOME .. "/Code"
-local projects_dir = code_dir .. "/projects"
-
 vim.g.path = {
     knowledgebase = vim.env.HOME .. "/Knowledgebase",
     code = code_dir,
     scripts = code_dir .. "/scripts",
     work_projects = code_dir .. "/work",
     test_projects = code_dir .. "/test",
-    projects = projects_dir,
-    plugin_dev = projects_dir .. "/nvim",
+    projects = code_dir .. "/projects",
     snippets = vim.fn.stdpath("config") .. "/luasnippets",
 }
 

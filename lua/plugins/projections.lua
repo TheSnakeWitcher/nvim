@@ -11,7 +11,6 @@ local function get_workspaces()
         { "~/.config/" , { patterns.readme } },
         { vim.g.path.code , { patterns.readme } },
         { vim.g.path.projects , { patterns.git } },
-        { vim.g.path.plugin_dev , { patterns.git } },
         vim.g.path.test_projects,
     }
 
@@ -27,7 +26,7 @@ local function get_workspaces()
     return workspaces
 end
 
---- @help {projections-installation}
+--- @help {projections-🛸-projections.nvim-🔌-installation}
 projections.setup({
     workspaces = get_workspaces(),
     patterns = { patterns.git , patterns.svn, patterns.hg },

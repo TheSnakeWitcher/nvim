@@ -245,7 +245,6 @@ require("lazy").setup({
         },
     },
     -- telescope extensions
-    -- "jmbuhr/telescope-zotero.nvim",
     {
         "nvim-telescope/telescope-ui-select.nvim",
         init = function() require("telescope").load_extension("ui-select") end
@@ -532,8 +531,6 @@ require("lazy").setup({
         config = function() load_config("gitsigns") end,
     },
     {
-        -- "isakbm/gitgraph.nvim",
-        -- "SuperBo/fugit2.nvim",
         -- git commit browser
         "junegunn/gv.vim",
         cmd = "GV",
@@ -758,7 +755,7 @@ require("lazy").setup({
 
 },{
     dev = {
-        path = vim.g.path.plugin_dev,
+        path = vim.g.path.projects,
         patterns = { vim.env.GH_USER },
     },
 })
