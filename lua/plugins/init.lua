@@ -66,9 +66,6 @@ require("lazy").setup({
     --     init = function() vim.cmd("colorscheme eldritch") end,
     -- },
     -- { "folke/tokyonight.nvim", lazy = true },
-    -- { "Mofiqul/dracula.nvim", lazy = true },
-    -- { "marko-cerovac/material.nvim" , lazy = true },
-    -- { "catppuccin/nvim", name = "catppuccin", lazy = true },
     -- icons
     {
         "nvim-tree/nvim-web-devicons",
@@ -86,11 +83,8 @@ require("lazy").setup({
     },
     -- file explorer
     -- {'stevearc/oil.nvim', opts = {} },
+    -- { "A7Lavinraj/fyler.nvim", branch = "stable", opts = {} },
     {
-        --     -- 'stevearc/oil.nvim',
-        --     "A7Lavinraj/fyler.nvim",
-        --     branch = "stable",
-        --     config = function() load_config("fyler") end,
         "nvim-neo-tree/neo-tree.nvim",
         branch = "v3.x",
         cmd = "Neotree",
@@ -98,7 +92,6 @@ require("lazy").setup({
     },
     -- statusline
     {
-        -- "rebelot/heirline.nvim",
         "nvim-lualine/lualine.nvim",
         config = function() load_config("lualine") end,
     },
@@ -124,7 +117,6 @@ require("lazy").setup({
         config = function() load_config("edgy") end,
     },
     -- topbar
-    -- "Bekaboo/dropbar.nvim",  -- lsp symbols in winbar(just below tabline)
     -- cursorline (highligh all word in buffer equals to word under cursor)
     {
         "yamatsum/nvim-cursorline",
@@ -218,12 +210,6 @@ require("lazy").setup({
         "b0o/schemastore.nvim",
         event = "LspAttach",
     },
-    -- lsp signature hint as typing
-    -- {
-    --     "ray-x/lsp_signature.nvim",
-    --     event = "LspAttach",
-    --     config = function() load_config("lsp_signature") end,
-    -- },
     -- formatter
     {
         "stevearc/conform.nvim",
@@ -637,7 +623,7 @@ require("lazy").setup({
         -- codeium ai toolkit integration
         "Exafunction/codeium.nvim",
         event = "InsertEnter",
-        config = function() load_config("codeium") end,
+        opts = {},
     },
     {
         -- ollama
