@@ -222,10 +222,9 @@ set("n", "<leader>tl", "<CMD>Telescope telescope-tabs list_tabs<CR>", { desc = "
 --------------------------------------------------------------
 -- trees/views/explorers
 --------------------------------------------------------------
--- set("n", "<leader>e", '<cmd>lua require("edgy").toggle("left")<CR>', { desc = "[e]xplorers(edgy)" })
-set("n", "<leader>e", "<cmd>Neotree position=top buffers toggle<CR><cmd>Neotree position=bottom filesystem toggle<cr>", { desc = "[e]xplorer" })
-set("n", "<leader>E", "<cmd>AerialToggle<CR>", { desc = "[E]xplorer summary/outline(aerial)" })
 set("n", "<leader>u", "<cmd>UndotreeToggle<CR>", { desc = "[u]ndo tree toggle" })
+set("n", "<leader>e", "<cmd>Neotree position=top buffers toggle<CR><cmd>Neotree position=bottom filesystem toggle<cr>", { desc = "[e]xplorer" })
+set("n", "<leader>E", "<cmd>Trouble lsp_document_symbols toggle<CR>", { desc = "[E]xplorer summary/outline" })
 set("n", "<leader>D", "<cmd>Trouble diagnostics toggle <CR>", { desc = "[D]iagnostic toggle" })
 set("n", "<leader>Q", "<cmd>Trouble quickfix toggle<CR>", { desc = "[Q]uickfix toggle" })
 set("n", "<leader>L", "<cmd>Trouble loclist toggle<CR>", { desc = "[L]oclist toggle" })

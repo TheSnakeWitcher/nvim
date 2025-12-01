@@ -250,12 +250,6 @@ require("lazy").setup({
         keys = { "<C-p>" ,"<leader>fp" },
         config = function() load_config("projections") end,
     },
-    -- tree view/code outline for lsp symbols/tags
-    {
-        "stevearc/aerial.nvim",
-        cmd = { "Telescope aerial",  "AerialToggle",  "AerialOpen",  "AerialOpenAll" },
-        config = function() load_config("aerial") end,
-    },
     -- search urls in buffer
     {
         "axieax/urlview.nvim",
