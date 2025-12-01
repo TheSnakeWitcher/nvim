@@ -10,20 +10,9 @@ require("lazy").setup({
     ----------------------------------------------------------------
     -- base
     ----------------------------------------------------------------
-    -- luarocks support for lazy.nvim
-    -- {
-    --     "vhyrro/luarocks.nvim",
-    --     priority = 1001,
-    --     opts = { rocks = { "magick" } },
-    -- },
     "ray-x/guihua.lua",      -- GUI library
     "MunifTanjim/nui.nvim",  -- UI component library
     "nvim-lua/plenary.nvim", -- utility functions library
-    {
-        "folke/snacks.nvim",
-        priority = 1000,
-        config = function() load_config("snacks") end,
-    },
     -- tools management UI to easily install lsp,dap,linters,formatters,etc
     {
         "williamboman/mason.nvim",
@@ -35,12 +24,13 @@ require("lazy").setup({
             "jay-babu/mason-nvim-dap.nvim",
         },
     },
-    -- plugin development setup
     {
-        "folke/lazydev.nvim",
-        ft = "lua",
-        opts = {}
+        "folke/snacks.nvim",
+        priority = 1000,
+        config = function() load_config("snacks") end,
     },
+    -- plugin development setup
+    { "folke/lazydev.nvim", ft = "lua", opts = {} },
 
 
     --------------------------------------------------------------
@@ -76,10 +66,7 @@ require("lazy").setup({
       "folke/noice.nvim",
       event = "VeryLazy",
       opts = {},
-      dependencies = {
-        "MunifTanjim/nui.nvim",
-        "rcarriga/nvim-notify",
-        }
+      dependencies = { "MunifTanjim/nui.nvim", "rcarriga/nvim-notify" }
     },
     -- file explorer
     -- {'stevearc/oil.nvim', opts = {} },
@@ -112,15 +99,9 @@ require("lazy").setup({
     -- sidebar
     {
         "folke/edgy.nvim",
-        ft = "trouble",
+        ft = {"trouble", "neo-tree" },
         init = function() vim.opt.splitkeep = "screen" end,
         config = function() load_config("edgy") end,
-    },
-    -- topbar
-    -- cursorline (highligh all word in buffer equals to word under cursor)
-    {
-        "yamatsum/nvim-cursorline",
-        opts = { cursorline = { enable = false } },
     },
     -- highlight, list and search notes (todo-comments)
     {
@@ -131,6 +112,11 @@ require("lazy").setup({
     {
         "folke/paint.nvim",
         config = function() load_config("paint") end,
+    },
+    -- cursorline (highligh all word in buffer equals to word under cursor)
+    {
+        "yamatsum/nvim-cursorline",
+        opts = { cursorline = { enable = false } },
     },
     -- highlighturl parents `(` , `[` or `{`
     {
@@ -143,13 +129,11 @@ require("lazy").setup({
     -- colorizer
     {
         'brenoprata10/nvim-highlight-colors',
-        -- "norcalli/nvim-colorizer.lua",
         ft = { "md", "html", "css"},
         opts = {}
     },
     -- folds
     {
-        -- "anuvyklack/fold-preview.nvim", -- fold preview
         --  "Vonr/foldcus.nvim/",          -- fold multiline comments
         "yaocccc/nvim-foldsign",
         config = function() load_config("nvim-foldsign") end,
@@ -217,11 +201,6 @@ require("lazy").setup({
         opts = {}
     --     config = function() load_config("conform") end,
     },
-    -- {
-    --     "glepnir/lspsaga.nvim",
-    --     event = "LspAttach",
-    --     config = function() load_config("lspsaga") end,
-    -- },
 
 
     --------------------------------------------------------------
