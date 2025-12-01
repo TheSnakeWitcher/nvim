@@ -9,13 +9,7 @@ blink.setup({
     snippets = { preset = 'luasnip' },
     cmdline = {
         keymap = { preset = 'inherit' },
-        completion = {
-            menu = {
-                auto_show = true
-                -- auto_show = function(ctx) return vim.fn.getcmdtype() == ':' end,
-            }
-        },
-
+        completion = { menu = { auto_show = true } },
     },
     sources = {
         default = {
@@ -42,5 +36,4 @@ blink.setup({
             },
         },
     },
-
 })
