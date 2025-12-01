@@ -28,6 +28,7 @@ edgy.setup({
           pinned = true,
           collapsed = false,
           open = "Neotree position=bottom filesystem",
+          size = { height = 0.7 },
         },
     },
 })
