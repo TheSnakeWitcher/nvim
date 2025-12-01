@@ -41,8 +41,8 @@ projections.setup({
     restore_hooks = {
         pre = nil,
         post = function()
-            vim.cmd("Neotree position=top buffers " .. vim.uv.cwd())
             vim.cmd("Neotree position=bottom filesystem " .. vim.uv.cwd())
+            vim.cmd("Neotree position=top buffers")
         end,
     },
 })
