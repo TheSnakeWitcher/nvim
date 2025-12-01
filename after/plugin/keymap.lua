@@ -22,7 +22,6 @@ else
     end, { desc = '[f]ind [g]rep' })
 end
 
-
 --------------------------------------------------------------
 -- builtins
 --------------------------------------------------------------
@@ -224,12 +223,15 @@ set("n", "<leader>tl", "<CMD>Telescope telescope-tabs list_tabs<CR>", { desc = "
 -- trees/views/explorers
 --------------------------------------------------------------
 -- set("n", "<leader>e", '<cmd>lua require("edgy").toggle("left")<CR>', { desc = "[e]xplorers(edgy)" })
-set("n", "<leader>e", "<cmd>Neotree source=buffers action=show toggle<CR>", { desc = "[e]xplorer" })
+set("n", "<leader>e", "<cmd>Neotree position=top buffers toggle<CR><cmd>Neotree position=bottom filesystem toggle<cr>", { desc = "[e]xplorer" })
 set("n", "<leader>E", "<cmd>AerialToggle<CR>", { desc = "[E]xplorer summary/outline(aerial)" })
 set("n", "<leader>u", "<cmd>UndotreeToggle<CR>", { desc = "[u]ndo tree toggle" })
 set("n", "<leader>D", "<cmd>Trouble diagnostics toggle <CR>", { desc = "[D]iagnostic toggle" })
 set("n", "<leader>Q", "<cmd>Trouble quickfix toggle<CR>", { desc = "[Q]uickfix toggle" })
+set("n", "<leader>L", "<cmd>Trouble loclist toggle<CR>", { desc = "[L]oclist toggle" })
 set("n", "<leader>N", "<cmd>Trouble todo toggle<CR>", { desc = "[N]otes toggle" })
+set("n", "]n", "<cmd>lua require('todo-comments').jump_next()<cr>", { desc = "jump to next note" })
+set("n", "]n", "<cmd>lua require('todo-comments').jump_prev()<cr>", { desc = "jump to previous note" })
 
 
 --------------------------------------------------------------

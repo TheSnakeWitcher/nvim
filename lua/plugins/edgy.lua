@@ -8,4 +8,26 @@ end
 edgy.setup({
     options = { right = { size = 40 } },
     right = { "trouble" },
+    left = {
+        {
+          title = "Buffers",
+          ft = "neo-tree",
+          filter = function(buf)
+            return vim.b[buf].neo_tree_source == "buffers"
+          end,
+          pinned = true,
+          collapsed = false,
+          open = "Neotree position=top buffers",
+        },
+        {
+          title = "Filesystem",
+          ft = "neo-tree",
+          filter = function(buf)
+            return vim.b[buf].neo_tree_source == "filesystem"
+          end,
+          pinned = true,
+          collapsed = false,
+          open = "Neotree position=bottom filesystem",
+        },
+    },
 })
