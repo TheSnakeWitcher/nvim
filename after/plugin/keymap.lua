@@ -178,10 +178,10 @@ set("n", "<leader>fz", "<cmd>lua require('telescope').extensions.zoxide.list()<c
 --------------------------------------------------------------
 -- buffer_manager
 --------------------------------------------------------------
-set('n', '<S-h>', "<cmd>lua require('buffer_manager.ui').nav_file(1)<cr>", { desc = "move to pinned buffer 1" })
-set('n', '<S-j>', "<cmd>lua require('buffer_manager.ui').nav_file(2)<cr>", { desc = "move to pinned buffer 2" })
-set('n', '<S-k>', "<cmd>lua require('buffer_manager.ui').nav_file(3)<cr>", { desc = "move to pinned buffer 3" })
-set('n', '<S-l>', "<cmd>lua require('buffer_manager.ui').nav_file(4)<cr>", { desc = "move to pinned buffer 3" })
+set('n', '<A-h>', "<cmd>lua require('buffer_manager.ui').nav_file(1)<cr>", { desc = "move to pinned buffer 1" })
+set('n', '<A-j>', "<cmd>lua require('buffer_manager.ui').nav_file(2)<cr>", { desc = "move to pinned buffer 2" })
+set('n', '<A-k>', "<cmd>lua require('buffer_manager.ui').nav_file(3)<cr>", { desc = "move to pinned buffer 3" })
+set('n', '<A-l>', "<cmd>lua require('buffer_manager.ui').nav_file(4)<cr>", { desc = "move to pinned buffer 3" })
 
 
 --------------------------------------------------------------
@@ -213,15 +213,15 @@ set("n", "<leader>fu", "<cmd>UrlView buffer<cr>", { desc = "[f]ind [u]rls in buf
 --------------------------------------------------------------
 -- tab management
 --------------------------------------------------------------
-vim.api.nvim_set_keymap("n", "<leader>ta", ":$tabnew<CR>", { desc = "create new tab",noremap = true })
-vim.api.nvim_set_keymap("n", "<leader>tq", ":tabclose<CR>", {desc = "close selected tab", noremap = true })
-vim.api.nvim_set_keymap("n", "<leader>to", ":tabonly<CR>", { desc = "close all tabs except selected",noremap = true })
+set("n", "<leader>ta", ":$tabnew<CR>", { desc = "create new tab",noremap = true })
+set("n", "<leader>tq", ":tabclose<CR>", {desc = "close selected tab", noremap = true })
+set("n", "<leader>to", ":tabonly<CR>", { desc = "close all tabs except selected",noremap = true })
 
-vim.api.nvim_set_keymap("n", "<leader>tn", ":tabn<CR>", { desc = "select next tab",noremap = true })
-vim.api.nvim_set_keymap("n", "<leader>tp", ":tabp<CR>", { desc = "select previous tab",noremap = true })
+set("n", "<leader>tn", ":tabn<CR>", { desc = "select next tab",noremap = true })
+set("n", "<leader>tp", ":tabp<CR>", { desc = "select previous tab",noremap = true })
 
-vim.api.nvim_set_keymap("n", "<leader>tmn", ":+tabmove<CR>", { desc = "move current tab to next position",noremap = true })
-vim.api.nvim_set_keymap("n", "<leader>tmp", ":-tabmove<CR>", { desc = "move current tab to previous position" , noremap = true })
+set("n", "<leader>tmn", ":+tabmove<CR>", { desc = "move current tab to next position",noremap = true })
+set("n", "<leader>tmp", ":-tabmove<CR>", { desc = "move current tab to previous position" , noremap = true })
 
 set("n", "<leader>tl", "<CMD>Telescope telescope-tabs list_tabs<CR>", { desc = "[f]ind [t]abs" })
 
