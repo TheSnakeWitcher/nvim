@@ -244,12 +244,6 @@ require("lazy").setup({
         keys = { "<C-p>" ,"<leader>fp" },
         config = function() load_config("projections") end,
     },
-    -- search urls in buffer
-    {
-        "axieax/urlview.nvim",
-        cmd = "UrlView",
-        config = function() load_config("urlview") end,
-    },
 
 
     --------------------------------------------------------------
@@ -338,6 +332,12 @@ require("lazy").setup({
         "michaelrommel/nvim-silicon",
         cmd = "Silicon",
         config = function() load_config("silicon") end,
+    },
+    -- search urls in buffer
+    {
+        "axieax/urlview.nvim",
+        cmd = "UrlView",
+        config = function() load_config("urlview") end,
     },
     {
         -- refactoring tool
