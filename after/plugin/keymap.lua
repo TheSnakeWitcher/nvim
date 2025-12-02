@@ -175,6 +175,14 @@ set("n", "<leader>ft", "<cmd>lua require('telescope').extensions['telescope-tabs
 set("n", "<leader>fH", "<cmd>lua require('telescope').extensions.heading.heading()<cr>", { desc = "[f]ind [H]eaders" })
 set("n", "<leader>fz", "<cmd>lua require('telescope').extensions.zoxide.list()<cr>", { desc = "[f]ind [z]oxide" })
 
+--------------------------------------------------------------
+-- buffer_manager
+--------------------------------------------------------------
+set('n', '<S-h>', "<cmd>lua require('buffer_manager.ui').nav_file(1)<cr>", { desc = "move to pinned buffer 1" })
+set('n', '<S-j>', "<cmd>lua require('buffer_manager.ui').nav_file(2)<cr>", { desc = "move to pinned buffer 2" })
+set('n', '<S-k>', "<cmd>lua require('buffer_manager.ui').nav_file(3)<cr>", { desc = "move to pinned buffer 3" })
+set('n', '<S-l>', "<cmd>lua require('buffer_manager.ui').nav_file(4)<cr>", { desc = "move to pinned buffer 3" })
+
 
 --------------------------------------------------------------
 -- Diagnostic keymaps
@@ -184,7 +192,6 @@ set("n", "<leader>fz", "<cmd>lua require('telescope').extensions.zoxide.list()<c
 -- set('n', ']d', vim.diagnostic.goto_next, { noremap = true , desc = "next diagnostic"})
 -- set('n', '[e', function() vim.diagnostic.goto_prev({ severity = vim.diagnostic.severity.ERROR }) end, opts)
 -- set('n', ']e', function() vim.diagnostic.goto_next({ severity = vim.diagnostic.severity.ERROR }) end, opts)
-set('n', '<leader>q', vim.diagnostic.setloclist, { desc = "[q]uickfix set loclist" })
 
 
 --------------------------------------------------------------
