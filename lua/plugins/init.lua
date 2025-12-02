@@ -231,13 +231,7 @@ require("lazy").setup({
     { "tsakirist/telescope-lazy.nvim", keys = "<leader>fP" },   -- search plugins installed with lazy
     { "LinArcX/telescope-env.nvim", keys = "<leader>fe" },      -- search environment variables 
     { "crispgm/telescope-heading.nvim", keys = "<leader>fH" },  -- search headers
-    -- pinned buffer management
-    -- {
-    --     "ThePrimeagen/harpoon",
-    --     branch = "harpoon2",
-    --     dependencies = { "nvim-lua/plenary.nvim" },
-    --     init = function() require("harpoon"):setup() end
-    -- },
+    -- buffer management
     {
         "j-morano/buffer_manager.nvim",
         keys = { { "<leader>b", "<cmd>lua require('buffer_manager.ui').toggle_quick_menu()<cr>" } },
@@ -599,7 +593,7 @@ require("lazy").setup({
         -- codeium ai toolkit integration
         "Exafunction/codeium.nvim",
         event = "InsertEnter",
-        opts = {},
+        config = function() require("codeium").setup({}) end,
     },
     {
         -- ollama
