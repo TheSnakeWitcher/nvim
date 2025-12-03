@@ -42,7 +42,7 @@ projections.setup({
         pre = nil,
         post = function()
             vim.cmd("Neotree position=bottom filesystem " .. vim.uv.cwd())
-            vim.cmd("Neotree position=top buffers")
+            vim.cmd("Neotree position=top buffers " .. vim.uv.cwd())
         end,
     },
 })
