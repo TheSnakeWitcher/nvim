@@ -7,20 +7,17 @@ end
 
 local diff = util.load_config("lualine.diff")
 local project = util.load_config("lualine.project")
-local tests = util.load_config("lualine.neotest")
+-- local tests = util.load_config("lualine.neotest")
 local ruler = "%5(%l/%L%):%2c %p%%"  --- @help {statusline}
 
 ---@help {lualine-Default-configuration}
 lualine.setup({
 
     options = {
-        icons_enabled = true,
-        theme = 'onedark', -- 'tokyonight', onedark
-        component_separators = { left = '', right = '' }, -- -- ┊ |        
+        theme = 'onedark',
+        component_separators = { left = '', right = '' },
         section_separators = { left = '', right = '' },
-        disabled_filetypes = {
-            statusline = { "dashboard" },
-        },
+        disabled_filetypes = { statusline = { "dashboard" } },
         globalstatus = true,
     },
 
@@ -46,36 +43,11 @@ lualine.setup({
         },
         lualine_x = {
             "overseer",
-            tests.stats,
+            -- tests.stats,
         },
         lualine_y = {},
         lualine_z = {}
     },
-
-    -- tabline = {
-    --     lualine_c = {
-    --         --- @help {lualine-tabs-component-options}
-    --         {
-    --             "tabs",
-    --             mode = 2,
-    --         }
-    --     },
-    --     lualine_y = {
-    --         --- @help {lualine-windows-component-options}
-    --         {
-    --             "windows",
-    --             mode = 2,
-    --             filetype_names = {
-    --                 ["neo-tree"] = 'Neotree',
-    --             },
-    --             disabled_buftypes = {
-    --                 "prompt",
-    --                 "quickfix",
-    --                 "trouble"
-    --             },
-    --         },
-    --     }
-    -- },
 
     -- winbar = {
     --     lualine_c = {
@@ -83,15 +55,6 @@ lualine.setup({
     --     },
     --     lualine_x = {
     --         tests.stats_buf,
-    --     },
-    -- },
-
-    -- inactive_winbar = {
-    --     lualine_c = {
-    --         function() return require("lspsaga.symbol.winbar").get_bar() or "" end,
-    --     },
-    --     lualine_x = {
-    --          tests.stats_buf,
     --     },
     -- },
 
