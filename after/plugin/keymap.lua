@@ -1,6 +1,5 @@
 --- @help {vim.keymap}
 --- @help {key-notation}
-
 local set = vim.keymap.set
 local opts = { noremap = true, silent = true }
 
@@ -80,14 +79,17 @@ set("n", "N", "Nzz")
 -- navigations
 --------------------------------------------------------------
 -- buffers
--- set('n', 'B', function() vim.cmd('buffer ' .. vim.v.count) end, {
---     desc = "Usa {number}B para ir a un buffer específico" ,
---     noremap = true,
---     silent = true
--- })
-
--- go to
-set("n","gl", "<cmd>norm gx<cr>", opts)
+set('n', '^', function()
+    if vim.v.count ~= 0 then
+        vim.cmd('buffer ' .. vim.v.count)
+    else
+        vim.api.nvim_feedkeys("^",'n', false)
+    end
+end, {
+    desc = "Use {number}^ to go to buffer with number {number}" ,
+    noremap = true,
+    silent = true
+})
 
 -- tabs
 set("n", "<S-l>", ":tabnext<CR>", opts)
@@ -162,9 +164,10 @@ set("n", "<leader>fP", "<cmd>lua require('telescope').extensions.lazy.lazy()<cr>
 set("n", "<C-s>", "<cmd>lua require('telescope.builtin').git_status()<cr>", { desc = "[f]ind [S]tatus" })
 set("n","<leader>fs","<cmd>lua require('telescope.builtin').lsp_document_symbols()<cr>", { desc = "[f]ind [S]tatus" })
 set("n", "<leader>fb", "<cmd>lua require('telescope.builtin').git_branches()<cr>", { desc = "[f]ind [b]ranches" })
-set("n", "<leader>fc", "<cmd>lua require('telescope.builtin').git_commits()<cr>", { desc = "[f]ind [c]ommits" })
-set("n", "<leader>B", "<cmd>lua require('telescope.builtin').buffers({ sort_mru=true, sort_lastused=true, initial_mode=normal, theme=ivy})<cr>", { desc = "[f]ind [B]uffers" })
-set("n", "<C-b>", "<cmd>lua require('telescope.builtin').buffers({ sort_mru=true, sort_lastused=true, initial_mode=normal, theme=ivy})<cr>", { desc = "[f]ind [B]uffers" })
+set("n", "<leader>fc", "<cmd>lua require('telescope.builtin').git_bcommits()<cr>", { desc = "[f]ind [c]ommits for buffer" })
+set("n", "<leader>B", "<cmd>lua require('telescope.builtin').live_grep({ grep_open_files=true})<cr>", { desc = "[f]ind [B]uffers" })
+-- set("n", "<leader>B", "<cmd>lua require('telescope.builtin').buffers({ sort_mru=true, sort_lastused=true, initial_mode=normal, theme=ivy})<cr>", { desc = "[f]ind [B]uffers" })
+-- set("n", "<C-b>", "<cmd>lua require('telescope.builtin').buffers({ sort_mru=true, sort_lastused=true, initial_mode=normal, theme=ivy})<cr>", { desc = "[f]ind [B]uffers" })
 
 -- extensions pickers
 set("n", "<C-p>", "<cmd>lua require('telescope').extensions.projections.projections()<CR>", { desc = "[f]ind [p]rojects" })
@@ -286,9 +289,6 @@ set("n", "<leader>Tl", "<cmd>OverseerRestartLast<cr>", { desc = "[T]ask [l]ast" 
 --------------------------------------------------------------
 -- neotest
 --------------------------------------------------------------
-set("n", "<leader>tR", '<cmd>lua require("neotest").run.run({ suite= true})<cr>', { desc = "[t]est [R]un all/suite" })
-set("n", "<leader>tr", "<cmd>Neotest run<cr>", { desc = "[t]est [r]un" })
-set("n", "<leader>ts", "<cmd>Neotest summary<cr>", { desc = "[t]est [s]umary" })
 -- set("n", "]t", '<cmd>lua require("neotest").jump.next({ status = "failed" })<cr>', { desc = "next failed test" })
 -- set("n", "[t", '<cmd>lua require("neotest").jump.prev({ status = "failed" })<cr>', { desc = "prev failed test" })
 
