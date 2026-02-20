@@ -21,6 +21,24 @@ local n = extras.nonempty
 local postfix = require("luasnip.extras.postfix").postfix
 
 -- common nodes
+-- local filename = vim.fn.expand("%:t:r")
+
+local function filename()
+    local file = vim.fn.expand("%:t:r")
+    return sn(nil,{ i(1,file) })
+end
+
+
+local function solc_version()
+    local version_cmd_out = vim.fn.system({"solc","--version"})
+    local version = string.match(version_cmd_out,"%d.%d+.%d%d*")
+    if version then
+        return version
+    else
+        return "version"
+    end
+end
+
 
 ls.add_snippets("solidity", {
 
@@ -36,26 +54,22 @@ ls.add_snippets("solidity", {
     fmt([[
       //SPDX-License-Identifier: MIT
       pragma solidity ^{} ;
-      pragma {} ;
-
+      pragma abicoder v2 ;
 
       {}
     ]],
       {
-        d(1,function()
-            local solc_version_cmd_out = vim.fn.system({"solc","--version"})
-            local solc_version = string.match(solc_version_cmd_out,"%d.%d+.%d%d*")
-            if solc_version then
-                return sn(nil,{i(1,solc_version)})
-            else
-                return sn(nil,{i("version")})
-            end
-        end,{},{}),
-        c(2, {
-          t "abicoder v2",
-          t "abicoder v1",
-        }),
-        i(3,"/* code */"),
+        i(1),
+        -- d(1,function()
+        --     local solc_version_cmd_out = vim.fn.system({"solc","--version"})
+        --     local solc_version = string.match(solc_version_cmd_out,"%d.%d+.%d%d*")
+        --     if solc_version then
+        --         return sn(nil,{i(1,solc_version)})
+        --     else
+        --         return sn(nil,{i("version")})
+        --     end
+        -- end,{},{}),
+        i(2,"/* code */"),
       }
     )
   ),
@@ -99,7 +113,7 @@ ls.add_snippets("solidity", {
         /**
          * {}
          */
-	]]  ,
+	]],
       { i(1,"code") }
     )
   ),
@@ -110,14 +124,7 @@ ls.add_snippets("solidity", {
     {
       name = "contract",
       trig = "ct",
-      dscr = [[contract declaration,note:
-        * constructor is only used during contract creation
-        * contract is abstract when at least one of their functions isn't
-          implemented or may be marked as abstract
-          implement abstract functions in derived contracts must have the override keyword
-        * inheritance is ordered from most base(lefth) to most specialized or derived(rigth)
-        * constructor are always called in this order
-      ]],
+      dscr = "contract declaration",
     },
     fmt([[
       /**
@@ -131,11 +138,7 @@ ls.add_snippets("solidity", {
     ]],
       {
         title = rep(1),
-        -- name = i(1,"name"),
-        name = d(1,function()
-            local file = vim.fn.expand("%:t:r")
-            return sn(nil,{ i(1,file) })
-        end,{},{}),
+        name = d(1,filename,{},{}),
         parent = c(2, {
           sn(nil, fmt([[
             is {} 
@@ -144,27 +147,7 @@ ls.add_snippets("solidity", {
           })),
           t("")
         }),
-        c(3, {
-          i(1, "/* code */"),
-          sn(nil, fmt([[
-            constructor({1}) {2} {{
-              {3}
-            }}
-
-            {4}
-          ]], {
-            c(1, {
-              i(1, "_args"),
-              t(""),
-            }),
-            c(2, {
-              i(1, "constraints"),
-              t(""),
-            }),
-            i(3, "/* code */"),
-            i(4, "/* code */"),
-          })),
-        }),
+        i(3, "/* code */"),
       }
     )
   ),
@@ -177,40 +160,29 @@ ls.add_snippets("solidity", {
     },
     fmt([[
         // SPDX-License-Identifier: UNLICENSED
-        pragma solidity {solc} ;
+        pragma solidity {1} ;
 
         import "../lib/forge-std/src/Test.sol" ;
         import "./TestUtil.t.sol" ;
 
-        contract {contract}Test is Test , TestUtil {{
+        contract {2}Test is Test , TestUtil {{
 
             {contract} testContract ;
 
             function setUp() public {{
-                testContract = new {contract}({}) ;
+                testContract = new {contract}({3}) ;
             }}
 
-            {}
+            {4}
 
         }}
     ]],
       {
-        solc = f(function()
-            local solc_version_cmd_out = vim.fn.system({"solc","--version"})
-            local solc_version = string.match(solc_version_cmd_out,"%d.%d+.%d%d*")
-            if solc_version then
-                return solc_version
-            else
-                return "version"
-            end
-        end,{},{}),
-        contract = f(function()
-            local filename = vim.fn.expand("%:t")
-            local extension = ".t.sol"
-            return string.gsub(filename, extension, "")
-        end, {}, {}),
-        i(1, "args"),
-        i(2, "/* code */"),
+        i(1, "version"),
+        d(2,filename, {}, {}),
+        i(3, "args"),
+        i(4, "/* code */"),
+           contract = rep(2)
       }
     )
   ),
@@ -271,7 +243,7 @@ ls.add_snippets("solidity", {
       }}
     ]],
       {
-        i(1, "name"),
+        d(1,filename,{},{}),
         i(2, "/* code */"),
       }
     )
@@ -295,26 +267,8 @@ ls.add_snippets("solidity", {
         }}
     ]]  ,
       {
-        i(1, "name"),
+        d(1,filename, {}, {}),
         i(2, "/* function signature set, events*/"),
-      }
-    )
-  ),
-
-  s(
-    {
-      name = "interface-use",
-      trig = "interface",
-      dscr = "interface usage",
-    },
-    fmt([[
-	  {} {} = {}({}) ;
-	]]  ,
-      {
-        i(1, "interface_type"),
-        i(2, "interface_name"),
-        rep(1),
-        i(3, "contract_address")
       }
     )
   ),
@@ -593,14 +547,13 @@ ls.add_snippets("solidity", {
     },
     fmt(
       [[
-		for(uint i = {1} ; i < {2} ; ++i ) {{
-			{3}
+		for(uint256 i ; i < {1} ; ++i ) {{
+			{2}
 		}}
 	]]    ,
       {
-        i(1, "iter"),
-        i(2, "length"),
-        i(3, "/* code */"),
+        i(1, "length"),
+        i(2, "/* code */"),
       }
     )
   ),
@@ -940,124 +893,6 @@ ls.add_snippets("solidity", {
   -- utilities
   ------------------------------------------------------
   s({
-    name = "util-pkg",
-    trig = "pkg",
-    dscr = "list of commonly used packages",
-  }, {
-    c(1, {
-      t "SafeMath",
-      t "SafeMath2",
-    }),
-  }),
-
-  s({
-    name = "environment-variables",
-    trig = "env",
-    dscr = "global environment variables",
-  }, {
-    c(1, {
-      t "this",
-      t "msg.sender",
-      t "msg.value",
-      t "msg.data",
-      t "msg.sig",
-      t "block.coinbase",
-      t "block.prevrandao",
-      t "block.gaslimit",
-      t "block.number",
-      t "block.timestamp",
-      t "blockhash(blocknumber)",
-      t "tx.gasprice",
-      t "tx.origin",
-      t "addres(this).balance",
-    }),
-  }),
-
-  s({
-    name = "util-send",
-    trig = "util-send",
-    dscr = [[functions to send ether,note:
-      call(forward all gas or set gas,return bool),this is the recomended method to use when send ether but not to call external functions
-      transfer(2300 gas,trow error),
-      send(2300 gas,trow error),
-    ]],
-  }, {
-    c(1, {
-      t '(bool sent ; bytes memory data) = _to.staticcall',
-      t '(bool sent ; bytes memory data) = _to.call{value: msg.value,gas: gasAmount}("")',
-      t "to.transfer(msg.value)",
-      t "_to.send(msg.value)}",
-    }),
-  }),
-
-  s({
-    name = "util-receive",
-    trig = "util-receive",
-    dscr = [[function to receive ether,note:
-      receive is called if msg.data is empty,
-      otherwise or when a function that not exist is called fallback() is called,
-      call with re-entrancy guard is the recomendation
-    ]],
-  }, {
-    c(1, {
-      t "receive() external payable{}",
-      t "fallback() external payable",
-    }),
-  }),
-
-  s({
-    name = "util-hash",
-    trig = "util-hash",
-    dscr = [[solidity hashing function,note:
-      * except keccak256 all other call external contracts
-      * ecrecover validate that incoming data is properly signed by an expected party(verify tx signature)
-
-    ]],
-  }, {
-    c(1, {
-      t "keccak256(abi.encodePacked(data)) ;",
-      t "sha256() ;",
-      t "ripemd160() ;",
-      t "ecrecover() ;",
-      t "1addmod() ;",
-      t "mulmod",
-    }),
-  }),
-
-  s({
-    name = "util-abi",
-    trig = "util-abi",
-    dscr = [[abi functions,note:
-      * encodePacked returns byte array
-    ]],
-  }, {
-    c(1, {
-      sn(nil, fmt([[
-        abi.encodePacked({}) ;
-      ]], {
-        i(1, "data1,data2"),
-      })),
-      sn(nil, fmt([[
-        abi.encode({}) ;
-      ]], {
-        i(1, "data"),
-      })),
-      sn(nil, fmt([[
-        abi.decode({},({})) ;
-      ]], {
-        i(1, "encodedData"),
-        i(2, "typeListToDecode"),
-      })),
-      sn(nil, fmt([[
-        abi.EncodeWithSignature({1},{2}) ;
-      ]], {
-        i(1, "fnSignatureString"),
-        i(2, "PassedArgs"),
-      })),
-    }),
-  }),
-
-  s({
     name = "util-functions",
     trig = "util-fn",
     dscr = [[important functions,note:
@@ -1199,21 +1034,6 @@ ls.add_snippets("solidity", {
       sn(nil, fmt([[ return({},{}) ]], { i(1, "mem_address"), i(2, "bytes_number") })),
       t("stop()"), -- stop execution(equivalent to return(0,0))
     }),
-  }),
-
-  s({
-    name = "util-notes",
-    trig = "notes",
-    dscr = "important notes about",
-  }, {
-    t {
-      "view functions don't cost any gas when are called externally",
-      "view functions called inside a child contract inside another functions wich is not view cost gas",
-      "modifiers cannot have same name as a function",
-      'Inheritance must be ordered from "most base-like" to “most derived',
-      "Inherited methods(super().method()) from parents are called starting from rigth(more specialized) to left(more general)",
-      "Interface functions can be overrided in derived contract,but overrided functions in child must be declared virtual in order to be overrided again in contracts derived from child",
-    },
   }),
 
 })
