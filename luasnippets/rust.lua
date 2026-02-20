@@ -28,48 +28,6 @@ ls.add_snippets("rust", {
   ------------------------------------------------------
   s(
     {
-      name = "pkg",
-      trig = "pkg",
-      dscr = [[most used modules,notes:
-        configuration: config
-        loging: tracing,log
-        error handling: anyhow,thiserror
-        parser : nom,syn
-        assertions : more_asserts,assertor,spectral
-        tapping values: tap
-        cli : clap
-        camino : utf8 paths
-        data parallelism lib: rayon
-        async runtime environment: tokio
-        http client: reqwest
-        reflexion: quote
-      ]],
-    },
-    fmt([[
-      {}
-    ]], {
-      c(1, {
-        t("config"),
-        t("tracing"),
-        t("anyhow"),
-        t("thiserror"),
-        t("tokio"),
-        t("reqwest"),
-        t("more_asserts"),
-        t("assertor"),
-        t("clap"),
-        t("tap"),
-        t("rayon"),
-        t("camino"),
-        t("itertools"),
-        t("async-trait"),
-      })
-    }), {
-    key = "modules"
-  }),
-
-  s(
-    {
       name = "module",
       trig = "mod",
       dscr = "import/declare module",
@@ -158,69 +116,6 @@ ls.add_snippets("rust", {
 
   s(
     {
-      name = "main",
-      trig = "main",
-      dscr = "main function declaration, note: main is entry point for program",
-    },
-    fmt([[
-        {}
-        {}fn main(){}{{
-            {}
-        }}
-    ]],
-      {
-        d(1,function()
-            local bufnr = vim.api.nvim_get_current_buf()
-            local lang , query_name  = "rust" , "used_modules"
-            local query = [[( (use_declaration (scoped_use_list (identifier) @module (#eq? @module "actix_web") ) ) )]]
-            local struct_name_query = [[( (struct_item (type_identifier) @struct_name ) )]]
-            local trait_name_query = [[( (trait_item (type_identifier) @trait_name ) )]]
-
-            local parser = vim.treesitter.get_parser(bufnr ,lang,{})
-            local tree = parser:parse()[1]
-            local tree_root = tree:root()
-            local used_modules = vim.treesitter.query.parse(lang,query)
-
-            for id,node,metadata in used_modules:iter_captures(tree_root,bufnr) do
-                return sn(nil,t("#[actix_web::main]"))
-            end
-            return sn(nil,t(""))
-        end,{},{}),
-        n(1,"async ",""),
-        c(2, {
-          sn(2, {
-            t " -> ",
-            i(1, "return_type"),
-            t " ",
-          }),
-          t " ",
-        }),
-        d(3,function(args)
-            local insert_code_node = i(1,"/* code */")
-            local attribute_node = sn(nil,
-            fmt([[
-                HttpServer::new(||{{
-                    App::new()
-                    {}
-                }})
-                .bind((SERVER_ADDRESS,SERVER_PORT))
-                .run()
-                .await
-            ]],{insert_code_node}))
-
-            local attribute = args[1][1]
-            if attribute == "#[actix_web::main]" then
-                return attribute_node
-            else
-                return sn(nil,{insert_code_node})
-            end
-        end,{1},{}),
-      }
-    )
-  ),
-
-  s(
-    {
       name = "func",
       trig = "fn",
       dscr = "function declaration",
@@ -239,6 +134,7 @@ ls.add_snippets("rust", {
           i(1, "name"),
           t "",
         }),
+        -- m(2,"<),
         c(3, {
           i(1, "args"),
           t "",
@@ -258,198 +154,31 @@ ls.add_snippets("rust", {
 
   s(
     {
-      name = "closure",
-      trig = "fnl",
-      dscr = "closure declaration",
-    },
-    fmt([[
-      {1}|{2}|{{ {} }}
-    ]],
-      {
-        c(1, {
-          t "",
-          t "move ",
-        }),
-        c(2, {
-          i(1, "args"),
-          t "",
-        }),
-        i(3, "/* code */"),
-      }
-    )
-  ),
-
-  s(
-    {
-      name = "func-generic",
-      trig = "fng",
-      dscr = "generic function declaration",
-    },
-    fmt([[
-      {1}fn {2}{3}({4}){5}{{
-        {6}
-      }}
-    ]],
-      {
-        c(1, {
-          t "",
-          t "pub ",
-        }),
-        i(2, "name"),
-        sn(3, {
-          t "<",
-          i(1, "ptype"),
-          t ">",
-        }),
-        i(4, "args"),
-        c(5, {
-          sn(1, {
-            t " -> ",
-            i(1, "return_type"),
-            t " ",
-          }),
-          t "",
-        }),
-        i(6, "/* code */"),
-      }
-    )
-  ),
-
-  s(
-    {
-      name = "func-parametric-trait",
-      trig = "fngt",
-      dscr = "parametrict function declaration",
-    },
-    fmt([[
-      {1}fn {2}{3}({4}){5}{6}{{
-        {7}
-      }}
-    ]],
-      {
-        c(1, {
-          t "",
-          t "pub ",
-        }),
-        i(2, "name"),
-        sn(3, {
-          t "<",
-          i(1, "ptype"),
-          t ">",
-        }),
-        i(4, "args"),
-        c(5, {
-          sn(1, {
-            t " -> ",
-            i(4, "return_type"),
-            t " ",
-          }),
-          t "",
-        }),
-        sn(6, {
-          t "where ",
-          i(1, "ptype:trait"),
-        }),
-        i(7, "/* code */"),
-      }
-    )
-  ),
-
-  s(
-    {
-      name = "method",
-      trig = "fnm",
+      name = "function-method",
+      trig = "fm",
       dscr = "method declaration, note: methdos are asociated with a datastruct & must be inside and impl",
     },
     fmt([[
-      {1}fn {2}({3}{4}){5}{{
-        {6}
-      }}
-    ]],
-      {
-        c(1, {
-          t "",
-          t "pub ",
-        }),
-        i(2, "name"),
-        c(3, {
-          t "&self",
-          t "&mut self",
-          t "self",
-        }),
-        c(4, {
-          sn(1, {
-            t ",",
-            i(1, "args"),
-          }),
-          t "",
-        }),
-        c(5, {
-          sn(nil, {
-            t " -> ",
-            i(1, "return_type"),
-            t " ",
-          }),
-          t " ",
-        }),
-        i(6, "/* code */"),
-      }
-    )
-  ),
-
-  s(
-    {
-      name = "wasm function",
-      trig = "fnw",
-      dscr = "wasm function declaration",
-    },
-    fmt([[
-      #[wasm_bindgen]
-      pub fn {1}({2}){3}{{
-        {4}
-      }}
-    ]],
-      {
-        i(1, "name"),
-        c(2, {
-          sn(1, {
-            t ",",
-            i(1, "args"),
-          }),
-          t "",
-        }),
-        c(3, {
-          sn(nil, {
-            t " -> ",
-            i(1, "return_type"),
-            t " ",
-          }),
-          t " ",
-        }),
-        i(4, "/* code */"),
-      }
-    )
-  ),
-
-  s(
-    {
-      name = "func-const",
-      trig = "fnc",
-      dscr = "constant function declaration, note: constant functions is usable at compile time",
-    },
-    fmt([[
-      {1}const fn {2}({3}){4}{{
+      fn {1}({2}{3}){4}{{
         {5}
       }}
     ]],
       {
-        c(1, {
-          t "",
-          t "pub ",
+        -- c(1, {
+        --   t "",
+        --   t "pub ",
+        -- }),
+        i(1, "name"),
+        c(2, {
+          t "&self",
+          t "&mut self",
+          t "self",
         }),
-        i(2, "name"),
         c(3, {
-          i(1, "args"),
+          sn(1, {
+            t ",",
+            i(1, "args"),
+          }),
           t "",
         }),
         c(4, {
@@ -495,6 +224,69 @@ ls.add_snippets("rust", {
           t " ",
         }),
         i(5, "/* code */"),
+      }
+    )
+  ),
+
+  s(
+    {
+      name = "closure",
+      trig = "fnl",
+      dscr = "closure declaration",
+    },
+    fmt([[
+      {1}|{2}|{{ {} }}
+    ]],
+      {
+        c(1, {
+          t "",
+          t "move ",
+        }),
+        c(2, {
+          i(1, "args"),
+          t "",
+        }),
+        i(3, "/* code */"),
+      }
+    )
+  ),
+
+s(
+    {
+      name = "func-parametric-trait",
+      trig = "fngt",
+      dscr = "parametrict function declaration",
+    },
+    fmt([[
+      {1}fn {2}{3}({4}){5}{6}{{
+        {7}
+      }}
+    ]],
+      {
+        c(1, {
+          t "",
+          t "pub ",
+        }),
+        i(2, "name"),
+        sn(3, {
+          t "<",
+          i(1, "ptype"),
+          t ">",
+        }),
+        i(4, "args"),
+        c(5, {
+          sn(1, {
+            t " -> ",
+            i(4, "return_type"),
+            t " ",
+          }),
+          t "",
+        }),
+        sn(6, {
+          t "where ",
+          i(1, "ptype:trait"),
+        }),
+        i(7, "/* code */"),
       }
     )
   ),
@@ -790,23 +582,6 @@ ls.add_snippets("rust", {
   -- loops
   s(
     {
-      name = "loop",
-      trig = "loop",
-      dscr = "infinite loop statement",
-    },
-    fmt([[
-    loop {{
-      {1}
-    }}
-  ]] ,
-      {
-        i(1, "/* code */"),
-      }
-    )
-  ),
-
-  s(
-    {
       name = "while",
       trig = "while",
       dscr = "while|while let statement declaration",
@@ -849,57 +624,9 @@ ls.add_snippets("rust", {
     )
   ),
 
-  s(
-    {
-      name = "break",
-      trig = "break",
-      dscr = "break loop,note: may returning val",
-    },
-    fmt([[
-    break {1};
-  ]] ,
-      {
-        c(1, {
-          sn(1, {
-            i(1, "return_val"),
-            t " ",
-          }),
-          t "",
-        }),
-      }
-    )
-  ),
-
   ------------------------------------------------------
   --     				data structures   				--
   ------------------------------------------------------
-  s({
-    name = "types",
-    trig = "type",
-    dscr = "rust builting types",
-  }, {
-    c(1, {
-      t "isize",
-      t "usize",
-      t "char",
-      t "str",
-      t "String",
-      t "Vec",
-      t "HashMap",
-      t "i8",
-      t "i16",
-      t "i32",
-      t "i64",
-      t "u8",
-      t "u16",
-      t "u32",
-      t "u64",
-      t "u128",
-      t "f32",
-      t "f64",
-    }),
-  }),
-
   s(
     {
       name = "type",
@@ -907,8 +634,8 @@ ls.add_snippets("rust", {
       dscr = "type alias declaration",
     },
     fmt([[
-type {1} = {2} ;
-]]   ,
+        type {1} = {2} ;
+    ]]   ,
       {
         i(1, "TypeAlias"),
         i(2, "BaseType"),
@@ -1008,41 +735,6 @@ type {1} = {2} ;
       i(3, "args"),
       i(4, "ops"),
     }
-    )
-  ),
-
-  s(
-    {
-      name = "let-tuple",
-      trig = "tuple",
-      dscr = "create a tuple with vals values_list of types types_list",
-    },
-    fmt([[
-    let {1} : ({2}) = {3} ;
-  ]] ,
-      {
-        i(1, "name"),
-        i(2, "types_list"),
-        i(3, "values_list"),
-      }
-    )
-  ),
-
-  s(
-    {
-      name = "let-array",
-      trig = "leta",
-      dscr = "declaration of array named arr_name of type arr_type with capacity arr_cap",
-    },
-    fmt([[
-  let {1} : [{2},{3}] = [{4}] ;
-  ]] ,
-      {
-        i(1, "arr_name"),
-        i(2, "arr_type"),
-        i(3, "arr_cap"),
-        i(4, "vals"),
-      }
     )
   ),
 
@@ -1319,113 +1011,6 @@ type {1} = {2} ;
   ),
 
   ------------------------------------------------------
-  --     				  	auxiliar 					--
-  ------------------------------------------------------
-  s(
-    {
-      name = "unsafe",
-      trig = "unsafe",
-      dscr = "unsafe block declaretions, note: unsafe code are low level code wich rust compiler can't assert good behavior",
-    },
-    fmt([[
-      unsafe {{
-	    {}
-      }}
-    ]],
-      {
-        i(1, "/* unsafe code */}"),
-      }
-    )
-  ),
-
-  s(
-    {
-      name = "result",
-      trig = "Result",
-      dscr = "result enum declaration with return type return_type and error type err_type",
-    },
-    fmt([[
-      Result<{1},{2}>
-    ]],
-      {
-        i(1, "return_type"),
-        i(2, "err_type"),
-      }
-    )
-  ),
-  s(
-    {
-      name = "option",
-      trig = "Option",
-      dscr = "option enum declaration",
-    },
-    fmt([[
-      Option<{}>
-    ]],
-      {
-        i(1, "some_variant"),
-      }
-    )
-  ),
-
-  s(
-    {
-      name = "ok",
-      trig = "Ok",
-      dscr = "OK enum",
-    },
-    fmt([[
-      Ok({}) ;
-    ]],
-      {
-        i(1, "name"),
-      }
-    )
-  ),
-
-  s(
-    {
-      name = "err",
-      trig = "err",
-      dscr = "Err enum",
-    },
-    fmt([[
-  Err({}) ;
-]]   ,
-      {
-        i(1, "name"),
-      }
-    )
-  ),
-
-  s(
-    {
-      name = "Some",
-      trig = "Some",
-      dscr = "Some enum",
-    },
-    fmt([[
-  Some({}) ;
-]]   ,
-      {
-        i(1, "name"),
-      }
-    )
-  ),
-
-  s(
-    {
-      name = "None",
-      trig = "None",
-      dscr = "None enum",
-    },
-    fmt([[
-      None() ;
-    ]], {}
-    )
-  ),
-
-  ------------------------------------------------------
   --  				  	macros				          --
   ------------------------------------------------------
   s(
@@ -1512,51 +1097,6 @@ type {1} = {2} ;
         i(1,"name"),
         i(2,"args: TokenStream"),
         i(3,"/* code */"),
-    })
-  ),
-
-
-  ------------------------------------------------------
-  --  				  	configuration				  --
-  ------------------------------------------------------
-  s(
-    {
-      name = "config",
-      trig = "config",
-      dscr = "basic config",
-    },
-    fmt([[
-      use config;
-      use serde;
-
-      const CONFIG_FILE: &'static str = "{}";
-
-      #[derive(Debug, serde::Deserialize)]
-      pub struct Configuration {{
-        {}
-      }}
-
-      impl Default for Configuration {{
-          fn default() -> Self {{
-              return Configuration {{
-                {}
-              }};
-          }}
-      }}
-
-      pub fn init_config() -> Configuration {{
-          let config: Configuration = config::Config::builder()
-              .add_source(config::File::with_name(CONFIG_FILE))
-              .build()
-              .expect("failed to load configuration")
-              .try_deserialize()
-              .expect("failed to serialize configuration");
-          return config;
-      }}
-    ]], {
-      i(1, "path to config file"),
-      i(2, "config data/fields"),
-      rep(2)
     })
   ),
 
