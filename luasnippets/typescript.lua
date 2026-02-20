@@ -24,56 +24,15 @@ ls.add_snippets("typescript", {
   --     				codebase structures   			--
   ------------------------------------------------------
   s({
-    name = "import",
-    trig = "im",
-    dscr = "import code"
-  },
-    fmt([[
-            import "{}" ;
-        ]], {
-      i(1, "pkg"),
-    })
-  ),
-
-  s({
-    name = "imports",
-    trig = "ims",
-    dscr = "import from code"
-  },
-    fmt([[
-            import {{ {} }} from "{}" ;
-        ]], {
-      i(1, "obj"),
-      i(2, "pkg"),
-    })
-  ),
-
-  s({
-    name = "export",
-    trig = "exp",
-    dscr = "export component from module pkg"
-  },
-    fmt([[
-    	    export {}{} ;
-        ]], {
-      c(1,{
-          t("default "),
-          t(""),
-      }),
-      i(2, "component"),
-    })
-  ),
-
-  s({
     name = "function",
     trig = "fn",
     dscr = "function declaration"
   },
     fmt([[
-    	{1}function {2}({3}) {{
-    	  {}
-    	}}
-      ]], {
+        {1}function {2}({3}) {{
+            {}
+        }}
+    ]], {
       c(1, {
         t(""),
         t("export "),
@@ -89,48 +48,6 @@ ls.add_snippets("typescript", {
       i(4, "/* code */"),
     })
   ),
-
-s({
-    name = "function-component",
-    trig = "fnc",
-    dscr = "react component declaration"
-},
-    fmt([[
-        import "./{1}.css" ;
-
-        function {2}({3}) {{
-            return (
-                {4}
-            ) ;
-        }}
-
-        export default {5} ;
-    ]], {
-        --f(function(nodes) return nodes[1][1] end ,{2},{}),
-        rep(1),
-        d(1, function()
-            local file = vim.fn.expand("%:t")
-            local extension = vim.fn.expand("%:t:e")
-            local name = string.gsub(file, "." .. extension, "")
-
-            return sn(nil, {
-                    i(1, name),
-            })
-        end, {}, {}),
-        c(2, {
-            t(""),
-            t("props"),
-            sn(nil,{
-                t("{"),
-                i(1, "args"),
-                t("}"),
-            }),
-        }),
-        i(3, "/* code */"),
-        rep(1),
-    })
-),
-
 
 s({
     name = "function-async",
@@ -158,7 +75,6 @@ s({
     })
 ),
 
-
   s({
     name="function-lambda",
     trig= "fl",
@@ -181,50 +97,74 @@ s({
     	i(4,"/* code */"),
     })
   ),
-  --
-  -- s({
-  --   name="function",
-  --   trig= "fnm",
-  --   dscr= "method declaration"
-  -- },
-  --   fmt([[
-  -- 	{1}function {2}({3}) {{
-  -- 	  {4}
-  -- 	}}
-  --   ]],{
-  --   	c(1,{
-  --   	  t("public "),
-  --   	  t(""),
-  --   	  t("static "),
-  --   	  t("public static "),
-  --   	}),
-  --   	i(2,"name"),
-  --   	c(3,{
-  --   	  i(1,"arg:type"),
-  --   	  t(""),
-  --   	}),
-  --   	i(4,"/* code */"),
-  --   })
-  -- ),
+
+   s({
+     name="function-method",
+     trig= "fm",
+     dscr= "method declaration"
+   },
+     fmt([[
+   	{1}function {2}({3}) {{
+   	  {4}
+   	}}
+     ]],{
+     	c(1,{
+     	  t(""),
+     	  t("public "),
+     	  t("static "),
+     	}),
+     	i(2,"name"),
+     	c(3,{
+     	  i(1,"arg:type"),
+     	  t(""),
+     	}),
+     	i(4,"/* code */"),
+     })
+   ),
+
+
+s({
+        name = "function-component",
+        trig = "fnc",
+        dscr = "react component declaration"
+    },
+    fmt([[
+        import "./{1}.css" ;
+
+        export default function {2}({3}) {{
+            return (
+                {4}
+            ) ;
+        }}
+    ]], {
+        --f(function(nodes) return nodes[1][1] end ,{2},{}),
+        rep(1),
+        d(1, function()
+            local file = vim.fn.expand("%:t")
+            local extension = vim.fn.expand("%:t:e")
+            local name = string.gsub(file, "." .. extension, "")
+
+            return sn(nil, {
+                    i(1, name),
+            })
+        end, {}, {}),
+        c(2, {
+            t(""),
+            t("props"),
+            sn(nil,{
+                t("{"),
+                i(1, "args"),
+                t("}"),
+            }),
+        }),
+        i(3, "/* code */"),
+    })
+),
 
   ------------------------------------------------------
   --     				control structures   			--
   ------------------------------------------------------
   --  bifurcation
-  s({
-    name = "if-ternary",
-    trig = "ift",
-    dscr = "if ternary statement"
-  },
-    fmt([[
-      	{1} ? {2} : {3}
-      ]], {
-      i(1, "cond"),
-      i(2, "val_if_true"),
-      i(3, "val_if_false"),
-    })
-  ),
-
   s({
     name = "if",
     trig = "if",
@@ -330,28 +270,12 @@ s({
   ),
 
   s({
-    name = "foreach",
-    trig = "foreach",
-    dscr = "calls function for every element of container"
-  },
-    fmt([[
-      	{1}.forEach( {2} => {{
-    	  {3}
-      	}})
-      ]], {
-      i(1, "containerName"),
-      i(2, "item"),
-      i(3, "/* code */"),
-    })
-  ),
-
-  s({
     name = "for",
     trig = "for",
     dscr = "for declaration"
   },
     fmt([[
-      	for (let {1} = 0 , {2} ; {3} ) {{
+      	for (let {1} = 0 ; {2} ; {3} ) {{
     	  {4}
       	}}
       ]], {
@@ -522,117 +446,6 @@ s({
         ]], {
       i(1, "name"),
       i(2, "field:type"),
-    })
-  ),
-
-  ------------------------------------------------------
-  --     				   auxiliar     			    --
-  ------------------------------------------------------
-  s({
-    name = "filter",
-    trig = "filter",
-    dscr = "filter function"
-  },
-    fmt([[
-      	{1}.filter( {2} => {{
-    	  {3}
-      	}})
-      ]], {
-      i(1, "containerName"),
-      i(2, "item"),
-      i(3, "/* code */"),
-    })
-  ),
-
-  s({
-    name = "map",
-    trig = "map",
-    dscr = "map function"
-  },
-    fmt([[
-      	{1}.map( {2} => {{
-    	  {3}
-      	}})
-      ]], {
-      i(1, "containerName"),
-      i(2, "item"),
-      i(3, "/* code */"),
-    })
-  ),
-
-  s({
-    name = "find",
-    trig = "find",
-    dscr = "find function"
-  },
-    fmt([[
-      	{1}.find( {2} => {{
-    	  {3}
-      	}})
-      ]], {
-      i(1, "containerName"),
-      i(2, "item"),
-      i(3, "/* code */"),
-    })
-  ),
-
-  s({
-    name = "fetch",
-    trig = "fetch",
-    dscr = "fetch function"
-  },
-    fmt([[
-      	let data = await fetch({{
-      	    url: "{}",
-      	    method: "{}",
-      	    {}
-      	}})
-      ]], {
-      i(1, "url"),
-      c(2,{
-         t("GET"),
-         t("POST"),
-         t("PUT"),
-         t("DELETE"),
-      }),
-      c(3,{
-        sn(nil,fmt([[
-            body: {}
-        ]],{
-            i(1,"data")
-        })),
-        t(""),
-      }),
-    })
-  ),
-
-  s({
-    name = "hooks",
-    trig = "hooks",
-    dscr = "hooks"
-  },
-    fmt([[
-      	useState
-      	useEffect
-      ]], {})
-  ),
-
-  s({
-    name = "useState",
-    trig = "useState",
-    dscr = "declare a component state variable"
-  },
-    fmt([[
-        const [{},{}] = useState({})
-    ]], {
-        i(1,"variable"),
-        f(function(nodes)
-            local str = nodes[1][1]
-            local first_char = string.sub(str,0,1)
-            local rest = string.sub(str,2,#str)
-            return "set" .. string.upper(first_char) .. rest
-        end,{1},{}),
-        i(2,"defaultValue"),
     })
   ),
 
