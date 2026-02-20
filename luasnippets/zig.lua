@@ -28,6 +28,26 @@ ls.add_snippets("zig", {
   ------------------------------------------------------
   s(
     {
+      name = "import",
+      trig = "import",
+      dscr = "import declaration",
+    },
+    fmt([[
+      {1}const {3} = @import("{2}");
+    ]],
+      {
+        c(1, {
+          t "",
+          t "pub ",
+        }),
+        i(2, "name"),
+        d(3, function(args) return sn(nil, { i(1,args[1]) }) end, {2})
+      }
+    )
+  ),
+
+  s(
+    {
       name = "function",
       trig = "fn",
       dscr = "function declaration",
