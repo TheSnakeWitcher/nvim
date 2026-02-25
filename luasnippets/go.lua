@@ -73,38 +73,16 @@ ls.add_snippets("go", {
 	  import {}
 	]]  ,
       {
-        i(1, "name"),
-      }
-    )
-  ),
-
-  s(
-    {
-      name = "import-block",
-      trig = "ims",
-      dscr = "imports a group of packages",
-    },
-    fmt([[
-	  import ((
- 	 	{2}"{1}"
- 	 	{4}"{3}"
-	  ))
-	]]  ,
-      {
-        i(1, "pkg"),
-        c(2, {
-          t "",
-          sn(1, {
-            i(1, "alias"),
-            t " ",
+        c(1, {
+          sn(nil, {
+            t('"'),
+            i(1, "name"),
+            t('"'),
           }),
-        }),
-        i(3, "pkg"),
-        c(4, {
-          t "",
-          sn(1, {
-            i(1, "alias"),
-            t " ",
+          sn(nil, {
+            t({'(','\t"'}),
+            i(1, "names"),
+            t({'"',')'}),
           }),
         }),
       }
@@ -223,30 +201,29 @@ ls.add_snippets("go", {
 
   s(
     {
-      name = "func-generation",
-      trig = "fng",
-      dscr = "generic function declaration, note: ptype stands for parametric_type",
+      name = "method",
+      trig = "fm",
+      dscr = "method",
     },
-    fmt(
-      [[
-      	func {1}[{2}]({3}) {4}{{
-      	  {5}
-      	}}
-	]]    ,
+    fmt([[
+      func (self {4}){1}({2}) {3}{{
+        {5}
+      }}
+	]]  ,
       {
-        i(1, "name"),
-        i(2, "arg ptype"),
-        c(3, {
-          t "args",
+        i(1,"name"),
+        c(2, {
+          i(1,"args"),
           t "",
         }),
-        c(4, {
+        c(3, {
           sn(nil, {
             i(1, "return_types"),
             t " ",
           }),
           t "",
         }),
+        i(4, "ReceiverType"),
         i(5, "/* code */"),
       }
     )
@@ -318,83 +295,10 @@ ls.add_snippets("go", {
     )
   ),
 
-  s(
-    {
-      name = "method",
-      trig = "fm",
-      dscr = "method",
-    },
-    fmt([[
-      func (self {4}){1}({2}) {3}{{
-        {5}
-      }}
-	]]  ,
-      {
-        i(1,"name"),
-        c(2, {
-          i(1,"args"),
-          t "",
-        }),
-        c(3, {
-          sn(nil, {
-            i(1, "return_types"),
-            t " ",
-          }),
-          t "",
-        }),
-        i(4, "ReceiverType"),
-        i(5, "/* code */"),
-      }
-    )
-  ),
-
-  s(
-    {
-      name = "defered-func-anonimous",
-      trig = "defer",
-      dscr = "defered anonimous function",
-    },
-    fmt([[
-      defer func ({1}) {2}{{
-        {3}
-      }}()
-	]]  ,
-      {
-        c(1, {
-          t "args",
-          t "",
-        }),
-        c(2, {
-          sn(nil, {
-            i(1, "return_types"),
-            t " ",
-          }),
-          t "",
-        }),
-        i(3, "/* code */"),
-      }
-    )
-  ),
-
-  s(
-    {
-      name = "defered-func-call",
-      trig = "defer",
-      dscr = "defered function call",
-    },
-    fmt([[
-      defer {}
-    ]],
-      {
-        i(1, "name"),
-      }
-    )
-  ),
-
-  -- ------------------------------------------------------
-  -- --     				control structures   			--
-  -- ------------------------------------------------------
-  -- -- bifurcation
+  --------------------------------------------------------
+  --     				control structures   			--
+  --------------------------------------------------------
+  -- bifurcation
   s(
     {
       name = "ifer",
@@ -718,22 +622,6 @@ ls.add_snippets("go", {
 	]]    ,
       {
         i(1, "ErrorMsg"),
-      }
-    )
-  ),
-
-  s(
-    {
-      name = "panic",
-      trig = "panic,",
-      dscr = "panic call",
-    },
-    fmt(
-      [[
-		panic({})
-	]]    ,
-      {
-        i(1, "PanicMsg"),
       }
     )
   ),
@@ -1073,117 +961,7 @@ ls.add_snippets("go", {
 	]]    ,
       {
         i(1, "name"),
-        i(2, "/* method set */"),
-      }
-    )
-  ),
-
-  s(
-    {
-      name = "interface-constraint",
-      trig = "[iw, interface],",
-      dscr = "interface constraint type to use in generic functions, note: this is go union",
-    },
-    fmt(
-      [[
-		type {1} interface {{
-			{2}
-		}}
-	]]    ,
-      {
-        i(1, "name"),
-        i(2, "{0:/* type1 | type2 | ... typeN */}"),
-      }
-    )
-  ),
-
-  s(
-    {
-      name = "array-init",
-      trig = "arr",
-      dscr = "array init",
-    },
-    fmt(
-      [[
-		{1} := [{2}]{3}{4}
-	]]    ,
-      {
-        i(1, "name"),
-        i(2, "number"),
-        i(3, "type"),
-        i(4, "values"),
-      }
-    )
-  ),
-  -- ------------------------------------------------------
-  -- --     	 multithread/concurency structures 		   --
-  -- ------------------------------------------------------
-  s(
-    {
-      name = "go-func",
-      trig = "gfn",
-      dscr = "goroutine function",
-    },
-    fmt(
-      [[
-		go {}
-	]]    ,
-      {
-        c(1, {
-          i(1, "name"),
-          sn(1, {
-            t "func (",
-            i(1, "args"),
-            t ") ",
-            i(2, "return_type"),
-            t { " {", "" },
-            i(3, "/* code */"),
-            t { "", "}" },
-          }),
-        }),
-      }
-    )
-  ),
-
-  s(
-    {
-      name = "channel-close",
-      trig = "close,",
-      dscr = "close a channel,send data trought a closed channel panics",
-    },
-    fmt(
-      [[
-		close({})
-	]]    ,
-      {
-        i(1, "ch"),
-      }
-    )
-  ),
-
-  s(
-    {
-      name = "channel-select",
-      trig = "select,",
-      dscr = "run code accoding to enable a channel otherwise default block,default is always executable",
-    },
-    fmt(
-      [[
-		select {{
-			case {1} :
-				{3}
-			case {2} :
-				{4}
-			default :
-				{5}
-		}}
-	]]    ,
-      {
-        i(1, "ch_op1"),
-        i(2, "ch_op2"),
-        i(3, "/* code */"),
-        i(4, "/* code */"),
-        i(5, "/* code */"),
+        i(2, "/* method set or constraint_type1 | constraint_type2 */"),
       }
     )
   ),
@@ -1325,162 +1103,6 @@ ls.add_snippets("go", {
 	]]    ,
       {
         i(1, "file"),
-      }
-    )
-  ),
-
-  -- -- templates
-  s(
-    {
-      name = "template-folder",
-      trig = "tmpl",
-      dscr = "var to contain the template folder",
-    },
-    fmt(
-      [[
-		var tmpls = template.Must(template.ParseGlob(i(1,"TemplateFolderPath"),))
-	]]    ,
-      {}
-    )
-  ),
-
-  s(
-    {
-      name = "template-selection",
-      trig = "tmple",
-      dscr = "var to contain the template folder",
-    },
-    fmt(
-      [[
-		tmpls.ExecuteTemplate({},{},nil)
-	]]    ,
-      {
-        i(1, "buffer"),
-        i(1, "TmplName"),
-      }
-    )
-  ),
-
-  -- -- http
-  s(
-    {
-      name = "http-handle-func",
-      trig = "http",
-      dscr = "when find pattern call handler function",
-    },
-    fmt(
-      [[
-		func {1}(w http.ResponseWriter,r *http.Request) {{
-			{2}
-		}}
-	]]    ,
-      {
-        i(1, "name"),
-        i(2, "/* code */"),
-      }
-    )
-  ),
-
-  -- -- rpc
-  s(
-    {
-      name = "rpc-register",
-      trig = "rpc,",
-      dscr = "register in rpc-server to make available for clients",
-    },
-    fmt(
-      [[
-		rpc.Register({})
-	]]    ,
-      {
-        i(1, "Interface"),
-      }
-    )
-  ),
-
-  s(
-    {
-      name = "rpc-func-call",
-      trig = "rpc,",
-      dscr = "rpc function call",
-    },
-    fmt(
-      [[
-		{1},({2},{3})
-	]]    ,
-      {
-        i(1, "Name"),
-        i(2, "InArg"),
-        i(3, "OutArg"),
-      }
-    )
-  ),
-
-  s(
-    {
-      name = "rpc-func-def",
-      trig = "rpc,",
-      dscr = "rpc function implementation",
-    },
-    fmt(
-      [[
-		func (self *{1}){2}(*{3},*{4}) error {{
-			{5}
-		}}
-	]]    ,
-      {
-        i(1, "Receiver"),
-        i(2, "Name"),
-        i(3, "InArg"),
-        i(4, "OutArg"),
-        i(5, "/* code */"),
-      }
-    )
-  ),
-
-  s(
-    {
-      name = "rpc-server-http",
-      trig = "rpc,",
-      dscr = "rpc http server basic implementation",
-    },
-    fmt(
-      [[
-		rpc.Register({1})
-		rpc.HandleHTTP()
-		err := http.ListenAndServe({2},{3})
-	]]    ,
-      {
-        i(1, "obj_with_methods"),
-        i(2, "addr"),
-        i(3, "srv"),
-      }
-    )
-  ),
-
-  s(
-    {
-      name = "rpc-client-http",
-      trig = "rpc,",
-      dscr = "rpc http client basic implementation",
-    },
-    fmt(
-      [[
-  	  	client,err := rpc.DialHTTP({1},{2})
-  	  	if err != nil {{
-  	  	  	{3}
-		}}
-
-  	  	err = client.Call(\call\,inArg,outArg)
-  	  	if err != nil {{
-  	  	  	{4}
-  	  	}}
-	]]    ,
-      {
-        i(1, "tcp"),
-        i(2, "srv_addr+srv_port"),
-        i(3, "/* code */"),
-        i(4, "/* code */"),
       }
     )
   ),
@@ -1659,96 +1281,7 @@ ls.add_snippets("go", {
     )
   ),
 
-  -- -- gob
-  s(
-    {
-      name = "encoding-save-gob",
-      trig = "gob,",
-      dscr = "call saveGOB func",
-    },
-    fmt(
-      [[
-		saveGOB({1},{2})
-	]]    ,
-      {
-        i(1, "file string"),
-        i(2, "key interface{}"),
-      }
-    )
-  ),
-
-  s(
-    {
-      name = "encoding-load-gob",
-      trig = "gob,",
-      dscr = "call loadGOB func",
-    },
-    fmt(
-      [[
-		loadGOB({1},{2})
-	]]    ,
-      {
-        i(1, "file string"),
-        i(2, "key interface{}"),
-      }
-    )
-  ),
-
-  s(
-    {
-      name = "encoding-save-gob-impl",
-      trig = "gob,",
-      dscr = "saveGOB implementation",
-    },
-    fmt(
-      [[
-      	saveGOB(file string,key interface{{}} {{
-      		outFile,err := os.Create(file)
-      		if err != nil {{
-      			fmt.Println("error:",err.Error())
-      		}}
-
-      		encoder := gob.NewEncoder(outFile)
-      		err = Encoder.Encode(key)
-      		if err != nil {{
-      			fmt.Println(\Error:\,err.Error())
-      		}}
-
-      		outFile.Close()
-      	}}
-	]]    ,
-      {}
-    )
-  ),
-
-  s(
-    {
-      name = "encoding-load-gob-impl",
-      trig = "gob,",
-      dscr = "loadGOB implementation",
-    },
-    fmt(
-      [[
-      	loadGOB(file string,key interface{{}} {{
-      		inFile,err := os.Open(file)
-      		if err != nil {{
-      			fmt.Println("error:",err.Error())
-      		}}
-
-      		decoder := gob.NewDecoder(inFile)
-      		err = decoder.Decode(key)
-      		if err != nil {{
-      			fmt.Println("error:",err.Error())
-      		}}
-
-      		inFile.Close(),
-    	}}
-	]]    ,
-      {}
-    )
-  ),
-
-  -- -- viper
+  -- viper
   s(
     {
       name = "viper",
@@ -1892,7 +1425,7 @@ ls.add_snippets("go", {
     )
   ),
 
-  -- -- echo
+  -- echo
   s(
     {
       name = "echo-function",
@@ -1912,455 +1445,9 @@ ls.add_snippets("go", {
     )
   ),
 
-  -- -- blockchain
-  s(
-    {
-      name = "blockchain-account-key",
-      trig = "bc-ak",
-      dscr = "create new private/public keys for a new account",
-    },
-    fmt(
-      [[
-		privateKeyECDSA, err := crypto.GenerateKey(),
-		if err != nil {{
-			fmt.Println(err)
-		}}
-		privateKeyBytes := crypto.FromECDSA(privateKeyECDSA),
-		privateKeyEncoded := hexutil.Encode(privateKeyBytes),
-		publicKey := privateKeyECDSA.Public(),
-		publicKeyECDSA, ok := publicKey.(*ecdsa.PublicKey),
-		if !ok {{
-			fmt.Println(err)
-		}}
-		publicKeyBytes := crypto.FromECDSAPub(publicKeyECDSA),
-		publicAddress := crypto.PubkeyToAddress(*publicKeyECDSA)
-	]]    ,
-      {}
-    )
-  ),
-
-  s(
-    {
-      name = "blockchain-account-keystore-new",
-      trig = "bc-aks",
-      dscr = "create a new keystore",
-    },
-    fmt(
-      [[
-		ks := keystore.NewKeyStore({1},keystore.StandardScryptN,keystore.StandardScryptP)
-		account,err := ks.NewAccount({2})
-		if err != nil {{
-			fmt.Println(err)
-		}}
-	]]    ,
-      {
-        i(1, "path"),
-        i(2, "password"),
-      }
-    )
-  ),
-
-  s(
-    {
-      name = "blockchain-account-keystore-import",
-      trig = "bc-aksi",
-      dscr = "keystore import",
-    },
-    fmt(
-      [[
-		file := {1}
-		jsonBytes,err := ioutil.ReadFile(file),
-		account,err := ks.Import(jsonBytes,password,password),
-		if err != nil {{
-			fmt.Println(err)
-		}}
-	]]    ,
-      {
-        i(1, "file"),
-      }
-    )
-  ),
-
-  s(
-    {
-      name = "blockchain-address-valid",
-      trig = "bc-ai",
-      dscr = "determine if an account address is a valid",
-    },
-    fmt(
-      [[
-		validAddress := ethutil.IsValidAddress({})
-	]]    ,
-      {
-        i(1, "address"),
-      }
-    )
-  ),
-
-  -- s({
-  -- 	name = "blockchain-transaction-new",
-  -- 	trig = "bc-txn",
-  -- 	dscr = "create a new transaction",
-  -- },
-  -- 	fmt([[
-  -- 		balance, err = client.BalanceAt(context.WithTimeout({2}), fromAddress , nil)
-  -- 		if err != nil {{
-  -- 			fmt.Println(err)
-  -- 		}}
-  --
-  -- 		if balance < amount {{
-  -- 			panic("insuficient founds")
-  -- 		}}
-  --
-  -- 		privateKey, err := crypto.HexToECDSA({1})
-  -- 		if err != nil {{
-  -- 			fmt.Println(err)
-  -- 		}}
-  --
-  -- 		nonce, err = client.PendingNonceAt(context.WithTimeout({3}), toAddress)
-  -- 		if err != nil {{
-  -- 			fmt.Println(err)
-  -- 		}}
-  --
-  -- 		gasPrice, err = client.SuggestGasPrice(context.WithTimeout({4}))
-  -- 		if err != nil {{
-  -- 			fmt.Println(err)
-  -- 		}}
-  --
-  -- 		gasLimit, err = client.EstimateGas(context.WithTimeout({5}),ethereum.CallMsg{{
-  -- 			To: &tokenAddress,
-  -- 			Data: data,
-  -- 		}}),
-  -- 		if err != nil {{
-  -- 			fmt.Println(err)
-  -- 		}}
-  --
-  -- 		chainID, err = client.NetworkID(context.WithTimeout({6}))
-  -- 		if err != nil {{
-  -- 			fmt.Println(err)
-  -- 		}}
-  --
-  -- 		tx := types.NewTransaction(nonce, toAddres, amount, gasLimit, gasPrice, nil)
-  -- 		signTx, err = types.SignTx(tx, types.NewEIP155Signer(chainID), privateKey)
-  -- 		if err != nil {{
-  -- 			fmt.Println(err)
-  -- 		}}
-  --
-  -- 		err = client.SendTransaction(context.WithTimeout({7}), signTx)
-  -- 		if err != nil {{
-  -- 			fmt.Println(err)
-  -- 		}}
-  -- -- ]],{
-  -- 	i(1,"privateKey"),
-  -- 	i(2,"timeout"),
-  -- 	rep(2),
-  -- 	rep(2),
-  -- 	rep(2),
-  -- 	rep(2),
-  -- 	rep(2),
-  -- }),
-
-  s(
-    {
-      name = "blockchain-transaction-raw-new",
-      trig = "bc-txnr",
-      dscr = "create new raw transaction",
-    },
-    fmt(
-      [[
-		tx := types.NewTransaction(nonce,toAddress,amount,gasLimit,gasPrice,data)
-		signedTx,err := types.SignTx(tx,types.NewEIP155Signer(chainID),privateKey)
-		if err != nil {{
-			log.Fatal(err)
-		}}
-
-		rawSignedTx := types.Transactions{{signedTx}}.GetRlp(0)
-		rawTxHex := hex.EncodeToString(rawSignedTx)
-		tx := new(types.Transaction)
-		rlp.DecodeBytes(rawTxBytes,&tx)
-		err = client.SendTrasaction(context.Background(),tx)
-		if err != nil {{
-			log.Fatal(err)
-		}}
-	]]    ,
-      {}
-    )
-  ),
-  s(
-    {
-      name = "blockchain-transaction-query-header",
-      trig = "bc-txqh",
-      dscr = "determine if a account is a smart contract",
-    },
-    fmt(
-      [[
-		header,err := client.HeaderByNumber(context.Background(),{1})
-		if err != nil {{
-			{2}
-		}}
-	]]    ,
-      {
-        i(1, "blockNumber"),
-        i(2, "error handling"),
-      }
-    )
-  ),
-
-  s(
-    {
-      name = "blockchain-transaction-query-block",
-      trig = "bc-txqb",
-      dscr = "get block by number from blockchain",
-    },
-    fmt(
-      [[
-    	block,err := client.BlockByNumber(context.Background(),{1})
-    	if err != nil {{
-			{2}	
-    	}}
-	]]    ,
-      {
-        i(1, "blockNumber"),
-        i(2, "error handling"),
-      }
-    )
-  ),
-
-  s(
-    {
-      name = "blockchain-transaction-count",
-      trig = "bc-txq",
-      dscr = "get number of transactions in a block",
-    },
-    fmt(
-      [[
-		block,err := client.TransactionCount(context.Background(),{1})
-		if err != nil {{
-			{2}	
-		}}
-	]]    ,
-      {
-        i(1, "blockHash"),
-        i(2, "error handling"),
-      }
-    )
-  ),
-
-  s(
-    {
-      name = "blockchain-transaction-receipt",
-      trig = "bc-txq",
-      dscr = "get transaction receipt",
-    },
-    fmt(
-      [[
-		block,err := client.TransactionReceipt(context.Background(),{1})
-		if err != nil {{
-			{2}
-		}}
-	]]    ,
-      {
-        i(1, "txHash"),
-        i(2, "error handling"),
-      }
-    )
-  ),
-
-  s(
-    {
-      name = "blockchain-transaction-signature",
-      trig = "bc-txs",
-      dscr = "generate a new signature",
-    },
-    fmt(
-      [[
-		privateKey,err := crypto.HexToECDSA({1})
-		if err != nil {{
-			fmt.Println(err)
-		}}
-
-		data = []byte({2})
-		hash . crypto.Keccack256Hash(data)
-		signature,err := crypto.Sign(hash.Bytes(),privateKey)
-		if err != nil {{
-			fmt.Println(err)
-		}}
-	]]    ,
-      {
-        i(2, "hex"),
-        i(2, "data"),
-      }
-    )
-  ),
-
-  s(
-    {
-      name = "blockchain-token",
-      trig = "bc-scc",
-      dscr = "determine if a account is a smart contract",
-    },
-    fmt(
-      [[
-		fnSignature := []byte({1})
-		hash := sha3.NewLegacyKeccak256().Write(fnSignature)
-		methodID := hash.Sum(nil)[:4]
-		toAddressPadded := common.LeftPadBytes(toAddress.Bytes(),32)
-		amount := new(big.Int)
-		amount.SetString({2})
-		amountPadded := common.LeftPadBytes(amount.Bytes(),32)
-		var data []byte
-		data = append(data,methodID,toAddressPadded,amountPadded)
-		gasLimit,err := client.EstimateGas(context.Background(),ethereum.CallMsg{{
-			To: &tokenAddress,
-			Data: data,
-		}})
-		if err != nil {{
-			fmt.Println(err)
-		}}
-	]]    ,
-      {
-        i(1, "fnSignature"),
-        i(2, "qty"),
-      }
-    )
-  ),
-
-  s(
-    {
-      name = "blockchain-smartcontract-is",
-      trig = "bc-sci",
-      dscr = "determine if a account is a smart contract",
-    },
-    fmt(
-      [[
-		bytecode,err := client.CodeAt(context.WithTimeout({1}),address,{2})
-		if err != nil {{
-			fmt.Println(err)
-		}}
-		isContract := len(bytecode) > 0
-		}}
-	]]    ,
-      {
-        i(1, "timeout"),
-        i(2, "block"),
-      }
-    )
-  ),
-
-  -- s({
-  -- 	name = "blockchain-smartcontract-new",
-  -- 	trig = "bc-scn",
-  -- 	dscr = "get log(events) of smart contracts",
-  -- },fmt([[
-  -- 	contractABI,err := abi.JSON(strings.NewReader(string({2},.{2}ABI))),
-  -- 	if err != nil {{
-  -- 		fmt.Println(err)
-  -- 	}}
-  -- ]],{
-  -- 	i(1,"contract"),
-  -- 	rep(1),
-  -- }),
-
-  s(
-    {
-      name = "blockchain-smartcontract-log-subscribe",
-      trig = "bcscqs",
-      dscr = "subscribe to log(events) of smart contracts",
-    },
-    fmt(
-      [[
-		contractAddress = {1}
-		query := ethereum.FilterQuery {{
-			Addresses: []common.Address{{contractAddress}}
-			FromBlock: big.NewInt()
-			ToBlock: big.NewInt()
-		}}
-
-		logs := make(chan types.Log)
-		sub,err := client.SubscribeFilterLogs(context.Bakcground(),query,logs)
-		if err != nil {{
-			fmt.Println(err)
-		}}
-
-		for {{
-			select {{
-				case err := <-sub.Err() :
-					fmt.Println(err)
-				case eventLog := <-logs :
-					if err != nil {{
-						fmt.Println(err)
-					}}
-			}}
-		}}
-		
-	]]    ,
-      {
-        i(1, "contractAddress"),
-      }
-    )
-  ),
-
-  s(
-    {
-      name = "blockchain-smartcontract-log-read",
-      trig = "bcscq",
-      dscr = "get log(events) of smart contracts",
-    },
-    fmt(
-      [[
-        contractAddress = {1}
-        query := ethereum.FilterQuery {{
-          Addresses: []common.Address{{contractAddress}}
-          FromBlock: big.NewInt()
-          ToBlock: big.NewInt()
-        }}
-
-        logs := client.FilterLogs(context.Background(),query)
-        if err != nil {{
-          fmt.Println(err)
-        }}
-
-        contractABI,err := abi.JSON(strings.NewReader(string({2},contractABI)))
-        if err != nil {{
-          fmt.Println(err)
-        }}
-
-        for _,eventLog := range Logs {{
-            event := struct {{
-              Key [32]byte,
-              Value [32]byte,
-            }}{{}}
-
-            err := contractABI.Unpack(&event,\item set\,eventLog.Data)
-            if err != nil {{
-              fmt.Println(err)
-            }}
-            fmt.Println(string(event.Key[:]))
-            fmt.Println(string(event.Value[:]))
-
-            //const (
-            //    EventFn1NameSign := crypto.Keccak256Hash([]byte(EventFn1Name))
-            //    EventFn2NameSign := crypto.Keccak256Hash([]byte(EventFn2Name))
-            //)
-            //var topics []string
-            //switch eventLog.Topics[0].Hex() {{
-            //    case EventFn1NameSign.Hex()
-            //
-            //    case EventFn2NameSign.Hex() :
-            //
-            //}}
-        }}
-    ]] ,
-      {
-        i(1, "contract"),
-        i(2, "contractAddress"),
-      }
-    )
-  ),
-
-  -- ------------------------------------------------------
-  -- --     					patterns 				 	--
-  -- ------------------------------------------------------
+  ------------------------------------------------------
+  --     					patterns 				 	--
+  ------------------------------------------------------
   s(
     {
       name = "pattern-worker",
