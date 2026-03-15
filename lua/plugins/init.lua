@@ -37,8 +37,9 @@ require("lazy").setup({
     -- ui
     --------------------------------------------------------------
     -- colorschemes
+    -- { "eldritch-theme/eldritch.nvim", },
+    -- { "folke/tokyonight.nvim", lazy = true },
     {
-        -- 'NTBBloodbath/doom-one.nvim'
         "romgrk/doom-one.vim",
         lazy = true,
         priority = 1000,
@@ -49,13 +50,6 @@ require("lazy").setup({
             vim.cmd("hi! link LazyNormal Pmenu")
         end,
     },
-    -- {
-    --     "eldritch-theme/eldritch.nvim",
-    --     lazy = true,
-    --     config = function() load_config("eldritch") end,
-    --     init = function() vim.cmd("colorscheme eldritch") end,
-    -- },
-    -- { "folke/tokyonight.nvim", lazy = true },
     -- icons
     {
         "nvim-tree/nvim-web-devicons",
@@ -97,12 +91,12 @@ require("lazy").setup({
         config = function() load_config("fidget") end,
     },
     -- sidebar
-    {
-        "folke/edgy.nvim",
-        ft = {"trouble", "neo-tree" },
-        init = function() vim.opt.splitkeep = "screen" end,
-        config = function() load_config("edgy") end,
-    },
+    -- {
+    --     "folke/edgy.nvim",
+    --     ft = {"trouble", "neo-tree" },
+    --     init = function() vim.opt.splitkeep = "screen" end,
+    --     config = function() load_config("edgy") end,
+    -- },
     -- highlight, list and search notes (todo-comments)
     {
         "folke/todo-comments.nvim",
@@ -273,7 +267,6 @@ require("lazy").setup({
     --------------------------------------------------------------
     -- operational
     --------------------------------------------------------------
-    -- https://github.com/MagicDuck/grug-far.nvim  TODO: CHECK:
     "mong8se/actually.nvim",  -- ask for correct file to open when autocompletion doesn't work because multiple files share the same prefix
     "zdcthomas/yop.nvim",     -- easier custom operator management
     "mg979/vim-visual-multi", --  enhaced multiline editing
@@ -303,8 +296,9 @@ require("lazy").setup({
         "unblevable/quick-scope",
         event = "InsertEnter",
     },
-    -- easily comment code with treesiter integration
+    -- comments
     {
+        -- easily comment code with treesiter integration
         "folke/ts-comments.nvim",
         event = "VeryLazy",
         opts = {},
@@ -378,6 +372,14 @@ require("lazy").setup({
         "Pocco81/high-str.nvim",
         cmd = "HSHighlight",
         opts = {},
+    },
+    {
+        -- remove source code comments
+        "KashifKhn/nvim-remove-comments",
+        cmd = { "RMC" },
+        opts = {},
+        -- cmd = { "RMC", "lua require('nvim-remove-comments').remove_comments()" },
+
     },
 
 
@@ -497,7 +499,11 @@ require("lazy").setup({
     -- integrations
     --------------------------------------------------------------
     -- git
-    "tpope/vim-fugitive",             -- git integration for cmdline
+    {
+        -- git integration for cmdline
+        "tpope/vim-fugitive",
+        cmd = { "G", "Gr", "Gw" },
+    },
     {
         -- git integration for buffers
         "lewis6991/gitsigns.nvim",
@@ -520,26 +526,6 @@ require("lazy").setup({
         cmd = { "Diffview", "DiffviewOpen" },
         config = function() load_config("diffview") end,
     },
-    -- github
-    -- "dlvhdr/gh-dash.git", -- github dashboard
-    -- "rawnly/gist.nvim",   -- gist management
-    -- {
-    --     -- https://who.ldelossa.is/posts/gh-nvim/
-    --     "ldelossa/gh.nvim",
-    --     dependencies = {
-    --         {
-    --             "ldelossa/litee.nvim",
-    --             config = function() require("litee.lib").setup() end,
-    --         },
-    --     },
-    --     config = function() require("litee.gh").setup() end,
-    -- },
-    -- {
-    --     -- edit & review github issues
-    --     "pwntester/octo.nvim",
-    --     cmd = "Octo",
-    --     config = function() load_config("octo") end,
-    -- },
     -- task management
     -- https://github.com/georgeharker/comment-tasks.nvim
     -- literature programming / jupyter notebooks
@@ -568,8 +554,6 @@ require("lazy").setup({
     -- },
     -- AI
     -- {"olimorris/codecompanion.nvim"},     -- zed AI
-    -- {"zbirenbaum/copilot.lua"},           -- copilot
-    -- { "CopilotC-Nvim/CopilotChat.nvim" }, -- copilot
     -- model agnostic ai integration
     -- {"dlants/magenta.nvim"},
     -- {"ravitemer/mcphub.nvim"}
@@ -583,24 +567,29 @@ require("lazy").setup({
     --     event = "VeryLazy",
     --     config = function() load_config("avante") end,
     -- },
-    {
-       -- chatgpt
-       "jackMort/ChatGPT.nvim",
-       cmd = "ChatGpt",
-       config = function() load_config("chatgpt") end,
-    },
-    {
-        -- codeium ai toolkit integration
-        "Exafunction/codeium.nvim",
-        event = "InsertEnter",
-        config = function() require("codeium").setup({}) end,
-    },
+    -- {
+    --  -- copilot
+    -- "zbirenbaum/copilot.lua",
+    -- "CopilotC-Nvim/CopilotChat.nvim",
+    -- },
     {
         -- ollama
         "David-Kunz/gen.nvim",
         cmd = "Gen",
         config = function() load_config("gen") end,
     },
+    {
+       -- chatgpt
+       "jackMort/ChatGPT.nvim",
+       cmd = "ChatGpt",
+       config = function() load_config("chatgpt") end,
+    },
+    -- {
+    --     -- codeium ai toolkit integration
+    --     "Exafunction/codeium.nvim",
+    --     event = "InsertEnter",
+    --     config = function() require("codeium").setup({}) end,
+    -- },
 
 
     ----------------------------------------------------------------
@@ -646,17 +635,9 @@ require("lazy").setup({
     --     opts = {},
     -- },
     -- markdown
-    -- { "bullets-vim/bullets.vim" },
-    -- 'jakewvincent/mkdnflow.nvim',
-    -- {
-    --     "tadmccorkle/markdown.nvim",
-    --     ft = "markdown",
-    --     config = function() require("markdown").setup({
-    --         enable = true,
-    --         -- inline_surround = { --[[ ... ]] },
-    --     })
-    --     end,
-    -- },
+    -- "bullets-vim/bullets.vim",
+    -- "jakewvincent/mkdnflow.nvim",
+    -- "tadmccorkle/markdown.nvim",
     -- latex
     {
         -- integrations
@@ -664,11 +645,6 @@ require("lazy").setup({
         ft = { "tex", "latex" },
         init = function() vim.g.vimtex_view_general_viewer = "okular" end
     },
-    -- {
-    -- -- preview
-    --     "frabjous/knap",
-    --     ft = { "tex", "latex" },
-    -- },
 
 
     ----------------------------------------------------------------
@@ -679,28 +655,6 @@ require("lazy").setup({
         "teamtype/teamtype-nvim",
         event = "VeryLazy",
     },
-    -- "abecodes/tabout.nvim"                -- exit from within close symbols with <tab>
-    -- "vimpostor/vim-tpipeline"             -- statusline merged with tmux
-    -- "chriswritescode-dev/consolelog.nvim" -- show console commands output next to the code as virtual text
-    ---- motions
-    --{
-    --    -- motions for every coordinate of the viewport
-    --    -- alternative: flash.nvim
-    --    "ggandor/leap.nvim",
-    --    opt = true,
-    --    config = function() load_config("leap") end,
-    --}
-    ---- code runner
-    --{
-    --    "michaelb/sniprun",
-    --    opt = true,
-    --    run = "bash ./install.sh",
-    --    config = function() load_config("sniprun") end,
-    --}
-    -- {
-    --     -- develop integration with overseer
-    --     "kndndrj/nvim-dbee",
-    -- },
 
 
     ----------------------------------------------------------------
