@@ -26,66 +26,28 @@ ls.add_snippets("proto", {
   ------------------------------------------------------
   s(
     {
-      name = "\\",
-      trig = "\\",
+      name = "base structure",
+      trig = "!",
       dscr = "basic proto file structure/layout",
+      snippetType = "autosnippet",
     },
     fmt([[
       sintax = "{1}" ;
 
-      package "{2}" ;
+      package {2} ;
 
       {}
     ]],
       {
-        c(1, {
-          t "proto3",
-          t "proto2 ",
-        }),
-        i(2, "name"),
-        c(3, {
-          t("message"),
-          t("service"),
-        }),
-      }
-    )
-  ),
-
-  s(
-    {
-      name = "sintax",
-      trig = "sintax",
-      dscr = "sintax",
-    },
-    fmt([[
-      sintax = "{1}" ;
-
-      package "{2}" ;
-
-      {3}
-    ]],
-      {
-        c(1, {
-          t "proto3",
-          t "proto2 ",
-        }),
-        i(2, "name"),
-        i(3, "code"),
-      }
-    )
-  ),
-
-  s(
-    {
-      name = "package",
-      trig = "package",
-      dscr = "package",
-    },
-    fmt([[
-      package "{1}" ;
-    ]],
-      {
-        i(1, "name"),
+        i(1,  "proto3"),
+        -- i(2, "name"),
+        d(2, function()
+            local filename = vim.fn.expand("%:t:r")
+            return sn(nil,{
+                i(1,filename)
+            })
+           end, {}, {}),
+        i(3, "message/service"),
       }
     )
   ),
@@ -93,7 +55,7 @@ ls.add_snippets("proto", {
   s(
     {
       name = "import",
-      trig = "import",
+      trig = "imp",
       dscr = "import declaration",
     },
     fmt([[
@@ -232,7 +194,7 @@ ls.add_snippets("proto", {
       {
         i(1, "name"),
         c(2, {
-          i(1, "stream args"),
+          i(1, "[stream] args"),
           t "",
         }),
         c(3, {
